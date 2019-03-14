@@ -14,8 +14,8 @@ html, body{
 	background-color:#dbdbdb;
 	padding: 20px 50px
 }
-table{
-	margin: 2vh 0 -2vh 0;
+div .table-responsive{
+	margin: 0 -6vw 0 6vw;
 }
 table td, thead th{
 	border-color:#0000bb !important;
