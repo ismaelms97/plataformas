@@ -1,9 +1,8 @@
-<<<<<<< HEAD
-html, body{
+html, body {
 	background-color: #eef2f0;
 }
 /* Titulo */
-.mainTitle{
+.mainTitle {
 	font-size: 5em;
 	color: blue;
 	text-align: center;
@@ -11,23 +10,59 @@ html, body{
 }
 
 /* Style form login */
-.formulario{
+.formulario {
 	margin-left: 40%;
 	margin-top: 10%;
 }
-/* Cada uno de los RTC */ 
-.rect{
+/* Cada uno de los RTC */
+.rect {
+	position: relative;
 	border: 2px solid darkgrey;
-	background-color:#dbdbdb;
-	padding: 20px 50px
+	background-color: #dbdbdb;
+	padding: 20px 50px;
+	border: 2px solid darkgrey;
 }
-div .table-responsive{
-	margin: 0 -6vw 0 6vw;
+
+.tamano {
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin-left: 5px;
 }
-table td, thead th{
-	border-color:#0000bb !important;
+
+.complejidad {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin-right: 5px;
 }
-/* tbody{
+
+/* TABLE Attributes */
+table td, thead th {
+	border-color: #0000bb !important;
+}
+
+table td {
+	width: 178.556px;
+	height: 66.170px;
+	min-width: 170.556px;
+}
+
+tbody {
 	max-height: 50px;
 	overflow-y: auto;
-} */
+}
+
+.red {
+	background-color: red;
+}
+
+/* Selected */
+td .ui-selecting {
+	background: #FECA40;
+}
+
+td .ui-selected {
+	background: #F39814;
+	color: white;
+}

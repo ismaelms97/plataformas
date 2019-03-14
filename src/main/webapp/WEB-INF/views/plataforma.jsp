@@ -27,8 +27,16 @@
 			</thead>
 			 <tbody>
 			    <tr>
-			    	<td scope="row"><div class="rect"><small class="">sm</small> 123456 <small>3</small></div></td>
-			    	<td colspan="9"></td>
+			    	<td scope="row"><div class="rect"><small class="tamano">sm</small> 123456 <small class="complejidad">3</small></div></td>
+			    	<td class="PteQual"></td>
+			    	<td></td>
+			    	<td></td>
+			    	<td></td>
+			    	<td></td>
+			    	<td></td>
+			    	<td></td>
+			    	<td></td>
+			    	<td></td>
 			    </tr>
 			    <tr>
 			    	<td><div class="rect"></div></td>

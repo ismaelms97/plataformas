@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.plataformas.model.User;
 
+
 /**
  * Handles requests for the application home page.
  */
