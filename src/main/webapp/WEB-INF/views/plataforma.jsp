@@ -7,9 +7,9 @@
 <link rel="shortcut icon" href="">
 </head>
 <body>
-	<h1>TITLE</h1>
+	<h1 class="mainTitle">TITLE</h1>
 
-	<div class="table-responsive">
+	<div class="table-responsive table-bordered">
 		<table class="table">
 			<thead>
 				<tr class="table-info">
@@ -27,16 +27,20 @@
 			</thead>
 			 <tbody>
 			    <tr>
-			    <td scope="row"><div class="rect"></div></td>
+			    	<td scope="row"><div class="rect"><small class="">sm</small> 123456 <small>3</small></div></td>
+			    	<td colspan="9"></td>
 			    </tr>
 			    <tr>
-			    <td><div class="rect"></div></td>
+			    	<td><div class="rect"></div></td>
+			    	<td colspan="9"></td>
 			    </tr>
 			    <tr>
-			    <td><div class="rect"></div></td>
+			    	<td><div class="rect"></div></td>
+			    	<td colspan="9"></td>
 			    </tr>
 			    <tr>
-			    <td><div class="rect"></div></td>
+			    	<td><div class="rect"></div></td>
+			    	<td colspan="9"></td>
 			    </tr>
 		    </tbody>
 		</table>

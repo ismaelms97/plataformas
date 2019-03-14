@@ -1,3 +1,26 @@
-.rect{
-	border: 1px solid red;
+html, body{
+	background-color: #eef2f0;
 }
+/* Titulo */
+.mainTitle{
+	font-size: 5em;
+	color: blue;
+	text-align: center;
+	font-family: "Georgia";
+}
+/* Cada uno de los RTC */ 
+.rect{
+	border: 2px solid darkgrey;
+	background-color:#dbdbdb;
+	padding: 20px 50px
+}
+table{
+	margin: 2vh 0 -2vh 0;
+}
+table td, thead th{
+	border-color:#0000bb !important;
+}
+/* tbody{
+	max-height: 50px;
+	overflow-y: auto;
+} */
