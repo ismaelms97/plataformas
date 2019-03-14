@@ -1,12 +1,9 @@
-/* Style form login */
-#formFooter a {
-	color: #92badd;
-	display: inline-block;
-	text-decoration: none;
-	font-weight: 400;
-}
 
-#formContent {
-	font-family: "Poppins", sans-serif;
-	height: 100vh;
+/* Style form login */
+.formulario{
+	margin-left: 40%;
+	margin-top: 10%;
+}
+.rect{
+	border: 1px solid red;
 }
