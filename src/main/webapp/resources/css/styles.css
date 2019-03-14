@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 html, body{
 	background-color: #eef2f0;
 }
@@ -7,6 +8,12 @@ html, body{
 	color: blue;
 	text-align: center;
 	font-family: "Georgia";
+}
+
+/* Style form login */
+.formulario{
+	margin-left: 40%;
+	margin-top: 10%;
 }
 /* Cada uno de los RTC */ 
 .rect{
