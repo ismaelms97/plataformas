@@ -36,5 +36,13 @@ public class HomeController {
 		
 		return "home";
 	}
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public String login( Model model) {		
+		
+		
+		model.addAttribute("serverTime", 2 );
+		
+		return "home";
+	}
 	
 }
