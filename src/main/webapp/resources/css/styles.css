@@ -1,5 +1,9 @@
 html, body {
 	background-color: #eef2f0;
+	user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
 }
 /* Titulo */
 .mainTitle {
@@ -21,6 +25,7 @@ html, body {
 	background-color: #dbdbdb;
 	padding: 20px 50px;
 	border: 2px solid darkgrey;
+	border-radius: 5%;
 }
 
 .tamano {
@@ -53,8 +58,8 @@ tbody {
 	overflow-y: auto;
 }
 
-.red {
-	background-color: red;
+.orange {
+	background-color: #ffcf75;
 }
 
 /* Selected */
