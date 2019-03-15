@@ -62,6 +62,10 @@ tbody {
 	background-color: #ffcf75;
 }
 
+.clone{
+	display: inline !important;
+}
+
 /* Selected */
 td .ui-selecting {
 	background: #FECA40;

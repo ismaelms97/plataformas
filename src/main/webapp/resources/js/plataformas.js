@@ -3,12 +3,20 @@ $( function() {
 
 	$(".rect").draggable(
 			{
+
 				axis: "x" , 
 				containment: ".table-responsive",
 				scroll: false,
 				opacity: 0.7,
 				helper: "clone",
-				appendTo: "td"
+				stop: function(event, ui){
+					if($(this).attr("data-clone") == "false"){
+
+						$(this).clone().attr({"class":"rect clone"}).appendTo($("tr")[$(this).attr("data-rtc")].children[$(this).attr("data-posInitial")]);
+						$(this).attr({"data-clone" : "true"});
+					
+					}
+				},
 			}
 	);
 
@@ -26,10 +34,6 @@ $( function() {
 					$(this).animate(pos, 200, "linear");
 				}
 			});
-			
-//			console.log($("tr")[$( ui.draggable)[0].attributes[2].value].children);
-//			console.log($("tr")[$( ui.draggable)[0].attributes[2].value].children[$( ui.draggable)[0].attributes[1].value].length);
-//			$(".rect").clone().attr({"class":"first"}).appendTo($("tr")[$( ui.draggable)[0].attributes[2].value].children[$( ui.draggable)[0].attributes[1].value]);
 		}
 	});
 
