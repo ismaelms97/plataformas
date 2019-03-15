@@ -35,4 +35,13 @@ public class HomeController {
 		return "plataforma";
 	}
 	
+	@RequestMapping(value = "/excel", method = RequestMethod.GET)
+	public String login(Model model) {		
+		
+		/* AQUI va el codigo para comprobar user en la base de datos. */
+		
+		model.addAttribute("greeting","Hola ");
+		return "excelreader";
+	}
+	
 }
