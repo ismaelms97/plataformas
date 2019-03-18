@@ -25,32 +25,64 @@
 					<th scope="col">Implantado</th>
 				</tr>
 			</thead>
-			 <tbody>
-			    <tr>
-			    	<td scope="row"><div class="rect"><small class="tamano">sm</small> 123456 <small class="complejidad">3</small></div></td>
-			    	<td class="PteQual"></td>
-			    	<td></td>
-			    	<td></td>
-			    	<td></td>
-			    	<td></td>
-			    	<td></td>
-			    	<td></td>
-			    	<td></td>
-			    	<td></td>
-			    </tr>
-			    <tr>
-			    	<td><div class="rect"></div></td>
-			    	<td colspan="9"></td>
-			    </tr>
-			    <tr>
-			    	<td><div class="rect"></div></td>
-			    	<td colspan="9"></td>
-			    </tr>
-			    <tr>
-			    	<td><div class="rect"></div></td>
-			    	<td colspan="9"></td>
-			    </tr>
-		    </tbody>
+			<tbody>
+				<tr id="1">
+					<td scope="row">
+						<div class="rect" data-posInitial="0" data-rtc="1" data-clone="false">
+							<small class="tamano">sm</small> 123456 <small class="complejidad">3</small>
+						</div>
+					</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td scope="row">
+						<div class="rect" data-posInitial="0" data-rtc="2"  data-clone="false">
+							<small class="tamano">md</small> 78156 <small class="complejidad">2</small>
+						</div>
+					</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</tbody>
 		</table>
 	</div>
 
