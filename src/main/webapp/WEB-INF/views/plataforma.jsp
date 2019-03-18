@@ -59,7 +59,7 @@
 					<td></td>
 				</tr>
 				<tr>
-					<td><div class="rect" data-posInitial = "0"></div></td>
+					<td></td>
 					<td></td>
 					<td></td>
 					<td></td>
@@ -71,7 +71,7 @@
 					<td></td>
 				</tr>
 				<tr>
-					<td><div class="rect" data-posInitial = "0"></div></td>
+					<td></td>
 					<td></td>
 					<td></td>
 					<td></td>

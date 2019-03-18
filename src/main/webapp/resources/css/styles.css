@@ -21,11 +21,11 @@ html, body {
 /* Cada uno de los RTC */
 .rect {
 	position: relative;
-	border: 2px solid darkgrey;
 	background-color: #dbdbdb;
 	padding: 20px 50px;
 	border: 2px solid darkgrey;
 	border-radius: 5%;
+	z-index: 10;
 }
 
 .tamano {
@@ -48,9 +48,10 @@ table td, thead th {
 }
 
 table td {
-	width: 178.556px;
+	width: 180.556px;
 	height: 66.170px;
-	min-width: 170.556px;
+	min-width: 180.556px;
+	max-width: 180.556px;
 }
 
 tbody {
@@ -63,7 +64,19 @@ tbody {
 }
 
 .clone{
-	display: inline !important;
+	position: relative;
+	background-color: #dbdbdb;
+	padding: 20px 50px;
+	border: 2px solid darkgrey;
+	border-radius: 5%;
+	display: inline;
+	position: absolute;
+}
+.display{
+	display:none;
+}
+.noLeft{
+	left: 0 !important;
 }
 
 /* Selected */
