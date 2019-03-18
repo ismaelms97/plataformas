@@ -27,8 +27,8 @@ Output Format: <select name="format" onchange="setfmt()">
 <input type="file" name="xlfile" id="xlf" /> ... or click here to select a file
 
 <b>Advanced Demo Options:</b>
-Use Web Workers: (when available) <input type="checkbox" name="useworker" checked>
-Use readAsBinaryString: (when available) <input type="checkbox" name="userabs" checked>
+Use Web Workers: (when available) <input type="checkbox" name="useworker" >
+Use readAsBinaryString: (when available) <input type="checkbox" name="userabs" >
 </pre>
 <pre id="out"></pre>
 <!--<div id="htmlout"></div>-->
@@ -37,6 +37,8 @@ Use readAsBinaryString: (when available) <input type="checkbox" name="userabs" c
 <script src="/resources/libs/js/xlsx.full.min.js"></script>
 <script>
 
+var tasks = []
+var idPos, typePos, prioPos, resuPos, statusPos;
 var X = XLSX;
 var XW = {
 	/* worker message */
@@ -70,13 +72,33 @@ var process_wb = (function() {
 
 	return function process_wb(wb) {
 		global_wb = wb;
-		var output = "";
-		switch(get_format()) {
-			default: output = to_json(wb);
-		}
+		var output = to_json(wb);
 		if(OUT.innerText === undefined) OUT.textContent = output;
 		else OUT.innerText = output;
-		console.log(to_json(wb)) //my console
+		//console.log(JSON.parse(output).Tareas)  idPos, typePos, prioPos, resuPos, statusPos
+		for(var i = 0; i < JSON.parse(output).Tareas[0].length; i++){
+			if(JSON.parse(output).Tareas[0][i] == "ID"){
+				idPos = i;
+			} else if(JSON.parse(output).Tareas[0][i] == "Tipo"){
+				typePos = i;
+			} else if(JSON.parse(output).Tareas[0][i] == "Piroridad"){
+				prioPos = i;
+			} else if(JSON.parse(output).Tareas[0][i] == "Resumen"){
+				resuPos = i;
+			} else if(JSON.parse(output).Tareas[0][i] == "Estado"){
+				statusPos = i;
+			}
+		}
+		for(var i = 1; i < 5; i++){ //JSON.parse(output).Tareas.length
+			var task = new Object();	
+			task.id = JSON.parse(output).Tareas[i][idPos]
+			task.tipo = JSON.parse(output).Tareas[i][typePos]
+			task.prioridad = JSON.parse(output).Tareas[i][prioPos]
+			task.resumen = JSON.parse(output).Tareas[i][resuPos]
+			task.estado = JSON.parse(output).Tareas[i][statusPos]
+			tasks.push(task);
+		}
+		console.log(tasks)
 		if(typeof console !== 'undefined') console.log("output", new Date());
 	};
 })();
