@@ -5,7 +5,7 @@ $(document).ready(function(){
 		var cln = $(el).clone();
 		cln.attr("class", "clone");
 		$(el).parent().append(cln);
-		$(cln).addClass("display");
+		$(cln).css("display", "none");
 	}
 });
 
@@ -21,37 +21,41 @@ $( function() {
 				helper: "clone",
 				start: function(event, ui){
 					$(".ui-draggable-dragging").removeClass("noLeft");
+//					document.getElementsByClassName("clone")[(event.target.getAttribute("data-rtc") - 1)].style.display = "inherit";
 
 //					Descomentar esto para seleccionar
 //					if ($(this).hasClass("ui-selected")){
-//						selected = $(".ui-selected").each(function() {
-//							var el = $(this);
-//							el.data("offset", el.offset());
-//						});
+//					selected = $(".ui-selected").each(function() {
+//					var el = $(this);
+//					el.data("offset", el.offset());
+//					});
 //					}
 //					else {
-//						selected = $([]);
-//						$(".rect").removeClass("ui-selected");
+//					selected = $([]);
+//					$(".rect").removeClass("ui-selected");
 //					}
 //					offset = $(this).offset();
 
+
 				},
+
 //				Descomentar esto para seleccionar
 //				drag: function(ev, ui) {
-//					var dt = ui.position.top - offset.top, dl = ui.position.left - offset.left;
-//					// Coje todos los elementos seleccionados excepto $(this), que es el elemento que queremos mover
-//					selected.not(this).each(function() {
-//
-//						// Crea la variable para que no necesitemos llamar a $(this)
-//						// el = Elemento actual
-//						// off = En que posicion esteaba este elemento antes de moverlo
-//						var el = $(this), off = el.data("offset");
-//						el.css({top: off.top + dt, left: off.left + dl});
-//					});
+//				var dt = ui.position.top - offset.top, dl = ui.position.left - offset.left;
+//				// Coje todos los elementos seleccionados excepto $(this), que es el elemento que queremos mover
+//				selected.not(this).each(function() {
+
+//				// Crea la variable para que no necesitemos llamar a $(this)
+//				// el = Elemento actual
+//				// off = En que posicion esteaba este elemento antes de moverlo
+//				var el = $(this), off = el.data("offset");
+//				el.css({top: off.top + dt, left: off.left + dl});
+//				});
 //				},
 
 				stop: function(event, ui){
-					document.getElementsByClassName("clone")[(this.getAttribute("data-rtc") - 1)].classList.remove("display");
+					document.getElementsByClassName("rect")[(this.getAttribute("data-rtc") - 1)].style.display = "";
+
 				},
 			}
 	);
@@ -71,34 +75,48 @@ $( function() {
 				}
 			});
 
+			if(event.target.children.length == 1){
+				console.log(event.target.children.length);
+				event.target.children[0].style.display = "none";
+			}
+			if(document.getElementsByClassName("clone")[(ui.draggable[0].getAttribute("data-rtc") - 1)].style.display == "none" && 
+					!(event.target.children.length >= 1)){
+
+				document.getElementsByClassName("clone")[(ui.draggable[0].getAttribute("data-rtc") - 1)].style.display = "";
+			}
+
+
 			$(ui.draggable[0]).addClass("noLeft").appendTo(event.target);
+
+
+
 		}
 	});
 
-	
-// SI se quiere seleccionar, solo hace falta desbloquear el siguiente codigo, aunque si es así, mirar la seleccion multiple
+
+//	SI se quiere seleccionar, solo hace falta desbloquear el siguiente codigo, aunque si es así, mirar la seleccion multiple
 
 //	$(".rect").selectable()
 
 	//Manualmente activa el select que los elementos clicados
 //	$( ".rect" ).click( function(e){
-//		if (e.ctrlKey == false) {
-//			// Si la tecla de comando se presiona no deselecciones los elementos
-//			$( ".rect" ).removeClass("ui-selected");
-//			$(this).addClass("ui-selecting");
-//		}
-//		else {
-//			if ($(this).hasClass("ui-selected")) {
-//				// Elimina la clase selected de lo elementos seleccionados
-//				$(this).removeClass("ui-selected");
-//			}
-//			else {
-//				// Sino, añadeles la clase
-//				$(this).addClass("ui-selecting");
-//			}
-//		}
+//	if (e.ctrlKey == false) {
+//	// Si la tecla de comando se presiona no deselecciones los elementos
+//	$( ".rect" ).removeClass("ui-selected");
+//	$(this).addClass("ui-selecting");
+//	}
+//	else {
+//	if ($(this).hasClass("ui-selected")) {
+//	// Elimina la clase selected de lo elementos seleccionados
+//	$(this).removeClass("ui-selected");
+//	}
+//	else {
+//	// Sino, añadeles la clase
+//	$(this).addClass("ui-selecting");
+//	}
+//	}
 
-//		$( ".rect" ).data("selectable")._mouseStop(null);
+//	$( ".rect" ).data("selectable")._mouseStop(null);
 
 //	});
 

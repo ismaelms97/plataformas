@@ -18,6 +18,15 @@ html, body {
 	margin-left: 40%;
 	margin-top: 10%;
 }
+
+/* Toggle Password */
+#togglePasswd {
+	float: right;
+	margin-right: 10px;
+	margin-top: -25px;
+	position: relative;
+	z-index: 2;
+}
 /* Cada uno de los RTC */
 .rect {
 	position: relative;
@@ -43,6 +52,27 @@ html, body {
 	margin-right: 5px;
 }
 
+/* Atributos de los RTC y cuando se modifican */
+.orange {
+	background-color: #ffcf75;
+}
+
+.clone {
+	position: relative;
+	background-color: #dbdbdb;
+	padding: 20px 50px;
+	border: 2px solid darkgrey;
+	border-radius: 5%;
+	display: inline-block;
+}
+
+.display {
+	display: none;
+}
+
+.noLeft {
+	left: 0 !important;
+}
 /* TABLE Attributes */
 table td, thead th {
 	border-color: #0000bb !important;
@@ -58,26 +88,6 @@ table td {
 tbody {
 	max-height: 50px;
 	overflow-y: auto;
-}
-
-.orange {
-	background-color: #ffcf75;
-}
-
-.clone{
-	position: relative;
-	background-color: #dbdbdb;
-	padding: 20px 50px;
-	border: 2px solid darkgrey;
-	border-radius: 5%;
-	display: inline-block;
-	position: relative;
-}
-.display{
-	display:none;
-}
-.noLeft{
-	left: 0 !important;
 }
 
 /* Selected */
