@@ -5,7 +5,6 @@ $(document).ready(function(){
 		var cln = $(el).clone();
 		cln.attr("class", "clone");
 		$(el).parent().append(cln);
-//		$(cln).addClass("display");
 		$(cln).css("display", "none");
 	}
 });
@@ -37,9 +36,9 @@ $( function() {
 //					}
 //					offset = $(this).offset();
 
-					
+
 				},
-				
+
 //				Descomentar esto para seleccionar
 //				drag: function(ev, ui) {
 //				var dt = ui.position.top - offset.top, dl = ui.position.left - offset.left;
@@ -55,9 +54,8 @@ $( function() {
 //				},
 
 				stop: function(event, ui){
-//					document.getElementsByClassName("clone")[(this.getAttribute("data-rtc") - 1)].classList.remove("display");
-				document.getElementsByClassName("rect")[(this.getAttribute("data-rtc") - 1)].style.display = "";
-					
+					document.getElementsByClassName("rect")[(this.getAttribute("data-rtc") - 1)].style.display = "";
+
 				},
 			}
 	);
@@ -76,8 +74,9 @@ $( function() {
 					$(this).animate(pos, 200, "linear");
 				}
 			});
-			
-			if(event.target.children.length >= 1){
+
+			if(event.target.children.length == 1){
+				console.log(event.target.children.length);
 				event.target.children[0].style.display = "none";
 			}
 			if(document.getElementsByClassName("clone")[(ui.draggable[0].getAttribute("data-rtc") - 1)].style.display == "none" && 
@@ -85,8 +84,8 @@ $( function() {
 
 				document.getElementsByClassName("clone")[(ui.draggable[0].getAttribute("data-rtc") - 1)].style.display = "";
 			}
-			
-			
+
+
 			$(ui.draggable[0]).addClass("noLeft").appendTo(event.target);
 
 
