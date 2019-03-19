@@ -9,7 +9,7 @@
 
 		<div class="col-xs-12 col-sm-8 col-md-4 col-lg-4 col-centered">
 			<div class="jumbotron text-center">
-				<h3>Please login</h3>
+				<h3>Log In</h3>
 
 				<form:form method="POST" action="/estrategia" modelAttribute="user">
 					<div class="form-group">
