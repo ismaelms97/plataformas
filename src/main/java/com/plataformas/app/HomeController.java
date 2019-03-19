@@ -39,7 +39,7 @@ public class HomeController {
 	public String login(@ModelAttribute("user") User user, Model model,HttpSession session){
 		try {
 
-			String password = db2Service.findByPassword(user.getUsername());
+			String password = db2Service.findByUsername(user.getUsername());
 			if(password.equals(user.getPassword())) {
 				USessions.add(user);
 				session.setAttribute("users", USessions);
@@ -54,11 +54,12 @@ public class HomeController {
 
 				return "plataforma";
 			}else {
+				model.addAttribute("errorMsg","Contraseña incorrecta");
 				System.out.println("No Encontrado");
 				return "home";
 			}
 		} catch (NullPointerException e) { 
-
+			model.addAttribute("errorMsg","El usuario no existe");
 			System.out.println("No Encontrado");
 			return "home";
 

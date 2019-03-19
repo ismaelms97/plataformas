@@ -21,7 +21,7 @@ public class Db2Service {
 		return rs;
 	}
 	
-	public String findByPassword(String username) throws ClassNotFoundException, SQLException {
+	public String findByUsername(String username) throws ClassNotFoundException, SQLException {
 		
 		String url = "jdbc:db2://dashdb-txn-sbox-yp-lon02-01.services.eu-gb.bluemix.net:50001/BLUDB:user=rvg03272;password=0@vn6gg9jg7zqjb1;sslConnection=true;";
 		Class.forName("com.ibm.db2.jcc.DB2Driver");     
