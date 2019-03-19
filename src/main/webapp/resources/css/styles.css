@@ -26,6 +26,7 @@ html, body {
 	border: 2px solid darkgrey;
 	border-radius: 5%;
 	z-index: 10;
+	cursor: pointer;
 }
 
 .tamano {
@@ -69,8 +70,7 @@ tbody {
 	padding: 20px 50px;
 	border: 2px solid darkgrey;
 	border-radius: 5%;
-	display: inline;
-	position: absolute;
+	display: inline-block;
 }
 .display{
 	display:none;
@@ -81,10 +81,10 @@ tbody {
 
 /* Selected */
 td .ui-selecting {
-	background: #FECA40;
+	background: #6dd175;
 }
 
 td .ui-selected {
-	background: #F39814;
+	background: #dffe0a;
 	color: white;
 }

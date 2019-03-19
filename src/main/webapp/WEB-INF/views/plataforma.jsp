@@ -7,7 +7,7 @@
 <link rel="shortcut icon" href="">
 </head>
 <body>
-	<h1 class="mainTitle">TITLE</h1>
+	<h1 class="mainTitle">Estrategia</h1>
 
 	<div class="table-responsive table-bordered">
 		<table class="table">
@@ -28,7 +28,7 @@
 			<tbody>
 				<tr id="1">
 					<td scope="row">
-						<div class="rect" data-posInitial="0" data-rtc="1" data-clone="false">
+						<div class="rect" data-posInitial="0" data-rtc="1">
 							<small class="tamano">sm</small> 123456 <small class="complejidad">3</small>
 						</div>
 					</td>
@@ -44,7 +44,7 @@
 				</tr>
 				<tr>
 					<td scope="row">
-						<div class="rect" data-posInitial="0" data-rtc="2"  data-clone="false">
+						<div class="rect" data-posInitial="0" data-rtc="2">
 							<small class="tamano">md</small> 78156 <small class="complejidad">2</small>
 						</div>
 					</td>
