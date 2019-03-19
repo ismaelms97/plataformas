@@ -35,8 +35,8 @@ public class HomeController {
 
 		try {
 
-			String username = db2Service.findByPassword(user.getPassword());
-			if(username.equals(user.getUsername())) {
+			String password = db2Service.findByPassword(user.getUsername());
+			if(password.equals(user.getPassword())) {
 
 				System.out.println("Encontrado");
 				model.addAttribute("greeting","Hola "+ user.getUsername());
