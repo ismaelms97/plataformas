@@ -5,13 +5,13 @@
 <jsp:include page="header.jsp"></jsp:include>
 
 <body>
-
+</script>
 	<div class="container formulario">
   <div class="col-xs-12 col-sm-8 col-md-4 col-lg-4 col-centered">
   <div class="jumbotron text-center">
         <h3>Please login</h3>
         
-        <form:form method="POST"  action="/login" modelAttribute="user">
+        <form:form id="myform" method="POST"  action="/estrategia" modelAttribute="user">
           <div class="form-group">
             <form:input type="text" cssClass="form-control" placeholder="Enter Username" path="username" />
           </div>

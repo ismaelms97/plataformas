@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <head>
 <!-- <link rel="shortcut icon" type="image/x-icon"
 	href="/resources/img/favicon.png" /> -->
@@ -36,6 +37,9 @@
       <h5 class="my-0 mr-md-auto font-weight-normal">${greeting}</h5>
       <nav class="my-2 my-md-0 mr-md-3">
       </nav>
-      <a class="btn btn-outline-primary" href="/">Cerrar Session</a>
+      <form:form method="POST"  action="/closeSession"  modelAttribute="user">
+     <form:input type="hidden"  path="username" value= "${user.username}"  />
+       <button type="submit" class="btn btn-outline-primary">Cerrar Sessión</button>       
+      </form:form>
     </div>
 </html>
