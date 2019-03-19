@@ -1,7 +1,11 @@
 package com.plataformas.app;
 
-import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
+import java.util.List;
 import java.util.Locale;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +23,7 @@ import com.plataformas.model.User;
  */
 @Controller
 public class HomeController {
+	private List<User> USessions = new ArrayList<User>();
 	@Autowired
 	Db2Service db2Service;
 	/**
@@ -30,23 +35,31 @@ public class HomeController {
 		return "home";
 	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(@ModelAttribute("user") User user, Model model) throws SQLException, ClassNotFoundException {		
-
+	@RequestMapping(value = "/estrategia", method = RequestMethod.POST)
+	public String login(@ModelAttribute("user") User user, Model model,HttpSession session){
 		try {
 
-			String password = db2Service.findByPassword(user.getUsername());
+			String password = db2Service.findByUsername(user.getUsername());
 			if(password.equals(user.getPassword())) {
-
+				USessions.add(user);
+				session.setAttribute("users", USessions);
 				System.out.println("Encontrado");
+
+				@SuppressWarnings("unchecked")
+				List<User> x = (List<User>) session.getAttribute("users"); // Recoge la List de users para de la session
+				System.out.println(x.size());
+
 				model.addAttribute("greeting","Hola "+ user.getUsername());
+				model.addAttribute("user",user);
+
 				return "plataforma";
 			}else {
+				model.addAttribute("errorMsg","Contraseña incorrecta");
 				System.out.println("No Encontrado");
 				return "home";
 			}
 		} catch (NullPointerException e) { 
-
+			model.addAttribute("errorMsg","El usuario no existe");
 			System.out.println("No Encontrado");
 			return "home";
 
@@ -55,9 +68,32 @@ public class HomeController {
 			return "home";
 		}
 
+	}
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/closeSession", method = RequestMethod.POST)
+	public String SessionDestroy(@ModelAttribute("user") User user, Model model,HttpSession session) {	
 
+		List<User> actualSession = (List<User>) session.getAttribute("users"); 
+		try {
+			for(User u : actualSession) {
+				if(u.getUsername().equals(user.getUsername())) {
 
+					actualSession.remove(u);
+					USessions.remove(u);
+					session.setAttribute("users", actualSession);
+					System.out.println("Sessiones Actuales "+actualSession.size());
 
+				}else {
+					System.out.println("No encontrado");
+					System.out.println("Sessiones FAIL de borrar "+actualSession.size());
+				}
+
+			}
+			
+		}catch (ConcurrentModificationException e) {
+			return "home";
+		}
+		return "home";
 	}
 
 	@RequestMapping(value = "/excel", method = RequestMethod.GET)
