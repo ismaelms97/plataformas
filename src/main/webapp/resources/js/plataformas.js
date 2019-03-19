@@ -21,7 +21,6 @@ $( function() {
 				helper: "clone",
 				start: function(event, ui){
 					$(".ui-draggable-dragging").removeClass("noLeft");
-//					document.getElementsByClassName("clone")[(event.target.getAttribute("data-rtc") - 1)].style.display = "inherit";
 
 //					Descomentar esto para seleccionar
 //					if ($(this).hasClass("ui-selected")){
@@ -72,6 +71,7 @@ $( function() {
 				of: $this,
 				using: function(pos) {
 					$(this).animate(pos, 200, "linear");
+
 				}
 			});
 

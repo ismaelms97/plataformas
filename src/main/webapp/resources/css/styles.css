@@ -5,6 +5,9 @@ html, body {
 	-moz-user-select: none;
 	-ms-user-select: none;
 }
+body{
+	overflow-x: hidden;
+}
 /* Titulo */
 .mainTitle {
 	font-size: 5em;

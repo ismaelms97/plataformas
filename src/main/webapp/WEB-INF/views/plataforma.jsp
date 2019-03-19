@@ -45,7 +45,7 @@
 				<tr>
 					<td scope="row">
 						<div class="rect" data-posInitial="0" data-rtc="2">
-							<small class="tamano">md</small> 78156 <small class="complejidad">2</small>
+							<small class="tamano">md</small> 781567 <small class="complejidad">2</small>
 						</div>
 					</td>
 					<td></td>
@@ -59,7 +59,11 @@
 					<td></td>
 				</tr>
 				<tr>
-					<td></td>
+					<td scope="row">
+						<div class="rect" data-posInitial="0" data-rtc="3">
+							<small class="tamano">sm</small> 456987 <small class="complejidad">1</small>
+						</div>
+					</td>
 					<td></td>
 					<td></td>
 					<td></td>
@@ -71,7 +75,11 @@
 					<td></td>
 				</tr>
 				<tr>
-					<td></td>
+					<td scope="row">
+						<div class="rect" data-posInitial="0" data-rtc="4">
+							<small class="tamano">sm</small> 987654 <small class="complejidad">3</small>
+						</div>
+					</td>
 					<td></td>
 					<td></td>
 					<td></td>
