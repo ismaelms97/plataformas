@@ -71,7 +71,6 @@ tbody {
 	border: 2px solid darkgrey;
 	border-radius: 5%;
 	display: inline-block;
-	position: relative;
 }
 .display{
 	display:none;
