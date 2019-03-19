@@ -11,7 +11,7 @@
 			<div class="jumbotron text-center">
 				<h3>Please login</h3>
 
-				<form:form method="POST" action="/login" modelAttribute="user">
+				<form:form method="POST" action="/estrategia" modelAttribute="user">
 					<div class="form-group">
 						<form:input type="text" cssClass="form-control"
 							placeholder="Enter Username" path="username" />
