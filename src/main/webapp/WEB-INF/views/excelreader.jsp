@@ -26,7 +26,7 @@
 <!--Output Format: <select name="format" onchange="setfmt()">
 		<option value="json" selected> JSON</option>
 	</select><br />>-->
-	<div id="drop">Drop a spreadsheet file here to see sheet data <input type="file" name="xlfile" id="xlf" hidden />
+	<div id="drop">Arrastra el archivo excel aqui<input type="file" name="xlfile" id="xlf" hidden />
 	</div>
 	<!--<input type="file" name="xlfile" id="xlf" /> ... or click here to select a file
 
@@ -39,7 +39,8 @@
 <br />
 <script src="/resources/libs/js/shim.js"></script>
 <script src="/resources/libs/js/xlsx.full.min.js"></script>
-<script>
+<script src="/resources/js/readExcel.js"></script>
+<!--<script>
 		var tasks = []
 		var idPos, typePos, prioPos, resuPos, statusPos;
 		var X = XLSX;
@@ -197,6 +198,6 @@
 
 			console.log(truncated)
 		});
-	</script>
+	</script>-->
 </body>
 </html>
