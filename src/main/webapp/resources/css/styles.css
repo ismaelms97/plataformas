@@ -1,5 +1,9 @@
 html, body {
 	background-color: #eef2f0;
+	user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
 }
 /* Titulo */
 .mainTitle {
@@ -17,10 +21,12 @@ html, body {
 /* Cada uno de los RTC */
 .rect {
 	position: relative;
-	border: 2px solid darkgrey;
 	background-color: #dbdbdb;
 	padding: 20px 50px;
 	border: 2px solid darkgrey;
+	border-radius: 5%;
+	z-index: 10;
+	cursor: pointer;
 }
 
 .tamano {
@@ -43,9 +49,10 @@ table td, thead th {
 }
 
 table td {
-	width: 178.556px;
+	width: 180.556px;
 	height: 66.170px;
-	min-width: 170.556px;
+	min-width: 180.556px;
+	max-width: 180.556px;
 }
 
 tbody {
@@ -53,16 +60,32 @@ tbody {
 	overflow-y: auto;
 }
 
-.red {
-	background-color: red;
+.orange {
+	background-color: #ffcf75;
+}
+
+.clone{
+	position: relative;
+	background-color: #dbdbdb;
+	padding: 20px 50px;
+	border: 2px solid darkgrey;
+	border-radius: 5%;
+	display: inline-block;
+	position: relative;
+}
+.display{
+	display:none;
+}
+.noLeft{
+	left: 0 !important;
 }
 
 /* Selected */
 td .ui-selecting {
-	background: #FECA40;
+	background: #6dd175;
 }
 
 td .ui-selected {
-	background: #F39814;
+	background: #dffe0a;
 	color: white;
 }
