@@ -56,7 +56,7 @@ public class HomeController {
 			}else {
 				model.addAttribute("errorMsg","Contraseña incorrecta");
 				System.out.println("No Encontrado");
-				return "home";
+				return  "home";
 			}
 		} catch (NullPointerException e) { 
 			model.addAttribute("errorMsg","El usuario no existe");
