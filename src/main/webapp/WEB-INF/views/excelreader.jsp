@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%-- <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <!-- xlsx.js (C) 2013-present  SheetJS http://sheetjs.com -->
@@ -33,7 +33,7 @@
 	<b>Advanced Demo Options:</b>
 	Use Web Workers: (when available) <input type="checkbox" name="useworker">
 	Use readAsBinaryString: (when available) <input type="checkbox" name="userabs">-->
-</pre>
+
 <pre id="out"></pre>
 <!--<div id="htmlout"></div>-->
 <br />
@@ -201,3 +201,4 @@
 	</script>-->
 </body>
 </html>
+ --%>

@@ -25,7 +25,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr id="1">
+				<!-- <tr id="1">
 					<td scope="row">
 						<div class="rect" data-posInitial="0" data-rtc="1">
 							<small class="tamano">sm</small> 123456 <small
@@ -92,13 +92,17 @@
 					<td></td>
 					<td></td>
 					<td></td>
-				</tr>
+				</tr> -->
 			</tbody>
 		</table>
+	<div id="drop"> Arrastra el archivo excel aquí para cargarlo<input type="file" name="xlfile" id="xlf" hidden />
 	</div>
-
-
-	<script src="/resources/libs/js/popper.min.js"></script>
-	<script src="/resources/libs/css/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+	</div>
+	
+	
+	<script src="/resources/libs/js/shim.js"></script>
+	<script src="/resources/libs/js/xlsx.full.min.js"></script>
+	
+	<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>
