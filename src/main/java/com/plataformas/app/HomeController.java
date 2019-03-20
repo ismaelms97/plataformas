@@ -61,7 +61,7 @@ public class HomeController {
 		} catch (NullPointerException e) { 
 			model.addAttribute("errorMsg","El usuario no existe");
 			System.out.println("No Encontrado");
-			return "home";
+			return "home";  // CUANDO CIERRAS SESSION HE CONSEGUIDO QUE REDIRIJA A LA RAIZ   ESTARIA BIEN MIRAR SI ESTE "HOME" SE PUEDE REDIRIGIR
 
 		}catch (Exception e) {
 			System.out.println("Error desconocido");
@@ -74,6 +74,10 @@ public class HomeController {
 	public String SessionDestroy(@ModelAttribute("user") User user, Model model,HttpSession session) {	
 
 		List<User> actualSession = (List<User>) session.getAttribute("users"); 
+		for (User user2 : actualSession) {
+			
+			System.out.println(user2.getUsername()+" "+user2.getPassword()+" "+user2.getId());
+		}
 		try {
 			for(User u : actualSession) {
 				if(u.getUsername().equals(user.getUsername())) {
@@ -91,9 +95,9 @@ public class HomeController {
 			}
 			
 		}catch (ConcurrentModificationException e) {
-			return "home";
+			return "redirect:/";
 		}
-		return "home";
+		return "redirect:/";
 	}
 
 	@RequestMapping(value = "/excel", method = RequestMethod.GET)
