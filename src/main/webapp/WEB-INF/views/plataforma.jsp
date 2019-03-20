@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
 <jsp:include page="header.jsp"></jsp:include>
-<head>
-<link rel="shortcut icon" href="">
-</head>
+
 <body>
 	<h1 class="mainTitle">Estrategia</h1>
 
@@ -29,7 +28,8 @@
 				<tr id="1">
 					<td scope="row">
 						<div class="rect" data-posInitial="0" data-rtc="1">
-							<small class="tamano">sm</small> 123456 <small class="complejidad">3</small>
+							<small class="tamano">sm</small> 123456 <small
+								class="complejidad">3</small>
 						</div>
 					</td>
 					<td></td>
@@ -45,7 +45,8 @@
 				<tr>
 					<td scope="row">
 						<div class="rect" data-posInitial="0" data-rtc="2">
-							<small class="tamano">md</small> 781567 <small class="complejidad">2</small>
+							<small class="tamano">md</small> 781567 <small
+								class="complejidad">2</small>
 						</div>
 					</td>
 					<td></td>
@@ -61,7 +62,8 @@
 				<tr>
 					<td scope="row">
 						<div class="rect" data-posInitial="0" data-rtc="3">
-							<small class="tamano">sm</small> 456987 <small class="complejidad">1</small>
+							<small class="tamano">sm</small> 456987 <small
+								class="complejidad">1</small>
 						</div>
 					</td>
 					<td></td>
@@ -77,7 +79,8 @@
 				<tr>
 					<td scope="row">
 						<div class="rect" data-posInitial="0" data-rtc="4">
-							<small class="tamano">sm</small> 987654 <small class="complejidad">3</small>
+							<small class="tamano">sm</small> 987654 <small
+								class="complejidad">3</small>
 						</div>
 					</td>
 					<td></td>

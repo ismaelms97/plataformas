@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	drawRTC();
 	var rect = document.getElementsByClassName("rect");
 	for(var i = 0; i < rect.length; i++){
 		var el = rect[i];
@@ -121,3 +122,13 @@ $( function() {
 //	});
 
 })
+
+function drawRTC(){
+	var el = $("tbody tr:first-child");
+	console.log(el);
+	for (var i = 0; i < el; i++) {
+		
+		console.log(el[i]);
+		
+	}
+}

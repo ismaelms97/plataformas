@@ -21,7 +21,7 @@
 						<i class="fa fa-fw fa-eye" id="togglePasswd"></i>
 					</div>
 					<button type="submit" class="btn-primary form-control">Login</button>
-				</form:form>
+				</form:form> 
 				
 				<div>${errorMsg}</div>
 			</div>
