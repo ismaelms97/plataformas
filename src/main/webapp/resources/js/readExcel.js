@@ -1,6 +1,6 @@
 
 var tasks = []
-var idPos, typePos, prioPos, resuPos, statusPos;
+var idPos, typePos, prioPos, resuPos, statusPos, sizePos, complejPos;
 var X = XLSX;
 var XW = {
 		/* worker message */
@@ -8,7 +8,6 @@ var XW = {
 		/* worker scripts */
 		worker: '/resources/libs/js/xlsxworker.js'
 };
-
 var global_wb;
 
 var process_wb = (function () {
@@ -41,7 +40,8 @@ var process_wb = (function () {
 		/*if (OUT.innerText === undefined) OUT.textContent = output;
         else OUT.innerText = output;*/
 		//console.log(to_json(wb)) //my console
-		document.getElementById("drop").style.display =  "none";
+		//document.getElementById("drop").style.display =  "none";
+
 		for (var i = 0; i < JSON.parse(output).Tareas[0].length; i++) {
 			if(JSON.parse(output).Tareas[0][i] != null){
 				if (JSON.parse(output).Tareas[0][i].toLowerCase() == "id") {
@@ -54,24 +54,42 @@ var process_wb = (function () {
 					resuPos = i;
 				} else if (JSON.parse(output).Tareas[0][i].toLowerCase() == "estado") {
 					statusPos = i;
-				}
+				}  else if (JSON.parse(output).Tareas[0][i].toLowerCase() == "tamaño") {
+					sizePos = i;
+				}  else if (JSON.parse(output).Tareas[0][i].toLowerCase() == "complejidad") {
+					complejPos = i;
+				} 
 
 			}
 		}
 		for (var i = 1; i < JSON.parse(output).Tareas.length; i++) { //JSON.parse(output).Tareas.length
-			if(JSON.parse(output).Tareas[i][idPos] != null){
+			if(JSON.parse(output).Tareas[i][idPos] != null && JSON.parse(output).Tareas[i][statusPos].toLowerCase() != "finalizada"){
+
 				var task = new Object();
 				task.id = JSON.parse(output).Tareas[i][idPos]
 				task.tipo = JSON.parse(output).Tareas[i][typePos]
 				task.prioridad = JSON.parse(output).Tareas[i][prioPos]
 				task.resumen = JSON.parse(output).Tareas[i][resuPos]
 				task.estado = JSON.parse(output).Tareas[i][statusPos]
+				// Hacemos comprovaciones
+				if(JSON.parse(output).Tareas[i][complejPos] != null){
+					task.complejidad = JSON.parse(output).Tareas[i][complejPos]					
+				}else{
+					task.complejidad = 0;
+				}
+				if(JSON.parse(output).Tareas[i][sizePos] != null){
+					task.tamano = JSON.parse(output).Tareas[i][sizePos]					
+				}else{
+					task.tamano = 0;
+				}
+				task.modified = false;
 				tasks.push(task);
 			}
 		}
+		document.getElementById("loadAnimation").style.display =  "none"; //Hide load animation
 		console.log(tasks)
 		drawTable();
-		if (typeof console !== 'undefined') console.log("output", new Date());
+//		if (typeof console !== 'undefined') console.log("output", new Date());
 	};
 })();
 
@@ -85,6 +103,9 @@ var do_file = (function () {
 	if (!use_worker) domwork.disabled = !(domwork.checked = false);
 
 	var xw = function xw(data, cb) {
+
+		document.getElementById("drop").style.display =  "none"; //Hide dropZone div
+		document.getElementById("loadAnimation").removeAttribute("style"); //Show load animation
 		var worker = new Worker(XW.worker);
 		worker.onmessage = function (e) {
 			switch (e.data.t) {
@@ -102,7 +123,7 @@ var do_file = (function () {
 		var f = files[0];
 		var reader = new FileReader();
 		reader.onload = function (e) {
-			if (typeof console !== 'undefined') console.log("onload", new Date(), rABS, use_worker);
+//			if (typeof console !== 'undefined') console.log("onload", new Date(), rABS, use_worker);
 			var data = e.target.result;
 			if (!rABS) data = new Uint8Array(data);
 			if (use_worker) xw(data, process_wb);

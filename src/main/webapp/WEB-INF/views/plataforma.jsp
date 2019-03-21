@@ -12,11 +12,11 @@
 		<table class="table">
 			<thead>
 				<tr class="table-info">
-					<th scope="col">Pte. Alta</th>
-					<th scope="col">Pte.Qualificar</th>
+					<th scope="col">Pte Alta</th>
+					<th scope="col">Pte.Cuantificar</th>
 					<th scope="col">Listo Para Analizar</th>
 					<th scope="col">Cierre Requerimientos</th>
-					<th scope="col">En Analisis</th>
+					<th scope="col">En Análisis</th>
 					<th scope="col">Aceptación Usuario</th>
 					<th scope="col">En Curso</th>
 					<th scope="col">Aceptación a las Pruebas</th>
@@ -98,7 +98,7 @@
 	<div id="drop"> Arrastra el archivo excel aquí para cargarlo<input type="file" name="xlfile" id="xlf" hidden />
 	</div>
 	</div>
-	
+	<div id="loadAnimation" class="lds-dual-ring" style="display: none"></div> <!--style="display: none"-->
 	
 	<script src="/resources/libs/js/shim.js"></script>
 	<script src="/resources/libs/js/xlsx.full.min.js"></script>
