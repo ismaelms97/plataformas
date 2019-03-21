@@ -1,6 +1,6 @@
 
 var tasks = []
-var idPos, typePos, prioPos, resuPos, statusPos;
+var idPos, typePos, prioPos, resuPos, statusPos, sizePos, complejPos;
 var X = XLSX;
 var XW = {
 		/* worker message */
@@ -54,19 +54,35 @@ var process_wb = (function () {
 					resuPos = i;
 				} else if (JSON.parse(output).Tareas[0][i].toLowerCase() == "estado") {
 					statusPos = i;
+				}  else if (JSON.parse(output).Tareas[0][i].toLowerCase() == "tamaño") {
+					sizePos = i;
+				}  else if (JSON.parse(output).Tareas[0][i].toLowerCase() == "complejidad") {
+					complejPos = i;
 				} 
 
 			}
 		}
 		for (var i = 1; i < JSON.parse(output).Tareas.length; i++) { //JSON.parse(output).Tareas.length
 			if(JSON.parse(output).Tareas[i][idPos] != null && JSON.parse(output).Tareas[i][statusPos].toLowerCase() != "finalizada"){
-				
+
 				var task = new Object();
 				task.id = JSON.parse(output).Tareas[i][idPos]
 				task.tipo = JSON.parse(output).Tareas[i][typePos]
 				task.prioridad = JSON.parse(output).Tareas[i][prioPos]
 				task.resumen = JSON.parse(output).Tareas[i][resuPos]
 				task.estado = JSON.parse(output).Tareas[i][statusPos]
+				// Hacemos comprovaciones
+				if(JSON.parse(output).Tareas[i][complejPos] != null){
+					task.complejidad = JSON.parse(output).Tareas[i][complejPos]					
+				}else{
+					task.complejidad = 0;
+				}
+				if(JSON.parse(output).Tareas[i][sizePos] != null){
+					task.tamano = JSON.parse(output).Tareas[i][sizePos]					
+				}else{
+					task.tamano = 0;
+				}
+				task.modified = false;
 				tasks.push(task);
 			}
 		}
@@ -87,7 +103,7 @@ var do_file = (function () {
 	if (!use_worker) domwork.disabled = !(domwork.checked = false);
 
 	var xw = function xw(data, cb) {
-		
+
 		document.getElementById("drop").style.display =  "none"; //Hide dropZone div
 		document.getElementById("loadAnimation").removeAttribute("style"); //Show load animation
 		var worker = new Worker(XW.worker);

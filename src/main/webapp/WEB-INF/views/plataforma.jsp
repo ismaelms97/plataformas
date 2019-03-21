@@ -12,7 +12,7 @@
 		<table class="table">
 			<thead>
 				<tr class="table-info">
-					<th scope="col">Pte. Alta</th>
+					<th scope="col">Pte Alta</th>
 					<th scope="col">Pte.Cuantificar</th>
 					<th scope="col">Listo Para Analizar</th>
 					<th scope="col">Cierre Requerimientos</th>

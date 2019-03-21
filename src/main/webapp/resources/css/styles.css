@@ -126,8 +126,9 @@ td .ui-selected {
 	height: 128px;/* 64*/
 	margin-left: 50%;
 	margin-right: 50%;
-  }
-  .lds-dual-ring:after {
+}
+
+.lds-dual-ring:after {
 	content: " ";
 	display: block;
 	width: 92px; /*46px*/
@@ -137,12 +138,9 @@ td .ui-selected {
 	border: 5px solid #0000bb;
 	border-color: #0000bb transparent #0000bb transparent;
 	animation: lds-dual-ring 1.2s linear infinite;
-  }
-  @keyframes lds-dual-ring {
-	0% {
-	  transform: rotate(0deg);
-	}
-	100% {
-	  transform: rotate(360deg);
-	}
-  }
+}
+
+@keyframes lds-dual-ring {
+	0% {transform: rotate(0deg);}
+	100% {transform: rotate(360deg);}
+}
