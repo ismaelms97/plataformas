@@ -8,7 +8,6 @@ var XW = {
 		/* worker scripts */
 		worker: '/resources/libs/js/xlsxworker.js'
 };
-
 var global_wb;
 
 var process_wb = (function () {
@@ -41,7 +40,8 @@ var process_wb = (function () {
 		/*if (OUT.innerText === undefined) OUT.textContent = output;
         else OUT.innerText = output;*/
 		//console.log(to_json(wb)) //my console
-		document.getElementById("drop").style.display =  "none";
+		//document.getElementById("drop").style.display =  "none";
+
 		for (var i = 0; i < JSON.parse(output).Tareas[0].length; i++) {
 			if(JSON.parse(output).Tareas[0][i] != null){
 				if (JSON.parse(output).Tareas[0][i].toLowerCase() == "id") {
@@ -54,7 +54,7 @@ var process_wb = (function () {
 					resuPos = i;
 				} else if (JSON.parse(output).Tareas[0][i].toLowerCase() == "estado") {
 					statusPos = i;
-				}
+				} 
 
 			}
 		}
@@ -69,6 +69,7 @@ var process_wb = (function () {
 				tasks.push(task);
 			}
 		}
+		document.getElementById("loadAnimation").style.display =  "none"; //Hide load animation
 		console.log(tasks)
 		drawTable();
 		if (typeof console !== 'undefined') console.log("output", new Date());
@@ -85,6 +86,9 @@ var do_file = (function () {
 	if (!use_worker) domwork.disabled = !(domwork.checked = false);
 
 	var xw = function xw(data, cb) {
+		
+		document.getElementById("drop").style.display =  "none"; //Hide dropZone div
+		document.getElementById("loadAnimation").removeAttribute("style"); //Show load animation
 		var worker = new Worker(XW.worker);
 		worker.onmessage = function (e) {
 			switch (e.data.t) {
