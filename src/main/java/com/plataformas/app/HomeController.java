@@ -1,5 +1,6 @@
 package com.plataformas.app;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.List;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.plataformas.Db2.Db2Service;
+import com.plataformas.model.Estrategia;
 import com.plataformas.model.User;
 
 
@@ -28,9 +30,22 @@ public class HomeController {
 	Db2Service db2Service;
 	/**
 	 * Simply selects the home view to render by returning its name.
+	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
+	public String home(Locale locale, Model model)  {
+
+		/* EJEMPLO DE COMO RECOJER LA LISTA DE USUARIOS DE LA BASE DE DATOS
+		@SuppressWarnings("unchecked")
+		List<User> users = db2Service.findAll();
+
+		for (User user : users) {
+
+			System.out.println(user.getId()+" , "+user.getUsername()+" "+user.getPassword()+" ,  "+user.getEquipoId());
+		}
+		 */
+
 		model.addAttribute("user", new User());
 		return "home";
 	}
@@ -39,29 +54,27 @@ public class HomeController {
 	public String login(@ModelAttribute("user") User user, Model model,HttpSession session){
 		try {
 
-			String password = db2Service.findByUsername(user.getUsername());
-			if(password.equals(user.getPassword())) {
-				USessions.add(user);
-				session.setAttribute("users", USessions);
-				System.out.println("Encontrado");
-
-				@SuppressWarnings("unchecked")
-				List<User> x = (List<User>) session.getAttribute("users"); // Recoge la List de users para de la session
-				System.out.println(x.size());
-
-				model.addAttribute("greeting","Hola "+ user.getUsername());
-				model.addAttribute("user",user);
-
-				return "plataforma";
-			}else {
-				model.addAttribute("errorMsg","Contraseña incorrecta");
-				System.out.println("No Encontrado");
-				return  "home";
-			}
+			User newUser = db2Service.findByUsername(user.getUsername());
+		
+				if(newUser.getPassword().equals(user.getPassword())) {
+					USessions.add(newUser);				
+					session.setAttribute("users", USessions);
+					List<Estrategia> listaEstrategias = db2Service.findEstrategiaById(newUser.getEquipoId());
+					System.out.println("Encontrado");
+					model.addAttribute("greeting","Hola "+ user.getUsername());
+					model.addAttribute("user",user);
+					model.addAttribute("listaEstrategia",listaEstrategias);
+					return "plataforma";
+				}else {
+					model.addAttribute("errorMsg","Contraseña incorrecta");
+					System.out.println("No Encontrado");
+					return  "home";
+				}
+			
 		} catch (NullPointerException e) { 
 			model.addAttribute("errorMsg","El usuario no existe");
 			System.out.println("No Encontrado");
-			return "home";  // CUANDO CIERRAS SESSION HE CONSEGUIDO QUE REDIRIJA A LA RAIZ   ESTARIA BIEN MIRAR SI ESTE "HOME" SE PUEDE REDIRIGIR
+			return "home"; 
 
 		}catch (Exception e) {
 			System.out.println("Error desconocido");
@@ -75,7 +88,7 @@ public class HomeController {
 
 		List<User> actualSession = (List<User>) session.getAttribute("users"); 
 		for (User user2 : actualSession) {
-			
+
 			System.out.println(user2.getUsername()+" "+user2.getPassword()+" "+user2.getId());
 		}
 		try {
@@ -93,7 +106,7 @@ public class HomeController {
 				}
 
 			}
-			
+
 		}catch (ConcurrentModificationException e) {
 			return "redirect:/";
 		}
