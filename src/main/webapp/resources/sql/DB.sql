@@ -33,8 +33,8 @@ id int NOT NULL  PRIMARY KEY,
 estado varchar(50) NOT NULL,
 fechaInicio varchar(50) not null,
 fechaFin    varchar(50) not null,
-estrategia_id INT NOT NULL,		
-constraint relation_equipo_estrategia foreign key (estrategia_id)	references equipo (id)
+equipo_id INT NOT NULL,		
+constraint relation_equipo_estrategia foreign key (equipo_id)	references equipo (id)
 ON DELETE CASCADE
 );
 
