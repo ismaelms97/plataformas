@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.plataformas.model.Daily;
 import com.plataformas.model.Estrategia;
+import com.plataformas.model.Tarea;
 import com.plataformas.model.User;
 @Service
 public class Db2Service {
@@ -60,6 +61,7 @@ public class Db2Service {
 			return userList;
 		}
 	}
+	
 
 	public User findByUsername(String Uusername) throws ClassNotFoundException, SQLException {
 
@@ -115,6 +117,40 @@ public class Db2Service {
 			return estrategiaList;
 		}
 
+	}
+	public List<Tarea> findTareasByEstrategia(int idEstrategia) throws ClassNotFoundException  {
+		List<Tarea> tareaList = new ArrayList<Tarea>();		
+		initializeDriver();	     
+		System.out.println("idUser : "+idEstrategia);
+		try {
+
+			Connection con = DriverManager.getConnection(url);
+			con.setAutoCommit(false);
+			Statement  stmt = con.createStatement(); 
+			ResultSet rs = stmt.executeQuery("SELECT DISTINCT  T.id, T.tipo, T.estadoInicio, T.estadoFinal  FROM tarea T , estrategia E , estrategia_tarea ET"
+					+ " where T.id = ET.tarea_id AND  ET.estrategia_id = "+idEstrategia+"");
+			
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String tipo = rs.getString("tipo");
+				String estadoInicio = rs.getString("estadoInicio");
+				String estadoFinal = rs.getString("estadoFinal");
+				Tarea tarea = new Tarea(id,tipo,estadoInicio,estadoFinal);
+				tareaList.add(tarea);
+			}
+
+			return tareaList;
+
+		} catch (SQLException e) {
+			System.err.println("SQL Exeption  findTareasByEstrategia:  code -> "+e.getErrorCode());
+			System.err.println("more inf : "+e.getMessage()+" reason  -> "+e.getCause());
+			return tareaList;
+
+		}catch (Exception e) {
+			System.out.println("Error en findEstrategiaById ");
+			return tareaList;
+		}
+
 
 
 
@@ -127,7 +163,7 @@ public class Db2Service {
 			con.setAutoCommit(false);
 			Statement  stmt = con.createStatement(); 
 			ResultSet rs = stmt.executeQuery("INSERT INTO estrategia (estado,fechaInicio,fechaFin,equipo_id) values "
-					+ "('"+estrategia.getEstado()+"','"+estrategia.getFechaInicio()+"','"+estrategia.getFechaFin()+"',"+estrategia.getEquipoId()+");"); 
+					+ "('"+estrategia.getEstado()+"','"+estrategia.getFechaInicio()+"','"+estrategia.getFechaFin()+"',"+estrategia.getEquipoId()+")"); 
 		}catch (SQLException e) {
 			System.out.println("SQL Exeption  saveEstrategia:  code -> "+e.getErrorCode()+" more inf : "+e.getMessage());
 
@@ -146,7 +182,7 @@ public class Db2Service {
 			Connection con = DriverManager.getConnection(url);
 			con.setAutoCommit(false);
 			Statement  stmt = con.createStatement(); 
-			ResultSet rs = stmt.executeQuery("INSERT INTO estrategia (fecha,daily_id) values ('"+daily.getFecha()+"',"+daily.getDailyId()+");"); 
+			ResultSet rs = stmt.executeQuery("INSERT INTO estrategia (fecha,daily_id) values ('"+daily.getFecha()+"',"+daily.getDailyId()+")"); 
 
 		}catch (SQLException e) {
 			System.out.println("SQL Exeption saveDaily:  code -> "+e.getErrorCode() +" more inf : "+e.getMessage());

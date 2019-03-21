@@ -12,11 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.plataformas.Db2.Db2Service;
 import com.plataformas.model.Estrategia;
+import com.plataformas.model.Tarea;
 import com.plataformas.model.User;
 
 
@@ -34,8 +36,8 @@ public class HomeController {
 	 * @throws ClassNotFoundException 
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model)  {
-
+	public String home(Locale locale, Model model) throws ClassNotFoundException, SQLException  {
+		
 		/* EJEMPLO DE COMO RECOJER LA LISTA DE USUARIOS DE LA BASE DE DATOS
 		@SuppressWarnings("unchecked")
 		List<User> users = db2Service.findAll();
@@ -50,27 +52,28 @@ public class HomeController {
 		return "home";
 	}
 
-	@RequestMapping(value = "/estrategia", method = RequestMethod.POST)
+	@RequestMapping(value = "/mainPanel", method = RequestMethod.POST)
 	public String login(@ModelAttribute("user") User user, Model model,HttpSession session){
 		try {
 
 			User newUser = db2Service.findByUsername(user.getUsername());
-		
-				if(newUser.getPassword().equals(user.getPassword())) {
-					USessions.add(newUser);				
-					session.setAttribute("users", USessions);
-					List<Estrategia> listaEstrategias = db2Service.findEstrategiaById(newUser.getEquipoId());
-					System.out.println("Encontrado");
-					model.addAttribute("greeting","Hola "+ user.getUsername());
-					model.addAttribute("user",user);
-					model.addAttribute("listaEstrategia",listaEstrategias);
-					return "plataforma";
-				}else {
-					model.addAttribute("errorMsg","Contraseña incorrecta");
-					System.out.println("No Encontrado");
-					return  "home";
-				}
-			
+
+			if(newUser.getPassword().equals(user.getPassword())) {
+				USessions.add(newUser);				
+				session.setAttribute("users", USessions);
+				List<Estrategia> listaEstrategias = db2Service.findEstrategiaById(newUser.getEquipoId());
+				System.out.println("Encontrado");
+				model.addAttribute("greeting","Hola "+ user.getUsername());
+				model.addAttribute("user",user);
+				model.addAttribute("listaEstrategia",listaEstrategias);
+				System.out.println("ESTRATEGIAS COMPLETE");
+				return "mainPanel";
+			}else {
+				model.addAttribute("errorMsg","Contraseña incorrecta");
+				System.out.println("No Encontrado");
+				return  "home";
+			}
+
 		} catch (NullPointerException e) { 
 			model.addAttribute("errorMsg","El usuario no existe");
 			System.out.println("No Encontrado");
@@ -82,6 +85,29 @@ public class HomeController {
 		}
 
 	}
+
+	@RequestMapping(value = "/estrategia", method = RequestMethod.GET)
+	public String mostrarTareasEstrategia(@RequestBody String id ,  Model model,HttpSession session){		
+
+		try {
+			List<Tarea> tareas = db2Service.findTareasByEstrategia(Integer.parseInt(id.trim()));
+			model.addAttribute("listaTareas",tareas);
+			System.out.println("TAREAS COMPLETE");
+			return "plataforma";
+		}catch (NumberFormatException e) {
+			System.out.println("formato incorrecto en mostrarTareasEstrategia Controller");
+			return "mainPanel";
+		}catch (Exception e) {
+			System.out.println("otra error en mostrarTareasEstrategia Controller");
+			return "mainPanel";
+		}		
+
+	}
+
+
+
+
+
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/closeSession", method = RequestMethod.POST)
 	public String SessionDestroy(@ModelAttribute("user") User user, Model model,HttpSession session) {	
