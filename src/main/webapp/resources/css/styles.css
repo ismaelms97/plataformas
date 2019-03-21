@@ -5,6 +5,9 @@ html, body {
 	-moz-user-select: none;
 	-ms-user-select: none;
 }
+body{
+	overflow-x: hidden;
+}
 /* Titulo */
 .mainTitle {
 	font-size: 5em;
@@ -99,3 +102,18 @@ td .ui-selected {
 	background: #dffe0a;
 	color: white;
 }
+
+/* DROP Calc Sheet  */
+#drop{
+	border:2px dashed #bbb;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
+	padding:25px;
+	text-align:center;
+	font:20pt bold,"Vollkorn";color:#bbb;
+	cursor: pointer;
+	/*background: lightblue;*/
+	width: 100%;
+}
+

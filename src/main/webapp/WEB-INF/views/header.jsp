@@ -29,7 +29,6 @@
 <!-- Propio -->
 <link rel="stylesheet" type="text/css" media="screen"
 	href="/resources/css/styles.css">
-<script src="/resources/js/plataformas.js"></script>
 
 </head>
 <!-- Header -->

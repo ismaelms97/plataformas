@@ -55,7 +55,7 @@ public class HomeController {
 		try {
 
 			User newUser = db2Service.findByUsername(user.getUsername());
-			if(newUser != null) {
+		
 				if(newUser.getPassword().equals(user.getPassword())) {
 					USessions.add(newUser);				
 					session.setAttribute("users", USessions);
@@ -70,11 +70,7 @@ public class HomeController {
 					System.out.println("No Encontrado");
 					return  "home";
 				}
-			}else {
-				System.out.println("user  == null  LoginControler");
-				
-				return "home";
-			}
+			
 		} catch (NullPointerException e) { 
 			model.addAttribute("errorMsg","El usuario no existe");
 			System.out.println("No Encontrado");

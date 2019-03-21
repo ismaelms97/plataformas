@@ -68,19 +68,17 @@ public class Db2Service {
 		con.setAutoCommit(false);
 		Statement  stmt = con.createStatement(); 
 		ResultSet rs = stmt.executeQuery("SELECT * FROM USER where username = '"+Uusername+"'"); 
-
+		User user = null;
 		if(rs.next()) {
 			int id = rs.getInt("id");
 			String username = rs.getString("username");
 			String password = rs.getString("password");
 			int equipo_id = rs.getInt("equipo_id");
-			User user  = new User(id,username,password,equipo_id);
+			user  = new User(id,username,password,equipo_id);
 
-			return user;
-		}else {
-			return null;
+			
 		}
-
+		return user;
 
 	}
 	public List<Estrategia> findEstrategiaById(int idUser) throws ClassNotFoundException  {
@@ -92,19 +90,14 @@ public class Db2Service {
 			Connection con = DriverManager.getConnection(url);
 			con.setAutoCommit(false);
 			Statement  stmt = con.createStatement(); 
-			ResultSet rs = stmt.executeQuery("SELECT * FROM estrategia Es where Es.equipo_id =  "+idUser+";");
-
+			ResultSet rs = stmt.executeQuery("SELECT * FROM estrategia Es where Es.equipo_id = "+idUser+"");
+			
 			while (rs.next()) {
 				int id = rs.getInt("id");
 				String estado = rs.getString("estado");
 				String fechaInicio = rs.getString("fechaInicio");
 				String fechafin = rs.getString("fechafin");
 				int equipo_id = rs.getInt("equipo_id");
-				System.out.println("id : "+id);
-				System.out.println("estado : "+estado);
-				System.out.println("fechaInicio : "+fechaInicio);
-				System.out.println("fechafin : "+fechafin);
-				System.out.println("equipo_id : "+equipo_id);
 				Estrategia estrategia = new Estrategia( id, estado,fechaInicio ,fechafin ,equipo_id);
 
 				estrategiaList.add(estrategia);
@@ -114,7 +107,7 @@ public class Db2Service {
 
 		} catch (SQLException e) {
 			System.err.println("SQL Exeption  findEstrategiaById:  code -> "+e.getErrorCode());
-			System.err.println("more inf : "+e.getMessage()+"reason  -> "+e.getCause() +" ( puede haber devuelto un null al tener la tabla vacia )");
+			System.err.println("more inf : "+e.getMessage()+" reason  -> "+e.getCause());
 			return estrategiaList;
 
 		}catch (Exception e) {

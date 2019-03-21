@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
 <jsp:include page="header.jsp"></jsp:include>
-<head>
-<link rel="shortcut icon" href="">
-</head>
+
 <body>
 	<h1 class="mainTitle">Estrategia</h1>
 
@@ -26,10 +25,11 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr id="1">
+				<!-- <tr id="1">
 					<td scope="row">
 						<div class="rect" data-posInitial="0" data-rtc="1">
-							<small class="tamano">sm</small> 123456 <small class="complejidad">3</small>
+							<small class="tamano">sm</small> 123456 <small
+								class="complejidad">3</small>
 						</div>
 					</td>
 					<td></td>
@@ -45,7 +45,8 @@
 				<tr>
 					<td scope="row">
 						<div class="rect" data-posInitial="0" data-rtc="2">
-							<small class="tamano">md</small> 78156 <small class="complejidad">2</small>
+							<small class="tamano">md</small> 781567 <small
+								class="complejidad">2</small>
 						</div>
 					</td>
 					<td></td>
@@ -59,7 +60,12 @@
 					<td></td>
 				</tr>
 				<tr>
-					<td></td>
+					<td scope="row">
+						<div class="rect" data-posInitial="0" data-rtc="3">
+							<small class="tamano">sm</small> 456987 <small
+								class="complejidad">1</small>
+						</div>
+					</td>
 					<td></td>
 					<td></td>
 					<td></td>
@@ -71,6 +77,12 @@
 					<td></td>
 				</tr>
 				<tr>
+					<td scope="row">
+						<div class="rect" data-posInitial="0" data-rtc="4">
+							<small class="tamano">sm</small> 987654 <small
+								class="complejidad">3</small>
+						</div>
+					</td>
 					<td></td>
 					<td></td>
 					<td></td>
@@ -80,14 +92,17 @@
 					<td></td>
 					<td></td>
 					<td></td>
-					<td></td>
-				</tr>
+				</tr> -->
 			</tbody>
 		</table>
+	<div id="drop"> Arrastra el archivo excel aquí para cargarlo<input type="file" name="xlfile" id="xlf" hidden />
 	</div>
-
-
-	<script src="/resources/libs/js/popper.min.js"></script>
-	<script src="/resources/libs/css/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+	</div>
+	
+	
+	<script src="/resources/libs/js/shim.js"></script>
+	<script src="/resources/libs/js/xlsx.full.min.js"></script>
+	
+	<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>
