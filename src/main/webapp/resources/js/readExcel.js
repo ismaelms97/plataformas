@@ -59,7 +59,8 @@ var process_wb = (function () {
 			}
 		}
 		for (var i = 1; i < JSON.parse(output).Tareas.length; i++) { //JSON.parse(output).Tareas.length
-			if(JSON.parse(output).Tareas[i][idPos] != null){
+			if(JSON.parse(output).Tareas[i][idPos] != null && JSON.parse(output).Tareas[i][statusPos].toLowerCase() != "finalizada"){
+				
 				var task = new Object();
 				task.id = JSON.parse(output).Tareas[i][idPos]
 				task.tipo = JSON.parse(output).Tareas[i][typePos]
