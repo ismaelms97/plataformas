@@ -38,8 +38,7 @@
 	<nav class="my-2 my-md-0 mr-md-3"></nav>
 	<form:form method="POST" action="/closeSession" modelAttribute="user">
 		<form:input type="hidden" path="username" value="${user.username}" />
-		<button id="butonDestroy" type="submit" class="btn btn-outline-primary">Cerrar
-			Sessión</button>
+		<button id="butonDestroy" type="submit" class="btn btn-outline-primary">Cerrar Sessión</button>
 	</form:form>
 </div>
 <div id="errorMsg" class="alert alert-danger" role="alert">${errorMsg}</div>
