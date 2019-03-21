@@ -98,7 +98,7 @@
 	<div id="drop"> Arrastra el archivo excel aquí para cargarlo<input type="file" name="xlfile" id="xlf" hidden />
 	</div>
 	</div>
-	
+	<div id="loadAnimation" class="lds-dual-ring" style="display: none"></div> <!--style="display: none"-->
 	
 	<script src="/resources/libs/js/shim.js"></script>
 	<script src="/resources/libs/js/xlsx.full.min.js"></script>
