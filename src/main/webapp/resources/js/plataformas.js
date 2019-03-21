@@ -3,7 +3,7 @@ rellenarEstados();
 
 function rellenarEstados() {
 	for (var i = 0; i < $("th").length; i++) {
-		estados[i] = document.querySelectorAll("th")[i].innerText;
+		estados[i] = document.querySelectorAll("th")[i].innerText.toLowerCase();
 	}
 	console.log(estados);
 }
@@ -34,12 +34,23 @@ function drawTable() {
 	}
 }
 function drawRTC(pos) {
-	var i = 0;
-	if(estados.indexOf(tasks.estado) != -1){
-		 i = estados.indexOf(tasks.estado);
-	}
+	var estadoActual = 0;
 	
-	document.getElementsByTagName("TR")[pos + 1].children[0].innerHTML = '<div class="rect" data-posInitial="'+ i +'" data-rtc="' + (pos + 1) + '">'
+	if(estados.length >= 1){
+		
+		console.log(tasks[pos].estado.toLowerCase());
+		for (var j = 0; j < estados.length; j++) {
+			
+			console.log(tasks[pos].estado.toLowerCase().startsWith(estados[j]));
+			if (tasks[pos].estado.toLowerCase().startsWith(estados[j])) {
+				estadoActual = j
+			}
+		}
+		
+		
+	}
+
+	document.getElementsByTagName("TR")[pos + 1].children[estadoActual].innerHTML = '<div class="rect" data-posInitial="' + estadoActual + '" data-rtc="' + (pos + 1) + '">'
 			+ '<small class="tamano">md</small> 781567 <small class="complejidad">2</small></div>';
 
 	// Con este codigo conseguimos que se mueva cada tarea unicamente en su eje x, y

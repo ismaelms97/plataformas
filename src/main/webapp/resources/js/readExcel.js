@@ -71,7 +71,7 @@ var process_wb = (function () {
 		}
 		console.log(tasks)
 		drawTable();
-		if (typeof console !== 'undefined') console.log("output", new Date());
+//		if (typeof console !== 'undefined') console.log("output", new Date());
 	};
 })();
 
@@ -102,7 +102,7 @@ var do_file = (function () {
 		var f = files[0];
 		var reader = new FileReader();
 		reader.onload = function (e) {
-			if (typeof console !== 'undefined') console.log("onload", new Date(), rABS, use_worker);
+//			if (typeof console !== 'undefined') console.log("onload", new Date(), rABS, use_worker);
 			var data = e.target.result;
 			if (!rABS) data = new Uint8Array(data);
 			if (use_worker) xw(data, process_wb);

@@ -13,10 +13,10 @@
 			<thead>
 				<tr class="table-info">
 					<th scope="col">Pte. Alta</th>
-					<th scope="col">Pte.Qualificar</th>
+					<th scope="col">Pte.Cuantificar</th>
 					<th scope="col">Listo Para Analizar</th>
 					<th scope="col">Cierre Requerimientos</th>
-					<th scope="col">En Analisis</th>
+					<th scope="col">En Análisis</th>
 					<th scope="col">Aceptación Usuario</th>
 					<th scope="col">En Curso</th>
 					<th scope="col">Aceptación a las Pruebas</th>
