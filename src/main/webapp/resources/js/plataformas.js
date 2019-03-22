@@ -1,6 +1,6 @@
 var estados = [];
 rellenarEstados();
-
+var strategyTasks = [] //Array que recoje las tareas seleccionadas para la estrategia
 
 function rellenarEstados() {
 	for (var i = 0; i < $("th").length; i++) {
@@ -217,4 +217,15 @@ function tooltip(){
 			},
 		});
 	} );
+}
+
+function saveStrategy(){
+
+	//Guardar las tareas seleccionadas para la estrategia en el array strategyTasks
+	tasks.forEach(task => {
+		if(task.modified){
+			strategyTasks.push(task);
+		}
+	});
+	
 }
