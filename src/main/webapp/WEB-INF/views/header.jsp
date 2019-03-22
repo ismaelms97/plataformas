@@ -36,10 +36,12 @@
 	class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
 	<h5 id="greeting" class="my-0 mr-md-auto font-weight-normal">${greeting}</h5>
 	<nav class="my-2 my-md-0 mr-md-3"></nav>
+	<div id="deleteForm">
 	<form:form method="POST" action="/closeSession" modelAttribute="user">
 		<form:input type="hidden" path="username" value="${user.username}" />
 		<button id="butonDestroy" type="submit" class="btn btn-outline-primary">Cerrar Sessión</button>
 	</form:form>
+	</div>
 </div>
 <div id="errorMsg" class="alert alert-danger" role="alert">${errorMsg}</div>
 <script> 
@@ -48,7 +50,7 @@ if (document.getElementById("errorMsg").innerHTML == "" ){
     }
     
 if (document.getElementById("greeting").innerHTML == "" ){
-	document.getElementById("butonDestroy").style.visibility = "hidden";
+	document.getElementById("deleteForm").style.visibility = "hidden";
 }
     </script>
 </html>

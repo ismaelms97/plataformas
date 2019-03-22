@@ -80,8 +80,11 @@ public class HomeController {
 			return "home"; 
 
 		}catch (Exception e) {
+			model.addAttribute("errorMsg","Error db user");
 			System.out.println("Error desconocido");
 			return "home";
+			
+			
 		}
 
 	}
