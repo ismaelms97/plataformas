@@ -139,9 +139,13 @@ td .ui-selected {
 	height: 92px; /*46px*/
 	margin: 1px;
 	border-radius: 50%;
-	border: 5px solid #0000bb;
-	border-color: #0000bb transparent #0000bb transparent;
+	border: 5px solid rgb(104, 104, 104);
+	border-color: rgb(104, 104, 104) transparent rgb(104, 104, 104) transparent;
 	animation: lds-dual-ring 1.2s linear infinite;
+}
+
+.loginAnimation{
+	padding-left: 200px;	
 }
 
 @keyframes lds-dual-ring {
