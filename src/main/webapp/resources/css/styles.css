@@ -77,6 +77,10 @@ body{
 	left: 0 !important;
 }
 /* TABLE Attributes */
+div.table-responsive{
+	height: 100%;
+}
+
 table td, thead th {
 	border-color: #0000bb !important;
 }
@@ -143,4 +147,19 @@ td .ui-selected {
 @keyframes lds-dual-ring {
 	0% {transform: rotate(0deg);}
 	100% {transform: rotate(360deg);}
+}
+
+/* TOOLTIP */
+.tooltip-inner, .arrow {
+	background: blue;
+	border: 2px solid white;
+}
+
+.tooltip-inner {
+	padding: 10px 20px;
+	color: white;
+	border-radius: 20px;
+	font: bold 14px "Helvetica Neue", Sans-Serif;
+	text-transform: uppercase;
+	box-shadow: 0 0 7px black;
 }

@@ -52,7 +52,10 @@ public class HomeController {
 
 	@RequestMapping(value = "/estrategia", method = RequestMethod.POST)
 	public String login(@ModelAttribute("user") User user, Model model,HttpSession session){
-		try {
+		return "plataforma";
+		
+		/*
+		 * try {
 
 			User newUser = db2Service.findByUsername(user.getUsername());
 		
@@ -78,9 +81,9 @@ public class HomeController {
 
 		}catch (Exception e) {
 			System.out.println("Error desconocido");
-			return "home";
+			return "plataforma";
 		}
-
+		*/
 	}
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/closeSession", method = RequestMethod.POST)
@@ -93,7 +96,7 @@ public class HomeController {
 		}
 		try {
 			for(User u : actualSession) {
-				if(u.getUsername().equals(user.getUsername())) {
+				if(u.getId() == user.getId()) {
 
 					actualSession.remove(u);
 					USessions.remove(u);
