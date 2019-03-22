@@ -16,7 +16,7 @@ body{
 	font-family: "Georgia";
 }
 
-/* Style form login */
+/*########### Form ###########*/
 .formulario {
 	margin-left: 40%;
 	margin-top: 10%;
@@ -30,7 +30,7 @@ body{
 	position: relative;
 	z-index: 2;
 }
-/* Cada uno de los RTC */
+/*########### RTC ###########*/
 .rect {
 	position: relative;
 	background-color: #dbdbdb;
@@ -55,7 +55,7 @@ body{
 	margin-right: 5px;
 }
 
-/* Atributos de los RTC y cuando se modifican */
+/*########### Clone RTC and Extra Classes ###########*/
 .orange {
 	background-color: #ffcf75;
 }
@@ -76,7 +76,7 @@ body{
 .noLeft {
 	left: 0 !important;
 }
-/* TABLE Attributes */
+/*########### TABLE ###########*/
 div.table-responsive{
 	height: 100%;
 }
@@ -96,8 +96,36 @@ tbody {
 	max-height: 50px;
 	overflow-y: auto;
 }
+/*########### BUTTON SAVE STARTEGY ###########*/
+div.button{
+	float:right;
+	margin: 0 20px 20px 0;
+	padding: 7px 20px;
+	border: 1px solid black;
+	border-radius: 10%;
+	background-color: #79d959;
+	color: white;
+	text-shadow: 1px 1px black;
+	box-shadow: 0 2px 2px black;
+	cursor:pointer;
+	
+}
+div.disabled{
+	pointer-events:none;
+	-webkit-filter: opacity(30%);
+	filter: opacity(30%);
+}
 
-/* Selected */
+a.button{
+	color: white !important;
+	font-weight: bold;
+}
+
+div.button:hover{
+	box-shadow: 0 1px 2px black inset;
+}
+
+/*########### SELECT ###########*/
 td .ui-selecting {
 	background: #6dd175;
 }
@@ -107,7 +135,22 @@ td .ui-selected {
 	color: white;
 }
 
-/* DROP Calc Sheet  */
+/*########### TOOLTIP ###########*/
+.tooltip-inner, .arrow {
+	background: blue;
+	border: 2px solid white;
+}
+
+.tooltip-inner {
+	padding: 10px 20px;
+	color: white;
+	border-radius: 20px;
+	font: bold 14px "Helvetica Neue", Sans-Serif;
+	text-transform: uppercase;
+	box-shadow: 0 0 7px black;
+}
+
+/*########### DROP CALCSHEET ###########*/
 #drop{
 	border:2px dashed #bbb;
 	-moz-border-radius:5px;
@@ -151,19 +194,4 @@ td .ui-selected {
 @keyframes lds-dual-ring {
 	0% {transform: rotate(0deg);}
 	100% {transform: rotate(360deg);}
-}
-
-/* TOOLTIP */
-.tooltip-inner, .arrow {
-	background: blue;
-	border: 2px solid white;
-}
-
-.tooltip-inner {
-	padding: 10px 20px;
-	color: white;
-	border-radius: 20px;
-	font: bold 14px "Helvetica Neue", Sans-Serif;
-	text-transform: uppercase;
-	box-shadow: 0 0 7px black;
 }

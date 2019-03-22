@@ -7,7 +7,10 @@
 
 <body>
 	<h1 class="mainTitle">Estrategia</h1>
-
+	
+	<div class="button disabled">
+		<a class="button" href="#">Guardar</a>
+	</div>
 	<div class="table-responsive table-bordered">
 		<table class="table">
 			<thead>
@@ -25,74 +28,6 @@
 				</tr>
 			</thead>
 			<tbody>
-				<!-- <tr id="1">
-					<td scope="row">
-						<div class="rect" data-posInitial="0" data-rtc="1">
-							<small class="tamano">sm</small> 123456 <small
-								class="complejidad">3</small>
-						</div>
-					</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td scope="row">
-						<div class="rect" data-posInitial="0" data-rtc="2">
-							<small class="tamano">md</small> 781567 <small
-								class="complejidad">2</small>
-						</div>
-					</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td scope="row">
-						<div class="rect" data-posInitial="0" data-rtc="3">
-							<small class="tamano">sm</small> 456987 <small
-								class="complejidad">1</small>
-						</div>
-					</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td scope="row">
-						<div class="rect" data-posInitial="0" data-rtc="4">
-							<small class="tamano">sm</small> 987654 <small
-								class="complejidad">3</small>
-						</div>
-					</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr> -->
 			</tbody>
 		</table>
 		<div id="drop">
@@ -107,7 +42,7 @@
 	<script src="/resources/libs/js/shim.js"></script>
 	<script src="/resources/libs/js/xlsx.full.min.js"></script>
 	<script src="/resources/js/readExcel.js"></script>
-	
+
 	<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

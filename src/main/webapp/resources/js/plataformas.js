@@ -55,7 +55,7 @@ function drawRTC(pos) {
 //	}
 
 
-	document.getElementsByTagName("TR")[pos + 1].children[estadoActual].innerHTML = '<div class="rect" data-posInitial="' + estadoActual + '" data-rtc="' + (pos + 1) + '" title="'+ tasks[pos].resumen +'">'
+	document.getElementsByTagName("TR")[pos + 1].children[estadoActual].innerHTML = '<div class="rect" data-posInitial="' + estadoActual + '" data-rtc="' + (pos + 1) + '" title="'+ tasks[pos].resumen +'" data-placement="right">'
 	+ '<small class="tamano">'+ tasks[pos].tamano + '</small> '+ tasks[pos].id + ' <small class="complejidad">'+ tasks[pos].complejidad + '</small></div>';
 
 	dragDrop();
@@ -82,9 +82,6 @@ function dragDrop(){
 					helper : "clone",
 					start : function(event, ui) {
 //						startPosition = ui.position.left;
-						console.log("UI")
-						console.log(ui);
-						console.log(event);
 						$(".ui-draggable-dragging").removeClass("noLeft");
 
 						// Descomentar esto para seleccionar
@@ -131,11 +128,16 @@ function dragDrop(){
 
 					stop : function(event, ui) {
 						document.getElementsByClassName("rect")[(this.getAttribute("data-rtc") - 1)].style.display = "";
-
-						if(!tasks[(this.getAttribute("data-rtc") - 1)].modified){
-							tasks[(this.getAttribute("data-rtc") - 1)].modified = true;
+							
+						if(this.parentElement.classList.contains(estados[this.getAttribute("data-posInitial")].replace(/\s/g, "-")) && tasks[this.getAttribute("data-rtc") -1].modified){
+							
+							tasks[this.getAttribute("data-rtc") -1].modified = false;
+							
+						}else{
+							tasks[this.getAttribute("data-rtc") -1].modified = true;
 						}
-						console.log(tasks);
+						
+						console.log(tasks[this.getAttribute("data-rtc") -1]);
 					},
 				});
 
@@ -157,8 +159,13 @@ function dragDrop(){
 						});
 
 						if (event.target.children.length == 1) {
-							console.log(event.target.children.length);
+
 							event.target.children[0].style.display = "none";
+							// SI al colocar el rtc en su posicion inicial, cambiale el color, y su estado de modificado
+							if(tasks[ui.draggable[0].getAttribute("data-rtc") - 1].modified){
+								$(ui.draggable[0]).removeClass("orange");
+								
+							}
 						}
 
 						if (document.getElementsByClassName("clone")[(ui.draggable[0].getAttribute("data-rtc") - 1)].style.display == "none" 
@@ -169,7 +176,6 @@ function dragDrop(){
 //						if(ui.draggable[0].offsetLeft > startPosition)
 						$(ui.draggable[0]).addClass("noLeft").appendTo(event.target);
 
-						console.log(tasks[ui.draggable[0].getAttribute("data-rtc") - 1]);
 					}
 				});
 
@@ -202,19 +208,9 @@ function dragDrop(){
 
 	})
 }
+/* Función que muestra la tooltip en html  */
 function tooltip(){
 	$( function() {
-		$( ".rect, .clone" ).tooltip({
-			open: function( event, ui ) {
-				console.log("event");
-				console.log(event);
-				console.log(ui);
-			},
-			position: {
-				my: "left top",
-				at: "right+5 top-5",
-				collision: "none"
-			},
-		});
+		$( ".rect, .clone" ).tooltip();
 	} );
 }
