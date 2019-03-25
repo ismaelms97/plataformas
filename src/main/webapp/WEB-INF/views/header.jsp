@@ -36,6 +36,13 @@
 <div
 	class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
 	<h5 id="greeting" class="my-0 mr-md-auto font-weight-normal">${greeting}</h5>
+	
+	<form:form method="POST" action="/mainPanel" modelAttribute="user">
+	<form:input type="hidden" path="id" value="${user.id}" />
+	<button id="buttonHome" type="submit"
+			class="btn btn-outline-secondary"><i class="fa fa-home"></i></button>
+	</form:form>
+	
 	<nav class="my-2 my-md-0 mr-md-3"></nav>
 	
 	<form:form method="POST" action="/closeSession" modelAttribute="user">
@@ -43,16 +50,26 @@
 		<button id="butonDestroy" type="submit"
 			class="btn btn-outline-primary">Cerrar Sessión</button>
 	</form:form>
+	
 </div>
 <div id="errorMsg" class="alert alert-danger" role="alert">${errorMsg}</div>
 
 <script>
+var hide = ${hidde};
+if(!hide){	
+		document.getElementById("butonDestroy").style.visibility = "visible";
+		document.getElementById("buttonHome").style.visibility = "visible";
+		if (document.getElementById("errorMsg").innerHTML == "") {
+			document.getElementById("errorMsg").style.visibility = "hidden";
+		}
+	
+}else{
 	if (document.getElementById("errorMsg").innerHTML == "") {
 		document.getElementById("errorMsg").style.visibility = "hidden";
 	}
-
-	if (document.getElementById("greeting").innerHTML == "") {
-		document.getElementById("butonDestroy").style.visibility = "hidden";
-	}
+	document.getElementById("butonDestroy").style.visibility = "hidden";
+	document.getElementById("buttonHome").style.visibility = "hidden";
+}
+	
 </script>
 </html>

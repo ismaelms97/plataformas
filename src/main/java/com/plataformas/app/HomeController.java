@@ -47,61 +47,69 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) throws ClassNotFoundException, SQLException  {
 
-
+		model.addAttribute("hidde", true);
 		model.addAttribute("user", new User());
 		return "home";
 	}
 
 	@RequestMapping(value = "/mainPanel", method = RequestMethod.POST)
 	public String login(@ModelAttribute("user") User user, Model model,HttpSession session){
+
 		User newUser = null;
 		boolean userExist = false;
 		String mensaje = "";
 		try{
 			newUser = userService.findByUsername(user.getUsername());
+
 			if(newUser.getPassword().equals(user.getPassword())) {
 				session.setAttribute(user.getUsername(), newUser);
 				USessions.add(newUser);	
 				model.addAttribute("greeting","Hola "+ user.getUsername());
 				model.addAttribute("user",user);
+				model.addAttribute("hidde", false);
 				userExist = true;
 			}else {
 				mensaje = "Contraseña incorrecta";
 			}
-						
+
 		}catch (NullPointerException e) { 			
 			mensaje = "El usuario no existe";
 
 		}catch (Exception e) {			
 			mensaje = "No hay conexion";
 		}
-		
+
 		if(userExist) {
-			
+
 			try {
 				List<Estrategia> listaEstrategias = estrategiaService.findEstrategiaById(newUser.getEquipoId());	
 				model.addAttribute("listaEstrategia",listaEstrategias);
-				
+
 			}catch (Exception e) {
 				System.out.println("listaEstrategia , no se ha encontrado...");
 			}			
-			
+
 			return "mainPanel";
 		}else {		
-			
+
 			model.addAttribute("errorMsg",mensaje);
 			return  "home";
 		}
+
+	}
+	@RequestMapping(value = "/newEstrategia", method = RequestMethod.GET)
+	public String nuevaEstrategia(@ModelAttribute("user") User user, @RequestBody String id ,  Model model,HttpSession session){	
 		
-		
+		return "plataforma";
+
 
 	}
 
 	@RequestMapping(value = "/estrategia", method = RequestMethod.GET)
-	public String mostrarTareasEstrategia(@RequestBody String id ,  Model model,HttpSession session){		
+	public String mostrarTareasEstrategia(@ModelAttribute("estrategia") Estrategia estrategia,  Model model,HttpSession session){		
 
 		try {
-			List<Tarea> tareas = estrategiaService.findTareasByEstrategia(Integer.parseInt(id.trim()));
+			List<Tarea> tareas = estrategiaService.findTareasByEstrategia(estrategia.getId());
 			model.addAttribute("listaTareas",tareas);
 			System.out.println("TAREAS COMPLETE");
 			return "plataforma";
@@ -119,14 +127,14 @@ public class HomeController {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/closeSession", method = RequestMethod.POST)
 	public String SessionDestroy(@ModelAttribute("user") User user, Model model,HttpSession session) {	
-		
+
 		try {
 			session.removeAttribute(user.getUsername());	
 			session.removeAttribute(session.getId());
-			
+
 			for(User u : USessions) {
 				if(u.getUsername().equals(user.getUsername())) {
-					
+
 					USessions.remove(u);
 					System.err.println("Sessiones Actuales "+USessions.size());
 				}else {
@@ -134,13 +142,13 @@ public class HomeController {
 					System.err.println("Sessiones error delete "+USessions.size());
 				}
 			}
-			
+
 		}catch (ConcurrentModificationException e) {
 			return "redirect:/";
 		}catch (Exception e) {
 			System.out.println("No borrado en remove()");
 		}
-		
+
 		// este try es un test para comprobar que el usuario ha sido borrado y no se encuentra
 		try {
 			User u = (User) session.getAttribute(user.getUsername());
@@ -148,8 +156,8 @@ public class HomeController {
 		}catch (Exception e) {
 			System.err.println("USUARIO no encontrado despues de borrarlo");
 		}
-		
-		
+
+
 		return "redirect:/";
 
 	}

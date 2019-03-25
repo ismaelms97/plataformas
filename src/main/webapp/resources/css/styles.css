@@ -168,10 +168,10 @@ td .ui-selected {
 /*########### Load animation ###########*/
 
 .lds-dual-ring {
-	display: inline-block;
+ 	display: inline-block; 
 	width: 128px; /* 64*/
 	height: 128px;/* 64*/
-	margin-left: 50%;
+ 	margin-left: 50%;
 	margin-right: 50%;
 }
 
@@ -187,11 +187,43 @@ td .ui-selected {
 	animation: lds-dual-ring 1.2s linear infinite;
 }
 
-.loginAnimation{
-	padding-left: 200px;	
+.parent {
+  display: flex;
+  justify-content: center !important;
+  align-items: center !important;
+  
+}
+
+.loginAnimation {
+  display: inline-block;
 }
 
 @keyframes lds-dual-ring {
 	0% {transform: rotate(0deg);}
 	100% {transform: rotate(360deg);}
+}
+
+/*########### Cartas de estrategia ###########*/
+.cartas{
+	flex-direction: row !important;
+	flex-wrap: wrap;
+}
+.cartas > a{
+	margin-right: 2%;
+}
+.estartegiasCard{
+	background-color: lime;
+	border: 0px solid black;
+	border-radius: 5%;
+	padding: 20px;
+	width: 187.52px;
+	height: 96px;
+	max-width: 187.52px;
+	max-height: 96px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.estartegiasCard:hover{
+	filter:grayscale(30%);
 }
