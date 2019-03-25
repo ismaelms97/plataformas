@@ -258,4 +258,3 @@ function saveStrategy(){
 		}
 	});
 }
-

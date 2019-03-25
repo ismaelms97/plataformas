@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path=""/>
+	<classpathentry kind="lib" path="C:/Java-JEE/tomcat/apache-tomcat-8.5.20/lib/db2jcc.jar"/>
+	<classpathentry kind="lib" path="C:/Java-JEE/tomcat/apache-tomcat-8.5.20/lib/db2jcc4.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

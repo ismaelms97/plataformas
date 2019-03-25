@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.plataformas.Db2.DailyService;
 import com.plataformas.Db2.EstrategiaService;
@@ -132,7 +133,21 @@ public class HomeController {
 		return "redirect:/";
 
 	}
-
+	
+	@RequestMapping(value = "/saveStrategy", method = RequestMethod.GET)
+	public @ResponseBody String saveStrategy(Model model, String name, String startDate, String endDate, String team, String stratTasks) {		
+		System.out.println("Stategy name: " + startDate);
+		String[][] tasks = new String[stratTasks.split("qwer").length][4];
+		
+		for(int i = 0; i < tasks.length; i++) {
+			String[] task = stratTasks.split("qwer");
+			tasks[i] = task[i].split(",");
+			System.out.println(tasks[i][0] + " - " + tasks[i][1]);
+		}
+		return "home";
+	}
+	
+	
 	@RequestMapping(value = "/excel", method = RequestMethod.GET)
 	public String login(Model model) {		
 
