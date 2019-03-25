@@ -45,11 +45,12 @@ public class EstrategiaService {
 
 			while (rs.next()) {
 				int id = rs.getInt("id");
+				String nombre = rs.getString("nombre");
 				String estado = rs.getString("estado");
 				String fechaInicio = rs.getString("fechaInicio");
 				String fechafin = rs.getString("fechafin");
 				int equipo_id = rs.getInt("equipo_id");
-				Estrategia estrategia = new Estrategia( id, estado,fechaInicio ,fechafin ,equipo_id);
+				Estrategia estrategia = new Estrategia( id,nombre, estado,fechaInicio ,fechafin ,equipo_id);
 
 				estrategiaList.add(estrategia);
 			}
