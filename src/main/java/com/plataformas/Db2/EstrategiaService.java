@@ -10,14 +10,17 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.plataformas.model.Daily;
 import com.plataformas.model.Estrategia;
 import com.plataformas.model.Tarea;
-import com.plataformas.model.User;
+/*
+ *  ESTA CLASE FALTA ACABARLA
+ */
 @Service
-public class Db2Service {
-	private String url = "jdbc:db2://dashdb-txn-sbox-yp-lon02-01.services.eu-gb.bluemix.net:50001/BLUDB:user=rvg03272;password=0@vn6gg9jg7zqjb1;sslConnection=true;";
-	
+public class EstrategiaService {
+	//private String url = "jdbc:db2://dashdb-txn-sbox-yp-lon02-01.services.eu-gb.bluemix.net:50001/BLUDB:user=rvg03272;password=0@vn6gg9jg7zqjb1;sslConnection=true;";
+		private String url = "jdbc:db2://dashdb-txn-sbox-yp-lon02-01.services.eu-gb.bluemix.net:50000/BLUDB";
+		private String dbUsername = "rvg03272";
+		private String dbPassword = "0@vn6gg9jg7zqjb1";
 	public void initializeDriver() throws ClassNotFoundException {
 		try {
 			Class.forName("com.ibm.db2.jcc.DB2Driver");  
@@ -26,74 +29,20 @@ public class Db2Service {
 		}catch (Exception e) {
 			System.out.println("Unknow error with driver");
 		}
-		   
-	}
-
-	public List<User> findAll() throws ClassNotFoundException{
-		List<User> userList = new ArrayList<User>();
-		initializeDriver();		
-
-		try{
-		Connection con = DriverManager.getConnection(url);
-		con.setAutoCommit(false);
-		Statement  stmt = con.createStatement(); 
-		ResultSet rs = stmt.executeQuery("SELECT * FROM USER"); 
-
-		while (rs.next()) {
-			int id = rs.getInt("id");
-			String username = rs.getString("username");
-			String password = rs.getString("password");
-			int equipo_id = rs.getInt("equipo_id");
-
-			User user = new User( id, username,password ,equipo_id );
-
-			userList.add(user);
-		}
-
-		return userList;
-
-		}catch (SQLException e) {
-			System.out.println("SQL Exeption  findEstrategiaById:  code -> "+e.getErrorCode());
-			return userList;
-
-		}catch (Exception e) {
-			System.out.println("Error en findEstrategiaById ");
-			return userList;
-		}
-	}
-	
-
-	public User findByUsername(String Uusername) throws ClassNotFoundException, SQLException {
-
-		initializeDriver();    
-		Connection con = DriverManager.getConnection(url);
-		con.setAutoCommit(false);
-		Statement  stmt = con.createStatement(); 
-		ResultSet rs = stmt.executeQuery("SELECT * FROM USER where username = '"+Uusername+"'"); 
-		User user = null;
-		if(rs.next()) {
-			int id = rs.getInt("id");
-			String username = rs.getString("username");
-			String password = rs.getString("password");
-			int equipo_id = rs.getInt("equipo_id");
-			user  = new User(id,username,password,equipo_id);
-
-			
-		}
-		return user;
 
 	}
+
+
 	public List<Estrategia> findEstrategiaById(int idUser) throws ClassNotFoundException  {
 		List<Estrategia> estrategiaList = new ArrayList<Estrategia>();		
 		initializeDriver();	     
-		System.out.println("idUser : "+idUser);
 		try {
 
-			Connection con = DriverManager.getConnection(url);
+			Connection con = DriverManager.getConnection(url,dbUsername,dbPassword);
 			con.setAutoCommit(false);
 			Statement  stmt = con.createStatement(); 
 			ResultSet rs = stmt.executeQuery("SELECT * FROM estrategia Es where Es.equipo_id = "+idUser+"");
-			
+
 			while (rs.next()) {
 				int id = rs.getInt("id");
 				String estado = rs.getString("estado");
@@ -123,13 +72,12 @@ public class Db2Service {
 		initializeDriver();	     
 		System.out.println("idUser : "+idEstrategia);
 		try {
-
-			Connection con = DriverManager.getConnection(url);
+			Connection con = DriverManager.getConnection(url,dbUsername,dbPassword);
 			con.setAutoCommit(false);
 			Statement  stmt = con.createStatement(); 
 			ResultSet rs = stmt.executeQuery("SELECT DISTINCT  T.id, T.tipo, T.estadoInicio, T.estadoFinal  FROM tarea T , estrategia E , estrategia_tarea ET"
 					+ " where T.id = ET.tarea_id AND  ET.estrategia_id = "+idEstrategia+"");
-			
+
 			while (rs.next()) {
 				int id = rs.getInt("id");
 				String tipo = rs.getString("tipo");
@@ -150,16 +98,12 @@ public class Db2Service {
 			System.out.println("Error en findEstrategiaById ");
 			return tareaList;
 		}
-
-
-
-
-
 	}
+	
 	public void saveEstrategia(Estrategia estrategia) throws ClassNotFoundException, SQLException {
 		initializeDriver();	    
 		try{
-			Connection con = DriverManager.getConnection(url);
+			Connection con = DriverManager.getConnection(url,dbUsername,dbPassword);
 			con.setAutoCommit(false);
 			Statement  stmt = con.createStatement(); 
 			ResultSet rs = stmt.executeQuery("INSERT INTO estrategia (estado,fechaInicio,fechaFin,equipo_id) values "
@@ -174,22 +118,6 @@ public class Db2Service {
 
 
 
-
-	}
-	public void saveDaily(Daily daily) throws ClassNotFoundException {
-		initializeDriver();	    
-		try{
-			Connection con = DriverManager.getConnection(url);
-			con.setAutoCommit(false);
-			Statement  stmt = con.createStatement(); 
-			ResultSet rs = stmt.executeQuery("INSERT INTO estrategia (fecha,daily_id) values ('"+daily.getFecha()+"',"+daily.getDailyId()+")"); 
-
-		}catch (SQLException e) {
-			System.out.println("SQL Exeption saveDaily:  code -> "+e.getErrorCode() +" more inf : "+e.getMessage());
-
-		}catch (Exception e) {
-			System.out.println("Error en saveDaily ");
-		}
 
 	}
 

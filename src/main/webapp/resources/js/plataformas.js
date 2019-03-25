@@ -1,6 +1,7 @@
 var estados = [];
 rellenarEstados();
 
+
 function rellenarEstados() {
 	for (var i = 0; i < $("th").length; i++) {
 		estados[i] = document.querySelectorAll("th")[i].innerText.toLowerCase();
@@ -44,26 +45,26 @@ function drawRTC(pos) {
 			}
 		}
 	}
-	
+
 //	if(tasks[pos].complejidad.toLowerCase().startsWith("sin asignar")){
-//		tasks[pos].complejidad = 0;
+//	tasks[pos].complejidad = 0;
 //	}
-//	
+
 //	if(tasks[pos].tamano.toLowerCase().startsWith("sin asignar")){
-//		tasks[pos].tamano = 0;
+//	tasks[pos].tamano = 0;
 //	}
-	
-	
-	document.getElementsByTagName("TR")[pos + 1].children[estadoActual].innerHTML = '<div class="rect" data-posInitial="' + estadoActual + '" data-rtc="' + (pos + 1) + '">'
+
+
+	document.getElementsByTagName("TR")[pos + 1].children[estadoActual].innerHTML = '<div class="rect" data-posInitial="' + estadoActual + '" data-rtc="' + (pos + 1) + '" title="'+ tasks[pos].resumen +'">'
 	+ '<small class="tamano">'+ tasks[pos].tamano + '</small> '+ tasks[pos].id + ' <small class="complejidad">'+ tasks[pos].complejidad + '</small></div>';
 
 	dragDrop();
-	
+	tooltip()
 }
 
 function dragDrop(){
-	
-	 // Con este codigo conseguimos que se mueva cada tarea unicamente en su eje x, y
+
+	// Con este codigo conseguimos que se mueva cada tarea unicamente en su eje x, y
 	// a su vez que cuando los dejes en el sitio, cambien de color
 	$(function() {
 		var selected = $([]), offset = {
@@ -81,7 +82,9 @@ function dragDrop(){
 					helper : "clone",
 					start : function(event, ui) {
 //						startPosition = ui.position.left;
-//						console.log(startPosition);
+						console.log("UI")
+						console.log(ui);
+						console.log(event);
 						$(".ui-draggable-dragging").removeClass("noLeft");
 
 						// Descomentar esto para seleccionar
@@ -103,7 +106,7 @@ function dragDrop(){
 					drag: function( event, ui ) {
 
 //						if(startPosition > ui.position.left){
-//							ui.position.left = startPosition;
+//						ui.position.left = startPosition;
 //						}
 						// Descomentar esto para seleccionar
 						// var dt = ui.position.top - offset.top, dl =
@@ -128,7 +131,7 @@ function dragDrop(){
 
 					stop : function(event, ui) {
 						document.getElementsByClassName("rect")[(this.getAttribute("data-rtc") - 1)].style.display = "";
-						
+
 						if(!tasks[(this.getAttribute("data-rtc") - 1)].modified){
 							tasks[(this.getAttribute("data-rtc") - 1)].modified = true;
 						}
@@ -164,9 +167,9 @@ function dragDrop(){
 							document.getElementsByClassName("clone")[(ui.draggable[0].getAttribute("data-rtc") - 1)].style.display = "";
 						}
 //						if(ui.draggable[0].offsetLeft > startPosition)
-							$(ui.draggable[0]).addClass("noLeft").appendTo(event.target);
-							
-							console.log(tasks[ui.draggable[0].getAttribute("data-rtc") - 1]);
+						$(ui.draggable[0]).addClass("noLeft").appendTo(event.target);
+
+						console.log(tasks[ui.draggable[0].getAttribute("data-rtc") - 1]);
 					}
 				});
 
@@ -198,4 +201,20 @@ function dragDrop(){
 		// });
 
 	})
+}
+function tooltip(){
+	$( function() {
+		$( ".rect, .clone" ).tooltip({
+			open: function( event, ui ) {
+				console.log("event");
+				console.log(event);
+				console.log(ui);
+			},
+			position: {
+				my: "left top",
+				at: "right+5 top-5",
+				collision: "none"
+			},
+		});
+	} );
 }
