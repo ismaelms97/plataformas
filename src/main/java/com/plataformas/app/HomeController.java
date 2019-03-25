@@ -104,7 +104,7 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/estrategia", method = RequestMethod.GET)
-	public String mostrarTareasEstrategia( @RequestBody String id ,  Model model,HttpSession session){		
+	public String mostrarTareasEstrategia(@ModelAttribute("estrategia") Estrategia estrategia, @RequestBody String id ,  Model model,HttpSession session){		
 
 		try {
 			List<Tarea> tareas = estrategiaService.findTareasByEstrategia(Integer.parseInt(id.trim()));
