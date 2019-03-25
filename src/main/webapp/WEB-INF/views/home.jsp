@@ -26,9 +26,12 @@
 				<div>${errorMsg}</div>
 			</div>
 		</div>
-		<div id="loadAnimation" class="lds-dual-ring loginAnimation" style="display: none"></div>
 		
 	</div>
+		<div class="parent">
+			<div id="loadAnimation" class="lds-dual-ring loginAnimation" style="display: none"></div>
+		</div>
+		
 	<jsp:include page="footer.jsp"></jsp:include>
 	<script>
 	

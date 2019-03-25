@@ -37,7 +37,7 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) throws ClassNotFoundException, SQLException  {
-		
+
 		/* EJEMPLO DE COMO RECOJER LA LISTA DE USUARIOS DE LA BASE DE DATOS
 		@SuppressWarnings("unchecked")
 		List<User> users = db2Service.findAll();
@@ -54,10 +54,10 @@ public class HomeController {
 
 	@RequestMapping(value = "/mainPanel", method = RequestMethod.POST)
 	public String login(@ModelAttribute("user") User user, Model model,HttpSession session){
-		return "plataforma";
-		
-		/*
-		 * try {
+		//		return "plataforma";
+
+
+		try {
 
 			User newUser = db2Service.findByUsername(user.getUsername());
 
@@ -86,11 +86,16 @@ public class HomeController {
 			System.out.println("Error desconocido");
 			return "plataforma";
 		}
-		*/
+
+	}
+	@RequestMapping(value = "/newEstrategia", method = RequestMethod.GET)
+	public String nuevaEstrategia(@ModelAttribute("user") User user, @RequestBody String id ,  Model model,HttpSession session){		
+		return "plataforma";
+
 	}
 
 	@RequestMapping(value = "/estrategia", method = RequestMethod.GET)
-	public String mostrarTareasEstrategia(@RequestBody String id ,  Model model,HttpSession session){		
+	public String mostrarTareasEstrategia( @RequestBody String id ,  Model model,HttpSession session){		
 
 		try {
 			List<Tarea> tareas = db2Service.findTareasByEstrategia(Integer.parseInt(id.trim()));

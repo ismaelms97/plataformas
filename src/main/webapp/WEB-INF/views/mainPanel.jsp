@@ -6,8 +6,20 @@
 <jsp:include page="header.jsp"></jsp:include>
 
 <body>
-	<a>Crear nueva Estrategia<span>+</span></a>
-
+	<div class="parent cartas">
+		<c:forEach items="${listaEstrategia}" var="data" varStatus="item">
+			<a>
+				<div class="estartegiasCard">
+					<c:out value="${data.nombre}" />
+				</div>
+			</a>
+		</c:forEach>
+		<a href="newEstrategia">
+			<div class="estartegiasCard">
+				Crear nueva Estrategia
+			</div>
+		</a>
+	</div>
 
 	<jsp:include page="footer.jsp"></jsp:include>
 </body>

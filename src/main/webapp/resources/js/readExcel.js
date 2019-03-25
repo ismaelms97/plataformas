@@ -59,7 +59,6 @@ var process_wb = (function () {
 				}  else if (JSON.parse(output).Tareas[0][i].toLowerCase() == "complejidad") {
 					complejPos = i;
 				} 
-
 			}
 		}
 		for (var i = 1; i < JSON.parse(output).Tareas.length; i++) { //JSON.parse(output).Tareas.length
@@ -71,6 +70,7 @@ var process_wb = (function () {
 				task.prioridad = JSON.parse(output).Tareas[i][prioPos]
 				task.resumen = JSON.parse(output).Tareas[i][resuPos]
 				task.estado = JSON.parse(output).Tareas[i][statusPos]
+				
 				// Hacemos comprovaciones
 				if(JSON.parse(output).Tareas[i][complejPos] != null){
 					task.complejidad = JSON.parse(output).Tareas[i][complejPos]					
