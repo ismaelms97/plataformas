@@ -46,13 +46,14 @@
 	<nav class="my-2 my-md-0 mr-md-3"></nav>
 	
 	<form:form method="POST" action="/closeSession" modelAttribute="user">
-		<form:input type="hidden" path="id" value="${user.id}" />
+		<form:input type="hidden" path="username" value="${username}" />
 		<button id="butonDestroy" type="submit"
 			class="btn btn-outline-primary">Cerrar Sessión</button>
 	</form:form>
 	
 </div>
 <div id="errorMsg" class="alert alert-danger" role="alert">${errorMsg}</div>
+
 <script>
 	if (document.getElementById("errorMsg").innerHTML == "") {
 		document.getElementById("errorMsg").style.visibility = "hidden";

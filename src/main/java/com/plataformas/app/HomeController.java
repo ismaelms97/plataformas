@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.plataformas.Db2.Db2Service;
+import com.plataformas.Db2.DailyService;
+import com.plataformas.Db2.EstrategiaService;
+import com.plataformas.Db2.UserService;
 import com.plataformas.model.Estrategia;
 import com.plataformas.model.Tarea;
 import com.plataformas.model.User;
@@ -27,9 +29,16 @@ import com.plataformas.model.User;
  */
 @Controller
 public class HomeController {
+
 	private List<User> USessions = new ArrayList<User>();
+
 	@Autowired
-	Db2Service db2Service;
+	UserService userService;
+	@Autowired
+	EstrategiaService estrategiaService;
+	@Autowired
+	DailyService dailyService;
+
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 * @throws SQLException 
@@ -38,15 +47,6 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) throws ClassNotFoundException, SQLException  {
 
-		/* EJEMPLO DE COMO RECOJER LA LISTA DE USUARIOS DE LA BASE DE DATOS
-		@SuppressWarnings("unchecked")
-		List<User> users = db2Service.findAll();
-
-		for (User user : users) {
-
-			System.out.println(user.getId()+" , "+user.getUsername()+" "+user.getPassword()+" ,  "+user.getEquipoId());
-		}
-		 */
 
 		model.addAttribute("user", new User());
 		return "home";
@@ -54,37 +54,45 @@ public class HomeController {
 
 	@RequestMapping(value = "/mainPanel", method = RequestMethod.POST)
 	public String login(@ModelAttribute("user") User user, Model model,HttpSession session){
-		//		return "plataforma";
 
-
-		try {
-
-			User newUser = db2Service.findByUsername(user.getUsername());
+		User newUser = null;
+		boolean userExist = false;
+		String mensaje = "";
+		try{
+			newUser = userService.findByUsername(user.getUsername());
 
 			if(newUser.getPassword().equals(user.getPassword())) {
-				USessions.add(newUser);				
-				session.setAttribute("users", USessions);
-				List<Estrategia> listaEstrategias = db2Service.findEstrategiaById(newUser.getEquipoId());
-				System.out.println("Encontrado");
+				session.setAttribute(user.getUsername(), newUser);
+				USessions.add(newUser);	
 				model.addAttribute("greeting","Hola "+ user.getUsername());
 				model.addAttribute("user",user);
-				model.addAttribute("listaEstrategia",listaEstrategias);
-				System.out.println("ESTRATEGIAS COMPLETE");
-				return "mainPanel";
+				userExist = true;
 			}else {
-				model.addAttribute("errorMsg","Contraseña incorrecta");
-				System.out.println("No Encontrado");
-				return  "home";
+				mensaje = "Contraseña incorrecta";
 			}
 
-		} catch (NullPointerException e) { 
-			model.addAttribute("errorMsg","El usuario no existe");
-			System.out.println("No Encontrado");
-			return "home"; 
+		}catch (NullPointerException e) { 			
+			mensaje = "El usuario no existe";
 
-		}catch (Exception e) {
-			System.out.println("Error desconocido");
-			return "plataforma";
+		}catch (Exception e) {			
+			mensaje = "No hay conexion";
+		}
+
+		if(userExist) {
+
+			try {
+				List<Estrategia> listaEstrategias = estrategiaService.findEstrategiaById(newUser.getEquipoId());	
+				model.addAttribute("listaEstrategia",listaEstrategias);
+
+			}catch (Exception e) {
+				System.out.println("listaEstrategia , no se ha encontrado...");
+			}			
+
+			return "mainPanel";
+		}else {		
+
+			model.addAttribute("errorMsg",mensaje);
+			return  "home";
 		}
 
 	}
@@ -92,13 +100,14 @@ public class HomeController {
 	public String nuevaEstrategia(@ModelAttribute("user") User user, @RequestBody String id ,  Model model,HttpSession session){		
 		return "plataforma";
 
+
 	}
 
 	@RequestMapping(value = "/estrategia", method = RequestMethod.GET)
 	public String mostrarTareasEstrategia( @RequestBody String id ,  Model model,HttpSession session){		
 
 		try {
-			List<Tarea> tareas = db2Service.findTareasByEstrategia(Integer.parseInt(id.trim()));
+			List<Tarea> tareas = estrategiaService.findTareasByEstrategia(Integer.parseInt(id.trim()));
 			model.addAttribute("listaTareas",tareas);
 			System.out.println("TAREAS COMPLETE");
 			return "plataforma";
@@ -113,38 +122,42 @@ public class HomeController {
 	}
 
 
-
-
-
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/closeSession", method = RequestMethod.POST)
 	public String SessionDestroy(@ModelAttribute("user") User user, Model model,HttpSession session) {	
 
-		List<User> actualSession = (List<User>) session.getAttribute("users"); 
-		for (User user2 : actualSession) {
-
-			System.out.println(user2.getUsername()+" "+user2.getPassword()+" "+user2.getId());
-		}
 		try {
-			for(User u : actualSession) {
-				if(u.getId() == user.getId()) {
+			session.removeAttribute(user.getUsername());	
+			session.removeAttribute(session.getId());
 
-					actualSession.remove(u);
+			for(User u : USessions) {
+				if(u.getUsername().equals(user.getUsername())) {
+
 					USessions.remove(u);
-					session.setAttribute("users", actualSession);
-					System.out.println("Sessiones Actuales "+actualSession.size());
-
+					System.err.println("Sessiones Actuales "+USessions.size());
 				}else {
-					System.out.println("No encontrado");
-					System.out.println("Sessiones FAIL de borrar "+actualSession.size());
+					System.err.println("No encontrado");
+					System.err.println("Sessiones error delete "+USessions.size());
 				}
-
 			}
 
 		}catch (ConcurrentModificationException e) {
 			return "redirect:/";
+		}catch (Exception e) {
+			System.out.println("No borrado en remove()");
 		}
+
+		// este try es un test para comprobar que el usuario ha sido borrado y no se encuentra
+		try {
+			User u = (User) session.getAttribute(user.getUsername());
+			System.out.println(u.getPassword());
+		}catch (Exception e) {
+			System.err.println("USUARIO no encontrado despues de borrarlo");
+		}
+
+
 		return "redirect:/";
+
 	}
 
 	@RequestMapping(value = "/excel", method = RequestMethod.GET)

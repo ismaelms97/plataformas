@@ -13,7 +13,8 @@ public class Estrategia {
 	}
 	
 	
-	public Estrategia(int id, String nombre, String estado, String fechaInicio, String fechaFin, int equipoId) {
+
+	public Estrategia(int id,String nombre, String estado, String fechaInicio, String fechaFin, int equipoId) {
 		super();
 		Id = id;
 		this.nombre = nombre;
@@ -24,15 +25,15 @@ public class Estrategia {
 	}
 
 
-	public Estrategia(String nombre, String estado, String fechaInicio, String fechaFin, int equipoId) {
+
+	public Estrategia(String nombre,String estado, String fechaInicio, String fechaFin, int equipoId) {
 		super();
-		this.nombre= nombre;
+		this.nombre = nombre;
 		this.estado = estado;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
 		this.equipoId = equipoId;
 	}
-
 
 	public int getId() {
 		return Id;
@@ -40,14 +41,16 @@ public class Estrategia {
 	public void setId(int id) {
 		Id = id;
 	}
+	
 	public String getNombre() {
 		return nombre;
 	}
-	
+
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
+
 	public String getEstado() {
 		return estado;
 	}
