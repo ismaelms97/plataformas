@@ -6,12 +6,14 @@ import java.util.ConcurrentModificationException;
 import java.util.List;
 import java.util.Locale;
 
+import javax.annotation.Generated;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -47,7 +49,7 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) throws ClassNotFoundException, SQLException  {
 
-
+		model.addAttribute("hidde", true);
 		model.addAttribute("user", new User());
 		return "home";
 	}
@@ -66,6 +68,7 @@ public class HomeController {
 				USessions.add(newUser);	
 				model.addAttribute("greeting","Hola "+ user.getUsername());
 				model.addAttribute("user",user);
+				model.addAttribute("hidde", false);
 				userExist = true;
 			}else {
 				mensaje = "Contraseña incorrecta";
@@ -97,17 +100,17 @@ public class HomeController {
 
 	}
 	@RequestMapping(value = "/newEstrategia", method = RequestMethod.GET)
-	public String nuevaEstrategia(@ModelAttribute("user") User user, @RequestBody String id ,  Model model,HttpSession session){		
+	public String nuevaEstrategia(@ModelAttribute("user") User user, @RequestBody String id ,  Model model,HttpSession session){	
+		
 		return "plataforma";
 
 
 	}
-
-	@RequestMapping(value = "/estrategia", method = RequestMethod.GET)
-	public String mostrarTareasEstrategia(@ModelAttribute("estrategia") Estrategia estrategia, @RequestBody String id ,  Model model,HttpSession session){		
+	@RequestMapping(value = "/estrategia/{id}", method = RequestMethod.GET)
+	public String mostrarTareasEstrategia(@ModelAttribute("estrategia") Estrategia estrategia,@PathVariable String id , Model model,HttpSession session){		
 
 		try {
-			List<Tarea> tareas = estrategiaService.findTareasByEstrategia(Integer.parseInt(id.trim()));
+			List<Tarea> tareas = estrategiaService.findTareasByEstrategia(Integer.parseInt(id));
 			model.addAttribute("listaTareas",tareas);
 			System.out.println("TAREAS COMPLETE");
 			return "plataforma";

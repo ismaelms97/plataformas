@@ -55,13 +55,21 @@
 <div id="errorMsg" class="alert alert-danger" role="alert">${errorMsg}</div>
 
 <script>
+var hide = ${hidde};
+if(!hide){	
+		document.getElementById("butonDestroy").style.visibility = "visible";
+		document.getElementById("buttonHome").style.visibility = "visible";
+		if (document.getElementById("errorMsg").innerHTML == "") {
+			document.getElementById("errorMsg").style.visibility = "hidden";
+		}
+	
+}else{
 	if (document.getElementById("errorMsg").innerHTML == "") {
 		document.getElementById("errorMsg").style.visibility = "hidden";
 	}
-
-	if (document.getElementById("greeting").innerHTML == "") {
-		document.getElementById("butonDestroy").style.visibility = "hidden";
-		document.getElementById("buttonHome").style.visibility = "hidden";
-	}
+	document.getElementById("butonDestroy").style.visibility = "hidden";
+	document.getElementById("buttonHome").style.visibility = "hidden";
+}
+	
 </script>
 </html>

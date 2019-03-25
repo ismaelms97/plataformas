@@ -7,7 +7,7 @@
 
 <body>
 	<h1 class="mainTitle">Estrategia</h1>
-	
+	<h2>${listaTareas}</h2>
 	<div class="button disabled">
 		<a class="button" href="#">Guardar</a>
 	</div>

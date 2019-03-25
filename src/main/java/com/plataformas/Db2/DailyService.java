@@ -52,6 +52,7 @@ public class DailyService {
 				String fechaInicio = rs.getString("fechaInicio");
 				String fechafin = rs.getString("fechafin");
 				int equipo_id = rs.getInt("equipo_id");
+
 				Estrategia estrategia = new Estrategia( id,nombre, estado,fechaInicio ,fechafin ,equipo_id);
 
 				estrategiaList.add(estrategia);

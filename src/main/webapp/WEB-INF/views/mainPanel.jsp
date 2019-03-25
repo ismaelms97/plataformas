@@ -10,15 +10,12 @@
 
 
 
-		<c:forEach items="${listaEstrategia}" var="data" varStatus="item">
-			<form:form method="POST" action="/estrategia" modelAttribute="estrategia">
-				<form:input type="hidden" path="id" value="${data.id}" />
-				<a>
+		<c:forEach items="${listaEstrategia}" var="estrategia" varStatus="item">
+				<a href ="estrategia/${estrategia.id}">
 					<div class="estartegiasCard" type="submit" role="button">
-						<c:out value="${data.nombre}" />
+						<c:out value="${estrategia.nombre}" />
 					</div>
 				</a>
-			</form:form>
 		</c:forEach>
 
 		<a href="newEstrategia">
