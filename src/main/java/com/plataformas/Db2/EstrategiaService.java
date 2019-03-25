@@ -117,9 +117,42 @@ public class EstrategiaService {
 		}catch (Exception e) {
 			System.out.println("Error en saveEstrategia ");
 		}
+	}
+	
+	public List<Estrategia> findEstrategiaByTeam(int idUser) throws ClassNotFoundException  {
+		List<Estrategia> estrategiaList = new ArrayList<Estrategia>();		
+		initializeDriver();	     
+		try {
+
+			Connection con = DriverManager.getConnection(url,dbUsername,dbPassword);
+			con.setAutoCommit(false);
+			Statement  stmt = con.createStatement(); 
+			ResultSet rs = stmt.executeQuery("SELECT * FROM estrategia Es where Es.equipo_id = "+idUser+"");
+
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String nombre = rs.getString("nombre");
+				String estado = rs.getString("estado");
+				String fechaInicio = rs.getString("fechaInicio");
+				String fechafin = rs.getString("fechafin");
+				int equipo_id = rs.getInt("equipo_id");
+				Estrategia estrategia = new Estrategia( id,nombre, estado,fechaInicio ,fechafin ,equipo_id);
 
 
+				estrategiaList.add(estrategia);
+			}
 
+			return estrategiaList;
+
+		} catch (SQLException e) {
+			System.err.println("SQL Exeption  findEstrategiaById:  code -> "+e.getErrorCode());
+			System.err.println("more inf : "+e.getMessage()+" reason  -> "+e.getCause());
+			return estrategiaList;
+
+		}catch (Exception e) {
+			System.out.println("Error en findEstrategiaById ");
+			return estrategiaList;
+		}
 
 	}
 
