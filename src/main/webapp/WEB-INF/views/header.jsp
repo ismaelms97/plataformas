@@ -45,10 +45,8 @@
 	
 	<nav class="my-2 my-md-0 mr-md-3"></nav>
 	
-	<form:form method="POST" action="/closeSession" modelAttribute="user">
-		<form:input type="hidden" path="username" value="${username}" />
-		<button id="butonDestroy" type="submit"
-			class="btn btn-outline-primary">Cerrar Sessión</button>
+	<form:form method="POST" action="/closeSession">		
+		<button id="butonDestroy" type="submit"	class="btn btn-outline-primary">Cerrar Sessión</button>
 	</form:form>
 	
 </div>
