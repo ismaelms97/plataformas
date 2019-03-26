@@ -7,17 +7,17 @@
 
 <body>
 	<div class="parent cartas">
-		<c:forEach items="${listaEstrategia}" var="data" varStatus="item">
-			<a>
-				<div class="estartegiasCard">
-					<c:out value="${data.nombre}" />
-				</div>
-			</a>
+
+		<c:forEach items="${listaEstrategia}" var="estrategia" varStatus="item">
+				<a href ="estrategia/${estrategia.id}">
+					<div class="estartegiasCard" type="submit" role="button">
+						<c:out value="${estrategia.nombre}" />
+					</div>
+				</a>
 		</c:forEach>
+
 		<a href="newEstrategia">
-			<div class="estartegiasCard">
-				Crear nueva Estrategia
-			</div>
+			<div class="estartegiasCard">Crear nueva Estrategia</div>
 		</a>
 	</div>
 

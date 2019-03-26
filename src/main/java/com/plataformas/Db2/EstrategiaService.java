@@ -119,7 +119,7 @@ public class EstrategiaService {
 			return estrategiaList;
 
 		}catch (Exception e) {
-			System.out.println("Error en findEstrategiaById ");
+			System.out.println("Error en findEstrategiaByTeam ");
 			return estrategiaList;
 		}
 

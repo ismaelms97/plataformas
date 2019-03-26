@@ -123,19 +123,19 @@ public class HomeController {
 	@RequestMapping(value = "/newEstrategia", method = RequestMethod.GET)
 	public String nuevaEstrategia( Model model,HttpSession session){
 		model.addAttribute("hidde", "hide");//boton cerrar sesion
-		
+
 		return "plataforma";
 
 
 	}
-
-	@RequestMapping(value = "/estrategia", method = RequestMethod.GET)
-	public String mostrarTareasEstrategia(@ModelAttribute("estrategia") Estrategia estrategia,  Model model,HttpSession session){		
+	@RequestMapping(value = "/estrategia/{id}", method = RequestMethod.GET)
+	public String mostrarTareasEstrategia(@ModelAttribute("estrategia") Estrategia estrategia,@PathVariable String id , Model model,HttpSession session){		
 
 		try {
-			List<Tarea> tareas = estrategiaService.findTareasByEstrategia(estrategia.getId());
+			List<Tarea> tareas = estrategiaService.findTareasByEstrategia(Integer.parseInt(id));
 			model.addAttribute("listaTareas",tareas);
 			model.addAttribute("hidde", "hide");//boton cerrar sesion
+
 			System.out.println("TAREAS COMPLETE");
 			return "plataforma";
 		}catch (NumberFormatException e) {
@@ -148,8 +148,6 @@ public class HomeController {
 
 	}
 
-
-	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/closeSession", method = RequestMethod.POST)
 	public String SessionDestroy(HttpSession session) {	
 		
@@ -169,7 +167,7 @@ public class HomeController {
 			tasks[i] = task[i].split(",");
 			System.out.println(tasks[i][0] + " - " + tasks[i][1]);
 		}
-		return "home";
+		return "mainPanel";
 	}
 	
 	
