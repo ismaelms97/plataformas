@@ -2,6 +2,19 @@ var estados = [];
 rellenarEstados();
 var strategyTasks = [] //Array que recoje las tareas seleccionadas para la estrategia
 
+if(document.getElementById("formContent")){
+	
+	document.getElementById("butonDestroy").style.visibility = "hidden";
+	document.getElementById("buttonHome").style.visibility = "hidden";
+		
+	
+}else{
+	
+	document.getElementById("butonDestroy").style.visibility = "visible";
+	document.getElementById("buttonHome").style.visibility = "visible";
+	
+}
+
 function rellenarEstados() {
 	if($("th").length >= 1){
 		for (var i = 0; i < $("th").length; i++) {
@@ -70,6 +83,7 @@ function tooltip(){
 		$( ".rect, .clone" ).tooltip();
 	} );
 }
+
 if(document.getElementById("suve")){
 	document.getElementById("suve").addEventListener('click', saveStrategy);
 }

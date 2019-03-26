@@ -43,20 +43,9 @@ public class EstrategiaService {
 			Statement  stmt = con.createStatement(); 
 			ResultSet rs = stmt.executeQuery("SELECT * FROM estrategia Es where Es.equipo_id = "+idUser+"");
 
-			while (rs.next()) {
-				int id = rs.getInt("id");
-				String nombre = rs.getString("nombre");
-				String estado = rs.getString("estado");
-				String fechaInicio = rs.getString("fechaInicio");
-				String fechafin = rs.getString("fechafin");
-				int equipo_id = rs.getInt("equipo_id");
-				Estrategia estrategia = new Estrategia( id,nombre, estado,fechaInicio ,fechafin ,equipo_id);
+			
 
-
-				estrategiaList.add(estrategia);
-			}
-
-			return estrategiaList;
+			return Estrategia.converFromDatabase(rs, estrategiaList);
 
 		} catch (SQLException e) {
 			System.err.println("SQL Exeption  findEstrategiaById:  code -> "+e.getErrorCode());
@@ -80,16 +69,8 @@ public class EstrategiaService {
 			ResultSet rs = stmt.executeQuery("SELECT DISTINCT  T.id, T.tipo, T.estadoInicio, T.estadoFinal  FROM tarea T , estrategia E , estrategia_tarea ET"
 					+ " where T.id = ET.tarea_id AND  ET.estrategia_id = "+idEstrategia+"");
 
-			while (rs.next()) {
-				int id = rs.getInt("id");
-				String tipo = rs.getString("tipo");
-				String estadoInicio = rs.getString("estadoInicio");
-				String estadoFinal = rs.getString("estadoFinal");
-				Tarea tarea = new Tarea(id,tipo,estadoInicio,estadoFinal);
-				tareaList.add(tarea);
-			}
 
-			return tareaList;
+			return Tarea.converFromDatabase(rs, tareaList);
 
 		} catch (SQLException e) {
 			System.err.println("SQL Exeption  findTareasByEstrategia:  code -> "+e.getErrorCode());
@@ -128,21 +109,9 @@ public class EstrategiaService {
 			con.setAutoCommit(false);
 			Statement  stmt = con.createStatement(); 
 			ResultSet rs = stmt.executeQuery("SELECT * FROM estrategia Es where Es.equipo_id = "+idUser+"");
+			
 
-			while (rs.next()) {
-				int id = rs.getInt("id");
-				String nombre = rs.getString("nombre");
-				String estado = rs.getString("estado");
-				String fechaInicio = rs.getString("fechaInicio");
-				String fechafin = rs.getString("fechafin");
-				int equipo_id = rs.getInt("equipo_id");
-				Estrategia estrategia = new Estrategia( id,nombre, estado,fechaInicio ,fechafin ,equipo_id);
-
-
-				estrategiaList.add(estrategia);
-			}
-
-			return estrategiaList;
+			return Estrategia.converFromDatabase(rs, estrategiaList);
 
 		} catch (SQLException e) {
 			System.err.println("SQL Exeption  findEstrategiaById:  code -> "+e.getErrorCode());

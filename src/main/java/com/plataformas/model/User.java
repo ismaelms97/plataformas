@@ -1,5 +1,8 @@
 package com.plataformas.model;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class User {
 	private int Id;
 	private String username;
@@ -59,5 +62,18 @@ public class User {
 		this.password = password;
 	}
 	
+	public static User converFromDataBase(ResultSet rs) throws SQLException {
+		User user = null;
+		if(rs.next()) {
+			int id = rs.getInt("id");
+			String username = rs.getString("username");
+			String password = rs.getString("password");
+			int equipo_id = rs.getInt("equipo_id");
+			user  = new User(id,username,password,equipo_id);
+
+			
+		}
+		return user;
+	}
 
 }

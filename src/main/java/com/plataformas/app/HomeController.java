@@ -47,7 +47,6 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) throws ClassNotFoundException, SQLException  {
 
-		model.addAttribute("hidde", true);
 		model.addAttribute("user", new User());
 		return "home";
 	}
@@ -62,11 +61,10 @@ public class HomeController {
 			newUser = userService.findByUsername(user.getUsername());
 
 			if(newUser.getPassword().equals(user.getPassword())) {
-				session.setAttribute(user.getUsername(), newUser);
+				session.setAttribute("userSession", newUser);
 				USessions.add(newUser);	
 				model.addAttribute("greeting","Hola "+ user.getUsername());
 				model.addAttribute("user",user);
-				model.addAttribute("hidde", false);
 				userExist = true;
 			}else {
 				mensaje = "Contraseña incorrecta";
@@ -97,9 +95,32 @@ public class HomeController {
 		}
 
 	}
+	
+	@RequestMapping(value = "/panelControl", method = RequestMethod.GET)
+	public String panelControl(Model model,HttpSession session){
+		
+		synchronized (session) {
+			try {
+				
+				User actualUser = (User) session.getAttribute("userSession");
+				List<Estrategia> listaEstrategias = estrategiaService.findEstrategiaById(actualUser.getEquipoId());	
+				model.addAttribute("listaEstrategia",listaEstrategias);
+				return "mainPanel";
+				
+			}catch (Exception e) {
+				System.out.println("Panel de control Error con session o con estrategias");
+				return "redirect:/";
+			}
+			
+		}
+
+
+	}
+	
 	@RequestMapping(value = "/newEstrategia", method = RequestMethod.GET)
-	public String nuevaEstrategia(Model model){	
-		model.addAttribute("hidde", false);
+	public String nuevaEstrategia( Model model,HttpSession session){
+		model.addAttribute("hidde", "hide");//boton cerrar sesion
+
 		return "plataforma";
 
 
@@ -110,7 +131,7 @@ public class HomeController {
 		try {
 			List<Tarea> tareas = estrategiaService.findTareasByEstrategia(Integer.parseInt(id));
 			model.addAttribute("listaTareas",tareas);
-			model.addAttribute("hidde", false);
+
 			System.out.println("TAREAS COMPLETE");
 			return "plataforma";
 		}catch (NumberFormatException e) {
@@ -125,6 +146,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/closeSession", method = RequestMethod.POST)
 	public String SessionDestroy(HttpSession session) {	
+		
 		session.invalidate();
 
 		return "redirect:/";

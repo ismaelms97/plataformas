@@ -8,7 +8,7 @@
 <body>
 	<h1 class="mainTitle">Estrategia</h1>
 
-	<div id="suve">Suve</div>
+	<!-- <div id="suve">Suve</div> -->
 
 	<div class="button disabled">Guardar</div>
 	
