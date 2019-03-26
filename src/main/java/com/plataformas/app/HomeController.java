@@ -11,9 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.plataformas.Db2.DailyService;
@@ -47,7 +47,6 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) throws ClassNotFoundException, SQLException  {
 
-		model.addAttribute("hidde", true);
 		model.addAttribute("user", new User());
 		return "home";
 	}
@@ -66,7 +65,6 @@ public class HomeController {
 				USessions.add(newUser);	
 				model.addAttribute("greeting","Hola "+ user.getUsername());
 				model.addAttribute("user",user);
-				model.addAttribute("hidde", "hide");
 				userExist = true;
 			}else {
 				mensaje = "Contraseña incorrecta";
@@ -107,7 +105,6 @@ public class HomeController {
 				User actualUser = (User) session.getAttribute("userSession");
 				List<Estrategia> listaEstrategias = estrategiaService.findEstrategiaById(actualUser.getEquipoId());	
 				model.addAttribute("listaEstrategia",listaEstrategias);
-				model.addAttribute("hidde", "hide");//boton cerrar sesion
 				return "mainPanel";
 				
 			}catch (Exception e) {
@@ -134,7 +131,6 @@ public class HomeController {
 		try {
 			List<Tarea> tareas = estrategiaService.findTareasByEstrategia(Integer.parseInt(id));
 			model.addAttribute("listaTareas",tareas);
-			model.addAttribute("hidde", "hide");//boton cerrar sesion
 
 			System.out.println("TAREAS COMPLETE");
 			return "plataforma";
