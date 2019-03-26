@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <head>
 <!-- <link rel="shortcut icon" type="image/x-icon"
 	href="/resources/img/favicon.png" /> -->
@@ -35,7 +36,7 @@
 <!-- Header -->
 <div
 	class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-	<h5 id="greeting" class="my-0 mr-md-auto font-weight-normal">${greeting}</h5>
+	<h5 id="greeting" class="my-0 mr-md-auto font-weight-normal">${greeting}  ${nombreEquipo} </h5>
 
 	<form method="GET" action="/panelControl">
 	<button id="buttonHome" type="submit"

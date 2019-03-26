@@ -66,14 +66,14 @@ public class UserService {
 	}
 	
 
-	public User findByUsername(String Uusername) throws ClassNotFoundException, SQLException {
+	public User findByUsername(String username) throws ClassNotFoundException, SQLException {
 		User user = null;
 		initializeDriver();    
 		try {
 			Connection con = DriverManager.getConnection(url,dbUsername,dbPassword);
 			con.setAutoCommit(false);
 			Statement  stmt = con.createStatement(); 
-			ResultSet rs = stmt.executeQuery("SELECT * FROM USER where username = '"+Uusername+"'"); 			
+			ResultSet rs = stmt.executeQuery("SELECT  U.*, E.name FROM user U join equipo E  on (U.equipo_id = E.id) where username = '"+username+"'"); 			
 			
 			return User.converFromDataBase(rs);
 			

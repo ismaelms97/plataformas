@@ -65,6 +65,10 @@ public class HomeController {
 				USessions.add(newUser);	
 				model.addAttribute("greeting","Hola "+ user.getUsername());
 				model.addAttribute("user",user);
+				System.out.println(newUser.getNombreEquipo());
+				model.addAttribute("nombreEquipo", " Nombre de equipo : "+newUser.getNombreEquipo());
+				
+				
 				userExist = true;
 			}else {
 				mensaje = "Contraseña incorrecta";
@@ -154,8 +158,17 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/saveStrategy", method = RequestMethod.GET)
-	public @ResponseBody String saveStrategy(Model model, String name, String startDate, String endDate, String team, String stratTasks) {		
-		System.out.println("Stategy name: " + startDate);
+	public @ResponseBody String saveStrategy(Model model, String name, String startDate, String endDate, String team, String stratTasks) {	
+	
+		
+		try {
+			Estrategia estrategia = new Estrategia(name,"En curso","02/03/2019","02/03/2020",Integer.parseInt(team));
+			estrategiaService.saveEstrategia(estrategia);
+			
+		}catch (Exception e) {
+			System.out.println("error al guardar");
+		}
+		
 		String[][] tasks = new String[stratTasks.split("qwer").length][4];
 		
 		for(int i = 0; i < tasks.length; i++) {

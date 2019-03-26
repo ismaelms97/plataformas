@@ -87,10 +87,13 @@ public class EstrategiaService {
 		initializeDriver();	    
 		try{
 			Connection con = DriverManager.getConnection(url,dbUsername,dbPassword);
-			con.setAutoCommit(false);
+			con.setAutoCommit(false); 
 			Statement  stmt = con.createStatement(); 
-			ResultSet rs = stmt.executeQuery("INSERT INTO estrategia (estado,fechaInicio,fechaFin,equipo_id) values "
-					+ "('"+estrategia.getEstado()+"','"+estrategia.getFechaInicio()+"','"+estrategia.getFechaFin()+"',"+estrategia.getEquipoId()+")"); 
+			
+			int rs = stmt.executeUpdate("INSERT INTO estrategia (nombre,estado,fechaInicio,fechaFin,equipo_id) values "
+					+ "('"+estrategia.getNombre()+"','"+estrategia.getEstado()+"','"+estrategia.getFechaInicio()+"','"+estrategia.getFechaFin()+"',"+estrategia.getEquipoId()+")");
+			con.commit();
+			System.out.println("Completado ? "+rs);
 		}catch (SQLException e) {
 			System.out.println("SQL Exeption  saveEstrategia:  code -> "+e.getErrorCode()+" more inf : "+e.getMessage());
 
