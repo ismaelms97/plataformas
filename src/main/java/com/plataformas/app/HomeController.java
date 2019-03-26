@@ -121,11 +121,26 @@ public class HomeController {
 
 	}
 	
-	@RequestMapping(value = "/newEstrategia", method = RequestMethod.GET)
-	public String nuevaEstrategia( Model model,HttpSession session){
-		model.addAttribute("hidde", "hide");//boton cerrar sesion
+	@RequestMapping(value = "/newEstrategiaForm", method = RequestMethod.GET)
+	public String nuevaEstrategiaForm(@ModelAttribute("estrategia") Estrategia estrategia, Model model,HttpSession session){
+
+		try {
+			estrategiaService.saveEstrategia(estrategia);
+			
+		}catch (Exception e) {
+			System.out.println("error al guardar");
+		}
 
 		return "plataforma";
+
+
+	}
+	@RequestMapping(value = "/newEstrategia", method = RequestMethod.GET)
+	public String nuevaEstrategia( Model model,HttpSession session){
+		
+		model.addAttribute("estrategia", new Estrategia());
+
+		return "formularioEstrategia";
 
 
 	}
@@ -162,7 +177,7 @@ public class HomeController {
 	
 		
 		try {
-			Estrategia estrategia = new Estrategia(name,"En curso","02/03/2019","02/03/2020",Integer.parseInt(team));
+			Estrategia estrategia = new Estrategia(name,"En curso",startDate,endDate,Integer.parseInt(team));
 			estrategiaService.saveEstrategia(estrategia);
 			
 		}catch (Exception e) {

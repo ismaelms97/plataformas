@@ -151,9 +151,9 @@ function saveStrategy(){
 	console.log("USe")
 	strategy = new Object();
 	strategy.name = "name";
-	strategy.startDate = new Date("dd-mm-YYYY");
-	console.log(new Date("dd-mm-YYYY"));
-	strategy.endDate = new Date("dd-mm-YYYY");
+	strategy.startDate = new Date().getDate() + "/" + new Date().getMonth() + "/" + new Date().getFullYear();
+	console.log(new Date().getDate() + "/" + new Date().getMonth() + "/" + new Date().getFullYear());
+	strategy.endDate = new Date().getDate() + "/" + new Date().getMonth() + "/" + new Date().getFullYear();
 	strategy.team = 1; //ID del equipo
 	strategy.tasks = [];
 	strategy.tasksModified = [];
