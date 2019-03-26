@@ -1,67 +1,3 @@
-var estados = [];
-rellenarEstados();
-var strategyTasks = [] //Array que recoje las tareas seleccionadas para la estrategia
-
-function rellenarEstados() {
-	for (var i = 0; i < $("th").length; i++) {
-		estados[i] = document.querySelectorAll("th")[i].innerText.toLowerCase();
-	}
-	console.log(estados);
-}
-
-function drawTable() {
-	if (tasks.length >= 1) {
-		for (var i = 0; i < tasks.length; i++) {
-			var tr = document.createElement("tr");
-			document.getElementsByTagName("TBODY")[0].appendChild(tr);
-			for (var j = 0; j < 10; j++) {
-				var el = document.createElement("td");
-				el.setAttribute("class", estados[j].replace(/\s/g, "-"));
-				document.getElementsByTagName("TR")[i + 1].appendChild(el);
-			}
-			drawRTC(i);
-		}
-
-		// creamos el clon de los RTC
-		var rect = document.getElementsByClassName("rect");
-		for (var i = 0; i < rect.length; i++) {
-			var el = rect[i];
-			var cln = $(el).clone();
-			cln.attr("class", "clone");
-			$(el).parent().append(cln);
-			$(cln).css("display", "none");
-		}
-
-	}
-}
-function drawRTC(pos) {
-	var estadoActual = 0;
-
-	if(estados.length >= 1){
-
-		for (var j = 0; j < estados.length; j++) {
-			if (tasks[pos].estado.toLowerCase().startsWith(estados[j])) {
-				estadoActual = j
-			}
-		}
-	}
-
-//	if(tasks[pos].complejidad.toLowerCase().startsWith("sin asignar")){
-//	tasks[pos].complejidad = 0;
-//	}
-
-//	if(tasks[pos].tamano.toLowerCase().startsWith("sin asignar")){
-//	tasks[pos].tamano = 0;
-//	}
-
-
-	document.getElementsByTagName("TR")[pos + 1].children[estadoActual].innerHTML = '<div class="rect" data-posInitial="' + estadoActual + '" data-rtc="' + (pos + 1) + '" title="'+ tasks[pos].resumen +'" data-placement="right">'
-	+ '<small class="tamano">'+ tasks[pos].tamano + '</small> '+ tasks[pos].id + ' <small class="complejidad">'+ tasks[pos].complejidad + '</small></div>';
-
-	dragDrop();
-	tooltip()
-}
-
 function dragDrop(){
 
 	// Con este codigo conseguimos que se mueva cada tarea unicamente en su eje x, y
@@ -135,9 +71,11 @@ function dragDrop(){
 							
 						}else{
 							tasks[this.getAttribute("data-rtc") -1].modified = true;
+							tasks[this.getAttribute("data-rtc") -1].endState = this.parentElement.classList[0].replace(/-/g, " ");
 						}
 						
 						console.log(tasks[this.getAttribute("data-rtc") -1]);
+						console.log(tasks[this.getAttribute("data-rtc") -1].endState);
 					},
 				});
 
@@ -208,14 +146,7 @@ function dragDrop(){
 
 	})
 }
-/* Función que muestra la tooltip en html  */
-function tooltip(){
-	$( function() {
-		$( ".rect, .clone" ).tooltip();
-	} );
-}
 
-document.getElementById("suve").addEventListener('click', saveStrategy);
 function saveStrategy(){
 	console.log("USe")
 	strategy = new Object();
@@ -225,9 +156,11 @@ function saveStrategy(){
 	strategy.endDate;
 	strategy.team = 1; //ID del equipo
 	strategy.tasks = [];
+	strategy.tasksModified = [];
 	//Guardar las tareas seleccionadas para la estrategia en el array strategyTasks
 	tasks.forEach(task => {
 		if(task.modified){
+			strategy.tasks.push(task);
 			strategy.tasks.push(task);
 		}
 	});
