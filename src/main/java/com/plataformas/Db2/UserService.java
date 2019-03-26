@@ -73,18 +73,10 @@ public class UserService {
 			Connection con = DriverManager.getConnection(url,dbUsername,dbPassword);
 			con.setAutoCommit(false);
 			Statement  stmt = con.createStatement(); 
-			ResultSet rs = stmt.executeQuery("SELECT * FROM USER where username = '"+Uusername+"'"); 
+			ResultSet rs = stmt.executeQuery("SELECT * FROM USER where username = '"+Uusername+"'"); 			
 			
-			if(rs.next()) {
-				int id = rs.getInt("id");
-				String username = rs.getString("username");
-				String password = rs.getString("password");
-				int equipo_id = rs.getInt("equipo_id");
-				user  = new User(id,username,password,equipo_id);
-
-				
-			}
-			return user;
+			return User.converFromDataBase(rs);
+			
 		}catch (Exception e) {
 			System.err.println("FIND() more inf : "+e.getMessage()+" reason  -> "+e.getCause());
 			user.setUsername("username : "+e.getMessage()+" cause :"+e.getCause());

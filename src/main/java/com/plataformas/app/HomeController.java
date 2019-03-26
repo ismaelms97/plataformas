@@ -2,7 +2,6 @@ package com.plataformas.app;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
 import java.util.List;
 import java.util.Locale;
 
@@ -12,9 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.plataformas.Db2.DailyService;
@@ -63,11 +62,11 @@ public class HomeController {
 			newUser = userService.findByUsername(user.getUsername());
 
 			if(newUser.getPassword().equals(user.getPassword())) {
-				session.setAttribute(user.getUsername(), newUser);
+				session.setAttribute("userSession", newUser);
 				USessions.add(newUser);	
 				model.addAttribute("greeting","Hola "+ user.getUsername());
 				model.addAttribute("user",user);
-				model.addAttribute("hidde", false);
+				model.addAttribute("hidde", "hide");
 				userExist = true;
 			}else {
 				mensaje = "Contraseña incorrecta";
@@ -98,8 +97,32 @@ public class HomeController {
 		}
 
 	}
+	
+	@RequestMapping(value = "/panelControl", method = RequestMethod.GET)
+	public String panelControl(Model model,HttpSession session){
+		
+		synchronized (session) {
+			try {
+				
+				User actualUser = (User) session.getAttribute("userSession");
+				List<Estrategia> listaEstrategias = estrategiaService.findEstrategiaById(actualUser.getEquipoId());	
+				model.addAttribute("listaEstrategia",listaEstrategias);
+				model.addAttribute("hidde", "hide");//boton cerrar sesion
+				return "mainPanel";
+				
+			}catch (Exception e) {
+				System.out.println("Panel de control Error con session o con estrategias");
+				return "redirect:/";
+			}
+			
+		}
+
+
+	}
+	
 	@RequestMapping(value = "/newEstrategia", method = RequestMethod.GET)
-	public String nuevaEstrategia(){	
+	public String nuevaEstrategia( Model model,HttpSession session){
+		model.addAttribute("hidde", "hide");//boton cerrar sesion
 		
 		return "plataforma";
 
@@ -112,6 +135,7 @@ public class HomeController {
 		try {
 			List<Tarea> tareas = estrategiaService.findTareasByEstrategia(estrategia.getId());
 			model.addAttribute("listaTareas",tareas);
+			model.addAttribute("hidde", "hide");//boton cerrar sesion
 			System.out.println("TAREAS COMPLETE");
 			return "plataforma";
 		}catch (NumberFormatException e) {
@@ -128,6 +152,7 @@ public class HomeController {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/closeSession", method = RequestMethod.POST)
 	public String SessionDestroy(HttpSession session) {	
+		
 		session.invalidate();
 
 		return "redirect:/";

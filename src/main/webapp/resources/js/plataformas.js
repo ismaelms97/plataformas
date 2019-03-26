@@ -1,3 +1,4 @@
+
 var estados = [];
 rellenarEstados();
 var strategyTasks = [] //Array que recoje las tareas seleccionadas para la estrategia
