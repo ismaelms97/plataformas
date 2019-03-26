@@ -112,6 +112,7 @@ div.button{
 }
 div.disabled{
 	pointer-events:none;
+	cursor:not-allowed;
 	-webkit-filter: opacity(30%);
 	filter: opacity(30%);
 }
@@ -213,7 +214,6 @@ td .ui-selected {
 }
 .estartegiasCard{
 	background-color: lime;
-	border: 0px solid black;
 	border-radius: 5%;
 	padding: 20px;
 	width: 187.52px;

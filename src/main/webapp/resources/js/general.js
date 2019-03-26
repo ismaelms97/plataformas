@@ -3,10 +3,12 @@ rellenarEstados();
 var strategyTasks = [] //Array que recoje las tareas seleccionadas para la estrategia
 
 function rellenarEstados() {
-	for (var i = 0; i < $("th").length; i++) {
-		estados[i] = document.querySelectorAll("th")[i].innerText.toLowerCase();
+	if($("th").length >= 1){
+		for (var i = 0; i < $("th").length; i++) {
+			estados[i] = document.querySelectorAll("th")[i].innerText.toLowerCase();
+		}
+		console.log(estados);
 	}
-	console.log(estados);
 }
 
 function drawTable() {
@@ -68,5 +70,6 @@ function tooltip(){
 		$( ".rect, .clone" ).tooltip();
 	} );
 }
-
-document.getElementById("suve").addEventListener('click', saveStrategy);
+if(document.getElementById("suve")){
+	document.getElementById("suve").addEventListener('click', saveStrategy);
+}

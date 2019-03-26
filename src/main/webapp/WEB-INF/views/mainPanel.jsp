@@ -10,7 +10,7 @@
 
 		<c:forEach items="${listaEstrategia}" var="estrategia" varStatus="item">
 				<a href ="estrategia/${estrategia.id}">
-					<div class="estartegiasCard" type="submit" role="button">
+					<div class="estartegiasCard">
 						<c:out value="${estrategia.nombre}" />
 					</div>
 				</a>
