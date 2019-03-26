@@ -120,8 +120,23 @@ public class HomeController {
 
 
 	}
+
+	@RequestMapping(value = "/newEstrategia", method = RequestMethod.GET)
+	public String nuevaEstrategia( Model model,HttpSession session){
+		synchronized (session) {
+			User actualUser = (User) session.getAttribute("userSession");
+			model.addAttribute("estrategia", new Estrategia());
+			model.addAttribute("equipoId", actualUser.getEquipoId());
+		}
+		
+		
+
+		return "formularioEstrategia";
+
+
+	}
 	
-	@RequestMapping(value = "/newEstrategiaForm", method = RequestMethod.GET)
+	@RequestMapping(value = "/newEstrategiaForm", method = RequestMethod.POST)
 	public String nuevaEstrategiaForm(@ModelAttribute("estrategia") Estrategia estrategia, Model model,HttpSession session){
 
 		try {
@@ -132,15 +147,6 @@ public class HomeController {
 		}
 
 		return "plataforma";
-
-
-	}
-	@RequestMapping(value = "/newEstrategia", method = RequestMethod.GET)
-	public String nuevaEstrategia( Model model,HttpSession session){
-		
-		model.addAttribute("estrategia", new Estrategia());
-
-		return "formularioEstrategia";
 
 
 	}
