@@ -64,7 +64,7 @@ public class HomeController {
 				session.setAttribute("userSession", newUser);
 				USessions.add(newUser);	
 				model.addAttribute("greeting","Hola "+ user.getUsername());
-				model.addAttribute("user",user);
+				model.addAttribute("user",newUser);
 				System.out.println(newUser.getNombreEquipo());
 				model.addAttribute("nombreEquipo", " Nombre de equipo : "+newUser.getNombreEquipo());
 				
