@@ -2,11 +2,9 @@ package com.plataformas.app;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
 import java.util.List;
 import java.util.Locale;
 
-import javax.annotation.Generated;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -101,8 +98,8 @@ public class HomeController {
 
 	}
 	@RequestMapping(value = "/newEstrategia", method = RequestMethod.GET)
-	public String nuevaEstrategia(){	
-		
+	public String nuevaEstrategia(Model model){	
+		model.addAttribute("hidde", false);
 		return "plataforma";
 
 
@@ -113,6 +110,7 @@ public class HomeController {
 		try {
 			List<Tarea> tareas = estrategiaService.findTareasByEstrategia(Integer.parseInt(id));
 			model.addAttribute("listaTareas",tareas);
+			model.addAttribute("hidde", false);
 			System.out.println("TAREAS COMPLETE");
 			return "plataforma";
 		}catch (NumberFormatException e) {
@@ -125,8 +123,6 @@ public class HomeController {
 
 	}
 
-
-	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/closeSession", method = RequestMethod.POST)
 	public String SessionDestroy(HttpSession session) {	
 		session.invalidate();
@@ -145,7 +141,7 @@ public class HomeController {
 			tasks[i] = task[i].split(",");
 			System.out.println(tasks[i][0] + " - " + tasks[i][1]);
 		}
-		return "home";
+		return "mainPanel";
 	}
 	
 	

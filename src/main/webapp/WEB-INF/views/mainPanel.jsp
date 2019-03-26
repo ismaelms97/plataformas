@@ -8,8 +8,6 @@
 <body>
 	<div class="parent cartas">
 
-
-
 		<c:forEach items="${listaEstrategia}" var="estrategia" varStatus="item">
 				<a href ="estrategia/${estrategia.id}">
 					<div class="estartegiasCard" type="submit" role="button">
