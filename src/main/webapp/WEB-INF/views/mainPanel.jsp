@@ -17,7 +17,7 @@
 				</a>
 		</c:forEach>
 
-		<a href="newEstrategia">
+		<a data-toggle="modal" data-target="#estrategiaForm">
 			<div class="estartegiasCard">Crear nueva Estrategia</div>
 		</a>
 	</div>

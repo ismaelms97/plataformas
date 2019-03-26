@@ -67,6 +67,8 @@ public class HomeController {
 				model.addAttribute("user",newUser);
 				System.out.println(newUser.getNombreEquipo());
 				model.addAttribute("nombreEquipo", " Nombre de equipo : "+newUser.getNombreEquipo());
+				model.addAttribute("estrategia", new Estrategia());
+				model.addAttribute("equipoId", newUser.getEquipoId());
 				
 				
 				userExist = true;
