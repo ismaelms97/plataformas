@@ -14,7 +14,7 @@
 			</div>
 			<div class="modal-body">
 				<form:form method="POST" action="/newEstrategiaForm"
-					modelAttribute="Estrategia">
+					modelAttribute="estrategia">
 					<table>
 						<tr>
 							<td><form:label path="nombre">Nombre</form:label></td>
@@ -22,6 +22,9 @@
 						</tr>
 						<tr>
 							<td><form:label path="fechaFin">Fecha Fin</form:label></td>
+							<td><form:input path="fechaFin" type="date" /></td>
+						</tr>
+						<tr>
 							<td><form:input path="fechaFin" type="date" /></td>
 						</tr>
 						<tr>

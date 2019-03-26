@@ -80,12 +80,14 @@ primary Key (daily_id,tarea_id),
 CONSTRAINT tarea_id FOREIGN KEY (tarea_id) REFERENCES tarea (id) ON DELETE CASCADE,
 CONSTRAINT daily_id FOREIGN KEY (daily_id) REFERENCES daily (id) ON DELETE CASCADE
 );
+INSERT INTO equipo (name) values ('tester');
 
 INSERT INTO equipo (name) values ('admin');
 INSERT INTO user (username,password,equipo_id) values ('marcos','1234',1);
 INSERT INTO user (username,password,equipo_id) values ('alejandro','1234',1);
 INSERT INTO user (username,password,equipo_id) values ('ismael','1234',1);
 INSERT INTO user (username,password,equipo_id) values ('german','1234',1);
+INSERT INTO user (username,password,equipo_id) values ('pepe','1234',21);
 
 INSERT INTO estrategia (nombre,estado,fechaInicio,fechaFin,equipo_id) values ('estrategia 1','en Pausa','2019-03','2019-04',1);
 INSERT INTO estrategia (nombre,estado,fechaInicio,fechaFin,equipo_id) values ('estrategia 2','trabajando','2019-02','2019-05',1);

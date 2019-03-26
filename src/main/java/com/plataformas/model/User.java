@@ -9,18 +9,28 @@ public class User {
 	private String username;
 	private String password;
 	private int equipoId;
+	private String NombreEquipo;
 	
 	public User() {
 		super();
 	}
-	
-	
+
 	public User(int id, String username, String password ,int equipoId) {
 		super();
 		Id = id;
 		this.username = username;
 		this.password = password;
 		this.equipoId = equipoId;
+	}
+
+	
+	public User(int id, String username, String password ,int equipoId,String NombreEquipo) {
+		super();
+		Id = id;
+		this.username = username;
+		this.password = password;
+		this.equipoId = equipoId;
+		this.NombreEquipo = NombreEquipo;
 	}
 
 
@@ -62,7 +72,17 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
+
+	public String getNombreEquipo() {
+		return NombreEquipo;
+	}
+
+
+	public void setNombreEquipo(String nombreEquipo) {
+		NombreEquipo = nombreEquipo;
+	}
+
 	public static User converFromDataBase(ResultSet rs) throws SQLException {
 		User user = null;
 		if(rs.next()) {
@@ -70,7 +90,8 @@ public class User {
 			String username = rs.getString("username");
 			String password = rs.getString("password");
 			int equipo_id = rs.getInt("equipo_id");
-			user  = new User(id,username,password,equipo_id);
+			String nombreEquipo = rs.getString("name");
+			user  = new User(id,username,password,equipo_id,nombreEquipo);
 
 			
 		}
