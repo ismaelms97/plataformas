@@ -1,25 +1,26 @@
 var estados = [];
 rellenarEstados();
-var strategyTasks = [] //Array que recoje las tareas seleccionadas para la estrategia
-console.log("ESTAMOS AKI");
+
 if(document.getElementById("formContent")){
-	console.log("oculto");
+	
 	document.getElementById("butonDestroy").style.visibility = "hidden";
 	document.getElementById("buttonHome").style.visibility = "hidden";
 		
 	
 }else{
-	console.log("mostrar");
+	
 	document.getElementById("butonDestroy").style.visibility = "visible";
 	document.getElementById("buttonHome").style.visibility = "visible";
 	
 }
 
 function rellenarEstados() {
-	for (var i = 0; i < $("th").length; i++) {
-		estados[i] = document.querySelectorAll("th")[i].innerText.toLowerCase();
+	if($("th").length >= 1){
+		for (var i = 0; i < $("th").length; i++) {
+			estados[i] = document.querySelectorAll("th")[i].innerText.toLowerCase();
+		}
+		console.log(estados);
 	}
-	console.log(estados);
 }
 
 function drawTable() {
@@ -68,7 +69,7 @@ function drawRTC(pos) {
 //	}
 
 
-	document.getElementsByTagName("TR")[pos + 1].children[estadoActual].innerHTML = '<div class="rect" data-posInitial="' + estadoActual + '" data-rtc="' + (pos + 1) + '" title="'+ tasks[pos].resumen +'" data-placement="right">'
+	document.getElementsByTagName("TR")[pos + 1].children[estadoActual].innerHTML = '<div class="rect" data-posInitial="' + estadoActual + '" data-rtc="' + (pos + 1) + '" title="'+ tasks[pos].resumen +'" data-placement="left">'
 	+ '<small class="tamano">'+ tasks[pos].tamano + '</small> '+ tasks[pos].id + ' <small class="complejidad">'+ tasks[pos].complejidad + '</small></div>';
 
 	dragDrop();
@@ -82,11 +83,6 @@ function tooltip(){
 	} );
 }
 
-document.getElementById("suve").addEventListener('click', saveStrategy);
-
-
-
-
-
-
-	
+if(document.getElementById("suve")){
+	document.getElementById("suve").addEventListener('click', saveStrategy);
+}

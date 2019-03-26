@@ -112,6 +112,7 @@ div.button{
 }
 div.disabled{
 	pointer-events:none;
+	cursor:not-allowed;
 	-webkit-filter: opacity(30%);
 	filter: opacity(30%);
 }
@@ -145,7 +146,7 @@ td .ui-selected {
 	padding: 10px 20px;
 	color: white;
 	border-radius: 20px;
-	font: bold 14px "Helvetica Neue", Sans-Serif;
+	font: bold 12px "Times New Roman", Sans-Serif;
 	text-transform: uppercase;
 	box-shadow: 0 0 7px black;
 }
@@ -209,11 +210,10 @@ td .ui-selected {
 	flex-wrap: wrap;
 }
 .cartas > a{
-	margin-right: 2%;
+	margin: 0 2% 1% 0;
 }
 .estartegiasCard{
 	background-color: lime;
-	border: 0px solid black;
 	border-radius: 5%;
 	padding: 20px;
 	width: 187.52px;

@@ -2,6 +2,7 @@ package com.plataformas.model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class User {
 	private int Id;

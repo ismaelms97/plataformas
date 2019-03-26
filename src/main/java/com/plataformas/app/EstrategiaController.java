@@ -72,22 +72,13 @@ public class EstrategiaController {
 		}
 
 	}
-	@GetMapping(value = "/createEstrategia")
-	public String newEstrategia(Model model,HttpSession session) {
-
-		synchronized (session) {
-			User actualUser = (User) session.getAttribute("userSession");
-			model.addAttribute("estrategia", new Estrategia());
-			model.addAttribute("equipoId", actualUser.getEquipoId());
-		}
-
-		return "formularioEstrategia";
-	}
 
 	@PostMapping(value = "/saveEstrategia")
 	public  String saveEstrategia(@ModelAttribute("estrategia") Estrategia estrategia,Model model,HttpSession session) {	
-
+		
 		synchronized (session) {
+			User us = (User) session.getAttribute("userSession");
+			estrategia.setEquipoId(us.getEquipoId());
 			try {
 				estrategiaService.saveEstrategia(estrategia);
 

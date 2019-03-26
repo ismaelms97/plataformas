@@ -157,7 +157,7 @@ function saveStrategy(){
 	strategy.team = 1; //ID del equipo
 	strategy.tasks = [];
 	strategy.tasksModified = [];
-	//Guardar las tareas seleccionadas para la estrategia en el array strategyTasks
+
 	tasks.forEach(task => {
 		if(task.modified){
 			strategy.tasks.push(task);
@@ -186,7 +186,7 @@ function saveStrategy(){
 			team: strategy.team,
 			stratTasks: tasksToString
 		},success: function(data) {
-			console.log("susses")
+			console.log("success")
 
 		}
 	});

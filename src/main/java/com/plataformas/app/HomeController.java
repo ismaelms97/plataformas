@@ -12,17 +12,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.plataformas.Db2.DailyService;
 import com.plataformas.Db2.EstrategiaService;
 import com.plataformas.Db2.UserService;
 import com.plataformas.model.Estrategia;
-import com.plataformas.model.Tarea;
 import com.plataformas.model.User;
 
 
@@ -91,8 +87,10 @@ public class HomeController {
 
 			try {
 				List<Estrategia> listaEstrategias = estrategiaService.findEstrategiaById(newUser.getEquipoId());	
+				
 				model.addAttribute("listaEstrategia",listaEstrategias);
-
+				
+				
 			}catch (Exception e) {
 				System.out.println("listaEstrategia , no se ha encontrado...");
 			}			

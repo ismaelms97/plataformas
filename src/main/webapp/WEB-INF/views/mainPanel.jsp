@@ -4,19 +4,20 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <jsp:include page="header.jsp"></jsp:include>
+<jsp:include page="formularioEstrategia.jsp"></jsp:include>
 
 <body>
 	<div class="parent cartas">
 
 		<c:forEach items="${listaEstrategia}" var="estrategia" varStatus="item">
-				<a href ="estrategia/${estrategia.id}">
-					<div class="estartegiasCard" type="submit" role="button">
+				<a href ="/estrategia/findEstrategia/${estrategia.id}">
+					<div class="estartegiasCard">
 						<c:out value="${estrategia.nombre}" />
 					</div>
 				</a>
 		</c:forEach>
 
-		<a href="newEstrategia">
+		<a data-toggle="modal" data-target="#estrategiaForm">
 			<div class="estartegiasCard">Crear nueva Estrategia</div>
 		</a>
 	</div>
