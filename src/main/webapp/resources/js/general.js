@@ -1,6 +1,5 @@
 var estados = [];
 rellenarEstados();
-var strategyTasks = [] //Array que recoje las tareas seleccionadas para la estrategia
 
 if(document.getElementById("formContent")){
 	
@@ -70,7 +69,7 @@ function drawRTC(pos) {
 //	}
 
 
-	document.getElementsByTagName("TR")[pos + 1].children[estadoActual].innerHTML = '<div class="rect" data-posInitial="' + estadoActual + '" data-rtc="' + (pos + 1) + '" title="'+ tasks[pos].resumen +'" data-placement="right">'
+	document.getElementsByTagName("TR")[pos + 1].children[estadoActual].innerHTML = '<div class="rect" data-posInitial="' + estadoActual + '" data-rtc="' + (pos + 1) + '" title="'+ tasks[pos].resumen +'" data-placement="left">'
 	+ '<small class="tamano">'+ tasks[pos].tamano + '</small> '+ tasks[pos].id + ' <small class="complejidad">'+ tasks[pos].complejidad + '</small></div>';
 
 	dragDrop();

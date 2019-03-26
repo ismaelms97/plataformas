@@ -10,8 +10,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.plataformas.model.Equipo;
 import com.plataformas.model.Estrategia;
 import com.plataformas.model.Tarea;
+import com.plataformas.model.User;
 /*
  *  ESTA CLASE FALTA ACABARLA
  */
@@ -114,7 +116,7 @@ public class EstrategiaService {
 			return Estrategia.converFromDatabase(rs, estrategiaList);
 
 		} catch (SQLException e) {
-			System.err.println("SQL Exeption  findEstrategiaById:  code -> "+e.getErrorCode());
+			System.err.println("SQL Exeption  findEstrategiaByTeam:  code -> "+e.getErrorCode());
 			System.err.println("more inf : "+e.getMessage()+" reason  -> "+e.getCause());
 			return estrategiaList;
 
@@ -124,5 +126,4 @@ public class EstrategiaService {
 		}
 
 	}
-
 }

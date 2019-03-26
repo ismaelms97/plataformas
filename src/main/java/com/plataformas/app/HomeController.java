@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.plataformas.Db2.DailyService;
 import com.plataformas.Db2.EstrategiaService;
 import com.plataformas.Db2.UserService;
+import com.plataformas.model.Equipo;
 import com.plataformas.model.Estrategia;
 import com.plataformas.model.Tarea;
 import com.plataformas.model.User;
@@ -81,8 +82,10 @@ public class HomeController {
 
 			try {
 				List<Estrategia> listaEstrategias = estrategiaService.findEstrategiaById(newUser.getEquipoId());	
+				
 				model.addAttribute("listaEstrategia",listaEstrategias);
-
+				
+				
 			}catch (Exception e) {
 				System.out.println("listaEstrategia , no se ha encontrado...");
 			}			
