@@ -39,12 +39,14 @@
 
 
 <script>
+$(document).ready(function(){
+	
 $('#estrategiaForm').on('shown.bs.modal', function () {
+	console.log("Abierto")
 	/*   $('#estrategiaFormInputDate').attr('min' , new Date().getFullYear() + "-" +  new Date().getMonth() + "-" + new Date().getDate()); */
-	  $('#estrategiaFormInputDate').change(function(){
-		  var hoy = new Date().getTime();
-		  hoy.setHours(0,0,0,0);
-		  var fechaIntroducida = $("#estrategiaFormInputDate").val();
+	  $('#estrategiaFormInputDate').change(function(e){
+		  var hoy = new Date().setHours(0,0,0,0);
+		  var fechaIntroducida = e.target.value;
 		  var fecha = new Date(fechaIntroducida).getTime();
 		  console.log(fecha);
 		  
@@ -55,4 +57,5 @@ $('#estrategiaForm').on('shown.bs.modal', function () {
 	  })
 	
 	})
+})
 </script>
