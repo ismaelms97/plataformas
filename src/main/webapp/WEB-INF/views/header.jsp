@@ -45,7 +45,7 @@
 	<nav class="my-2 my-md-0 mr-md-3"></nav>
 	
 	<form:form method="POST" action="/closeSession">		
-		<button id="butonDestroy" type="submit"	class="btn btn-outline-primary">Cerrar Sessión</button>
+		<button id="butonDestroy" type="submit"	class="btn btn-outline-primary">Cerrar Sessiï¿½n</button>
 	</form:form>
 	
 </div>
