@@ -72,8 +72,9 @@ function dragDrop(){
 						}else{
 							tasks[this.getAttribute("data-rtc") -1].modified = true;
 							tasks[this.getAttribute("data-rtc") -1].endState = this.parentElement.classList[0].replace(/-/g, " ");
+							
 						}
-						
+						habilitarBotonEnvio();
 						console.log(tasks[this.getAttribute("data-rtc") -1]);
 						console.log(tasks[this.getAttribute("data-rtc") -1].endState);
 					},
@@ -190,4 +191,19 @@ function saveStrategy(){
 
 		}
 	});
+}
+
+function habilitarBotonEnvio(){
+	var contador = 0;
+	for(var i = 0; i < tasks.length; i++){
+		if(tasks[i].modified)
+			contador ++;
+	}
+	
+	if(contador >= 1){
+		$("div.button").removeClass("disabled");
+	}else{
+		$("div.button").addClass("disabled");
+	}
+
 }
