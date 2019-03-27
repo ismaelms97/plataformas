@@ -163,7 +163,6 @@ function saveStrategy(){
 	tasks.forEach(task => {
 		if(task.modified){
 			strategy.tasks.push(task);
-			strategy.tasks.push(task);
 		}
 	});
 

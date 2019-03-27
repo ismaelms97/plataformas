@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.plataformas.Db2.DailyService;
 import com.plataformas.Db2.EstrategiaService;
@@ -114,9 +115,9 @@ public class HomeController {
 	}
 	
 	@GetMapping(value = "/saveStrategy")
-	public String saveStrategy(Model model,String stratTasks ) {	
+	public @ResponseBody String saveStrategy(Model model, String name, String startDate, String endDate, String team, String stratTasks ) {	
 		
-		
+	
 		
 		String[][] tasks = new String[stratTasks.split("qwer").length][4];
 		
@@ -125,7 +126,6 @@ public class HomeController {
 			tasks[i] = task[i].split(",");
 			System.out.println(tasks[i][0] + " - " + tasks[i][1]);
 		}
-		
 		return "mainPanel";
 		
 	}
