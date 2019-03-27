@@ -25,9 +25,9 @@
 							<td><form:input path="fechaFin" type="date" class="form-control" id="estrategiaFormInputDate"/></td>
 						</tr>
 						<tr>
-						<form:input path="fechaInicio" class="form-control" id="estrategiaFormInputDateInit" hidden/>
-						<form:input path="estado" class="form-control" id="estrategiaFormInputEstado" hidden/>
-						<form:input path="equipoId" class="form-control" id="estrategiaFormInputEquipoId" hidden/>
+						<form:input path="fechaInicio" class="form-control" id="estrategiaFormInputDateInit" type="hidden"/>
+						<form:input path="estado" class="form-control" id="estrategiaFormInputEstado" type="hidden"/>
+						<form:input path="equipoId" class="form-control" id="estrategiaFormInputEquipoId" type="hidden"/>
 							<td><input type="submit" value="Crear" class="btn btn-primary" id="crearEstrategia" disabled/></td>
 						</tr>
 					</table>
@@ -45,7 +45,6 @@
 $(document).ready(function(){
 	
 $('#estrategiaForm').on('shown.bs.modal', function () {
-	/*   $('#estrategiaFormInputDate').attr('min' , new Date().getFullYear() + "-" +  new Date().getMonth() + "-" + new Date().getDate()); */
 	  $('#estrategiaFormInputDate').change(function(e){
 		  var hoy = new Date().setHours(0,0,0,0);
 		  var fechaIntroducida = e.target.value;
@@ -58,9 +57,13 @@ $('#estrategiaForm').on('shown.bs.modal', function () {
 			  $("#crearEstrategia").prop( "disabled", true );
 		  }
 	  })
-		
-	 $("#estrategiaFormInputDateInit")
 	  
 	})
+	
+	$("#estrategiaFormInputDateInit").val(new Date().getFullYear() + "-" +  new Date().getMonth() + "-" + new Date().getDate());
+	$("#estrategiaFormInputEstado").val("En Curso");
+	$("#estrategiaFormInputEquipoId").val("1");
+	
+	
 })
 </script>
