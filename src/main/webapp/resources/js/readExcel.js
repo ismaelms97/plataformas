@@ -70,6 +70,7 @@ var process_wb = (function () {
 				task.prioridad = JSON.parse(output).Tareas[i][prioPos]
 				task.resumen = JSON.parse(output).Tareas[i][resuPos]
 				task.estado = JSON.parse(output).Tareas[i][statusPos]
+				task.estadoFinal = "";
 				
 				// Hacemos comprovaciones
 				if(JSON.parse(output).Tareas[i][complejPos] != null){
