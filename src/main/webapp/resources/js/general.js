@@ -83,6 +83,6 @@ function tooltip(){
 	} );
 }
 
-if(document.getElementById("suve")){
-	document.getElementById("suve").addEventListener('click', saveStrategy);
+if(document.getElementById("save")){
+	document.getElementById("save").addEventListener('click', saveStrategy);
 }

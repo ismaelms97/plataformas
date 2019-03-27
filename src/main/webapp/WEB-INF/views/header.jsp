@@ -2,6 +2,8 @@
 <html>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <head>
 <!-- <link rel="shortcut icon" type="image/x-icon"
 	href="/resources/img/favicon.png" /> -->
@@ -46,7 +48,7 @@
 	<nav class="my-2 my-md-0 mr-md-3"></nav>
 	
 	<form:form method="POST" action="/closeSession">		
-		<button id="butonDestroy" type="submit"	class="btn btn-outline-primary">Cerrar Sessi�n</button>
+		<button id="butonDestroy" type="submit"	class="btn btn-outline-primary">Cerrar Sesión</button>
 	</form:form>
 	
 </div>
