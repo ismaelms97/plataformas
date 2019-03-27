@@ -13,7 +13,7 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<form:form method="POST" action="/estrategia/saveEstrategia"
+				<form:form method="POST" action="/estrategia/pushEstrategia"
 					modelAttribute="estrategia">
 					<table>
 						<tr>

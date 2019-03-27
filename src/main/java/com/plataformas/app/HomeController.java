@@ -113,28 +113,22 @@ public class HomeController {
 
 	}
 	
-//	@GetMapping(value = "/saveStrategy")
-//	public @ResponseBody String saveStrategy(Model model, String name, String startDate, String endDate, String team, String stratTasks ) {	
-//		
-//		
-//		try {
-//			Estrategia estrategia = new Estrategia(name,"En curso",startDate,endDate,Integer.parseInt(team));
-//			estrategiaService.saveEstrategia(estrategia);
-//			
-//		}catch (Exception e) {
-//			System.out.println("error al guardar");
-//		}
-//		
-//		String[][] tasks = new String[stratTasks.split("qwer").length][4];
-//		
-//		for(int i = 0; i < tasks.length; i++) {
-//			String[] task = stratTasks.split("qwer");
-//			tasks[i] = task[i].split(",");
-//			System.out.println(tasks[i][0] + " - " + tasks[i][1]);
-//		}
-//		return "mainPanel";
-//		
-//	}
+	@GetMapping(value = "/saveStrategy")
+	public String saveStrategy(Model model,String stratTasks ) {	
+		
+		
+		
+		String[][] tasks = new String[stratTasks.split("qwer").length][4];
+		
+		for(int i = 0; i < tasks.length; i++) {
+			String[] task = stratTasks.split("qwer");
+			tasks[i] = task[i].split(",");
+			System.out.println(tasks[i][0] + " - " + tasks[i][1]);
+		}
+		
+		return "mainPanel";
+		
+	}
 	
 	
 	@GetMapping(value = "/excel")

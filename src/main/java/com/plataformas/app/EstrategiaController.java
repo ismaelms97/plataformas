@@ -43,7 +43,9 @@ public class EstrategiaController {
 				List<Estrategia> listaEstrategias = estrategiaService.findEstrategiaById(actualUser.getEquipoId());	
 				model.addAttribute("listaEstrategia",listaEstrategias);
 				model.addAttribute("estrategia", new Estrategia());
-				
+				if( session.getAttribute("newEstrategia") != null) {
+					session.removeAttribute("newEstrategia");
+				}
 				model.addAttribute("nombreEquipo", " Nombre de equipo : "+actualUser.getNombreEquipo());
 
 				model.addAttribute("greeting","Hola "+ actualUser.getUsername());
@@ -77,22 +79,45 @@ public class EstrategiaController {
 		}
 
 	}
-
-	@PostMapping(value = "/saveEstrategia")
-	public  String saveEstrategia(@ModelAttribute("estrategia") Estrategia estrategia,Model model,HttpSession session) {	
+	@PostMapping(value = "/pushEstrategia")
+	public  String pushEstrategia(@ModelAttribute("estrategia") Estrategia estrategia,Model model,HttpSession session) {	
 		
 		synchronized (session) {
+			
 			User us = (User) session.getAttribute("userSession");
 			estrategia.setEquipoId(us.getEquipoId());
+			session.setAttribute("newEstrategia", estrategia);
+			model.addAttribute("tarea", new Tarea());
+			
+
+			return "plataforma";
+		}
+
+	}
+
+	@PostMapping(value = "/saveEstrategia")
+	public  String saveEstrategia(@ModelAttribute("tarea") Tarea tarea,Model model,HttpSession session) {	
+		
+		synchronized (session) {
+			Estrategia newEstrategia = (Estrategia) session.getAttribute("newEstrategia");
+			
+			
 			try {
-				estrategiaService.saveEstrategia(estrategia);
+				
+				estrategiaService.saveEstrategia(newEstrategia);
+				/*
+				 * Aqui tiene que haver una List<Tarea> tareas
+				 * estrategiaService.saveTarea(tareas);
+				 */
+			
+				
 			
 
 			}catch (Exception e) {
 				System.out.println("error al guardar");
 			}
 
-			return "plataforma";
+			return "redirect:/estrategia/panelControl";
 		}
 
 	}
