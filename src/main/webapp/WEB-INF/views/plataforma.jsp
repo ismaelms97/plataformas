@@ -9,8 +9,9 @@
 	<h1 class="mainTitle">Estrategia</h1>
 
 	<!-- <div id="suve">Suve</div> -->
-
-	<div class="button disabled">Guardar</div>
+	<form:form method="POST" action="/estrategia/saveEstrategia">
+		<div class="button disabled" id="save">Guardar</div>
+	</form:form>
 	
 	<div class="table-responsive table-bordered">
 		<table class="table">

@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page session="false"%>
@@ -17,7 +19,7 @@
 							placeholder="Introduce Usuario" path="username" />
 					</div>
 					<div class="form-group">
-						<form:input type="password" cssClass="form-control" placeholder="Introduce Contraseña" path="password" id="passwd" />
+						<form:input type="password" cssClass="form-control" placeholder="Introduce ContraseÃ±a" path="password" id="passwd" />
 						<i class="fa fa-fw fa-eye" id="togglePasswd"></i>
 					</div>
 					<button type="submit" id="loginBtn" class="btn-primary form-control">Login</button>

@@ -2,6 +2,8 @@
 <html>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <head>
 <!-- <link rel="shortcut icon" type="image/x-icon"
 	href="/resources/img/favicon.png" /> -->
@@ -38,7 +40,7 @@
 	class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
 	<h5 id="greeting" class="my-0 mr-md-auto font-weight-normal">${greeting}  ${nombreEquipo} </h5>
 
-	<form method="GET" action="/panelControl">
+	<form method="GET" action="/estrategia/panelControl">
 	<button id="buttonHome" type="submit"
 			class="btn btn-outline-secondary"><i class="fa fa-home"></i></button>
 	</form>
@@ -46,7 +48,7 @@
 	<nav class="my-2 my-md-0 mr-md-3"></nav>
 	
 	<form:form method="POST" action="/closeSession">		
-		<button id="butonDestroy" type="submit"	class="btn btn-outline-primary">Cerrar Sessi�n</button>
+		<button id="butonDestroy" type="submit"	class="btn btn-outline-primary">Cerrar Sesión</button>
 	</form:form>
 	
 </div>

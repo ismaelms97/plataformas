@@ -10,7 +10,7 @@
 	<div class="parent cartas">
 
 		<c:forEach items="${listaEstrategia}" var="estrategia" varStatus="item">
-				<a href ="estrategia/${estrategia.id}">
+				<a href ="/estrategia/findEstrategia/${estrategia.id}">
 					<div class="estartegiasCard">
 						<c:out value="${estrategia.nombre}" />
 					</div>

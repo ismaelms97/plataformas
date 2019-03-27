@@ -184,32 +184,3 @@ document.getElementById("xlf").addEventListener('change', () => {
 
 	//console.log(truncated)
 });
-
-//function loadScripts(urls, callback) {
-//let scriptsLoaded = 0;
-
-//for (var i = 0; i < urls.length; i++) {
-//var script = document.createElement("script");
-//script.type = "text/javascript";
-
-//if (script.readyState) { //IE
-//script.onreadystatechange = function () {
-//if (script.readyState == "loaded" ||
-//script.readyState == "complete") {
-//script.onreadystatechange = null;
-//scriptsLoaded++;
-//if (scriptsLoaded == urls.length)
-//callback();
-//}
-//};
-//} else { //Others
-//script.onload = function () {
-//scriptsLoaded++;
-//if (scriptsLoaded == urls.length)
-//callback();
-//};
-//}
-//script.src = urls[i];
-//document.getElementsByTagName("head")[0].appendChild(script);
-//}
-//}
