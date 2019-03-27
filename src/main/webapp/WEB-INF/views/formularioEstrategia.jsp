@@ -18,16 +18,16 @@
 					<table>
 						<tr>
 							<td><form:label path="nombre" for="estrategiaFormInputName">Nombre</form:label></td>
-							<td><form:input path="nombre" class="form-control" placeholder="Introduce Nombre Estrategia" id="estrategiaFormInputName"/></td>
+							<td><form:input path="nombre" cssClass="form-control" placeholder="Introduce Nombre Estrategia" id="estrategiaFormInputName"/></td>
 						</tr>
 						<tr>
 							<td><form:label path="fechaFin" for="estrategiaFormInputDate">Fecha Fin</form:label></td>
-							<td><form:input path="fechaFin" type="date" class="form-control" id="estrategiaFormInputDate"/></td>
+							<td><form:input path="fechaFin" type="date" cssClass="form-control" id="estrategiaFormInputDate"/></td>
 						</tr>
 						<tr>
-						<form:input path="fechaInicio" class="form-control" id="estrategiaFormInputDateInit" hidden/>
-						<form:input path="estado" class="form-control" id="estrategiaFormInputEstado" hidden/>
-						<form:input path="equipoId" class="form-control" id="estrategiaFormInputEquipoId" hidden/>
+						<form:input type="hidden" path="fechaInicio" cssClass="form-control" id="estrategiaFormInputDateInit" value="" />
+						<form:input type="hidden" path="estado" cssClass="form-control" id="estrategiaFormInputEstado" value="En curso"/>
+						<form:input path="equipoId" cssClass="form-control" id="estrategiaFormInputEquipoId" hidden/>
 							<td><input type="submit" value="Crear" class="btn btn-primary" id="crearEstrategia" disabled/></td>
 						</tr>
 					</table>
@@ -43,8 +43,10 @@
 
 <script>
 $(document).ready(function(){
-	
+	;
 $('#estrategiaForm').on('shown.bs.modal', function () {
+	
+	$('#estrategiaFormInputDate').val(new Date().getDate() + "/" + new Date().getMonth() + "/" + new Date().getFullYear());
 	/*   $('#estrategiaFormInputDate').attr('min' , new Date().getFullYear() + "-" +  new Date().getMonth() + "-" + new Date().getDate()); */
 	  $('#estrategiaFormInputDate').change(function(e){
 		  var hoy = new Date().setHours(0,0,0,0);
