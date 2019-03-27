@@ -70,7 +70,7 @@ function dragDrop(){
 
 							if(estados.indexOf(this.parentElement.classList[0].replace(/-/g, " ")) >= this.getAttribute("data-posInitial")){
 								tasks[this.getAttribute("data-rtc") -1].modified = true;
-								tasks[this.getAttribute("data-rtc") -1].endState = this.parentElement.classList[0].replace(/-/g, " ");
+								tasks[this.getAttribute("data-rtc") -1].estadoFinal = this.parentElement.classList[0].replace(/-/g, " ");
 							}
 						}
 						
@@ -152,11 +152,6 @@ function dragDrop(){
 function saveStrategy(){
 	console.log("Use")
 	strategy = new Object();
-	strategy.name = "name";
-	strategy.startDate = new Date().getDate() + "/" + new Date().getMonth() + "/" + new Date().getFullYear();
-	console.log(new Date().getDate() + "/" + new Date().getMonth() + "/" + new Date().getFullYear());
-	strategy.endDate = new Date().getDate() + "/" + new Date().getMonth() + "/" + new Date().getFullYear();
-	strategy.team = 1; //ID del equipo
 	strategy.tasks = [];
 	strategy.tasksModified = [];
 
@@ -170,7 +165,9 @@ function saveStrategy(){
 
 	strategy.tasks.forEach(task => {
 		tasksToString += "RTC:" + task.id +",";
-		tasksToString += "Estado:" + task.estado +"qwer";
+		tasksToString += "Tipo:" + task.tipo +",";
+		tasksToString += "Estado:" + task.estado +",";
+		tasksToString += "EstadoFinal:" + task.estadoFinal +"qwer";
 	});
 
 	tasksToString = tasksToString.substring(0, tasksToString.length-4);
@@ -181,10 +178,6 @@ function saveStrategy(){
 		type: "GET",
 		url: "/saveStrategy",
 		data: {
-			name: strategy.name,
-			startDate: strategy.startDate, 
-			endDate: strategy.endDate, 
-			team: strategy.team,
 			stratTasks: tasksToString
 		},success: function(data) {
 			console.log("success")
