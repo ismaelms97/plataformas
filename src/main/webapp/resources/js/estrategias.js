@@ -6,8 +6,7 @@ function dragDrop(){
 		var selected = $([]), offset = {
 			top : 0,
 			left : 0
-		};
-//		var startPosition = 0;
+		};		
 
 		$(".rect").draggable(
 				{
@@ -17,9 +16,8 @@ function dragDrop(){
 					opacity : 0.7,
 					helper : "clone",
 					start : function(event, ui) {
-//						startPosition = ui.position.left;
 						$(".ui-draggable-dragging").removeClass("noLeft");
-
+						console.log("Start At = " + this.getAttribute("data-posInitial"));
 						// Descomentar esto para seleccionar
 						// if ($(this).hasClass("ui-selected")){
 						// selected = $(".ui-selected").each(function()
@@ -37,10 +35,9 @@ function dragDrop(){
 					},
 
 					drag: function( event, ui ) {
-
-//						if(startPosition > ui.position.left){
-//						ui.position.left = startPosition;
-//						}
+						
+						
+					    
 						// Descomentar esto para seleccionar
 						// var dt = ui.position.top - offset.top, dl =
 						// ui.position.left
@@ -64,19 +61,21 @@ function dragDrop(){
 
 					stop : function(event, ui) {
 						document.getElementsByClassName("rect")[(this.getAttribute("data-rtc") - 1)].style.display = "";
-							
+
 						if(this.parentElement.classList.contains(estados[this.getAttribute("data-posInitial")].replace(/\s/g, "-")) && tasks[this.getAttribute("data-rtc") -1].modified){
-							
+
 							tasks[this.getAttribute("data-rtc") -1].modified = false;
-							
+
 						}else{
-							tasks[this.getAttribute("data-rtc") -1].modified = true;
-							tasks[this.getAttribute("data-rtc") -1].endState = this.parentElement.classList[0].replace(/-/g, " ");
-							
+
+							if(estados.indexOf(this.parentElement.classList[0].replace(/-/g, " ")) >= this.getAttribute("data-posInitial")){
+								tasks[this.getAttribute("data-rtc") -1].modified = true;
+								tasks[this.getAttribute("data-rtc") -1].endState = this.parentElement.classList[0].replace(/-/g, " ");
+							}
 						}
+						
 						habilitarBotonEnvio();
 						console.log(tasks[this.getAttribute("data-rtc") -1]);
-						console.log(tasks[this.getAttribute("data-rtc") -1].endState);
 					},
 				});
 
@@ -103,7 +102,7 @@ function dragDrop(){
 							// SI al colocar el rtc en su posicion inicial, cambiale el color, y su estado de modificado
 							if(tasks[ui.draggable[0].getAttribute("data-rtc") - 1].modified){
 								$(ui.draggable[0]).removeClass("orange");
-								
+
 							}
 						}
 
@@ -112,9 +111,11 @@ function dragDrop(){
 
 							document.getElementsByClassName("clone")[(ui.draggable[0].getAttribute("data-rtc") - 1)].style.display = "";
 						}
-//						if(ui.draggable[0].offsetLeft > startPosition)
-						$(ui.draggable[0]).addClass("noLeft").appendTo(event.target);
-
+												
+						$(ui.draggable[0]).addClass("noLeft");
+						if(estados.indexOf(event.target.classList[0].replace(/-/g, " ")) >= ui.draggable[0].getAttribute("data-posInitial")){
+							$(ui.draggable[0]).appendTo(event.target);
+						}						
 					}
 				});
 
@@ -149,7 +150,7 @@ function dragDrop(){
 }
 
 function saveStrategy(){
-	console.log("USe")
+	console.log("Use")
 	strategy = new Object();
 	strategy.name = "name";
 	strategy.startDate = new Date().getDate() + "/" + new Date().getMonth() + "/" + new Date().getFullYear();
@@ -172,7 +173,7 @@ function saveStrategy(){
 		tasksToString += "RTC:" + task.id +",";
 		tasksToString += "Estado:" + task.estado +"qwer";
 	});
-	
+
 	tasksToString = tasksToString.substring(0, tasksToString.length-4);
 	console.log(tasksToString)
 
@@ -199,7 +200,7 @@ function habilitarBotonEnvio(){
 		if(tasks[i].modified)
 			contador ++;
 	}
-	
+
 	if(contador >= 1){
 		$("div.button").removeClass("disabled");
 	}else{
