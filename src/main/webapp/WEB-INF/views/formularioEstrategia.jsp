@@ -15,18 +15,19 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<form:form method="POST" action="/newEstrategiaForm"
+				<form:form method="POST" action="/estrategia/saveEstrategia"
 					modelAttribute="estrategia">
 					<table>
 						<tr>
 							<td><form:label path="nombre" for="estrategiaFormInputName">Nombre</form:label></td>
-							<td><form:input path="nombre" class="form-control" placeholder="Introduce Nombre Estrategia" id="estrategiaFormInputName"/></td>
+							<td><form:input path="nombre" cssClass="form-control" placeholder="Introduce Nombre Estrategia" id="estrategiaFormInputName"/></td>
 						</tr>
 						<tr>
 							<td><form:label path="fechaFin" for="estrategiaFormInputDate">Fecha Fin</form:label></td>
-							<td><form:input path="fechaFin" type="date" class="form-control" id="estrategiaFormInputDate"/></td>
+							<td><form:input path="fechaFin" type="date" cssClass="form-control" id="estrategiaFormInputDate"/></td>
 						</tr>
 						<tr>
+
 						<form:input path="fechaInicio" class="form-control" id="estrategiaFormInputDateInit" type="hidden"/>
 						<form:input path="estado" class="form-control" id="estrategiaFormInputEstado" type="hidden"/>
 						<form:input path="equipoId" class="form-control" id="estrategiaFormInputEquipoId" type="hidden"/>
@@ -45,7 +46,7 @@
 
 <script>
 $(document).ready(function(){
-	
+	;
 $('#estrategiaForm').on('shown.bs.modal', function () {
 	  $('#estrategiaFormInputDate').change(function(e){
 		  var hoy = new Date().setHours(0,0,0,0);

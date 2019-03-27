@@ -111,7 +111,8 @@ public class DailyService {
 			Connection con = DriverManager.getConnection(url,dbUsername,dbPassword);
 			con.setAutoCommit(false);
 			Statement  stmt = con.createStatement(); 
-			ResultSet rs = stmt.executeQuery("INSERT INTO estrategia (fecha,daily_id) values ('"+daily.getFecha()+"',"+daily.getDailyId()+")"); 
+			int rs = stmt.executeUpdate("INSERT INTO estrategia (fecha,daily_id) values ('"+daily.getFecha()+"',"+daily.getDailyId()+")"); 
+			con.commit();
 
 		}catch (SQLException e) {
 			System.out.println("SQL Exeption saveDaily:  code -> "+e.getErrorCode() +" more inf : "+e.getMessage());
