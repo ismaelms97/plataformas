@@ -42,6 +42,11 @@ public class EstrategiaController {
 				User actualUser = (User) session.getAttribute("userSession");
 				List<Estrategia> listaEstrategias = estrategiaService.findEstrategiaById(actualUser.getEquipoId());	
 				model.addAttribute("listaEstrategia",listaEstrategias);
+				model.addAttribute("estrategia", new Estrategia());
+				
+				model.addAttribute("nombreEquipo", " Nombre de equipo : "+actualUser.getNombreEquipo());
+
+				model.addAttribute("greeting","Hola "+ actualUser.getUsername());
 				return "mainPanel";
 
 			}catch (Exception e) {
@@ -81,6 +86,7 @@ public class EstrategiaController {
 			estrategia.setEquipoId(us.getEquipoId());
 			try {
 				estrategiaService.saveEstrategia(estrategia);
+			
 
 			}catch (Exception e) {
 				System.out.println("error al guardar");
