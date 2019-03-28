@@ -20,6 +20,9 @@
 				</button>
 			</div>
 			<div class="modal-body">
+			<h6 class="detailsSubtitle">Resumen</h6>
+				<div id="detallesResumen"></div>
+				<hr>
 				<h6 class="detailsSubtitle">Tamaño</h6>
 				<div id="detallesTamano"></div>
 				<hr>

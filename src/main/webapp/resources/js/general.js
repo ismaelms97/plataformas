@@ -90,6 +90,7 @@ function verDetallesRTC(i){
 	$("#detallesRTC").modal("show");
 	$('#detallesRTC').on('shown.bs.modal', function() {
 		document.getElementById("detallesTitulo").innerHTML = "Detalles RTC: <strong style='font-size:20px;'>#"+ tasks[i].id + "</strong>";
+		document.getElementById("detallesResumen").innerHTML = tasks[i].resumen;
 		document.getElementById("detallesTamano").innerHTML = tasks[i].tamano;
 		document.getElementById("detallesComplejidad").innerHTML = tasks[i].complejidad;
 		document.getElementById("detallesPropietario").innerHTML = tasks[i].propiedad;
