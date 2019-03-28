@@ -3,10 +3,6 @@ function dragDrop(){
 	// Con este codigo conseguimos que se mueva cada tarea unicamente en su eje x, y
 	// a su vez que cuando los dejes en el sitio, cambien de color
 	$(function() {
-		var selected = $([]), offset = {
-			top : 0,
-			left : 0
-		};		
 
 		$(".rect").draggable(
 				{
@@ -17,7 +13,7 @@ function dragDrop(){
 					helper : "clone",
 					start : function(event, ui) {
 						$(".ui-draggable-dragging").removeClass("noLeft");
-						console.log("Start At = " + this.getAttribute("data-posInitial"));
+
 						// Descomentar esto para seleccionar
 						// if ($(this).hasClass("ui-selected")){
 						// selected = $(".ui-selected").each(function()
@@ -35,9 +31,9 @@ function dragDrop(){
 					},
 
 					drag: function( event, ui ) {
-						
-						
-					    
+
+
+
 						// Descomentar esto para seleccionar
 						// var dt = ui.position.top - offset.top, dl =
 						// ui.position.left
@@ -73,7 +69,7 @@ function dragDrop(){
 								tasks[this.getAttribute("data-rtc") -1].estadoFinal = this.parentElement.classList[0].replace(/-/g, " ");
 							}
 						}
-						
+
 						habilitarBotonEnvio();
 						console.log(tasks[this.getAttribute("data-rtc") -1]);
 					},
@@ -99,28 +95,32 @@ function dragDrop(){
 						if (event.target.children.length == 1) {
 
 							event.target.children[0].style.display = "none";
-							// SI al colocar el rtc en su posicion inicial, cambiale el color, y su estado de modificado
+
+							// Al colocar el rtc en su posicion inicial, cambiale el color, y su estado de modificado
 							if(tasks[ui.draggable[0].getAttribute("data-rtc") - 1].modified){
 								$(ui.draggable[0]).removeClass("orange");
 
 							}
 						}
 
-						if (document.getElementsByClassName("clone")[(ui.draggable[0].getAttribute("data-rtc") - 1)].style.display == "none" 
-							&& !(event.target.children.length >= 1)) {
-
-							document.getElementsByClassName("clone")[(ui.draggable[0].getAttribute("data-rtc") - 1)].style.display = "";
-						}
-												
 						$(ui.draggable[0]).addClass("noLeft");
 						if(estados.indexOf(event.target.classList[0].replace(/-/g, " ")) >= ui.draggable[0].getAttribute("data-posInitial")){
+
+							if (document.getElementsByClassName("clone")[(ui.draggable[0].getAttribute("data-rtc") - 1)].style.display == "none" 
+								&& !(event.target.children.length >= 1)) {
+
+								document.getElementsByClassName("clone")[(ui.draggable[0].getAttribute("data-rtc") - 1)].style.display = "";
+
+							}
+
 							$(ui.draggable[0]).appendTo(event.target);
-						}						
+						}					
 					}
+
 				});
 
 		// SI se quiere seleccionar, solo hace falta desbloquear el siguiente
-		// codigo, aunque si es así, mirar la seleccion multiple
+		// codigo, aunque si se quiere seleccionar, buscar información sobre  la seleccion multiple
 
 		// $(".rect").selectable()
 

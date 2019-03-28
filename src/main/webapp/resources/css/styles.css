@@ -63,6 +63,7 @@ body{
 .clone {
 	position: relative;
 	background-color: #dbdbdb;
+	width: 167px;
 	padding: 20px 50px;
 	border: 2px solid darkgrey;
 	border-radius: 5%;
