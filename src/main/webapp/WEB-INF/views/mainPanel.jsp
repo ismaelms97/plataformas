@@ -6,11 +6,16 @@
 <jsp:include page="header.jsp"></jsp:include>
 <jsp:include page="formularioEstrategia.jsp"></jsp:include>
 
+<script src="/resources/js/mainPanel.js"></script>
 
 <body>
 	<div class="parent cartas">
 
 		<c:forEach items="${listaEstrategia}" var="estrategia" varStatus="item">
+				<%-- <script>
+					var estrategia = new Object();
+					estrategia.id = "<%=estrategia.id%>";
+				</script> --%>
 				<a href ="/estrategia/findEstrategia/${estrategia.id}">
 					<div class="estartegiasCard">
 						<c:out value="${estrategia.nombre}" />

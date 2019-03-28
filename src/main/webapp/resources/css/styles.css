@@ -227,3 +227,12 @@ td .ui-selected {
 .estartegiasCard:hover{
 	filter:grayscale(30%);
 }
+
+/*########### MODAL ###########*/
+.modal-info{
+	background-color: #95e3fd;
+}
+
+.detailsSubtitle{
+	font-size:18px;
+}
