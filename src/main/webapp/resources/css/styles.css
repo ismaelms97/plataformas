@@ -138,13 +138,13 @@ td .ui-selected {
 
 /*########### TOOLTIP ###########*/
 .tooltip-inner, .arrow {
-	background: blue;
+	background: #97d2e6;
 	border: 2px solid white;
 }
 
 .tooltip-inner {
 	padding: 10px 20px;
-	color: white;
+	color: black;
 	border-radius: 20px;
 	font: bold 12px "Times New Roman", Sans-Serif;
 	text-transform: uppercase;

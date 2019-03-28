@@ -1,6 +1,6 @@
 
 var tasks = []
-var idPos, typePos, prioPos, resuPos, statusPos, sizePos, complejPos;
+var idPos, typePos, prioPos, resuPos, statusPos, sizePos, complejPos, propPos, planPos;
 var X = XLSX;
 var XW = {
 		/* worker message */
@@ -58,6 +58,10 @@ var process_wb = (function () {
 					sizePos = i;
 				}  else if (JSON.parse(output).Tareas[0][i].toLowerCase() == "complejidad") {
 					complejPos = i;
+				}  else if (JSON.parse(output).Tareas[0][i].toLowerCase() == "propiedad de") {
+					propPos = i;
+				}  else if (JSON.parse(output).Tareas[0][i].toLowerCase() == "planificado para") {
+					planPos = i;
 				} 
 			}
 		}
@@ -83,6 +87,9 @@ var process_wb = (function () {
 				}else{
 					task.tamano = 0;
 				}
+				
+				task.propietario = JSON.parse(output).Tareas[i][propPos]
+				task.planificadoPara = JSON.parse(output).Tareas[i][planPos]
 				task.modified = false;
 				tasks.push(task);
 			}
@@ -90,7 +97,6 @@ var process_wb = (function () {
 		document.getElementById("loadAnimation").style.display =  "none"; //Hide load animation
 		console.log(tasks)
 		drawTable();
-//		if (typeof console !== 'undefined') console.log("output", new Date());
 	};
 })();
 
