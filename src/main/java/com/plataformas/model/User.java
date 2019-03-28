@@ -2,8 +2,11 @@ package com.plataformas.model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+@Entity
+@Table(name="user")
 public class User {
 	private int Id;
 	private String username;

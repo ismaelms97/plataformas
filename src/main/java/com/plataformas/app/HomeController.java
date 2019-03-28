@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.plataformas.Db2.DailyService;
 import com.plataformas.Db2.EstrategiaService;
 import com.plataformas.Db2.UserService;
 import com.plataformas.model.Estrategia;
@@ -35,8 +34,6 @@ public class HomeController {
 	UserService userService;
 	@Autowired
 	EstrategiaService estrategiaService;
-	@Autowired
-	DailyService dailyService;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -112,30 +109,7 @@ public class HomeController {
 		return "redirect:/";
 
 	}
-	
-//	@GetMapping(value = "/saveStrategy")
-//	public @ResponseBody String saveStrategy(Model model, String name, String startDate, String endDate, String team, String stratTasks ) {	
-//		
-//		
-//		try {
-//			Estrategia estrategia = new Estrategia(name,"En curso",startDate,endDate,Integer.parseInt(team));
-//			estrategiaService.saveEstrategia(estrategia);
-//			
-//		}catch (Exception e) {
-//			System.out.println("error al guardar");
-//		}
-//		
-//		String[][] tasks = new String[stratTasks.split("qwer").length][4];
-//		
-//		for(int i = 0; i < tasks.length; i++) {
-//			String[] task = stratTasks.split("qwer");
-//			tasks[i] = task[i].split(",");
-//			System.out.println(tasks[i][0] + " - " + tasks[i][1]);
-//		}
-//		return "mainPanel";
-//		
-//	}
-	
+		
 	
 	@GetMapping(value = "/excel")
 	public String login(Model model) {		

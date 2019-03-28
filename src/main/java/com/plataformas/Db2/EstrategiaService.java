@@ -2,6 +2,7 @@ package com.plataformas.Db2;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -10,15 +11,20 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.plataformas.model.Equipo;
 import com.plataformas.model.Estrategia;
 import com.plataformas.model.Tarea;
-import com.plataformas.model.User;
 /*
  *  ESTA CLASE FALTA ACABARLA
  */
 @Service
 public class EstrategiaService {
+//	@Autowired
+//	EstrategiaRepository estrategiaRepository;
+//	@Autowired
+//	TareaRepository tareaRepository;
+	
+	
+	
 	//private String url = "jdbc:db2://dashdb-txn-sbox-yp-lon02-01.services.eu-gb.bluemix.net:50001/BLUDB:user=rvg03272;password=0@vn6gg9jg7zqjb1;sslConnection=true;";
 		private String url = "jdbc:db2://dashdb-txn-sbox-yp-lon02-01.services.eu-gb.bluemix.net:50000/BLUDB";
 		private String dbUsername = "rvg03272";
@@ -95,6 +101,7 @@ public class EstrategiaService {
 			int rs = stmt.executeUpdate("INSERT INTO estrategia (nombre,estado,fechaInicio,fechaFin,equipo_id) values "
 					+ "('"+estrategia.getNombre()+"','"+estrategia.getEstado()+"','"+estrategia.getFechaInicio()+"','"+estrategia.getFechaFin()+"',"+estrategia.getEquipoId()+")");
 			con.commit();
+			//estrategiaRepository.save(estrategia);
 			System.out.println("Completado ? "+rs);
 		}catch (SQLException e) {
 			System.out.println("SQL Exeption  saveEstrategia:  code -> "+e.getErrorCode()+" more inf : "+e.getMessage());
@@ -128,5 +135,33 @@ public class EstrategiaService {
 			return estrategiaList;
 		}
 
+	}
+	public void saveTarea(List<Tarea> tareas) throws ClassNotFoundException, SQLException {
+		initializeDriver();	    
+		try{
+			Connection con = DriverManager.getConnection(url,dbUsername,dbPassword);
+			con.setAutoCommit(false); 
+			
+			
+			PreparedStatement  stmt = con.prepareStatement("INSERT INTO tarea (id,tipo,estadoInicio,estadoFinal) values (?,?,?,?)");
+			for (Tarea tarea : tareas) {
+				stmt.setInt(1, tarea.getId());
+				stmt.setString(2, tarea.getTipo());
+				stmt.setString(3, tarea.getEstadoInicio());
+				stmt.setString(4, tarea.getEstadoFinal());
+				stmt.executeUpdate();
+				}
+			con.commit();
+			
+		}catch (SQLException e) {
+			System.out.println("SQL Exeption  saveEstrategia:  code -> "+e.getErrorCode()+" more inf : "+e.getMessage());
+//			for (Tarea tarea : tareas) {
+//				tareaRepository.save(tarea);
+//			}
+			
+
+		}catch (Exception e) {
+			System.out.println("Error en saveEstrategia ");
+		}
 	}
 }
