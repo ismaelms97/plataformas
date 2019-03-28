@@ -4,7 +4,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+@Entity
+@Table(name="estrategia")
 public class Estrategia {
+	@Id
 	private int Id;
 	private String nombre;
 	private String estado;

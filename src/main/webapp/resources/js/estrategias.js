@@ -158,7 +158,6 @@ function saveStrategy(){
 	tasks.forEach(task => {
 		if(task.modified){
 			strategy.tasks.push(task);
-			strategy.tasks.push(task);
 		}
 	});
 
@@ -176,8 +175,8 @@ function saveStrategy(){
 
 	console.log(strategy.tasks)
 	$.ajax({
-		type: "GET",
-		url: "/saveStrategy",
+		type: "POST",
+		url: "/estrategia/saveEstrategia",
 		data: {
 			stratTasks: tasksToString
 		},success: function(data) {
