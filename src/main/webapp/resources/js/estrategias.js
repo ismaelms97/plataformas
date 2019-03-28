@@ -175,8 +175,8 @@ function saveStrategy(){
 
 	console.log(strategy.tasks)
 	$.ajax({
-		type: "GET",
-		url: "/saveStrategy",
+		type: "POST",
+		url: "/estrategia/saveEstrategia",
 		data: {
 			stratTasks: tasksToString
 		},success: function(data) {

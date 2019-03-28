@@ -4,6 +4,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+@Entity
+@Table(name="equipo")
 public class Equipo {
 	private int Id;
 	private String name;

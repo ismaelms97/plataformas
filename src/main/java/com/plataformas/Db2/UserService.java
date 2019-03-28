@@ -10,9 +10,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.plataformas.model.Daily;
-import com.plataformas.model.Estrategia;
-import com.plataformas.model.Tarea;
 import com.plataformas.model.User;
 @Service
 public class UserService {
@@ -79,7 +76,6 @@ public class UserService {
 			
 		}catch (Exception e) {
 			System.err.println("FIND() more inf : "+e.getMessage()+" reason  -> "+e.getCause());
-			user.setUsername("username : "+e.getMessage()+" cause :"+e.getCause());
 			return user;
 		}
 		

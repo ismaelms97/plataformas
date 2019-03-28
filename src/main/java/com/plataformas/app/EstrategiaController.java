@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.plataformas.Db2.EstrategiaService;
 import com.plataformas.model.Estrategia;
@@ -61,7 +62,7 @@ public class EstrategiaController {
 	}
 	@GetMapping(value = "/findEstrategia/{id}")
 	public  String findEstrategia(@PathVariable String id,Model model,HttpSession session) {	
-		
+
 		synchronized (session) {
 			try {
 				List<Tarea> tareas = estrategiaService.findTareasByEstrategia(Integer.parseInt(id));
@@ -81,14 +82,14 @@ public class EstrategiaController {
 	}
 	@PostMapping(value = "/pushEstrategia")
 	public  String pushEstrategia(@ModelAttribute("estrategia") Estrategia estrategia,Model model,HttpSession session) {	
-		
+
 		synchronized (session) {
-			
+
 			User us = (User) session.getAttribute("userSession");
 			estrategia.setEquipoId(us.getEquipoId());
 			session.setAttribute("newEstrategia", estrategia);
 			model.addAttribute("tarea", new Tarea());
-			
+
 
 			return "plataforma";
 		}
@@ -96,29 +97,23 @@ public class EstrategiaController {
 	}
 
 	@PostMapping(value = "/saveEstrategia")
-	public  String saveEstrategia(@ModelAttribute("tarea") Tarea tarea,Model model,HttpSession session) {	
-		
+	public @ResponseBody String saveEstrategia(String stratTasks ,Model model,HttpSession session) {	
+
 		synchronized (session) {
 			Estrategia newEstrategia = (Estrategia) session.getAttribute("newEstrategia");
-			
-			
+
 			try {
 				
-				estrategiaService.saveEstrategia(newEstrategia);
-				/*
-				 * Aqui tiene que haver una List<Tarea> tareas
-				 * estrategiaService.saveTarea(tareas);
-				 */
-			
-				
-			
+				estrategiaService.saveEstrategia(newEstrategia);				
+
+				estrategiaService.saveTarea(Tarea.stringToObject(stratTasks));
 
 			}catch (Exception e) {
 				System.out.println("error al guardar");
 			}
-
-			return "redirect:/estrategia/panelControl";
 		}
+			return "redirect:/estrategia/panelControl";
+		
 
 	}
 

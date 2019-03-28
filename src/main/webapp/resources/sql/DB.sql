@@ -92,10 +92,6 @@ INSERT INTO user (username,password,equipo_id) values ('pepe','1234',21);
 INSERT INTO estrategia (nombre,estado,fechaInicio,fechaFin,equipo_id) values ('estrategia 1','en Pausa','2019-03','2019-04',1);
 INSERT INTO estrategia (nombre,estado,fechaInicio,fechaFin,equipo_id) values ('estrategia 2','trabajando','2019-02','2019-05',1);
 
-INSERT INTO tarea (tipo,estadoInicio,estadoFinal) values ('normal','en fase 1', 'en fase 3');
-INSERT INTO tarea (tipo,estadoInicio,estadoFinal) values ('normal','en fase 2', 'en fase 5');
-INSERT INTO tarea (id,tipo,estadoInicio,estadoFinal) values (12345,'normal','en fase 2', 'en fase 5');
-INSERT INTO tarea (tipo,estadoInicio,estadoFinal) values ('facil','en fase 1', 'en fase 1');
 
 INSERT INTO estrategia_tarea (tarea_id,estrategia_id) values (1,1);
 INSERT INTO estrategia_tarea (tarea_id,estrategia_id) values (2,1);
