@@ -214,7 +214,7 @@ td .ui-selected {
 	margin: 0 2% 1% 0;
 }
 .estartegiasCard{
-	background-color: lime;
+	/*background-color: lime;*/
 	border-radius: 5%;
 	padding: 20px;
 	width: 187.52px;
@@ -224,9 +224,26 @@ td .ui-selected {
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	text-decoration: none;
+	color: black;
 }
 .estartegiasCard:hover{
 	filter:grayscale(30%);
+}
+
+.ended {
+	background-color: rgb(250, 142, 123);
+}
+
+.started {
+	background-color: #6dd175; 
+}
+
+.newStrategy {
+	background-color: rgb(201, 201, 201); 
+}
+.newStrategy:hover {
+	background-color: rgb(182, 182, 182); 
 }
 
 /*########### MODAL ###########*/
@@ -237,7 +254,6 @@ td .ui-selected {
 .detailsSubtitle{
 	font-size:18px;
 }
-
 /*########### Daily ###########*/
 .faseInicialDaily, .grey{
 	background-color: #d7dde1;
