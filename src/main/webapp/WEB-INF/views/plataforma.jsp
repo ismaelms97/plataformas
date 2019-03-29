@@ -4,6 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <jsp:include page="header.jsp"></jsp:include>
+<jsp:include page="detallesRTC.jsp"></jsp:include>
 
 <body>
 	<h1 class="mainTitle">Estrategia</h1>

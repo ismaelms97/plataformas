@@ -68,8 +68,10 @@ public class EstrategiaService {
 			Connection con = DriverManager.getConnection(url,dbUsername,dbPassword);
 			con.setAutoCommit(false);
 			Statement  stmt = con.createStatement(); 
-			ResultSet rs = stmt.executeQuery("SELECT DISTINCT  T.id, T.tipo, T.estadoInicio, T.estadoFinal  FROM tarea T , estrategia E , estrategia_tarea ET"
+			/*ResultSet rs = stmt.executeQuery("SELECT DISTINCT  T.id, T.tipo, T.estadoInicio, T.estadoFinal  FROM tarea T , estrategia E , estrategia_tarea ET"
 					+ " where T.id = ET.tarea_id AND  ET.estrategia_id = "+idEstrategia+"");
+					*/
+			ResultSet rs = stmt.executeQuery("select distinct T.* , ET.estadoInicio,ET.estadoFinal from tarea T , estrategia E , estrategia_tarea ET where T.id = ET.tarea_id AND ET.estrategia_id = "+idEstrategia+"");
 
 
 			return Tarea.converFromDatabase(rs, tareaList);

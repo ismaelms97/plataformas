@@ -5,8 +5,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <head>
-<!-- <link rel="shortcut icon" type="image/x-icon"
-	href="/resources/img/favicon.png" /> -->
+ <link rel="shortcut icon" type="image/x-icon"
+	href="/resources/img/icon.png" /> 
 
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">

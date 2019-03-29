@@ -46,7 +46,6 @@
 
 <script>
 $(document).ready(function(){
-	;
 $('#estrategiaForm').on('shown.bs.modal', function () {
 	  $('#estrategiaFormInputDate').change(function(e){
 		  var hoy = new Date().setHours(0,0,0,0);

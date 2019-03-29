@@ -63,6 +63,7 @@ body{
 .clone {
 	position: relative;
 	background-color: #dbdbdb;
+	width: 167px;
 	padding: 20px 50px;
 	border: 2px solid darkgrey;
 	border-radius: 5%;
@@ -138,13 +139,13 @@ td .ui-selected {
 
 /*########### TOOLTIP ###########*/
 .tooltip-inner, .arrow {
-	background: blue;
+	background: #97d2e6;
 	border: 2px solid white;
 }
 
 .tooltip-inner {
 	padding: 10px 20px;
-	color: white;
+	color: black;
 	border-radius: 20px;
 	font: bold 12px "Times New Roman", Sans-Serif;
 	text-transform: uppercase;
@@ -213,7 +214,7 @@ td .ui-selected {
 	margin: 0 2% 1% 0;
 }
 .estartegiasCard{
-	background-color: lime;
+	/*background-color: lime;*/
 	border-radius: 5%;
 	padding: 20px;
 	width: 187.52px;
@@ -223,7 +224,49 @@ td .ui-selected {
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	text-decoration: none;
+	color: black;
 }
 .estartegiasCard:hover{
 	filter:grayscale(30%);
+}
+
+.ended {
+	background-color: rgb(250, 142, 123);
+}
+
+.started {
+	background-color: #6dd175; 
+}
+
+.newStrategy {
+	background-color: rgb(201, 201, 201); 
+}
+.newStrategy:hover {
+	background-color: rgb(182, 182, 182); 
+}
+
+/*########### MODAL ###########*/
+.modal-info{
+	background-color: #95e3fd;
+}
+
+.detailsSubtitle{
+	font-size:18px;
+}
+/*########### Daily ###########*/
+.faseInicialDaily, .grey{
+	background-color: #d7dde1;
+}
+.faseIntermediaDaily, .cyan{
+	background-color: #4485fd;
+}
+.faseFinalDaily, .green{
+	background-color: #79f79e;
+}
+.subEstadoBloqueado, .red{
+	background-color: #fa8072;
+}
+.subEstadoPausado, .yellow{
+	background-color: #ffff53;
 }

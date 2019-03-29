@@ -69,7 +69,7 @@ function drawRTC(pos) {
 //	}
 
 
-	document.getElementsByTagName("TR")[pos + 1].children[estadoActual].innerHTML = '<div class="rect" data-posInitial="' + estadoActual + '" data-rtc="' + (pos + 1) + '" title="'+ tasks[pos].resumen +'" data-placement="left">'
+	document.getElementsByTagName("TR")[pos + 1].children[estadoActual].innerHTML = '<div class="rect" data-posInitial="' + estadoActual + '" data-rtc="' + (pos + 1) + '" title="'+ tasks[pos].resumen +'" data-placement="left" onclick="verDetallesRTC('+ pos +')">'
 	+ '<small class="tamano">'+ tasks[pos].tamano + '</small> '+ tasks[pos].id + ' <small class="complejidad">'+ tasks[pos].complejidad + '</small></div>';
 
 	dragDrop();
@@ -85,4 +85,17 @@ function tooltip(){
 
 if(document.getElementById("save")){
 	document.getElementById("save").addEventListener('click', saveStrategy);
+}
+function verDetallesRTC(i){
+	$("#detallesRTC").modal("show");
+	$('#detallesRTC').on('shown.bs.modal', function() {
+		document.getElementById("detallesTitulo").innerHTML = "Detalles RTC: <strong style='font-size:20px;'>#"+ tasks[i].id + "</strong>";
+		document.getElementById("detallesResumen").innerHTML = tasks[i].resumen;
+		document.getElementById("detallesTamano").innerHTML = tasks[i].tamano;
+		document.getElementById("detallesComplejidad").innerHTML = tasks[i].complejidad;
+		document.getElementById("detallesPropietario").innerHTML = tasks[i].propiedad;
+		document.getElementById("detallesPlanificadoPara").innerHTML = tasks[i].planificado;
+		
+		
+	})
 }

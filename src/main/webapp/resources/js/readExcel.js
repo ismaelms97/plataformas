@@ -1,6 +1,6 @@
 
 var tasks = []
-var idPos, typePos, prioPos, resuPos, statusPos, sizePos, complejPos;
+var idPos, typePos, prioPos, resuPos, statusPos, sizePos, complejPos, ownerPos, petPos, relevancePos, urgenPos, plannedPos;
 var X = XLSX;
 var XW = {
 		/* worker message */
@@ -54,10 +54,20 @@ var process_wb = (function () {
 					resuPos = i;
 				} else if (JSON.parse(output).Tareas[0][i].toLowerCase() == "estado") {
 					statusPos = i;
-				}  else if (JSON.parse(output).Tareas[0][i].toLowerCase() == "tamaño") {
+				} else if (JSON.parse(output).Tareas[0][i].toLowerCase() == "tamaño") {
 					sizePos = i;
-				}  else if (JSON.parse(output).Tareas[0][i].toLowerCase() == "complejidad") {
+				} else if (JSON.parse(output).Tareas[0][i].toLowerCase() == "complejidad") {
 					complejPos = i;
+				} else if (JSON.parse(output).Tareas[0][i].toLowerCase() == "propiedad de") {
+					ownerPos = i;
+				} else if (JSON.parse(output).Tareas[0][i].toLowerCase() == "peticionario") {
+					petPos = i;
+				} else if (JSON.parse(output).Tareas[0][i].toLowerCase() == "relevante") {
+					relevancePos = i;
+				} else if (JSON.parse(output).Tareas[0][i].toLowerCase() == "urgente") {
+					urgenPos = i;
+				} else if (JSON.parse(output).Tareas[0][i].toLowerCase() == "planificado para") {
+					plannedPos = i;
 				} 
 			}
 		}
@@ -70,6 +80,12 @@ var process_wb = (function () {
 				task.prioridad = JSON.parse(output).Tareas[i][prioPos]
 				task.resumen = JSON.parse(output).Tareas[i][resuPos]
 				task.estado = JSON.parse(output).Tareas[i][statusPos]
+				task.propiedad = JSON.parse(output).Tareas[i][ownerPos]
+				task.relevante = JSON.parse(output).Tareas[i][relevancePos]
+				task.urgente = JSON.parse(output).Tareas[i][urgenPos]
+				task.planificado = JSON.parse(output).Tareas[i][plannedPos]
+				task.estado = JSON.parse(output).Tareas[i][statusPos]
+				task.peticionario = JSON.parse(output).Tareas[i][petPos]
 				task.estadoFinal = "";
 				
 				// Hacemos comprovaciones
@@ -83,6 +99,7 @@ var process_wb = (function () {
 				}else{
 					task.tamano = 0;
 				}
+				
 				task.modified = false;
 				tasks.push(task);
 			}
@@ -90,7 +107,6 @@ var process_wb = (function () {
 		document.getElementById("loadAnimation").style.display =  "none"; //Hide load animation
 		console.log(tasks)
 		drawTable();
-//		if (typeof console !== 'undefined') console.log("output", new Date());
 	};
 })();
 
