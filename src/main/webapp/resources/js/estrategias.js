@@ -1,3 +1,4 @@
+var arrayTasksBackup = [];
 function dragDrop(){
 
 	// Con este codigo conseguimos que se mueva cada tarea unicamente en su eje x, y

@@ -106,7 +106,7 @@ var process_wb = (function () {
 		}
 		document.getElementById("loadAnimation").style.display =  "none"; //Hide load animation
 		console.log(tasks)
-		drawTable();
+		drawTable(tasks);
 	};
 })();
 

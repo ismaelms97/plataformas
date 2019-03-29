@@ -6,12 +6,12 @@
 
 <div class="modal fade" id="detallesRTC" tabindex="-1" role="dialog"
 	aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered"
+	<div class="modal-dialog modal-dialog-centered modal-notify modal-info"
 		role="document">
 		<!--Content-->
 		<div class="modal-content">
 			<!--Header-->
-			<div class="modal-header modal-info">
+			<div class="modal-header">
 				<p class="heading lead" id="detallesTitulo"></p>
 
 				<button type="button" class="close" data-dismiss="modal"

@@ -1,15 +1,6 @@
 var estados;
-var arrayBackup;
 
 $(document).ready(function(){
-	document.getElementById("filter").addEventListener("click", function(){
-		arrayBackup = tasks;
-		tasks = filter(tasks);
-		console.log(tasks);
-		emptyTable();
-		drawTable();
-	}, false);
-
 	estados = [];
 	rellenarEstados();
 
@@ -35,9 +26,9 @@ function rellenarEstados() {
 	}
 }
 
-function drawTable() {
-	if (tasks.length >= 1) {
-		for (var i = 0; i < tasks.length; i++) {
+function drawTable(array) {
+	if (array.length >= 1) {
+		for (var i = 0; i < array.length; i++) {
 			var tr = document.createElement("tr");
 			document.getElementsByTagName("TBODY")[0].appendChild(tr);
 			for (var j = 0; j < 10; j++) {
@@ -102,10 +93,10 @@ function verDetallesRTC(i){
 	})
 }
 
-function filter(array){
-
-	var filtrado = array.filter(item => item.tipo.toLowerCase() == "incidencia")
-
+function filter(array, filtros){
+	
+	var filtrado = array.filter(item => item.tipo.toLowerCase() == filtros[0] || filtros[1] || filtros[2]);
+	
 	return filtrado;
 }
 

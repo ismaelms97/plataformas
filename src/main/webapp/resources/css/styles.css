@@ -97,6 +97,11 @@ tbody {
 	max-height: 50px;
 	overflow-y: auto;
 }
+
+thead{
+	border-color: #0000bb !important;
+	border-top: 1px solid #0000bb;
+}
 /*########### BUTTON SAVE STARTEGY ###########*/
 div.button{
 	float:right;
@@ -247,10 +252,6 @@ td .ui-selected {
 }
 
 /*########### MODAL ###########*/
-.modal-info{
-	background-color: #95e3fd;
-}
-
 .detailsSubtitle{
 	font-size:18px;
 }
@@ -279,4 +280,7 @@ td .ui-selected {
 /*########### FILTER ###########*/
 #filter{
 	cursor:pointer;
+}
+.arrowDown{
+	text-align: right;
 }

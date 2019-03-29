@@ -23,7 +23,8 @@
 <!-- Bootstrap -->
 <link rel="stylesheet"
 	href="/resources/libs/css/bootstrap/4.1.3/css/bootstrap.min.css">
-
+  <!-- Material Design Bootstrap -->
+  <link href="/resources/libs/css/mdb.css" rel="stylesheet">
 <!-- Font Awesome -->
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
