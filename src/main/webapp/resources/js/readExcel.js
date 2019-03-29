@@ -77,7 +77,6 @@ var process_wb = (function () {
 				var task = new Object();
 				task.id = JSON.parse(output).Tareas[i][idPos]
 				task.tipo = JSON.parse(output).Tareas[i][typePos]
-				task.prioridad = JSON.parse(output).Tareas[i][prioPos]
 				task.resumen = JSON.parse(output).Tareas[i][resuPos]
 				task.estado = JSON.parse(output).Tareas[i][statusPos]
 				task.propiedad = JSON.parse(output).Tareas[i][ownerPos]
@@ -93,6 +92,11 @@ var process_wb = (function () {
 					task.complejidad = JSON.parse(output).Tareas[i][complejPos]					
 				}else{
 					task.complejidad = 0;
+				}
+				if(JSON.parse(output).Tareas[i][prioPos] != null && JSON.parse(output).Tareas[i][prioPos] != "undefined"){
+					task.prioridad = JSON.parse(output).Tareas[i][prioPos];
+				} else {
+					task.prioridad = 0;
 				}
 				if(JSON.parse(output).Tareas[i][sizePos] != null){
 					task.tamano = JSON.parse(output).Tareas[i][sizePos]					

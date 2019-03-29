@@ -167,7 +167,16 @@ function saveStrategy() {
 		tasksToString += "RTC:" + task.id + ",";
 		tasksToString += "Tipo:" + task.tipo + ",";
 		tasksToString += "Estado:" + task.estado + ",";
-		tasksToString += "EstadoFinal:" + task.estadoFinal + "qwer";
+		tasksToString += "EstadoFinal:" + task.estadoFinal;
+		tasksToString += "prioridad:" + task.prioridad + ",";
+		tasksToString += "resumen:" + task.resumen + ",";
+		tasksToString += "tamaño:" + task.tamano + ",";
+		tasksToString += "complejidad:" + task.complejidad + ",";
+		tasksToString += "propiedad:" + task.propiedad + ",";
+		tasksToString += "peticionario:" + task.peticionario + ",";
+		tasksToString += "Estrelevanteado:" + task.relevante + ",";
+		tasksToString += "urgente:" + task.urgente + ",";
+		tasksToString += "planificado:" + task.planificado + "qwer" ;
 	});
 
 	tasksToString = tasksToString.substring(0, tasksToString.length - 4);
@@ -212,21 +221,26 @@ function orderByPrio(arr) {
 
 		return 0;
 	})
+	console.log(arr)
 	var orderedArr = []
 	var prio = ["tasks[i].urgente", "tasks[i].complejidad"]
 	var prioVal = ["Si", "Sin asignar"]
 	var order = 0;
-	while (orderedArr.length < arr.length) {//orderedArr.length < tasks.length
+	var enter = true;
+	while (orderedArr.length < arr.length && enter) {//orderedArr.length < tasks.length
 		for (var i = 0; i < arr.length; i++) {
-			console.log(prio[order])
+			//console.log(prio[order])
 			if (eval(prio[order]) == prioVal[order] && !exists(orderedArr, arr[i]) && order < prio.length) {
 				orderedArr.push(arr[i])
 			} else if (order >= prio.length && !exists(orderedArr, arr[i])){
 				orderedArr.push(arr[i])
+			} else {
 			}
 		}
 		if(order < prio.length){
 			order++;	
+		} else {
+			enter = false;
 		}
 
 	}
@@ -236,6 +250,7 @@ function orderByPrio(arr) {
 function exists(arr, val){
 	for(var x = 0; x < arr.length; x++){
 		if(arr[x].id == val.id){
+			console.log(val.id)
 			return true;
 		}
 	}
