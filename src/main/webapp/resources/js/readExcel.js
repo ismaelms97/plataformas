@@ -81,7 +81,6 @@ var process_wb = (function () {
 				task.estado = JSON.parse(output).Tareas[i][statusPos]
 				task.propiedad = JSON.parse(output).Tareas[i][ownerPos]
 				task.relevante = JSON.parse(output).Tareas[i][relevancePos]
-				task.urgente = JSON.parse(output).Tareas[i][urgenPos]
 				task.planificado = JSON.parse(output).Tareas[i][plannedPos]
 				task.estado = JSON.parse(output).Tareas[i][statusPos]
 				task.peticionario = JSON.parse(output).Tareas[i][petPos]
@@ -93,11 +92,13 @@ var process_wb = (function () {
 				}else{
 					task.complejidad = 0;
 				}
+				
 				if(JSON.parse(output).Tareas[i][prioPos] != null && JSON.parse(output).Tareas[i][prioPos] != "undefined"){
 					task.prioridad = JSON.parse(output).Tareas[i][prioPos];
 				} else {
 					task.prioridad = 0;
 				}
+
 				if(JSON.parse(output).Tareas[i][sizePos] != null){
 					task.tamano = JSON.parse(output).Tareas[i][sizePos]					
 				}else{
