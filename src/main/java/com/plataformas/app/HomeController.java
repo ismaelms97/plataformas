@@ -40,7 +40,7 @@ public class HomeController {
 	 * @throws SQLException 
 	 * @throws ClassNotFoundException 
 	 */
-	
+
 	@GetMapping(value = "/")
 	public String home(Locale locale, Model model) throws ClassNotFoundException, SQLException  {
 
@@ -66,8 +66,8 @@ public class HomeController {
 				model.addAttribute("nombreEquipo", " Nombre de equipo : "+newUser.getNombreEquipo());
 				model.addAttribute("estrategia", new Estrategia());
 				model.addAttribute("equipoId", newUser.getEquipoId());
-				
-				
+
+
 				userExist = true;
 			}else {
 				mensaje = "Contraseña incorrecta";
@@ -84,10 +84,10 @@ public class HomeController {
 
 			try {
 				List<Estrategia> listaEstrategias = estrategiaService.findEstrategiaById(newUser.getEquipoId());	
-				
+
 				model.addAttribute("listaEstrategia",listaEstrategias);
-				
-				
+
+
 			}catch (Exception e) {
 				System.out.println("listaEstrategia , no se ha encontrado...");
 			}			
@@ -104,13 +104,13 @@ public class HomeController {
 	@PostMapping(value = "/closeSession")
 	public String SessionDestroy(HttpSession session) {	
 		synchronized (session) {
-		session.invalidate();
+			session.invalidate();
 		}
 		return "redirect:/";
 
 	}
-		
-	
+
+
 	@GetMapping(value = "/excel")
 	public String login(Model model) {		
 

@@ -164,18 +164,18 @@ function saveStrategy() {
 	var tasksToString = "";
 
 	strategy.tasks.forEach(task => {
-		tasksToString += "RTC:" + task.id + ",";
-		tasksToString += "Tipo:" + task.tipo + ",";
-		tasksToString += "Estado:" + task.estado + ",";
-		tasksToString += "EstadoFinal:" + task.estadoFinal;
-		tasksToString += "prioridad:" + task.prioridad + ",";
-		tasksToString += "resumen:" + task.resumen + ",";
-		tasksToString += "tamaño:" + task.tamano + ",";
-		tasksToString += "complejidad:" + task.complejidad + ",";
-		tasksToString += "propiedad:" + task.propiedad + ",";
-		tasksToString += "peticionario:" + task.peticionario + ",";
-		tasksToString += "Estrelevanteado:" + task.relevante + ",";
-		tasksToString += "urgente:" + task.urgente + ",";
+		tasksToString += "RTC:" + task.id + "--";
+		tasksToString += "Tipo:" + task.tipo + "--";
+		tasksToString += "Estado:" + task.estado + "--";
+		tasksToString += "EstadoFinal:" + task.estadoFinal+ "--";
+		tasksToString += "prioridad:" + task.prioridad + "--";
+		tasksToString += "resumen:" + task.resumen + "--";
+		tasksToString += "tamaño:" + task.tamano + "--";
+		tasksToString += "complejidad:" + task.complejidad + "--";
+		tasksToString += "propiedad:" + task.propiedad + "--";
+		tasksToString += "peticionario:" + task.peticionario + "--";
+		tasksToString += "Estrelevanteado:" + task.relevante + "--";
+		tasksToString += "urgente:" + task.urgente + "--";
 		tasksToString += "planificado:" + task.planificado + "qwer" ;
 	});
 
