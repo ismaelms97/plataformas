@@ -224,10 +224,9 @@ function orderByPrio(arr) {
 	console.log(arr)
 	var orderedArr = []
 	var prio = ["tasks[i].urgente", "tasks[i].complejidad"]
-	var prioVal = ["Si", "Sin asignar"]
+	var prioVal = ["Sí", "Sin asignar"]
 	var order = 0;
-	var enter = true;
-	while (orderedArr.length < arr.length && enter) {//orderedArr.length < tasks.length
+	while (orderedArr.length < arr.length) {//orderedArr.length < tasks.length
 		for (var i = 0; i < arr.length; i++) {
 			//console.log(prio[order])
 			if (eval(prio[order]) == prioVal[order] && !exists(orderedArr, arr[i]) && order < prio.length) {
@@ -239,12 +238,11 @@ function orderByPrio(arr) {
 		}
 		if(order < prio.length){
 			order++;	
-		} else {
-			enter = false;
-		}
+		} 
 
 	}
 	console.log(orderedArr)
+	return orderedArr;
 }
 
 function exists(arr, val){

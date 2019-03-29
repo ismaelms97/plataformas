@@ -36,6 +36,7 @@ function rellenarEstados() {
 }
 
 function drawTable() {
+	tasks = orderByPrio(tasks);
 	if (tasks.length >= 1) {
 		for (var i = 0; i < tasks.length; i++) {
 			var tr = document.createElement("tr");
@@ -59,7 +60,7 @@ function drawTable() {
 		}
 		
 	}
-	orderByPrio(tasks);
+	
 }
 function drawRTC(pos) {
 	var estadoActual = 0;
