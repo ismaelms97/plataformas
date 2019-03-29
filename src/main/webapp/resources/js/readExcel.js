@@ -48,7 +48,7 @@ var process_wb = (function () {
 					idPos = i;
 				} else if (JSON.parse(output).Tareas[0][i].toLowerCase() == "tipo") {
 					typePos = i;
-				} else if (JSON.parse(output).Tareas[0][i].toLowerCase() == "prioridad") {
+				} else if (JSON.parse(output).Tareas[0][i].toLowerCase() == "prioridadcbk") {
 					prioPos = i;
 				} else if (JSON.parse(output).Tareas[0][i].toLowerCase() == "resumen") {
 					resuPos = i;

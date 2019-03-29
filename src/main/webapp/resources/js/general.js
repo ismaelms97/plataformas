@@ -45,8 +45,9 @@ function drawTable() {
 			$(el).parent().append(cln);
 			$(cln).css("display", "none");
 		}
-
+		
 	}
+	orderByPrio(tasks);
 }
 function drawRTC(pos) {
 	var estadoActual = 0;
