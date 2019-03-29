@@ -88,23 +88,17 @@ INSERT INTO user (username,password,equipo_id) values ('ismael','1234',1);
 INSERT INTO user (username,password,equipo_id) values ('german','1234',1);
 
 INSERT INTO estrategia (nombre,estado,fechaInicio,fechaFin,equipo_id) values ('estrategia 1','en Pausa','2019-03','2019-04',1);
-INSERT INTO estrategia (nombre,estado,fechaInicio,fechaFin,equipo_id) values ('estrategia 2','trabajando','2019-02','2019-05',1);
+INSERT INTO estrategia (nombre,estado,fechaInicio,fechaFin,equipo_id) values ('finalizada','Finalizada','2019-2-20','2019-2-27',1);
 
-INSERT INTO tarea (tipo,estadoInicio,estadoFinal) values ('normal','en fase 1', 'en fase 3');
-INSERT INTO tarea (tipo,estadoInicio,estadoFinal) values ('normal','en fase 2', 'en fase 5');
-INSERT INTO tarea (id,tipo,estadoInicio,estadoFinal) values (12345,'normal','en fase 2', 'en fase 5');
-INSERT INTO tarea (tipo,estadoInicio,estadoFinal) values ('facil','en fase 1', 'en fase 1');
+INSERT INTO tarea (tipo) values ('normal');
+INSERT INTO tarea (tipol) values ('normal');
 
-INSERT INTO estrategia_tarea (tarea_id,estrategia_id) values (1,1);
-INSERT INTO estrategia_tarea (tarea_id,estrategia_id) values (2,1);
-INSERT INTO estrategia_tarea (tarea_id,estrategia_id) values (3,1);
-INSERT INTO estrategia_tarea (tarea_id,estrategia_id) values (12345,1);
+INSERT INTO estrategia_tarea (estadoInicio,estadoFinal,tarea_id,estrategia_id) values (1,1);
+INSERT INTO estrategia_tarea (estadoInicio,estadoFinal,tarea_id,estrategia_id) values (2,1);
 
 INSERT INTO daily (fecha,estrategia_id) values ('2019-03',1);
 
 INSERT INTO daily_tarea (daily_id,tarea_id,estadoActual,subEstadoActual) values (1,1,'en curso','trabajando');
 INSERT INTO daily_tarea (daily_id,tarea_id,estadoActual,subEstadoActual) values (1,2,'en curso','trabajando');
-INSERT INTO daily_tarea (daily_id,tarea_id,estadoActual,subEstadoActual) values (1,3,'en curso','trabajando');
-INSERT INTO daily_tarea (daily_id,tarea_id,estadoActual,subEstadoActual) values (1,12345,'en curso','En pausa');
 
 

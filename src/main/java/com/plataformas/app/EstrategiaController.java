@@ -105,8 +105,9 @@ public class EstrategiaController {
 			try {
 				
 				estrategiaService.saveEstrategia(newEstrategia);				
-
-				estrategiaService.saveTarea(Tarea.stringToObject(stratTasks));
+				List<Tarea> listaTareas = Tarea.stringToObject(stratTasks);
+				estrategiaService.saveTarea(listaTareas);
+				estrategiaService.saveEstrategiaTarea(listaTareas);
 
 			}catch (Exception e) {
 				System.out.println("error al guardar");
