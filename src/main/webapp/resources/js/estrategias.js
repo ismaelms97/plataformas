@@ -198,7 +198,6 @@ function habilitarBotonEnvio() {
 	} else {
 		$("div.button").addClass("disabled");
 	}
-
 }
 
 function orderByPrio(arr) {

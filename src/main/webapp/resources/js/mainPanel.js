@@ -1,7 +1,5 @@
 var estrategias = [];
 
-
-
 function checkStatus(){
 	var estrategiaCards = document.getElementsByTagName("a");
 	estrategias.forEach(estrategia => {
@@ -30,4 +28,3 @@ function checkStatus(){
 	console.log(estrategiaCards[estrategiaCards.length -1])
 	estrategiaCards[estrategiaCards.length -1].children[0].classList.add("newStrategy");
 }
-

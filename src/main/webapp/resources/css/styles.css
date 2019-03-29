@@ -263,19 +263,29 @@ a:hover {
 .detailsSubtitle{
 	font-size:18px;
 }
+
 /*########### Daily ###########*/
 .faseInicialDaily, .grey{
 	background-color: #d7dde1;
 }
+
 .faseIntermediaDaily, .cyan{
 	background-color: #4485fd;
 }
+
 .faseFinalDaily, .green{
 	background-color: #79f79e;
 }
+
 .subEstadoBloqueado, .red{
 	background-color: #fa8072;
 }
+
 .subEstadoPausado, .yellow{
 	background-color: #ffff53;
+}
+
+/*########### FILTER ###########*/
+#filter{
+	cursor:pointer;
 }

@@ -1,18 +1,30 @@
-var estados = [];
-rellenarEstados();
+var estados;
+var arrayBackup;
 
-if(document.getElementById("formContent")){
-	
-	document.getElementById("butonDestroy").style.visibility = "hidden";
-	document.getElementById("buttonHome").style.visibility = "hidden";
-		
-	
-}else{
-	
-	document.getElementById("butonDestroy").style.visibility = "visible";
-	document.getElementById("buttonHome").style.visibility = "visible";
-	
-}
+$(document).ready(function(){
+	document.getElementById("filter").addEventListener("click", function(){
+		arrayBackup = tasks;
+		tasks = filter(tasks);
+		console.log(tasks);
+		emptyTable();
+		drawTable();
+	}, false);
+
+	estados = [];
+	rellenarEstados();
+
+	if(document.getElementById("formContent")){
+
+		document.getElementById("butonDestroy").style.visibility = "hidden";
+		document.getElementById("buttonHome").style.visibility = "hidden";
+
+	}else{
+
+		document.getElementById("butonDestroy").style.visibility = "visible";
+		document.getElementById("buttonHome").style.visibility = "visible";
+
+	}
+})
 
 function rellenarEstados() {
 	if($("th").length >= 1){
@@ -61,15 +73,6 @@ function drawRTC(pos) {
 		}
 	}
 
-//	if(tasks[pos].complejidad.toLowerCase().startsWith("sin asignar")){
-//	tasks[pos].complejidad = 0;
-//	}
-
-//	if(tasks[pos].tamano.toLowerCase().startsWith("sin asignar")){
-//	tasks[pos].tamano = 0;
-//	}
-
-
 	document.getElementsByTagName("TR")[pos + 1].children[estadoActual].innerHTML = '<div class="rect" data-posInitial="' + estadoActual + '" data-rtc="' + (pos + 1) + '" title="'+ tasks[pos].resumen +'" data-placement="left" onclick="verDetallesRTC('+ pos +')">'
 	+ '<small class="tamano">'+ tasks[pos].tamano + '</small> '+ tasks[pos].id + ' <small class="complejidad">'+ tasks[pos].complejidad + '</small></div>';
 
@@ -87,6 +90,7 @@ function tooltip(){
 if(document.getElementById("save")){
 	document.getElementById("save").addEventListener('click', saveStrategy);
 }
+
 function verDetallesRTC(i){
 	$("#detallesRTC").modal("show");
 	$('#detallesRTC').on('shown.bs.modal', function() {
@@ -96,7 +100,18 @@ function verDetallesRTC(i){
 		document.getElementById("detallesComplejidad").innerHTML = tasks[i].complejidad;
 		document.getElementById("detallesPropietario").innerHTML = tasks[i].propiedad;
 		document.getElementById("detallesPlanificadoPara").innerHTML = tasks[i].planificado;
-		
-		
 	})
+}
+
+function filter(array){
+
+	var filtrado = array.filter(item => item.tipo.toLowerCase() == "incidencia")
+
+	return filtrado;
+}
+
+function emptyTable(){
+	for (var j = $("TR").length -1; j > 0 ; j--) {
+		$("TR")[j].remove();
+	}
 }

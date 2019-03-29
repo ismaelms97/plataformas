@@ -19,7 +19,7 @@
 			</script>
 			<a href="/estrategia/findEstrategia/${estrategia.id}">
 				<div class="estartegiasCard">
-					<c:out value="${estrategia.nombre}" />
+					<c:out value="${estrategia.nombre}"/>
 				</div>
 			</a>
 		</c:forEach>
