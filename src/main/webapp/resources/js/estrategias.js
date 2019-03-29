@@ -176,6 +176,19 @@ function saveStrategy() {
 		tasksToString += "peticionario:" + task.peticionario + "--";
 		tasksToString += "Estrelevanteado:" + task.relevante + "--";
 		tasksToString += "urgente:" + task.urgente + "--";
+
+		if(task.relevante == "Sí"){
+			tasksToString += "relevante:true--";
+		} else {
+			tasksToString += "relevante:false--";
+		}
+		
+		if(task.urgente == "Sí"){
+			tasksToString += "urgente:true--";
+		} else {
+			tasksToString += "urgente:false--";
+		}
+		
 		tasksToString += "planificado:" + task.planificado + "qwer" ;
 	});
 
