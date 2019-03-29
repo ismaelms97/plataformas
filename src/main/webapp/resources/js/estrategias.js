@@ -198,5 +198,4 @@ function habilitarBotonEnvio(){
 	}else{
 		$("div.button").addClass("disabled");
 	}
-
 }
