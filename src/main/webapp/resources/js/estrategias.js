@@ -6,7 +6,6 @@ function dragDrop(){
 	// Con este codigo conseguimos que se mueva cada tarea unicamente en su eje x, y
 	// a su vez que cuando los dejes en el sitio, cambien de color
 	$(function () {
-
 		$(".rect").draggable(
 			{
 				axis: "x",

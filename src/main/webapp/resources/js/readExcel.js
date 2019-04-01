@@ -111,7 +111,8 @@ var process_wb = (function () {
 		}
 		document.getElementById("loadAnimation").style.display =  "none"; //Hide load animation
 		console.log(tasks)
-		drawTable(tasks);
+		console.log(strategyFilter(tasks));
+		drawTable(tasks, false);
 	};
 })();
 
