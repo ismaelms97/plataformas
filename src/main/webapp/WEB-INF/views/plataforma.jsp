@@ -7,14 +7,21 @@
 <jsp:include page="detallesRTC.jsp"></jsp:include>
 
 <body>
-	<h1 class="mainTitle">Estrategia</h1>
+	<h1 class="mainTitle"> Estrategia </h1>
 
 	<i class="fa fa-filter fa-2x" id="filter"></i>
 	<!-- <div id="suve">Suve</div> -->
 	<form:form method="POST" action="/estrategia/saveEstrategia">
 		<div class="button disabled" id="save">Guardar</div>
 	</form:form>
-	
+	<c:forEach items="${listaTareas}" var="tarea" varStatus="item">
+			<script>
+				var tarea = new Object();
+				tarea.id = "${tarea.id}";	
+				
+				console.log(tarea);
+			</script>
+				</c:forEach>
 	<div class="table-responsive table-bordered">
 		<table class="table">
 			<thead>

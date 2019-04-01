@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.plataformas.model.Estrategia;
 import com.plataformas.model.Tarea;
@@ -84,7 +85,7 @@ public class EstrategiaService {
 			return tareaList;
 		}
 	}
-
+	@Transactional
 	public void saveEstrategia(Estrategia estrategia) throws ClassNotFoundException, SQLException {
 		initializeDriver();	    
 		try{
@@ -128,6 +129,7 @@ public class EstrategiaService {
 		}
 
 	}
+	@Transactional
 	public void saveTarea(List<Tarea> tareas) throws ClassNotFoundException, SQLException {
 		initializeDriver();	    
 		try{
@@ -164,6 +166,7 @@ public class EstrategiaService {
 			System.out.println("Error en savaTarea ");
 		}
 	}
+	@Transactional
 	public void saveEstrategiaTarea(List<Tarea> tareas) throws ClassNotFoundException, SQLException {
 		initializeDriver();	
 		try{
