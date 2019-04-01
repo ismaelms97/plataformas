@@ -91,10 +91,12 @@ CONSTRAINT daily_id FOREIGN KEY (daily_id) REFERENCES daily (id) ON DELETE CASCA
 );
 
 INSERT INTO equipo (name) values ('admin');
+INSERT INTO equipo (name) values ('root');
 INSERT INTO user (username,password,equipo_id) values ('marcos','1234',1);
 INSERT INTO user (username,password,equipo_id) values ('alejandro','1234',1);
 INSERT INTO user (username,password,equipo_id) values ('ismael','1234',1);
 INSERT INTO user (username,password,equipo_id) values ('german','1234',1);
+INSERT INTO user (username,password,equipo_id) values ('pepe','1234',2);
 
 
 

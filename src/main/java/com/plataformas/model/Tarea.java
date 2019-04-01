@@ -136,7 +136,7 @@ public class Tarea {
 	}
 
 
-	public boolean getRelevante() {
+	public boolean isRelevante() {
 		return relevante;
 	}
 
@@ -156,7 +156,7 @@ public class Tarea {
 	}
 
 
-	public String isPlanificado() {
+	public String getPlanificado() {
 		return planificado;
 	}
 
@@ -191,19 +191,19 @@ public class Tarea {
 
 		List<Tarea> listaTareas =  new ArrayList<Tarea>();
 
-		String[][] tasks = new String[stratTasks.split("qwer").length][4];
+		String[][] tasks = new String[stratTasks.split("qwer").length][12];
 
 		for(int i = 0; i < tasks.length; i++) {
 			String[] task = stratTasks.split("qwer");
-			tasks[i] = task[i].split(",");
-
-			String[] sId = tasks[i][0].split(":");
-			int id = Integer.parseInt(sId[1]);
+			tasks[i] = task[i].split("--");
+			int id = Integer.parseInt((tasks[i][0].split(":"))[1]);
 			String tipo = (tasks[i][1].split(":"))[1];
+			
 			String estadoI = (tasks[i][2].split(":"))[1];
 			String estadoF = (tasks[i][3].split(":"))[1];
 			String prioridad = (tasks[i][4].split(":"))[1];
 			String resumen = (tasks[i][5].split(":"))[1];
+			
 			String tamaño = (tasks[i][6].split(":"))[1];
 			String complejidad = (tasks[i][7].split(":"))[1];
 			String propiedad = (tasks[i][8].split(":"))[1];
@@ -211,11 +211,11 @@ public class Tarea {
 			boolean relevante = Boolean.parseBoolean((tasks[i][10].split(":"))[1]);
 			boolean urgente = Boolean.parseBoolean((tasks[i][11].split(":"))[1]);
 			String planificado = (tasks[i][12].split(":"))[1];
-
-
-			Tarea tarea = new Tarea (id,tipo,estadoI,estadoF,prioridad, resumen,tamaño, complejidad,
-					propiedad, peticionario,relevante,urgente, planificado);
+			Tarea tarea = new Tarea (id,tipo,estadoI,estadoF,prioridad, resumen,tamaño, complejidad,propiedad, peticionario,relevante,urgente, planificado);
+			
 			listaTareas.add(tarea);
+			
+			
 		}
 		return listaTareas;
 	}

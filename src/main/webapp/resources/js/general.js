@@ -27,6 +27,7 @@ function rellenarEstados() {
 }
 
 function drawTable(array) {
+	tasks = orderByPrio(array);
 	if (array.length >= 1) {
 		for (var i = 0; i < array.length; i++) {
 			var tr = document.createElement("tr");
@@ -50,6 +51,7 @@ function drawTable(array) {
 		}
 
 	}
+
 }
 function drawRTC(pos) {
 	var estadoActual = 0;
@@ -70,7 +72,7 @@ function drawRTC(pos) {
 	tooltip()
 }
 
-/* Función que muestra la tooltip en html  */
+/* Función que muestra la tooltip en html */
 function tooltip(){
 	$( function() {
 		$( ".rect, .clone" ).tooltip();
@@ -94,9 +96,9 @@ function verDetallesRTC(i){
 }
 
 function filter(array, filtros){
-	
+
 	var filtrado = array.filter(item => item.tipo.toLowerCase() == filtros[0] || filtros[1] || filtros[2]);
-	
+
 	return filtrado;
 }
 

@@ -232,16 +232,25 @@ td .ui-selected {
 	text-decoration: none;
 	color: black;
 }
-.estartegiasCard:hover{
-	filter:grayscale(30%);
+
+a:hover {
+	text-decoration: none;	
 }
 
 .ended {
 	background-color: rgb(250, 142, 123);
 }
 
+.ended:hover {
+	background-color: rgb(231, 132, 114);
+}
+
 .started {
 	background-color: #6dd175; 
+}
+
+.started:hover {
+	background-color: #65c26d; 
 }
 
 .newStrategy {

@@ -13,9 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.plataformas.model.Estrategia;
 import com.plataformas.model.Tarea;
-/*
- *  ESTA CLASE FALTA ACABARLA
- */
+
 @Service
 public class EstrategiaService {
 
@@ -97,7 +95,6 @@ public class EstrategiaService {
 			int rs = stmt.executeUpdate("INSERT INTO estrategia (nombre,estado,fechaInicio,fechaFin,equipo_id) values "
 					+ "('"+estrategia.getNombre()+"','"+estrategia.getEstado()+"','"+estrategia.getFechaInicio()+"','"+estrategia.getFechaFin()+"',"+estrategia.getEquipoId()+")");
 			con.commit();
-			System.out.println("Completado ? "+rs);
 		}catch (SQLException e) {
 			System.out.println("SQL Exeption  saveEstrategia:  code -> "+e.getErrorCode()+" more inf : "+e.getMessage());
 
@@ -138,12 +135,22 @@ public class EstrategiaService {
 			con.setAutoCommit(false); 
 
 
-			PreparedStatement  stmt = con.prepareStatement("INSERT INTO tarea (id,tipo) values (?,?)");
+			PreparedStatement  stmt = con.prepareStatement("INSERT INTO tarea (id,tipo,prioridad,resumen,tamaño,complejidad,propiedad,peticionario,relevante,urgente,planificado)"
+					+ " values (?,?,?,?,?,?,?,?,?,?,?)");
 			for (Tarea tarea : tareas) {
 				stmt.setInt(1, tarea.getId());
 				stmt.setString(2, tarea.getTipo());
+				stmt.setString(3, tarea.getPrioridad());
+				stmt.setString(4, tarea.getResumen());
+				stmt.setString(5, tarea.getTamaño());
+				stmt.setString(6, tarea.getComplejidad());
+				stmt.setString(7, tarea.getPropiedad());
+				stmt.setString(8, tarea.getPeticionario());
+				stmt.setBoolean(9, tarea.isRelevante());
+				stmt.setBoolean(10, tarea.isUrgente());
+				stmt.setString(11, tarea.getPlanificado());
+				
 				stmt.executeUpdate();
-				System.out.println(" Tarea guardada ");
 				}
 			con.commit();
 
