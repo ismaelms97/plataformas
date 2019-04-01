@@ -82,8 +82,8 @@ var process_wb = (function () {
 				task.propiedad = JSON.parse(output).Tareas[i][ownerPos]
 				task.relevante = JSON.parse(output).Tareas[i][relevancePos]
 				task.planificado = JSON.parse(output).Tareas[i][plannedPos]
-				task.estado = JSON.parse(output).Tareas[i][statusPos]
 				task.peticionario = JSON.parse(output).Tareas[i][petPos]
+				task.urgente = JSON.parse(output).Tareas[i][urgenPos];
 				task.estadoFinal = "";
 				
 				// Hacemos comprovaciones

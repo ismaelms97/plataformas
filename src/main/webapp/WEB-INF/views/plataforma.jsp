@@ -18,7 +18,7 @@
 	</form:form>
 	<c:forEach items="${listaTareas}" var="tarea" varStatus="item">
 			<script>
-				var tarea = new Object();
+				
 				tarea.id = "${tarea.id}";	
 				
 				console.log(tarea);
