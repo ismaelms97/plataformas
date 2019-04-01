@@ -69,7 +69,7 @@ public class EstrategiaService {
 			Statement  stmt = con.createStatement(); 
 			/*ResultSet rs = stmt.executeQuery("SELECT DISTINCT  T.id, T.tipo, T.estadoInicio, T.estadoFinal  FROM tarea T , estrategia E , estrategia_tarea ET"
 					+ " where T.id = ET.tarea_id AND  ET.estrategia_id = "+idEstrategia+"");
-					*/
+			 */
 			ResultSet rs = stmt.executeQuery("select distinct T.* , ET.estadoInicio,ET.estadoFinal from tarea T , estrategia E , estrategia_tarea ET where T.id = ET.tarea_id AND ET.estrategia_id = "+idEstrategia+"");
 
 
@@ -151,12 +151,16 @@ public class EstrategiaService {
 				stmt.setBoolean(9, tarea.isRelevante());
 				stmt.setBoolean(10, tarea.isUrgente());
 				stmt.setString(11, tarea.getPlanificado());
-				
-				stmt.executeUpdate();
+
+				try {
+					stmt.executeUpdate();
+				}catch (Exception e) {
+					System.out.println("ha pedado en execute UPdATE");
 				}
+			}
 			con.commit();
 
-			
+
 
 		}catch (SQLException e) {
 			System.out.println("SQL Exeption  savaTarea:  code -> "+e.getErrorCode()+" more inf : "+e.getMessage());
@@ -189,6 +193,30 @@ public class EstrategiaService {
 
 		}catch (Exception e) {
 			System.out.println("Error en saveEstrategiaTarea ");
+		}
+	}
+
+	@Transactional
+	public void deleteEstrategia(int IDestrategia) throws ClassNotFoundException, SQLException {
+		initializeDriver();	    
+		try{
+
+			Connection con = DriverManager.getConnection(url,dbUsername,dbPassword);
+			con.setAutoCommit(false); 
+
+			Statement  stmt  = con.createStatement(); 
+			stmt.execute("DELETE FROM estrategia where id ="+IDestrategia);
+
+
+			con.commit();
+
+
+		}catch (SQLException e) {
+			System.out.println("SQL Exeption  deleteEstrategia:  code -> "+e.getErrorCode()+" more inf : "+e.getMessage());
+
+
+		}catch (Exception e) {
+			System.out.println("Error en savaTarea ");
 		}
 	}
 }

@@ -103,7 +103,7 @@ public class EstrategiaController {
 			Estrategia newEstrategia = (Estrategia) session.getAttribute("newEstrategia");
 
 			try {
-				
+
 				estrategiaService.saveEstrategia(newEstrategia);	
 				System.out.println("Estrategia   Guardada");
 				List<Tarea> listaTareas = Tarea.stringToObject(stratTasks);
@@ -116,13 +116,30 @@ public class EstrategiaController {
 				System.out.println("error al guardar");
 			}
 		}
-			return "redirect:/estrategia/panelControl";
-		
+		return "redirect:/estrategia/panelControl";
+
 
 	}
 
-	@PostMapping(value = "/updateEstrategia")
-	public String deleteEstrategia(Model model) {	
+//	@PostMapping(value = "/updateEstrategia")
+//	public String updateEstrategia(Model model) {	
+//
+//
+//		return "mainPanel";
+//
+//	}
+	@PostMapping(value = "/deleteEstrategia")
+	public String deleteEstrategia(@ModelAttribute("estrategia") Estrategia estrategia,Model Model,HttpSession session) {
+		synchronized (session) {
+			try {
+				estrategiaService.deleteEstrategia(estrategia.getId());
+
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 
 
 		return "mainPanel";
