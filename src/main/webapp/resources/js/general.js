@@ -3,7 +3,6 @@ var estados;
 $(document).ready(function(){
 	estados = [];
 	rellenarEstados();
-
 	if(document.getElementById("formContent")){
 
 		document.getElementById("butonDestroy").style.visibility = "hidden";
@@ -18,6 +17,7 @@ $(document).ready(function(){
 })
 
 function rellenarEstados() {
+
 	if($("th").length >= 1){
 		for (var i = 0; i < $("th").length; i++) {
 			estados[i] = document.querySelectorAll("th")[i].innerText.toLowerCase();
@@ -27,7 +27,7 @@ function rellenarEstados() {
 }
 
 function drawTable(array) {
-	tasks = orderByPrio(array);
+	array = orderByPrio(array);
 	if (array.length >= 1) {
 		for (var i = 0; i < array.length; i++) {
 			var tr = document.createElement("tr");
@@ -80,6 +80,7 @@ function tooltip(){
 }
 
 if(document.getElementById("save")){
+	getNameEstrategia();
 	document.getElementById("save").addEventListener('click', saveStrategy);
 }
 
@@ -95,9 +96,10 @@ function verDetallesRTC(i){
 	})
 }
 
+/* Función que sirve para filtrar las tareas, versión 1.0, solo filtra por el tipo de tareas: Incidencias, Tareas, Consulta. */
 function filter(array, filtros){
 
-	var filtrado = array.filter(item => item.tipo.toLowerCase() == filtros[0] || filtros[1] || filtros[2]);
+	var filtrado = array.filter(item => item.tipo.toLowerCase() == filtros[0] ||  item.tipo.toLowerCase() == filtros[1] ||  item.tipo.toLowerCase() == filtros[2]);
 
 	return filtrado;
 }
@@ -106,4 +108,13 @@ function emptyTable(){
 	for (var j = $("TR").length -1; j > 0 ; j--) {
 		$("TR")[j].remove();
 	}
+}
+
+function getNameEstrategia(){
+	$(document).ready(function(){
+		$("#estartegiasCard").on("click", function(e) {
+			console.log(e.target);
+			$(".mainTitle").html(e.target.innerHTML.trim());
+		})
+	})
 }

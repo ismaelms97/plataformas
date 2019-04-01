@@ -82,13 +82,12 @@ var process_wb = (function () {
 				task.propiedad = JSON.parse(output).Tareas[i][ownerPos]
 				task.relevante = JSON.parse(output).Tareas[i][relevancePos]
 				task.planificado = JSON.parse(output).Tareas[i][plannedPos]
-				task.estado = JSON.parse(output).Tareas[i][statusPos]
 				task.peticionario = JSON.parse(output).Tareas[i][petPos]
 				task.estadoFinal = "";
 				
 				// Hacemos comprovaciones
-				if(JSON.parse(output).Tareas[i][complejPos] != null){
-					task.complejidad = JSON.parse(output).Tareas[i][complejPos]					
+				if(JSON.parse(output).Tareas[i][complejPos] != null && JSON.parse(output).Tareas[i][complejPos].toLowerCase() != "sin asignar"){
+					task.complejidad = JSON.parse(output).Tareas[i][complejPos].substring(0,1)	
 				}else{
 					task.complejidad = 0;
 				}

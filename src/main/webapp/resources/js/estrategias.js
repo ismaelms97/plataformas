@@ -204,7 +204,8 @@ function saveStrategy() {
 		data: {
 			stratTasks: tasksToString
 		}, success: function (data) {
-			console.log("success")
+			console.log("success");
+			location.href = "/estrategia/panelControl";
 
 		}
 	});
