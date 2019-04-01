@@ -37,7 +37,7 @@ function drawTable(array) {
 				el.setAttribute("class", estados[j].replace(/\s/g, "-"));
 				document.getElementsByTagName("TR")[i + 1].appendChild(el);
 			}
-			drawRTC(i);
+			drawRTC(array, i);
 		}
 
 		// creamos el clon de los RTC
@@ -53,13 +53,13 @@ function drawTable(array) {
 	}
 
 }
-function drawRTC(pos) {
+function drawRTC(array, pos) {
 	var estadoActual = 0;
 
 	if(estados.length >= 1){
 
 		for (var j = 0; j < estados.length; j++) {
-			if (tasks[pos].estado.toLowerCase().startsWith(estados[j])) {
+			if (array[pos].estado.toLowerCase().startsWith(estados[j])) {
 				estadoActual = j
 			}
 		}
