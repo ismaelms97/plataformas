@@ -1,5 +1,6 @@
 
 var arrayTasksBackup = [];
+
 function dragDrop(){
 
 	// Con este codigo conseguimos que se mueva cada tarea unicamente en su eje x, y
@@ -238,7 +239,7 @@ function orderByPrio(arr) {
 	})
 	console.log(arr)
 	var orderedArr = []
-	var prio = ["tasks[i].urgente", "tasks[i].complejidad"]
+	var prio = ["arr[i].urgente", "arr[i].complejidad"]
 	var prioVal = ["Sí", "Sin asignar"]
 	var order = 0;
 	while (orderedArr.length < arr.length) {//orderedArr.length < tasks.length

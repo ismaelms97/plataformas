@@ -16,14 +16,29 @@
 	<form:form method="POST" action="/estrategia/saveEstrategia">
 		<div class="button disabled" id="save">Guardar</div>
 	</form:form>
+		<script>
+		var inTasks = [];
+	</script>
 	<c:forEach items="${listaTareas}" var="tarea" varStatus="item">
 			<script>
-				
-				tarea.id = "${tarea.id}";	
-				
-				console.log(tarea);
+				var task = new Object();
+				task.id = "${tarea.id}";
+				task.tipo = "${tarea.tipo}"
+				task.resumen = "${tarea.resumen}"
+				task.estado = "${tarea.estadoInicio}";
+				task.propiedad = "${tarea.propiedad}"
+				task.relevante = "${tarea.relevante}"
+				task.planificado = "${tarea.planificado}"
+				task.peticionario = "${tarea.peticionario}"
+				task.urgente = "${tarea.urgente}";
+				task.estadoFinal = "${tarea.estadoFinal}";
+				task.complejidad = "${tarea.complejidad}";
+				task.prioridad = "${tarea.prioridad}";
+				task.tamano = "${tarea.tamaño}";
+				inTasks.push(task);				
+				console.log(task);
 			</script>
-				</c:forEach>
+	</c:forEach>
 	<div class="table-responsive table-bordered">
 		<table class="table">
 			<thead>
@@ -55,7 +70,6 @@
 	<script src="/resources/libs/js/shim.js"></script>
 	<script src="/resources/libs/js/xlsx.full.min.js"></script>
 	<script src="/resources/js/readExcel.js"></script>
-
 	<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

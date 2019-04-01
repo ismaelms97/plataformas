@@ -1,9 +1,15 @@
 var estados;
 
+
 $(document).ready(function(){
 	estados = [];
 	rellenarEstados();
-
+	
+	if(inTasks.length > 0){
+		drawTable(inTasks);
+		console.log("enter")
+	}
+	
 	if(document.getElementById("formContent")){
 
 		document.getElementById("butonDestroy").style.visibility = "hidden";
