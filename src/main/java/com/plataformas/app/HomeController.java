@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,12 +50,13 @@ public class HomeController {
 	}
 
 	@PostMapping(value = "/mainPanel")
-	public String login(@ModelAttribute("user") User user, Model model,HttpSession session){
+	public String login(@ModelAttribute("user") User user, Model model,HttpServletRequest request,HttpSession session){
 
 		User newUser = null;
 		boolean userExist = false;
 		String mensaje = "";
 		try{
+			session = request.getSession();
 			newUser = userService.findByUsername(user.getUsername());
 
 			if(newUser.getPassword().equals(user.getPassword())) {
@@ -86,6 +88,8 @@ public class HomeController {
 				List<Estrategia> listaEstrategias = estrategiaService.findEstrategiaById(newUser.getEquipoId());	
 
 				model.addAttribute("listaEstrategia",listaEstrategias);
+
+				session.setAttribute("userStrategy", listaEstrategias);
 
 
 			}catch (Exception e) {
