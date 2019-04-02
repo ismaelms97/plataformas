@@ -68,6 +68,7 @@ public class EstrategiaController {
 					return "mainPanel";
 
 				}
+				
 			}catch (Exception e) {
 
 				System.out.println("Panel de control Error con session o con estrategias");
@@ -77,6 +78,7 @@ public class EstrategiaController {
 		}
 
 	}
+	
 	@GetMapping(value = "/findEstrategia/{id}")
 	public  String findEstrategia(@PathVariable String id,Model model,HttpSession session) {	
 
@@ -92,6 +94,7 @@ public class EstrategiaController {
 				}else {
 
 					List<Tarea> tareas = estrategiaService.findTareasByEstrategia(Integer.parseInt(id));
+					session.setAttribute("estrategiaID", Integer.parseInt(id.trim()));
 					model.addAttribute("listaTareas",tareas);
 					System.out.println("TAREAS COMPLETE");
 					return "plataforma";
@@ -110,6 +113,7 @@ public class EstrategiaController {
 		}
 
 	}
+	
 	@PostMapping(value = "/pushEstrategia")
 	public  String pushEstrategia(@ModelAttribute("estrategia") Estrategia estrategia,Model model,HttpSession session) {	
 

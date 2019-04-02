@@ -55,11 +55,14 @@ public class HomeController {
 		User newUser = null;
 		boolean userExist = false;
 		String mensaje = "";
+
 		try{
+
 			session = request.getSession();
 			newUser = userService.findByUsername(user.getUsername());
 
 			if(newUser.getPassword().equals(user.getPassword())) {
+
 				session.setAttribute("userSession", newUser);
 				USessions.add(newUser);	
 				model.addAttribute("greeting","Hola "+ user.getUsername());
@@ -68,35 +71,37 @@ public class HomeController {
 				model.addAttribute("nombreEquipo", " Nombre de equipo : "+newUser.getNombreEquipo());
 				model.addAttribute("estrategia", new Estrategia());
 				model.addAttribute("equipoId", newUser.getEquipoId());
-
-
 				userExist = true;
+
 			}else {
+
 				mensaje = "Contraseña incorrecta";
 			}
 
-		}catch (NullPointerException e) { 			
+		}catch (NullPointerException e) { 	
+
 			mensaje = "El usuario no existe";
 
-		}catch (Exception e) {			
+		}catch (Exception e) {		
+
 			mensaje = "No hay conexion";
 		}
 
 		if(userExist) {
 
 			try {
-				List<Estrategia> listaEstrategias = estrategiaService.findEstrategiaById(newUser.getEquipoId());	
 
+				List<Estrategia> listaEstrategias = estrategiaService.findEstrategiaById(newUser.getEquipoId());
 				model.addAttribute("listaEstrategia",listaEstrategias);
-
 				session.setAttribute("userStrategy", listaEstrategias);
 
-
 			}catch (Exception e) {
+
 				System.out.println("listaEstrategia , no se ha encontrado...");
 			}			
 
 			return "mainPanel";
+
 		}else {		
 
 			model.addAttribute("errorMsg",mensaje);
@@ -107,9 +112,12 @@ public class HomeController {
 
 	@PostMapping(value = "/closeSession")
 	public String SessionDestroy(HttpSession session) {	
+
 		synchronized (session) {
+
 			session.invalidate();
 		}
+
 		return "redirect:/";
 
 	}

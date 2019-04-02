@@ -11,6 +11,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="daily")
 public class Daily {
+	
 	private int Id;
 	private String fecha;
 	private int estrategiaId;
@@ -121,7 +122,9 @@ public class Daily {
 
 
 	public static  List<Daily> converFromDatabase(ResultSet rs,List<Daily> dailyList ) throws SQLException {
+		
 		while (rs.next()) {
+			
 			int id = rs.getInt("id");
 			String fecha = rs.getString("fecha");
 			int idEstrategia = rs.getInt("estrategia_id");
@@ -130,6 +133,7 @@ public class Daily {
 			Daily daily = new Daily(id,fecha,idEstrategia,estadoActual,subEstadoActual);
 			dailyList.add(daily);
 		}
+		
 		return dailyList;
 	}
 
@@ -140,20 +144,18 @@ public class Daily {
 		String[][] dailys = new String[stratDaily.split("qwer").length][12];
 
 		for(int i = 0; i < dailys.length; i++) {
-			String[] dailystr = stratDaily.split("qwer");
-			dailys[i] = dailystr[i].split("--");
 			
+			String[] dailystr = stratDaily.split("qwer");
+			dailys[i] = dailystr[i].split("--");			
 			String fecha = (dailys[i][0].split(":"))[1];			
 			String estadoActual = (dailys[i][2].split(":"))[1];
-			String subEstadoActual = (dailys[i][3].split(":"))[1];
-			
-			
-			Daily daily = new Daily (fecha,estadoActual,subEstadoActual);
-			
+			String subEstadoActual = (dailys[i][3].split(":"))[1];			
+			Daily daily = new Daily (fecha,estadoActual,subEstadoActual);		
 			listaDaily.add(daily);
 			
 			
 		}
+		
 		return listaDaily;
 
 	

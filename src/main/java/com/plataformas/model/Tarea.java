@@ -10,6 +10,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="tarea")
 public class Tarea {
+	
 	private int Id;
 	private String tipo;
 	private String prioridad ;
@@ -167,7 +168,9 @@ public class Tarea {
 
 
 	public static  List<Tarea> converFromDatabase(ResultSet rs,List<Tarea> tareaList ) throws SQLException {
+		
 		while (rs.next()) {
+			
 			int id = rs.getInt("id");
 			String tipo = rs.getString("tipo");
 			String estadoInicio = rs.getString("estadoInicio");
@@ -181,12 +184,13 @@ public class Tarea {
 			boolean relevante = rs.getBoolean("estadoFinal");
 			boolean urgente = rs.getBoolean("estadoFinal");
 			String planificado = rs.getString("peticionario");
-			Tarea tarea = new Tarea(id,tipo,estadoInicio,estadoFinal,prioridad, resumen,tamaño, complejidad,
-					propiedad, peticionario,relevante,urgente, planificado);
+			Tarea tarea = new Tarea(id,tipo,estadoInicio,estadoFinal,prioridad, resumen,tamaño, complejidad,propiedad, peticionario,relevante,urgente, planificado);
 			tareaList.add(tarea);
 		}
+		
 		return tareaList;
 	}
+	
 	public static  List<Tarea> stringToObject(String stratTasks ){
 
 		List<Tarea> listaTareas =  new ArrayList<Tarea>();
@@ -194,6 +198,7 @@ public class Tarea {
 		String[][] tasks = new String[stratTasks.split("qwer").length][12];
 
 		for(int i = 0; i < tasks.length; i++) {
+			
 			String[] task = stratTasks.split("qwer");
 			tasks[i] = task[i].split("--");
 			int id = Integer.parseInt((tasks[i][0].split(":"))[1]);
@@ -211,12 +216,12 @@ public class Tarea {
 			boolean relevante = Boolean.parseBoolean((tasks[i][10].split(":"))[1]);
 			boolean urgente = Boolean.parseBoolean((tasks[i][11].split(":"))[1]);
 			String planificado = (tasks[i][12].split(":"))[1];
-			Tarea tarea = new Tarea (id,tipo,estadoI,estadoF,prioridad, resumen,tamaño, complejidad,propiedad, peticionario,relevante,urgente, planificado);
-			
+			Tarea tarea = new Tarea (id,tipo,estadoI,estadoF,prioridad, resumen,tamaño, complejidad,propiedad, peticionario,relevante,urgente, planificado);			
 			listaTareas.add(tarea);
 			
 			
 		}
+		
 		return listaTareas;
 	}
 

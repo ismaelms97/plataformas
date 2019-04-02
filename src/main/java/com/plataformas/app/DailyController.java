@@ -1,6 +1,7 @@
 package com.plataformas.app;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -39,9 +40,15 @@ public class DailyController {
 	public @ResponseBody String  saveDaily ( String stratDaily,Model model,HttpSession session) {	
 		synchronized (session) {
 			try {
-				dailyService.saveDaily(Daily.stringToObject(stratDaily));
+				List<Daily> listDaily =  Daily.stringToObject(stratDaily);				
+				//int idEstrategia  = (Integer) session.getAttribute("estrategiaID");
+				//Daily newDaily = null;
+				//newDaily.setEstrategiaId(idEstrategia);
+				//dailyService.saveDaily(newDaily,idEstrategia);
 				System.out.println("Daily   Guardada");
+				
 			}catch (Exception e) {
+				
 				System.out.println("error al guardar");
 			}
 

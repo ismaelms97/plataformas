@@ -9,6 +9,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="equipo")
 public class Equipo {
+	
 	private int Id;
 	private String name;
 	
@@ -43,13 +44,15 @@ public class Equipo {
 	}
 	
 	public static  List<Equipo> converFromDatabase(ResultSet rs,List<Equipo> teamList ) throws SQLException {
+		
 		if(rs.next()) {
+			
 			int id = rs.getInt("id");
 			String name = rs.getString("name");
 			Equipo equipo  = new Equipo(id,name);
-			teamList.add(equipo);
-			
+			teamList.add(equipo);			
 		}
+		
 		return teamList;
 	}
 	

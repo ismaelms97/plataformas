@@ -10,6 +10,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="estrategia")
 public class Estrategia {
+	
 	@Id
 	private int Id;
 	private String nombre;
@@ -87,7 +88,9 @@ public class Estrategia {
 	}
 	
 	public static  List<Estrategia> converFromDatabase(ResultSet rs,List<Estrategia> estrategiaList ) throws SQLException {
+		
 		while (rs.next()) {
+			
 			int id = rs.getInt("id");
 			String nombre = rs.getString("nombre");
 			String estado = rs.getString("estado");
@@ -97,6 +100,7 @@ public class Estrategia {
 			Estrategia estrategia = new Estrategia( id,nombre, estado,fechaInicio ,fechafin ,equipo_id);
 			estrategiaList.add(estrategia);
 		}
+		
 		return estrategiaList;
 	}
 	

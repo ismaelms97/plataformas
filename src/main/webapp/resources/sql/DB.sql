@@ -98,19 +98,3 @@ INSERT INTO user (username,password,equipo_id) values ('alejandro','1234',1);
 INSERT INTO user (username,password,equipo_id) values ('ismael','1234',1);
 INSERT INTO user (username,password,equipo_id) values ('german','1234',1);
 INSERT INTO user (username,password,equipo_id) values ('pepe','1234',2);
-
-
-
-INSERT INTO estrategia (nombre,estado,fechaInicio,fechaFin,equipo_id) values ('estrategia 1','en Pausa','2019-03','2019-04',1);
-INSERT INTO estrategia (nombre,estado,fechaInicio,fechaFin,equipo_id) values ('finalizada','Finalizada','2019-2-20','2019-2-27',1);
-
-INSERT INTO tarea (tipo,prioridad,resumen,tamaño,complejidad,propiedad,peticionario,relevante,urgente,planificado) values ('normal','alta','En resumen...','4','media','propiedad mia','peticion',true,true,'planificado');
-INSERT INTO tarea (tipo,prioridad,resumen,tamaño,complejidad,propiedad,peticionario,relevante,urgente,planificado) values ('normal','baja','En resumen...','6','alta','propiedad tuya','peticion',true,false,'planificado');
-
-INSERT INTO estrategia_tarea (estadoInicio,estadoFinal,tarea_id,estrategia_id) values ('En Curso (desarrollo)','aceptación a las pruebas',1,1);
-INSERT INTO estrategia_tarea (estadoInicio,estadoFinal,tarea_id,estrategia_id) values ('Pte.Cuantificar','en análisis',2,1);
-
-INSERT INTO daily (fecha,estrategia_id) values ('2019-03',1);
-
-INSERT INTO daily_tarea (daily_id,tarea_id,estadoActual,subEstadoActual) values (1,1,'en curso','trabajando');
-INSERT INTO daily_tarea (daily_id,tarea_id,estadoActual,subEstadoActual) values (1,2,'en curso','trabajando');

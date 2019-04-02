@@ -17,8 +17,11 @@ public class SessionResources {
 		List<Estrategia> listaEstrategias  = (List<Estrategia>) session.getAttribute("userStrategy");
 		
 		for (Estrategia estrategia : listaEstrategias) {
+			
 			System.out.println(estrategia.getId()+" == "+id);
+			
 			if(estrategia.getId() == Integer.parseInt(id)) {
+				
 				return true;
 			}
 		}
@@ -29,6 +32,7 @@ public class SessionResources {
 		
 				
 		if(session.getAttribute("userSession") == null) {
+			
 			return false;
 		}
 		

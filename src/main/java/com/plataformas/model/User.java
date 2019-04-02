@@ -8,6 +8,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="user")
 public class User {
+	
 	private int Id;
 	private String username;
 	private String password;
@@ -87,17 +88,19 @@ public class User {
 	}
 
 	public static User converFromDataBase(ResultSet rs) throws SQLException {
+		
 		User user = null;
+		
 		if(rs.next()) {
+			
 			int id = rs.getInt("id");
 			String username = rs.getString("username");
 			String password = rs.getString("password");
 			int equipo_id = rs.getInt("equipo_id");
 			String nombreEquipo = rs.getString("name");
-			user  = new User(id,username,password,equipo_id,nombreEquipo);
-
-			
+			user  = new User(id,username,password,equipo_id,nombreEquipo);			
 		}
+		
 		return user;
 	}
 
