@@ -41,31 +41,35 @@ public class EstrategiaController {
 	public  String showEstrategia(Model model,HttpSession session) {	
 
 		synchronized (session) {
+
 			try {
+
 				if (!sessionResources.checkUserSession(session)){
 
 					model.addAttribute("mensajeAcceso", "Acceso Denegado");
 
 					return "accessDenied";
-				
 
 				}else {
-					
+
 					User actualUser = (User) session.getAttribute("userSession");
 					List<Estrategia> listaEstrategias = estrategiaService.findEstrategiaById(actualUser.getEquipoId());	
 					model.addAttribute("listaEstrategia",listaEstrategias);
 					session.setAttribute("userStrategy", listaEstrategias);
 					model.addAttribute("estrategia", new Estrategia());
+
 					if( session.getAttribute("newEstrategia") != null) {
+
 						session.removeAttribute("newEstrategia");
 					}
-					model.addAttribute("nombreEquipo", " Nombre de equipo : "+actualUser.getNombreEquipo());
 
+					model.addAttribute("nombreEquipo", " Nombre de equipo : "+actualUser.getNombreEquipo());
 					model.addAttribute("greeting","Hola "+ actualUser.getUsername());
 					return "mainPanel";
-					
+
 				}
 			}catch (Exception e) {
+
 				System.out.println("Panel de control Error con session o con estrategias");
 				return "redirect:/";
 			}
@@ -77,7 +81,9 @@ public class EstrategiaController {
 	public  String findEstrategia(@PathVariable String id,Model model,HttpSession session) {	
 
 		synchronized (session) {
+
 			try {
+
 				if (!sessionResources.checkUserSession(session) || !sessionResources.checkUserStrategy(session,id)) {
 
 					model.addAttribute("mensajeAcceso", "Acceso Denegado");
@@ -87,15 +93,17 @@ public class EstrategiaController {
 
 					List<Tarea> tareas = estrategiaService.findTareasByEstrategia(Integer.parseInt(id));
 					model.addAttribute("listaTareas",tareas);
-
 					System.out.println("TAREAS COMPLETE");
 					return "plataforma";
 				}
 
 			}catch (NumberFormatException e) {
+
 				System.out.println("formato incorrecto en mostrarTareasEstrategia Controller");
 				return "mainPanel";
+
 			}catch (Exception e) {
+
 				System.out.println("otra error en mostrarTareasEstrategia Controller");
 				return "mainPanel";
 			}		
@@ -112,7 +120,6 @@ public class EstrategiaController {
 			session.setAttribute("newEstrategia", estrategia);
 			model.addAttribute("tarea", new Tarea());
 
-
 			return "plataforma";
 		}
 
@@ -122,34 +129,25 @@ public class EstrategiaController {
 	public @ResponseBody String saveEstrategia(String stratTasks ,Model model,HttpSession session) {	
 
 		synchronized (session) {
+
 			Estrategia newEstrategia = (Estrategia) session.getAttribute("newEstrategia");
 
 			try {
 
-				estrategiaService.saveEstrategia(newEstrategia);	
-				System.out.println("Estrategia   Guardada");
 				List<Tarea> listaTareas = Tarea.stringToObject(stratTasks);
-				estrategiaService.saveTarea(listaTareas);
-				System.out.println("Tarea Guardada");
-				estrategiaService.saveEstrategiaTarea(listaTareas);
-				System.out.println("Estrategia_Tarea Guardada");
+				estrategiaService.saveEstrategiaAndTarea(listaTareas,newEstrategia);
 
 			}catch (Exception e) {
+
 				System.out.println("error al guardar");
 			}
 		}
+
 		return "redirect:/estrategia/panelControl";
 
 
 	}
 
-	//	@PostMapping(value = "/updateEstrategia")
-	//	public String updateEstrategia(Model model) {	
-	//
-	//
-	//		return "mainPanel";
-	//
-	//	}
 	@PostMapping(value = "/deleteEstrategia")
 	public String deleteEstrategia(@ModelAttribute("estrategia") Estrategia estrategia,Model Model,HttpSession session) {
 		synchronized (session) {
@@ -157,8 +155,6 @@ public class EstrategiaController {
 				estrategiaService.deleteEstrategia(estrategia.getId());
 
 			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
