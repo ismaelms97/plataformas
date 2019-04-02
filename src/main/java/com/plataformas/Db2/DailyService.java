@@ -69,7 +69,7 @@ public class DailyService {
 	}
 
 	@Transactional
-	public void saveDaily(Daily daily,int estrategiaID ,List<Tarea> tareas) throws ClassNotFoundException{
+	public void saveDaily(Daily daily,int estrategiaID ,List<Tarea> tareas) throws ClassNotFoundException, SQLException{
 
 		initializeDriver();	
 		Connection con = null;
