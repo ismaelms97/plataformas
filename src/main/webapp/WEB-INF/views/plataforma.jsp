@@ -12,7 +12,6 @@
 
 	<i class="fa fa-filter fa-2x" id="filter" data-toggle="modal" data-target="#modalFiltrado"></i>
 	
-	<!-- <div id="suve">Suve</div> -->
 	<form:form method="POST" action="/estrategia/saveEstrategia">
 		<div class="button disabled" id="save">Guardar</div>
 	</form:form>
@@ -35,7 +34,8 @@
 				task.complejidad = "${tarea.complejidad}";
 				task.prioridad = "${tarea.prioridad}";
 				task.tamano = "${tarea.tamaño}";
-				inTasks.push(task);				
+				inTasks.push(task);			
+				console.log(task);
 			</script>
 	</c:forEach>
 	<div class="table-responsive table-bordered">

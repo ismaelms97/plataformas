@@ -16,20 +16,6 @@ body{
 	font-family: "Georgia";
 }
 
-/*########### Form ###########*/
-.formulario {
-	margin-left: 40%;
-	margin-top: 10%;
-}
-
-/* Toggle Password */
-#togglePasswd {
-	float: right;
-	margin-right: 10px;
-	margin-top: -25px;
-	position: relative;
-	z-index: 2;
-}
 /*########### RTC ###########*/
 .rect {
 	position: relative;
@@ -292,7 +278,7 @@ a:hover {
 /* Color para cuando el estado actual de la tarea sea el mismo que el estado final y el inicial */
 .sameEstadoIAF, .gradientGreyBlueOrange{
 	background-color: #dd8575 !important; /* For browsers that do not support gradients */
- 	background-image: linear-gradient(to right, #dbdbdb, #4485fd, #ffcf75); /* Standard syntax (must be last) */
+ 	background-image: linear-gradient(to right, #dbdbdb 20%, #4485fd, #ffcf75 85%); /* Standard syntax (must be last) */
 }
 /* Color para cuando la tarea tenga como estado actual su estado inicial */
 .sameEstadoInicialActual, .gradientGreyBlue{
@@ -306,4 +292,40 @@ a:hover {
 }
 .arrowDown{
 	text-align: right;
+}
+
+/*########### LOGIN FORM ###########*/
+.login-container{
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+.login-form-1{
+    padding: 5%;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+}
+.login-form-1 h3{
+    text-align: center;
+    color: #333;
+}
+.login-container form{
+    padding: 10%;
+}
+.login-form-1 .btnSubmit{
+    font-weight: 600;
+    color: #fff;
+    background-color: #0062cc;
+}
+.login-form-1 .ForgetPwd{
+    color: #0062cc;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+/* Toggle Password */
+#togglePasswd {
+	float: right;
+	margin-right: 10px;
+	margin-top: -25px;
+	position: relative;
+	z-index: 2;
 }
