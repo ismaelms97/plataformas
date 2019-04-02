@@ -18,21 +18,26 @@ import com.plataformas.model.Tarea;
 @Service
 public class EstrategiaService {
 
-	//private String url = "jdbc:db2://dashdb-txn-sbox-yp-lon02-01.services.eu-gb.bluemix.net:50001/BLUDB:user=rvg03272;password=0@vn6gg9jg7zqjb1;sslConnection=true;";
 	private String url = "jdbc:db2://dashdb-txn-sbox-yp-lon02-01.services.eu-gb.bluemix.net:50000/BLUDB";
 	private String dbUsername = "rvg03272";
 	private String dbPassword = "0@vn6gg9jg7zqjb1";
+
 	public void initializeDriver() throws ClassNotFoundException {
+
 		try {
-			Class.forName("com.ibm.db2.jcc.DB2Driver");  
+
+			Class.forName("com.ibm.db2.jcc.DB2Driver"); 
+
 		}catch (ClassNotFoundException e) {
+
 			System.out.println("Class driver not found");
+
 		}catch (Exception e) {
+
 			System.out.println("Unknow error with driver");
 		}
 
 	}
-
 
 	public List<Estrategia> findEstrategiaById(int idUser) throws ClassNotFoundException  {
 		List<Estrategia> estrategiaList = new ArrayList<Estrategia>();		
@@ -59,6 +64,7 @@ public class EstrategiaService {
 		}
 
 	}
+
 	public List<Tarea> findTareasByEstrategia(int idEstrategia) throws ClassNotFoundException  {
 		List<Tarea> tareaList = new ArrayList<Tarea>();		
 		initializeDriver();	     
@@ -67,9 +73,7 @@ public class EstrategiaService {
 			Connection con = DriverManager.getConnection(url,dbUsername,dbPassword);
 			con.setAutoCommit(false);
 			Statement  stmt = con.createStatement(); 
-			/*ResultSet rs = stmt.executeQuery("SELECT DISTINCT  T.id, T.tipo, T.estadoInicio, T.estadoFinal  FROM tarea T , estrategia E , estrategia_tarea ET"
-					+ " where T.id = ET.tarea_id AND  ET.estrategia_id = "+idEstrategia+"");
-			 */
+
 			ResultSet rs = stmt.executeQuery("select distinct T.* , ET.estadoInicio,ET.estadoFinal from tarea T , estrategia E , estrategia_tarea ET where T.id = ET.tarea_id AND ET.estrategia_id = "+idEstrategia+"");
 
 
@@ -85,29 +89,12 @@ public class EstrategiaService {
 			return tareaList;
 		}
 	}
-	@Transactional
-	public void saveEstrategia(Estrategia estrategia) throws ClassNotFoundException, SQLException {
-		initializeDriver();	    
-		try{
-			Connection con = DriverManager.getConnection(url,dbUsername,dbPassword);
-			con.setAutoCommit(false); 
-			Statement  stmt = con.createStatement(); 
-
-			int rs = stmt.executeUpdate("INSERT INTO estrategia (nombre,estado,fechaInicio,fechaFin,equipo_id) values "
-					+ "('"+estrategia.getNombre()+"','"+estrategia.getEstado()+"','"+estrategia.getFechaInicio()+"','"+estrategia.getFechaFin()+"',"+estrategia.getEquipoId()+")");
-			con.commit();
-		}catch (SQLException e) {
-			System.out.println("SQL Exeption  saveEstrategia:  code -> "+e.getErrorCode()+" more inf : "+e.getMessage());
-
-
-		}catch (Exception e) {
-			System.out.println("Error en saveEstrategia ");
-		}
-	}
 
 	public List<Estrategia> findEstrategiaByTeam(int idUser) throws ClassNotFoundException  {
+
 		List<Estrategia> estrategiaList = new ArrayList<Estrategia>();		
-		initializeDriver();	     
+		initializeDriver();	
+
 		try {
 
 			Connection con = DriverManager.getConnection(url,dbUsername,dbPassword);
@@ -115,31 +102,47 @@ public class EstrategiaService {
 			Statement  stmt = con.createStatement(); 
 			ResultSet rs = stmt.executeQuery("SELECT * FROM estrategia Es where Es.equipo_id = "+idUser+"");
 
-
 			return Estrategia.converFromDatabase(rs, estrategiaList);
 
 		} catch (SQLException e) {
+
 			System.err.println("SQL Exeption  findEstrategiaByTeam:  code -> "+e.getErrorCode());
 			System.err.println("more inf : "+e.getMessage()+" reason  -> "+e.getCause());
 			return estrategiaList;
 
 		}catch (Exception e) {
+
 			System.out.println("Error en findEstrategiaByTeam ");
 			return estrategiaList;
 		}
 
 	}
+
 	@Transactional
-	public void saveTarea(List<Tarea> tareas) throws ClassNotFoundException, SQLException {
-		initializeDriver();	    
+	public void saveEstrategiaAndTarea(List<Tarea> tareas,Estrategia estrategia) throws ClassNotFoundException, SQLException {
+
+		initializeDriver();	
+		Connection con = null;
+
 		try{
-			Connection con = DriverManager.getConnection(url,dbUsername,dbPassword);
-			con.setAutoCommit(false); 
 
+			con = DriverManager.getConnection(url,dbUsername,dbPassword);
+			con.setAutoCommit(false);
 
-			PreparedStatement  stmt = con.prepareStatement("INSERT INTO tarea (id,tipo,prioridad,resumen,tamaño,complejidad,propiedad,peticionario,relevante,urgente,planificado)"
+			String sql = "INSERT INTO estrategia (nombre,estado,fechaInicio,fechaFin,equipo_id) values "
+					+ "('"+estrategia.getNombre()+"','"+estrategia.getEstado()+"','"+estrategia.getFechaInicio()+"','"+estrategia.getFechaFin()+"',"+estrategia.getEquipoId()+")";
+
+			PreparedStatement  stmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS); 
+			stmt.executeUpdate();
+			ResultSet rs = stmt.getGeneratedKeys();
+			rs.next();
+			int lastIndex = rs.getInt(1);
+
+			stmt = con.prepareStatement("INSERT INTO tarea (id,tipo,prioridad,resumen,tamaño,complejidad,propiedad,peticionario,relevante,urgente,planificado)"
 					+ " values (?,?,?,?,?,?,?,?,?,?,?)");
+
 			for (Tarea tarea : tareas) {
+
 				stmt.setInt(1, tarea.getId());
 				stmt.setString(2, tarea.getTipo());
 				stmt.setString(3, tarea.getPrioridad());
@@ -153,34 +156,23 @@ public class EstrategiaService {
 				stmt.setString(11, tarea.getPlanificado());
 
 				try {
+
 					stmt.executeUpdate();
-				}catch (Exception e) {
-					System.out.println("ha pedado en execute UPdATE");
+
+				}catch  (Exception e) {
+
+					System.out.println("Esta tarea ya existe");
 				}
 			}
-			con.commit();
 
+			stmt = con.prepareStatement("INSERT INTO estrategia_tarea (estadoInicio,estadoFinal,tarea_id,estrategia_id) values (?,?,?,?)");
 
-
-		}catch (SQLException e) {
-			System.out.println("SQL Exeption  savaTarea:  code -> "+e.getErrorCode()+" more inf : "+e.getMessage());
-
-
-		}catch (Exception e) {
-			System.out.println("Error en savaTarea ");
-		}
-	}
-	@Transactional
-	public void saveEstrategiaTarea(List<Tarea> tareas) throws ClassNotFoundException, SQLException {
-		initializeDriver();	
-		try{
-			Connection con = DriverManager.getConnection(url,dbUsername,dbPassword);
-			con.setAutoCommit(false); 
-			PreparedStatement  stmt = con.prepareStatement("INSERT INTO estrategia_tarea (estadoInicio,estadoFinal,tarea_id,estrategia_id) values (?,?,?,(select max(id) from estrategia))");
 			for (Tarea tarea : tareas) {
+
 				stmt.setString(1, tarea.getEstadoInicio());
 				stmt.setString(2, tarea.getEstadoFinal());
 				stmt.setInt(3, tarea.getId());
+				stmt.setInt(4, lastIndex);
 				stmt.executeUpdate();
 				System.out.println(" intermedia guardada ");
 			}
@@ -188,34 +180,34 @@ public class EstrategiaService {
 			con.commit();
 
 		}catch (SQLException e) {
-			System.out.println("SQL Exeption  saveEstrategiaTarea:  code -> "+e.getErrorCode()+" more inf : "+e.getMessage());
+
+			System.out.println("SQL Exeption  saveEstrategiaAndTarea:  code -> "+e.getErrorCode()+" more inf : "+e.getMessage());
+			con.rollback();
 
 
-		}catch (Exception e) {
-			System.out.println("Error en saveEstrategiaTarea ");
+
 		}
 	}
 
 	@Transactional
-	public void deleteEstrategia(int IDestrategia) throws ClassNotFoundException, SQLException {
-		initializeDriver();	    
+	public void deleteEstrategia(int IDestrategia) throws ClassNotFoundException {
+
+		initializeDriver();	 
+
 		try{
 
 			Connection con = DriverManager.getConnection(url,dbUsername,dbPassword);
 			con.setAutoCommit(false); 
-
 			Statement  stmt  = con.createStatement(); 
 			stmt.execute("DELETE FROM estrategia where id ="+IDestrategia);
-
-
 			con.commit();
 
-
 		}catch (SQLException e) {
+
 			System.out.println("SQL Exeption  deleteEstrategia:  code -> "+e.getErrorCode()+" more inf : "+e.getMessage());
 
-
 		}catch (Exception e) {
+
 			System.out.println("Error en savaTarea ");
 		}
 	}
