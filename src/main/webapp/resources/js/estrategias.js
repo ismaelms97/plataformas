@@ -6,7 +6,6 @@ function dragDrop(){
 	// Con este codigo conseguimos que se mueva cada tarea unicamente en su eje x, y
 	// a su vez que cuando los dejes en el sitio, cambien de color
 	$(function () {
-
 		$(".rect").draggable(
 			{
 				axis: "x",
@@ -205,7 +204,8 @@ function saveStrategy() {
 		data: {
 			stratTasks: tasksToString
 		}, success: function (data) {
-			console.log("success")
+			console.log("success");
+			location.href = "/estrategia/panelControl";
 
 		}
 	});
@@ -237,7 +237,7 @@ function orderByPrio(arr) {
 
 		return 0;
 	})
-	console.log(arr)
+//	console.log(arr)
 	var orderedArr = []
 	var prio = ["arr[i].urgente", "arr[i].complejidad"]
 	var prioVal = ["Sí", "Sin asignar"]
@@ -257,14 +257,14 @@ function orderByPrio(arr) {
 		} 
 
 	}
-	console.log(orderedArr)
+//	console.log(orderedArr)
 	return orderedArr;
 }
 
 function exists(arr, val){
 	for(var x = 0; x < arr.length; x++){
 		if(arr[x].id == val.id){
-			console.log(val.id)
+//			console.log(val.id)
 			return true;
 		}
 	}

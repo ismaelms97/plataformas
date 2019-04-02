@@ -80,7 +80,6 @@ $(document).ready(function() {
 			}
 			
 			emptyTable();
-			console.log(arrayTasksBackup);
 			drawTable(arrayTasksBackup);
 			}, false);
 		})

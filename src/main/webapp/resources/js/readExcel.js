@@ -87,8 +87,8 @@ var process_wb = (function () {
 				task.estadoFinal = "";
 				
 				// Hacemos comprovaciones
-				if(JSON.parse(output).Tareas[i][complejPos] != null){
-					task.complejidad = JSON.parse(output).Tareas[i][complejPos]					
+				if(JSON.parse(output).Tareas[i][complejPos] != null && JSON.parse(output).Tareas[i][complejPos].toLowerCase() != "sin asignar"){
+					task.complejidad = JSON.parse(output).Tareas[i][complejPos].substring(0,1)	
 				}else{
 					task.complejidad = 0;
 				}
@@ -111,7 +111,10 @@ var process_wb = (function () {
 		}
 		document.getElementById("loadAnimation").style.display =  "none"; //Hide load animation
 		console.log(tasks)
-		drawTable(tasks);
+		if(inTasks.length >= 1){
+			tasks = strategyFilter(tasks);
+		}
+		drawTable(tasks, false);
 	};
 })();
 

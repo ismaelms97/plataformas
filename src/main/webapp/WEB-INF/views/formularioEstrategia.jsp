@@ -54,7 +54,6 @@ $('#estrategiaForm').on('shown.bs.modal', function () {
 		  
 		  if(hoy <= fecha){
 			  $("#crearEstrategia").prop( "disabled", false );
-			  console.log("Es mayor");
 		  }else{
 			  $("#crearEstrategia").prop( "disabled", true );
 		  }

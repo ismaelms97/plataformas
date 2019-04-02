@@ -39,6 +39,8 @@ body{
 	border-radius: 5%;
 	z-index: 10;
 	cursor: pointer;
+	display: inline-block;
+	width: 150px;
 }
 
 .tamano {
@@ -56,14 +58,10 @@ body{
 }
 
 /*########### Clone RTC and Extra Classes ###########*/
-.orange {
-	background-color: #ffcf75;
-}
-
 .clone {
 	position: relative;
 	background-color: #dbdbdb;
-	width: 167px;
+	width: 150px;
 	padding: 20px 50px;
 	border: 2px solid darkgrey;
 	border-radius: 5%;
@@ -266,12 +264,17 @@ a:hover {
 }
 
 /*########### Daily ###########*/
+
 .faseInicialDaily, .grey{
-	background-color: #d7dde1;
+	background-color: #dbdbdb;
 }
 
 .faseIntermediaDaily, .cyan{
 	background-color: #4485fd;
+}
+
+.faseFinal, .orange {
+	background-color: #ffcf75;
 }
 
 .faseFinalDaily, .green{
@@ -284,6 +287,17 @@ a:hover {
 
 .subEstadoPausado, .yellow{
 	background-color: #ffff53;
+}
+
+/* Color para cuando el estado actual de la tarea sea el mismo que el estado final y el inicial */
+.sameEstadoIAF, .gradientGreyBlueOrange{
+	background-color: #dd8575 !important; /* For browsers that do not support gradients */
+ 	background-image: linear-gradient(to right, #dbdbdb, #4485fd, #ffcf75); /* Standard syntax (must be last) */
+}
+/* Color para cuando la tarea tenga como estado actual su estado inicial */
+.sameEstadoInicialActual, .gradientGreyBlue{
+	background-color: #f55cde !important; /* For browsers that do not support gradients */
+	background-image: linear-gradient(to right, #dbdbdb 30%, #4485fd); /* Standard syntax (must be last) */
 }
 
 /*########### FILTER ###########*/
