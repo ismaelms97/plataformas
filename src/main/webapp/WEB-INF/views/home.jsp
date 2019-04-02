@@ -21,7 +21,7 @@
 					</div>
 					<div class="form-group">
 						<form:input type="password" cssClass="form-control"
-							placeholder="Introduce Contraseña" path="password" id="passwd" />
+							placeholder="Introduce Contraseña *" path="password" id="passwd" />
 						<i class="fa fa-fw fa-eye" id="togglePasswd"></i>
 					</div>
 					<button type="submit" id="loginBtn"

@@ -206,7 +206,6 @@ function saveStrategy() {
 		}, success: function (data) {
 			console.log("success");
 			location.href = "/estrategia/panelControl";
-
 		}
 	});
 }

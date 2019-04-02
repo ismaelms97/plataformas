@@ -117,12 +117,12 @@ function drawRTC(array, pos, db) {
 
 			}else if(array[pos].estado.toLowerCase().startsWith(inTasks[pos].estado.toLowerCase())){
 
-				// GRIS/AZUL
+				// GRIS/AZUL Inicio == Actual
 				classes += ' gradientGreyBlue';
 
 			}else{
 
-				//AZUL
+				//AZUL, resto
 				classes += ' blue';
 			}
 		}
@@ -150,7 +150,7 @@ function drawRTC(array, pos, db) {
 		verDetallesRTC(array, pos);
 	})
 
-	tooltip()
+	tooltip();
 }
 
 /** 
