@@ -3,6 +3,7 @@ package com.plataformas.app;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import com.plataformas.Db2.EstrategiaService;
 import com.plataformas.model.Estrategia;
 import com.plataformas.model.Tarea;
 import com.plataformas.model.User;
+import com.plataformas.recursos.SessionResources;
 @Controller
 @RequestMapping(value = "/estrategia")
 public class EstrategiaController {
@@ -26,7 +28,8 @@ public class EstrategiaController {
 
 	@Autowired
 	EstrategiaService estrategiaService;
-
+	@Autowired
+	SessionResources sessionResources;
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 * @throws SQLException 
@@ -39,19 +42,29 @@ public class EstrategiaController {
 
 		synchronized (session) {
 			try {
+				if (!sessionResources.checkUserSession(session)){
 
-				User actualUser = (User) session.getAttribute("userSession");
-				List<Estrategia> listaEstrategias = estrategiaService.findEstrategiaById(actualUser.getEquipoId());	
-				model.addAttribute("listaEstrategia",listaEstrategias);
-				model.addAttribute("estrategia", new Estrategia());
-				if( session.getAttribute("newEstrategia") != null) {
-					session.removeAttribute("newEstrategia");
+					model.addAttribute("mensajeAcceso", "Acceso Denegado");
+
+					return "accessDenied";
+				
+
+				}else {
+					
+					User actualUser = (User) session.getAttribute("userSession");
+					List<Estrategia> listaEstrategias = estrategiaService.findEstrategiaById(actualUser.getEquipoId());	
+					model.addAttribute("listaEstrategia",listaEstrategias);
+					session.setAttribute("userStrategy", listaEstrategias);
+					model.addAttribute("estrategia", new Estrategia());
+					if( session.getAttribute("newEstrategia") != null) {
+						session.removeAttribute("newEstrategia");
+					}
+					model.addAttribute("nombreEquipo", " Nombre de equipo : "+actualUser.getNombreEquipo());
+
+					model.addAttribute("greeting","Hola "+ actualUser.getUsername());
+					return "mainPanel";
+					
 				}
-				model.addAttribute("nombreEquipo", " Nombre de equipo : "+actualUser.getNombreEquipo());
-
-				model.addAttribute("greeting","Hola "+ actualUser.getUsername());
-				return "mainPanel";
-
 			}catch (Exception e) {
 				System.out.println("Panel de control Error con session o con estrategias");
 				return "redirect:/";
@@ -65,11 +78,20 @@ public class EstrategiaController {
 
 		synchronized (session) {
 			try {
-				List<Tarea> tareas = estrategiaService.findTareasByEstrategia(Integer.parseInt(id));
-				model.addAttribute("listaTareas",tareas);
+				if (!sessionResources.checkUserSession(session) || !sessionResources.checkUserStrategy(session,id)) {
 
-				System.out.println("TAREAS COMPLETE");
-				return "plataforma";
+					model.addAttribute("mensajeAcceso", "Acceso Denegado");
+
+					return "accessDenied";
+				}else {
+
+					List<Tarea> tareas = estrategiaService.findTareasByEstrategia(Integer.parseInt(id));
+					model.addAttribute("listaTareas",tareas);
+
+					System.out.println("TAREAS COMPLETE");
+					return "plataforma";
+				}
+
 			}catch (NumberFormatException e) {
 				System.out.println("formato incorrecto en mostrarTareasEstrategia Controller");
 				return "mainPanel";
@@ -121,13 +143,13 @@ public class EstrategiaController {
 
 	}
 
-//	@PostMapping(value = "/updateEstrategia")
-//	public String updateEstrategia(Model model) {	
-//
-//
-//		return "mainPanel";
-//
-//	}
+	//	@PostMapping(value = "/updateEstrategia")
+	//	public String updateEstrategia(Model model) {	
+	//
+	//
+	//		return "mainPanel";
+	//
+	//	}
 	@PostMapping(value = "/deleteEstrategia")
 	public String deleteEstrategia(@ModelAttribute("estrategia") Estrategia estrategia,Model Model,HttpSession session) {
 		synchronized (session) {
