@@ -5,8 +5,8 @@ $(document).ready(function(){
 	estados = [];
 	rellenarEstados();
 	inputTasks();
-	
-	
+
+
 	if(document.getElementById("formContent")){
 
 		document.getElementById("butonDestroy").style.visibility = "hidden";
@@ -36,7 +36,6 @@ function inputTasks() {
 	try {
 		if(inTasks.length > 0){
 			drawTable(inTasks, true);
-			console.log("enter")
 		}
 
 	} catch (e) {
@@ -44,70 +43,47 @@ function inputTasks() {
 
 	}
 }
-
+/**
+ * Función para pintar la tabla
+ * */
 function drawTable(array , db) {
+//	ORdenamos el array por prioridad, 
 	array = orderByPrio(array);
-	if (array.length >= 1) {
 
-
-		for (var i = 0; i < array.length; i++) {
-			var tr = document.createElement("tr");
-			document.getElementsByTagName("TBODY")[0].appendChild(tr);
-			for (var j = 0; j < 10; j++) {
-				var el = document.createElement("td");
-				el.setAttribute("class", estados[j].replace(/\s/g, "-"));
-				document.getElementsByTagName("TR")[i + 1].appendChild(el);
-			} 
-
-			drawRTC(array, i, db);
-		}
-
-
-		if(!db){
-			// creamos el clon de los RTC
-			if(inTasks.length > 0){
-				
-				for (var i = 0; i < inTasks.length; i++) {
-					if(inTasks[i].estadoFinal == inTasks[i].estado && array[i].estado == inTasks[i].estado){
-						// Tricolor, inicio == Final, no se mueve Tarea
-					}else if(array[i].estado == inTasks[i].estadoFinal){
-						// Verde, COMPLETADO
-					}else if(array[i].estado == inTasks[i].estado){
-						// GRIS/AZUL
-					}else{
-						//AZUL
-					}
-				}
-				
-			}else{
-
-				var rect = document.getElementsByClassName("rect");
-				for (var i = 0; i < rect.length; i++) {
-					var el = rect[i];
-					var cln = $(el).clone();
-					cln.attr("class", "clone");
-					$(el).parent().append(cln);
-					$(cln).css("display", "none");
-				}
+	// PIntamos la tabla
+	for (var i = 0; i < array.length; i++) {
+		var tr = document.createElement("tr");
+		document.getElementsByTagName("TBODY")[0].appendChild(tr);
+		for (var j = 0; j < 10; j++) {
+			if(document.getElementsByTagName("TR")[i+1].children.length != 10){
+				var td = document.createElement("td");
+				td.setAttribute("class", estados[j].replace(/\s/g, "-"));
+				document.getElementsByTagName("TR")[i + 1].appendChild(td);
 			}
-			
-		} else {
+		} 
+		// Pintamos los RTC
+		drawRTC(array, i, db);
+	}
 
-			// creamos el clon de los RTC
-			var rect = document.getElementsByClassName("rect");
-			for (var i = 0; i < rect.length; i++) {
-				var el = rect[i];
-				var cln = $(el).clone();
-				cln.attr("class", "clone orange");
-				$(el).parent().siblings("."+array[i].estadoFinal.replace(/\s/g, "-")).append(cln);
-				console.log(array[i].estadoFinal);
-				$(cln).css("display", "inline-block");
 
-			}
+	if(db){
+
+		// CLON ESTADO FINAL RECOGIDO DE BASE DE DATOS
+		var rect = document.getElementsByClassName("rect");
+		for (var i = 0; i < rect.length; i++) {
+			var el = rect[i];
+			var cln = $(el).clone();
+			cln.attr("class", "clone orange");
+			$(el).parent().siblings("."+array[i].estadoFinal.replace(/\s/g, "-")).append(cln);
+			$(cln).css("display", "inline-block");
 		}
 	}
 
 }
+
+/**
+ * Función para pintar los RTC 
+ * */
 function drawRTC(array, pos, db) {
 	var estadoActual = 0;
 
@@ -119,18 +95,65 @@ function drawRTC(array, pos, db) {
 			}
 		}
 	}
-	
-//Solucionar problema con onclick event, no nos da ningun valor
-	document.getElementsByTagName("TR")[pos + 1].children[estadoActual].innerHTML = '<div class="rect" data-posInitial="' + estadoActual + '" data-rtc="' + (pos + 1) + '" title="'+ array[pos].resumen +'" data-placement="left" onclick="verDetallesRTC(\'' + array + '\',' + pos + ');">'
-	+ '<small class="tamano">'+ array[pos].tamano + '</small> '+ array[pos].id + ' <small class="complejidad">'+ array[pos].complejidad + '</small></div>';
+
+
+	var classes = 'rect';
 
 	if(!db){
+
+		// creamos el clon de los RTC
+		if(inTasks.length > 0){
+			if(inTasks[pos].estadoFinal == inTasks[pos].estado && array[pos].estado == inTasks[pos].estado){
+
+				// Tricolor, inicio == Actual == Final
+				classes += ' gradientGreyBlueOrange';
+
+			}else if(array[pos].estado == inTasks[pos].estadoFinal){
+
+				// Verde, COMPLETADO
+				classes += ' green';
+
+			}else if(array[pos].estado == inTasks[pos].estado){
+
+				// GRIS/AZUL
+				classes += ' gradientGreyBlue';
+
+			}else{
+
+				//AZUL
+				classes += ' blue';
+			}
+		}
+	}
+
+//	Solucionar problema con onclick event, no nos da ningun valor
+	document.getElementsByTagName("TR")[pos + 1].children[estadoActual].innerHTML = '<div class="'+classes+'" data-posInitial="' + estadoActual + '" data-rtc="' + (pos + 1) + '" title="'+ array[pos].resumen +'" data-placement="left">'
+	+ '<small class="tamano">'+ array[pos].tamano + '</small> '+ array[pos].id + ' <small class="complejidad">'+ array[pos].complejidad + '</small></div>';
+
+
+
+
+	if(inTasks.length <= 0 && !db){
+
+		var el = document.getElementsByClassName("rect")[pos];
+		var cln = $(el).clone();
+		cln.attr("class", "clone");
+		$(el).parent().append(cln);
+		$(cln).css("display", "none");
+
 		dragDrop();
 	}
+	// Ejecutamos la funcion para mostrar los detalles
+	document.getElementsByTagName("TR")[pos + 1].children[estadoActual].addEventListener("click", function(){
+		verDetallesRTC(array, pos);
+	})
+
 	tooltip()
 }
 
-/* Función que muestra la tooltip en html */
+/** 
+ * Función que muestra la tooltip en html 
+ */
 function tooltip(){
 	$( function() {
 		$( ".rect, .clone" ).tooltip();
@@ -164,8 +187,8 @@ function filter(array, filtros){
 
 /* Función que sirve para filtrar las tareas, versión 1.0, solo filtra por el tipo de tareas: Incidencias, Tareas, Consulta. */
 function strategyFilter(array){
-	
-	var filtrado = array.filter(item => inTasks.includes(item.id));
+
+	var filtrado = array.filter(item => inTasks.find(item2 => item.id === item2.id));
 	return filtrado;
 }
 
@@ -178,7 +201,6 @@ function emptyTable(){
 function getNameEstrategia(){
 	$(document).ready(function(){
 		$("#estartegiasCard").on("click", function(e) {
-			console.log(e.target);
 			$(".mainTitle").html(e.target.innerHTML.trim());
 		})
 	})
