@@ -9,13 +9,13 @@ $(document).ready(function(){
 
 	if(document.getElementById("formContent")){
 
-		document.getElementById("butonDestroy").style.visibility = "hidden";
-		document.getElementById("buttonHome").style.visibility = "hidden";
+		document.getElementById("butonDestroy").style.display = "none";
+		document.getElementById("buttonHome").style.display = "none";
 
 	}else{
 
-		document.getElementById("butonDestroy").style.visibility = "visible";
-		document.getElementById("buttonHome").style.visibility = "visible";
+		document.getElementById("butonDestroy").style.display = "initial";
+		document.getElementById("buttonHome").style.display = "initial";
 
 	}
 
@@ -36,6 +36,7 @@ function inputTasks() {
 	try {
 		if(inTasks.length > 0){
 			drawTable(inTasks, true);
+
 		}
 
 	} catch (e) {
@@ -103,17 +104,18 @@ function drawRTC(array, pos, db) {
 
 		// creamos el clon de los RTC
 		if(inTasks.length > 0){
-			if(inTasks[pos].estadoFinal == inTasks[pos].estado && array[pos].estado == inTasks[pos].estado){
+			if(inTasks[pos].estadoFinal.toLowerCase().startsWith(inTasks[pos].estado.toLowerCase()) &&
+					array[pos].estado.toLowerCase().startsWith(inTasks[pos].estado.toLowerCase())){
 
 				// Tricolor, inicio == Actual == Final
 				classes += ' gradientGreyBlueOrange';
 
-			}else if(array[pos].estado == inTasks[pos].estadoFinal){
+			}else if(array[pos].estado.toLowerCase().startsWith(inTasks[pos].estadoFinal.toLowerCase())){
 
 				// Verde, COMPLETADO
 				classes += ' green';
 
-			}else if(array[pos].estado == inTasks[pos].estado){
+			}else if(array[pos].estado.toLowerCase().startsWith(inTasks[pos].estado.toLowerCase())){
 
 				// GRIS/AZUL
 				classes += ' gradientGreyBlue';

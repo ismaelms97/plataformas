@@ -80,7 +80,7 @@ $(document).ready(function() {
 			}
 			
 			emptyTable();
-			drawTable(arrayTasksBackup);
+			drawTable(arrayTasksBackup, false);
 			}, false);
 		})
 	})

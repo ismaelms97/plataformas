@@ -35,7 +35,8 @@
 				task.complejidad = "${tarea.complejidad}";
 				task.prioridad = "${tarea.prioridad}";
 				task.tamano = "${tarea.tamaño}";
-				inTasks.push(task);				
+				inTasks.push(task);			
+				console.log(task);
 			</script>
 	</c:forEach>
 	<div class="table-responsive table-bordered">
