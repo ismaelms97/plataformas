@@ -60,6 +60,7 @@ public class DailyController {
 		return "mainPanel";
 
 	}
+	
 	@PostMapping(value = "/saveDaily")
 	public @ResponseBody String  saveDaily ( String stratDaily,Model model,HttpSession session) {
 
@@ -67,8 +68,7 @@ public class DailyController {
 
 			try {
 
-				List<Daily> listDaily =  Daily.stringToObject(stratDaily);	
-				
+				List<Daily> listDaily =  Daily.stringToObject(stratDaily);					
 				int idEstrategia  = (Integer) session.getAttribute("estrategiaID");
 				Daily newDaily = null;
 				newDaily.setEstrategiaId(idEstrategia);

@@ -23,10 +23,6 @@ public class Daily {
 	public Daily() {
 		super();
 	}
-	
-	
-
-	
 
 	public Daily(int id, String fecha, int estrategiaId, String estadoActual, String subEstadoActual) {
 		super();
@@ -37,10 +33,6 @@ public class Daily {
 		this.subEstadoActual = subEstadoActual;
 	}
 
-
-
-
-
 	public Daily(String fecha, int estrategiaId, String estadoActual, String subEstadoActual) {
 		super();
 		this.fecha = fecha;
@@ -49,19 +41,12 @@ public class Daily {
 		this.subEstadoActual = subEstadoActual;
 	}
 
-
-
-
-
 	public Daily(String fecha, String estadoActual, String subEstadoActual) {
 		super();
 		this.fecha = fecha;
 		this.estadoActual = estadoActual;
 		this.subEstadoActual = subEstadoActual;
 	}
-
-
-
 
 
 	public int getId() {
@@ -94,15 +79,9 @@ public class Daily {
 	}
 
 
-
-
-
 	public void setEstadoActual(String estadoActual) {
 		this.estadoActual = estadoActual;
 	}
-
-
-
 
 
 	public String getSubEstadoActual() {
@@ -110,15 +89,9 @@ public class Daily {
 	}
 
 
-
-
-
 	public void setSubEstadoActual(String subEstadoActual) {
 		this.subEstadoActual = subEstadoActual;
 	}
-
-
-
 
 
 	public static  List<Daily> converFromDatabase(ResultSet rs,List<Daily> dailyList ) throws SQLException {

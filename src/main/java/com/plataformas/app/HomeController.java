@@ -1,14 +1,11 @@
 package com.plataformas.app;
 
-import java.net.PasswordAuthentication;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,12 +13,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import com.plataformas.Db2.EstrategiaService;
 import com.plataformas.Db2.UserService;
 import com.plataformas.model.Estrategia;
 import com.plataformas.model.User;
-import com.plataformas.recursos.SessionResources;
 
 
 /**
@@ -59,14 +54,13 @@ public class HomeController {
 		String mensaje = "";
 
 		try{
-			
-			session = request.getSession();
+
 			newUser = userService.findByUsername(user.getUsername());
 			user.setPassword(User.encrypt(user.getPassword()));
-		
-		
+
 			if(newUser.getPassword().equals(user.getPassword())) {
 
+				session = request.getSession();
 				session.setAttribute("userSession", newUser);
 				USessions.add(newUser);	
 				model.addAttribute("greeting","Hola "+ user.getUsername());
@@ -89,7 +83,9 @@ public class HomeController {
 
 			mensaje = "No hay conexion";
 		}
+
 		if(userExist) {
+
 			try {
 
 				List<Estrategia> listaEstrategias = estrategiaService.findEstrategiaById(newUser.getEquipoId());
@@ -99,7 +95,8 @@ public class HomeController {
 			}catch (Exception e) {
 
 				System.out.println("listaEstrategia , no se ha encontrado...");
-			}			
+			}	
+
 			return "mainPanel";
 
 		}else {		
@@ -107,7 +104,6 @@ public class HomeController {
 			model.addAttribute("errorMsg",mensaje);
 			return  "home";
 		}
-
 	}
 
 	@PostMapping(value = "/closeSession")
@@ -119,17 +115,5 @@ public class HomeController {
 		}
 
 		return "redirect:/";
-
 	}
-
-
-	@GetMapping(value = "/excel")
-	public String login(Model model) {		
-
-		/* AQUI va el codigo para comprobar user en la base de datos. */
-
-		model.addAttribute("greeting","Hola ");
-		return "excelreader";
-	}
-
 }

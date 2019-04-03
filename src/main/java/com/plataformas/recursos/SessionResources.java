@@ -1,7 +1,5 @@
 package com.plataformas.recursos;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;

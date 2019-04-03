@@ -202,13 +202,11 @@ public class Tarea {
 			String[] task = stratTasks.split("qwer");
 			tasks[i] = task[i].split("--");
 			int id = Integer.parseInt((tasks[i][0].split(":"))[1]);
-			String tipo = (tasks[i][1].split(":"))[1];
-			
+			String tipo = (tasks[i][1].split(":"))[1];			
 			String estadoI = (tasks[i][2].split(":"))[1];
 			String estadoF = (tasks[i][3].split(":"))[1];
 			String prioridad = (tasks[i][4].split(":"))[1];
-			String resumen = (tasks[i][5].split(":"))[1];
-			
+			String resumen = (tasks[i][5].split(":"))[1];			
 			String tamaño = (tasks[i][6].split(":"))[1];
 			String complejidad = (tasks[i][7].split(":"))[1];
 			String propiedad = (tasks[i][8].split(":"))[1];

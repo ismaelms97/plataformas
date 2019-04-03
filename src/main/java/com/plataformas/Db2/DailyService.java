@@ -9,45 +9,29 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.plataformas.model.Daily;
 import com.plataformas.model.Estrategia;
 import com.plataformas.model.Tarea;
+import com.plataformas.recursos.DbResources;
 
 @Service
 public class DailyService {
 
-	private String url = "jdbc:db2://dashdb-txn-sbox-yp-lon02-01.services.eu-gb.bluemix.net:50000/BLUDB";
-	private String dbUsername = "rvg03272";
-	private String dbPassword = "0@vn6gg9jg7zqjb1";
+	@Autowired
+	DbResources  dbResources;
 	
-	public void initializeDriver() throws ClassNotFoundException {
-		
-		try {
-			
-			Class.forName("com.ibm.db2.jcc.DB2Driver");  
-			
-		}catch (ClassNotFoundException e) {
-			
-			System.out.println("Class driver not found");
-			
-		}catch (Exception e) {
-			
-			System.out.println("Unknow error with driver");
-		}
-
-	}
-
-	public List<Daily> findDailyById(int idEstrategia) throws ClassNotFoundException  {
+	public List<Daily> findDailyById(int idEstrategia){
 		
 		List<Daily> dailyList = new ArrayList<Daily>();		
-		initializeDriver();	  
+		
 		
 		try {
 
-			Connection con = DriverManager.getConnection(url,dbUsername,dbPassword);
+			Connection con = dbResources.getConection();
 			con.setAutoCommit(false);
 			Statement  stmt = con.createStatement(); 
 			ResultSet rs = stmt.executeQuery("SELECT * FROM daily D where D.estrategia_id = "+idEstrategia+"");
@@ -69,14 +53,13 @@ public class DailyService {
 	}
 
 	@Transactional
-	public void saveDaily(Daily daily,int estrategiaID ,List<Tarea> tareas) throws ClassNotFoundException, SQLException{
+	public void saveDaily(Daily daily,int estrategiaID ,List<Tarea> tareas) throws  SQLException{
 
-		initializeDriver();	
 		Connection con = null;
 
 		try{
 
-			con = DriverManager.getConnection(url,dbUsername,dbPassword);
+			con = dbResources.getConection();
 			con.setAutoCommit(false);
 
 			String sql = "INSERT INTO daily (fecha,estrategia_id) values "
@@ -92,11 +75,11 @@ public class DailyService {
 			stmt = con.prepareStatement("INSERT INTO daily_tarea (daily_id,tarea_id,estadoActual,subEstadoActual) values (?,?,?,?)");
 
 			for (Tarea tarea : tareas) {
+				
 				stmt.setInt(1, lastIndex);
 				stmt.setInt(2, tarea.getId());
 				stmt.setString(2, tarea.getEstadoInicio());
 				stmt.setString(2, tarea.getEstadoFinal());
-
 				stmt.executeUpdate();
 				System.out.println(" intermedia guardada ");
 			}
