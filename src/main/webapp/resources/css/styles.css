@@ -8,7 +8,7 @@ html, body {
 body{
 	overflow-x: hidden;
 }
-/* Titulo */
+/* Titulo ESTRATEGIA*/
 .mainTitle {
 	font-size: 5em;
 	color: blue;
@@ -151,12 +151,11 @@ td .ui-selected {
 	text-align:center;
 	font:20pt bold,"Vollkorn";color:#bbb;
 	cursor: pointer;
-	/*background: lightblue;*/
 	width: 100%;
 }
 
 
-/*########### Load animation ###########*/
+/*########### ANIMACIÓN CARGA ###########*/
 
 .lds-dual-ring {
  	display: inline-block; 
@@ -194,7 +193,7 @@ td .ui-selected {
 	100% {transform: rotate(360deg);}
 }
 
-/*########### Cartas de estrategia ###########*/
+/*########### ESTRATEGIAS ###########*/
 .cartas{
 	flex-direction: row !important;
 	flex-wrap: wrap;
@@ -203,7 +202,6 @@ td .ui-selected {
 	margin: 0 2% 1% 0;
 }
 .estartegiasCard{
-	/*background-color: lime;*/
 	border-radius: 5%;
 	padding: 20px;
 	width: 187.52px;
@@ -249,21 +247,21 @@ a:hover {
 	font-size:18px;
 }
 
-/*########### Daily ###########*/
+/*########### ESTADOS Y DAILY ###########*/
 
-.faseInicialDaily, .grey{
+.estadoInicialDaily, .grey{
 	background-color: #dbdbdb;
 }
 
-.faseIntermediaDaily, .cyan{
+.estadoActualDaily, .blue{
 	background-color: #4485fd;
 }
 
-.faseFinal, .orange {
+.estadoFinal, .orange {
 	background-color: #ffcf75;
 }
 
-.faseFinalDaily, .green{
+.completadoTareaDaily, .green{
 	background-color: #79f79e;
 }
 
@@ -290,10 +288,18 @@ a:hover {
 #filter{
 	cursor:pointer;
 }
-.arrowDown{
-	text-align: right;
+
+.card-header .accordion-toggle::after {
+	font-family: 'Glyphicons Halflings';  /* essential for enabling glyphicon */
+    content: "\e114";    /* adjust as needed, taken from bootstrap.css */
+    float: right;        /* adjust as needed */
+    color: grey;         /* adjust as needed */
 }
 
+.card-header .accordion-toggle.collapsed:after {
+    /* symbol for "collapsed" panels */
+    content: "\e080";    /* adjust as needed, taken from bootstrap.css */
+}
 /*########### LOGIN FORM ###########*/
 .login-container{
     margin-top: 5%;

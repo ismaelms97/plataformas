@@ -24,9 +24,8 @@
 				<div class="card">
 					<div class="card-header" id="headingOne" data-toggle="collapse"
 						data-target="#collapseType">
-						<h6 class="d-inline" aria-expanded="false"
+						<h6 class="d-inline accordion-toggle" aria-expanded="false"
 							aria-controls="collapseExample">Tipo</h6>
-						<i class="fas fa-chevron-down d-inline" class="arrowDown"></i>
 					</div>
 				</div>
 				<div class="collapse" id="collapseType">
@@ -49,9 +48,27 @@
 						</div>
 					</div>
 				</div>
+				<div class="card">
+					<div class="card-header" id="headingOne" data-toggle="collapse"
+						data-target="#collapsePropertyOf">
+						<h6 class="d-inline accordion-toggle" aria-expanded="false"
+							aria-controls="collapseExample">Propietario</h6>
+					</div>
+				</div>
+				<div class="collapse" id="collapsePropertyOf">
+					<div class="card card-body">
+					<!-- Material unchecked -->
+					<div class="custom-control custom-checkbox">
+						<input type="checkbox" id="incidencia" value="incidencia"
+							class="custom-control-input filtros"><label
+							class="custom-control-label" for="incidencia">Ismael</label><br>
+					</div>
+					</div>
+				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" id="filter" class="btn btn-warning" data-dismiss="modal">Filtrar</button>
+				<button type="button" id="filter" class="btn btn-warning"
+					data-dismiss="modal">Filtrar</button>
 				<button type="button" class="btn btn-outline-info"
 					data-dismiss="modal">Close</button>
 			</div>

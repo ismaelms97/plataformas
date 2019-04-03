@@ -7,8 +7,11 @@ $(document).ready(function(){
 	inputTasks();
 	getNameEstrategia();
 
-	document.getElementsByClassName("mainTitle")[0] ? document.getElementsByClassName("mainTitle")[0].innerHTML = sessionStorage.getItem('titulo') : document.getElementsByClassName("mainTitle")[0].innerHTML =  " ";
-
+	if(document.getElementsByClassName("mainTitle")[0]){
+		document.getElementsByClassName("mainTitle")[0].innerHTML = sessionStorage.getItem('titulo');
+		
+	}
+	
 	if(document.getElementById("formContent")){
 
 		document.getElementById("butonDestroy").style.display = "none";
@@ -48,9 +51,9 @@ function inputTasks() {
 }
 /**
  * Función para pintar la tabla
- * */
+ */
 function drawTable(array , db) {
-//	ORdenamos el array por prioridad, 
+// ORdenamos el array por prioridad,
 	array = orderByPrio(array);
 
 	// PIntamos la tabla
@@ -81,12 +84,11 @@ function drawTable(array , db) {
 			$(cln).css("display", "inline-block");
 		}
 	}
-
 }
 
 /**
- * Función para pintar los RTC 
- * */
+ * Función para pintar los RTC
+ */
 function drawRTC(array, pos, db) {
 	var estadoActual = 0;
 
@@ -124,13 +126,13 @@ function drawRTC(array, pos, db) {
 
 			}else{
 
-				//AZUL, resto
+				// AZUL, resto
 				classes += ' blue';
 			}
 		}
 	}
 
-//	Solucionar problema con onclick event, no nos da ningun valor
+// Solucionar problema con onclick event, no nos da ningun valor
 	document.getElementsByTagName("TR")[pos + 1].children[estadoActual].innerHTML = '<div class="'+classes+'" data-posInitial="' + estadoActual + '" data-rtc="' + (pos + 1) + '" title="'+ array[pos].resumen +'" data-placement="left">'
 	+ '<small class="tamano">'+ array[pos].tamano + '</small> '+ array[pos].id + ' <small class="complejidad">'+ array[pos].complejidad + '</small></div>';
 
@@ -155,8 +157,8 @@ function drawRTC(array, pos, db) {
 	tooltip();
 }
 
-/** 
- * Función que muestra la tooltip en html 
+/**
+ * Función que muestra la tooltip en html
  */
 function tooltip(){
 	$( function() {
@@ -180,15 +182,22 @@ function verDetallesRTC(array, i){
 	})
 }
 
-/* Función que sirve para filtrar las tareas, versión 1.0, solo filtra por el tipo de tareas: Incidencias, Tareas, Consulta. */
+/*
+ * Función que sirve para filtrar las tareas, versión 1.0, solo filtra por el
+ * tipo de tareas: Incidencias, Tareas, Consulta.
+ */
 function filter(array, filtros){
-
-	var filtrado = array.filter(item => item.tipo.toLowerCase() == filtros[0] ||  item.tipo.toLowerCase() == filtros[1] ||  item.tipo.toLowerCase() == filtros[2]);
+	var filtrado;
+	
+	filtrado = array.filter(item => item.tipo.toLowerCase() == filtros[0] ||  item.tipo.toLowerCase() == filtros[1] ||  item.tipo.toLowerCase() == filtros[2]);
 
 	return filtrado;
 }
 
-/* Función que sirve para filtrar las tareas, versión 1.0, solo filtra por el tipo de tareas: Incidencias, Tareas, Consulta. */
+/*
+ * Función que sirve para filtrar las tareas, versión 1.0, solo filtra por el
+ * tipo de tareas: Incidencias, Tareas, Consulta.
+ */
 function strategyFilter(array){
 
 	var filtrado = array.filter(item => inTasks.find(item2 => item.id === item2.id));
