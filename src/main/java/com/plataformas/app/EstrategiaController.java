@@ -94,6 +94,9 @@ public class EstrategiaController {
 				}else {
 
 					List<Tarea> tareas = estrategiaService.findTareasByEstrategia(Integer.parseInt(id));
+					for (Tarea tarea : tareas) {
+						System.out.println(tarea.isUrgente());
+					}
 					session.setAttribute("estrategiaID", Integer.parseInt(id.trim()));
 					model.addAttribute("listaTareas",tareas);
 					System.out.println("TAREAS COMPLETE");

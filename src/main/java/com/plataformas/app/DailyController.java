@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,6 +22,7 @@ public class DailyController {
 
 	@Autowired
 	DailyService dailyService;
+	//@A
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -29,26 +31,34 @@ public class DailyController {
 	 */
 
 
-	@GetMapping(value = "/showDaily")
-	public  String showDaily(Model model) {	
-
-
+	@GetMapping(value = "/showDaily/{id}")
+	public  String showDaily(@PathVariable String id,Model model,HttpSession session) {	
+		
+		synchronized (session) {
+		//	if (!sessionResources.checkUserSession(session)){
+			
+			//dailyService.findDailyById(Integer.parseInt(id));
+		}
+		
 		return "mainPanel";
 
 	}
 	@PostMapping(value = "/saveDaily")
-	public @ResponseBody String  saveDaily ( String stratDaily,Model model,HttpSession session) {	
+	public @ResponseBody String  saveDaily ( String stratDaily,Model model,HttpSession session) {
+		
 		synchronized (session) {
+			
 			try {
+				
 				List<Daily> listDaily =  Daily.stringToObject(stratDaily);				
 				//int idEstrategia  = (Integer) session.getAttribute("estrategiaID");
 				//Daily newDaily = null;
 				//newDaily.setEstrategiaId(idEstrategia);
 				//dailyService.saveDaily(newDaily,idEstrategia);
 				System.out.println("Daily   Guardada");
-				
+
 			}catch (Exception e) {
-				
+
 				System.out.println("error al guardar");
 			}
 
