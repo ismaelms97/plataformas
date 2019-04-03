@@ -102,6 +102,10 @@ $(document).ready(function() {
 			drawTable(arrayInTasksBackup, true);
 			drawTable(arrayTasksBackup, false);
 			}, false);
+		
+			$(".card-header").on("click", function(){
+				$(this).toggleClass("arrowDown");
+			})
 		})
 	})
 </script>

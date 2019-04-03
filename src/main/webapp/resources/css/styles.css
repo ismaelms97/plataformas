@@ -288,17 +288,29 @@ a:hover {
 #filter{
 	cursor:pointer;
 }
+.accordion-toggle::before{
+	display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+ }
 
-.card-header .accordion-toggle::after {
-	font-family: 'Glyphicons Halflings';  /* essential for enabling glyphicon */
-    content: "\e114";    /* adjust as needed, taken from bootstrap.css */
-    float: right;        /* adjust as needed */
-    color: grey;         /* adjust as needed */
+.card-header::after {
+    content: "\f054";    
+  	font-family: "Font Awesome 5 Free";
+  	font-weight: 900;
+  	float:right;
 }
 
-.card-header .accordion-toggle.collapsed:after {
-    /* symbol for "collapsed" panels */
-    content: "\e080";    /* adjust as needed, taken from bootstrap.css */
+.arrowDown::after{
+	content: "\f078";    
+	font-family: "Font Awesome 5 Free";
+  	font-weight: 900;
+  	float:right;
+}
+.card{
+	margin-top: 5px;
 }
 /*########### LOGIN FORM ###########*/
 .login-container{
