@@ -52,16 +52,12 @@
 			} else {
 				x.type = "password";
 			}
-		}
+		};
 
-		document
-				.getElementById('loginBtn')
-				.addEventListener(
-						'click',
-						function() {
-							document.getElementById("formContent").style.display = "none";
-							document.getElementById("loadAnimation").style.display = "inline";
-						});
+		document.getElementById('loginBtn').addEventListener('click',function() {
+			document.getElementById("formContent").style.display = "none";
+			document.getElementById("loadAnimation").style.display = "inline";
+		});
 	</script>
 </body>
 </html>
