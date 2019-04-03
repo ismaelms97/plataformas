@@ -61,7 +61,7 @@
 <script>
 $(document).ready(function() {
 	var selecciones = [];
-	
+	var arrayInTasksBackup = [];
 	$(".filtros").on("click", function(){
 		if((this).checked){
 			selecciones.push(this.value);
@@ -75,11 +75,14 @@ $(document).ready(function() {
 		document.getElementById("filter").addEventListener("click", function() {
 			if(selecciones.length >= 1){
 				arrayTasksBackup = filter(tasks, selecciones);
+				arrayInTasksBackup = filter(inTasks, selecciones);
 			}else{
 				arrayTasksBackup = tasks;
+				arrayInTasksBackup = inTasks;
 			}
 			
 			emptyTable();
+			drawTable(arrayInTasksBackup, true);
 			drawTable(arrayTasksBackup, false);
 			}, false);
 		})
