@@ -23,7 +23,6 @@ $(document).ready(function(){
 
 	}
 
-
 })
 
 function rellenarEstados() {

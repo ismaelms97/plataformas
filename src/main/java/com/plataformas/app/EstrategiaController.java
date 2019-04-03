@@ -66,19 +66,16 @@ public class EstrategiaController {
 					model.addAttribute("nombreEquipo", " Nombre de equipo : "+actualUser.getNombreEquipo());
 					model.addAttribute("greeting","Hola "+ actualUser.getUsername());
 					return "mainPanel";
-
 				}
-				
+
 			}catch (Exception e) {
 
 				System.out.println("Panel de control Error con session o con estrategias");
 				return "redirect:/";
 			}
-
 		}
-
 	}
-	
+
 	@GetMapping(value = "/findEstrategia/{id}")
 	public  String findEstrategia(@PathVariable String id,Model model,HttpSession session) {	
 
@@ -94,9 +91,6 @@ public class EstrategiaController {
 				}else {
 
 					List<Tarea> tareas = estrategiaService.findTareasByEstrategia(Integer.parseInt(id));
-					for (Tarea tarea : tareas) {
-						System.out.println(tarea.isUrgente());
-					}
 					session.setAttribute("estrategiaID", Integer.parseInt(id.trim()));
 					model.addAttribute("listaTareas",tareas);
 					System.out.println("TAREAS COMPLETE");
@@ -114,9 +108,8 @@ public class EstrategiaController {
 				return "mainPanel";
 			}		
 		}
-
 	}
-	
+
 	@PostMapping(value = "/pushEstrategia")
 	public  String pushEstrategia(@ModelAttribute("estrategia") Estrategia estrategia,Model model,HttpSession session) {	
 
@@ -129,7 +122,6 @@ public class EstrategiaController {
 
 			return "plataforma";
 		}
-
 	}
 
 	@PostMapping(value = "/saveEstrategia")
@@ -152,23 +144,24 @@ public class EstrategiaController {
 
 		return "redirect:/estrategia/panelControl";
 
-
 	}
 
 	@PostMapping(value = "/deleteEstrategia")
 	public String deleteEstrategia(@ModelAttribute("estrategia") Estrategia estrategia,Model Model,HttpSession session) {
+
 		synchronized (session) {
+
 			try {
+
 				estrategiaService.deleteEstrategia(estrategia.getId());
 
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
+			} catch (Exception e) {
+
+				System.out.println("Error delete");
 			}
 		}
 
-
 		return "mainPanel";
-
 	}
 
 }

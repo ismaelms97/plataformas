@@ -17,16 +17,13 @@ public class Daily {
 	private int estrategiaId;
 	private String estadoActual;
 	private String subEstadoActual;
+	private int tareaId;
 	
 	
 	
 	public Daily() {
 		super();
 	}
-	
-	
-
-	
 
 	public Daily(int id, String fecha, int estrategiaId, String estadoActual, String subEstadoActual) {
 		super();
@@ -37,10 +34,6 @@ public class Daily {
 		this.subEstadoActual = subEstadoActual;
 	}
 
-
-
-
-
 	public Daily(String fecha, int estrategiaId, String estadoActual, String subEstadoActual) {
 		super();
 		this.fecha = fecha;
@@ -49,19 +42,12 @@ public class Daily {
 		this.subEstadoActual = subEstadoActual;
 	}
 
-
-
-
-
 	public Daily(String fecha, String estadoActual, String subEstadoActual) {
 		super();
 		this.fecha = fecha;
 		this.estadoActual = estadoActual;
 		this.subEstadoActual = subEstadoActual;
 	}
-
-
-
 
 
 	public int getId() {
@@ -94,15 +80,9 @@ public class Daily {
 	}
 
 
-
-
-
 	public void setEstadoActual(String estadoActual) {
 		this.estadoActual = estadoActual;
 	}
-
-
-
 
 
 	public String getSubEstadoActual() {
@@ -110,54 +90,62 @@ public class Daily {
 	}
 
 
-
-
-
 	public void setSubEstadoActual(String subEstadoActual) {
 		this.subEstadoActual = subEstadoActual;
 	}
 
+	
 
+	public int getTareaId() {
+		return tareaId;
+	}
 
-
+	public void setTareaId(int tareaId) {
+		this.tareaId = tareaId;
+	}
 
 	public static  List<Daily> converFromDatabase(ResultSet rs,List<Daily> dailyList ) throws SQLException {
 		
 		while (rs.next()) {
 			
-			int id = rs.getInt("id");
 			String fecha = rs.getString("fecha");
-			int idEstrategia = rs.getInt("estrategia_id");
+			int tareaId = rs.getInt("tarea_id");
 			String estadoActual = rs.getString("estadoActual");
 			String subEstadoActual = rs.getString("subEstadoActual");
-			Daily daily = new Daily(id,fecha,idEstrategia,estadoActual,subEstadoActual);
+			Daily daily = new Daily();
+			daily.setFecha(fecha);
+			daily.setTareaId(tareaId);
+			daily.setEstadoActual(estadoActual);
+			daily.setSubEstadoActual(subEstadoActual);
 			dailyList.add(daily);
 		}
 		
 		return dailyList;
 	}
 
-	public static  List<Daily> stringToObject(String stratDaily){
+	public static  List<Daily> stringToObject(String stratDaily, String date, int idEstrategia){
 
 		List<Daily> listaDaily =  new ArrayList<Daily>();
 
-		String[][] dailys = new String[stratDaily.split("qwer").length][12];
-
+		String[][] dailys = new String[stratDaily.split("qwer").length][4];
+		
 		for(int i = 0; i < dailys.length; i++) {
 			
 			String[] dailystr = stratDaily.split("qwer");
-			dailys[i] = dailystr[i].split("--");			
-			String fecha = (dailys[i][0].split(":"))[1];			
-			String estadoActual = (dailys[i][2].split(":"))[1];
-			String subEstadoActual = (dailys[i][3].split(":"))[1];			
-			Daily daily = new Daily (fecha,estadoActual,subEstadoActual);		
+			dailys[i] = dailystr[i].split("--");	
+			String idTarea = (dailys[i][0].split(":"))[1];		
+			String estadoActual = (dailys[i][1].split(":"))[1];
+			String subEstadoActual = (dailys[i][2].split(":"))[1];	
+			Daily daily = new Daily ();
+			daily.setEstadoActual(estadoActual);
+			daily.setSubEstadoActual(subEstadoActual);
+			daily.setTareaId(Integer.parseInt(idTarea));
+			daily.setFecha(date);
+			daily.setEstrategiaId(idEstrategia);
 			listaDaily.add(daily);
-			
-			
 		}
 		
 		return listaDaily;
 
-	
 	}
 }

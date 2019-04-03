@@ -9,68 +9,54 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.plataformas.model.Estrategia;
 import com.plataformas.model.Tarea;
+import com.plataformas.recursos.DbResources;
 
 @Service
 public class EstrategiaService {
 
-	private String url = "jdbc:db2://dashdb-txn-sbox-yp-lon02-01.services.eu-gb.bluemix.net:50000/BLUDB";
-	private String dbUsername = "rvg03272";
-	private String dbPassword = "0@vn6gg9jg7zqjb1";
-
-	public void initializeDriver() throws ClassNotFoundException {
-
-		try {
-
-			Class.forName("com.ibm.db2.jcc.DB2Driver"); 
-
-		}catch (ClassNotFoundException e) {
-
-			System.out.println("Class driver not found");
-
-		}catch (Exception e) {
-
-			System.out.println("Unknow error with driver");
-		}
-
-	}
-
-	public List<Estrategia> findEstrategiaById(int idUser) throws ClassNotFoundException  {
+	@Autowired
+	DbResources  dbResources;
+	
+	public List<Estrategia> findEstrategiaById(int idUser){
+		
 		List<Estrategia> estrategiaList = new ArrayList<Estrategia>();		
-		initializeDriver();	     
+		
+		
 		try {
 
-			Connection con = DriverManager.getConnection(url,dbUsername,dbPassword);
+			Connection con = dbResources.getConection();
 			con.setAutoCommit(false);
 			Statement  stmt = con.createStatement(); 
 			ResultSet rs = stmt.executeQuery("SELECT * FROM estrategia Es where Es.equipo_id = "+idUser+"");
-
-
-
 			return Estrategia.converFromDatabase(rs, estrategiaList);
 
 		} catch (SQLException e) {
+			
 			System.err.println("SQL Exeption  findEstrategiaById:  code -> "+e.getErrorCode());
 			System.err.println("more inf : "+e.getMessage()+" reason  -> "+e.getCause());
 			return estrategiaList;
 
 		}catch (Exception e) {
+			
 			System.out.println("Error en findEstrategiaById ");
 			return estrategiaList;
 		}
 
 	}
 
-	public List<Tarea> findTareasByEstrategia(int idEstrategia) throws ClassNotFoundException  {
+	public List<Tarea> findTareasByEstrategia(int idEstrategia){
+		
 		List<Tarea> tareaList = new ArrayList<Tarea>();		
-		initializeDriver();	     
-		System.out.println("idUser : "+idEstrategia);
+				
 		try {
-			Connection con = DriverManager.getConnection(url,dbUsername,dbPassword);
+			
+			Connection con = dbResources.getConection();
 			con.setAutoCommit(false);
 			Statement  stmt = con.createStatement(); 
 
@@ -80,24 +66,25 @@ public class EstrategiaService {
 			return Tarea.converFromDatabase(rs, tareaList);
 
 		} catch (SQLException e) {
+			
 			System.err.println("SQL Exeption  findTareasByEstrategia:  code -> "+e.getErrorCode());
 			System.err.println("more inf : "+e.getMessage()+" reason  -> "+e.getCause());
 			return tareaList;
 
 		}catch (Exception e) {
+			
 			System.out.println("Error en findEstrategiaById ");
 			return tareaList;
 		}
 	}
 
-	public List<Estrategia> findEstrategiaByTeam(int idUser) throws ClassNotFoundException  {
+	public List<Estrategia> findEstrategiaByTeam(int idUser){
 
 		List<Estrategia> estrategiaList = new ArrayList<Estrategia>();		
-		initializeDriver();	
-
+		
 		try {
 
-			Connection con = DriverManager.getConnection(url,dbUsername,dbPassword);
+			Connection con = dbResources.getConection();
 			con.setAutoCommit(false);
 			Statement  stmt = con.createStatement(); 
 			ResultSet rs = stmt.executeQuery("SELECT * FROM estrategia Es where Es.equipo_id = "+idUser+"");
@@ -119,14 +106,13 @@ public class EstrategiaService {
 	}
 
 	@Transactional
-	public void saveEstrategiaAndTarea(List<Tarea> tareas,Estrategia estrategia) throws ClassNotFoundException, SQLException {
+	public void saveEstrategiaAndTarea(List<Tarea> tareas,Estrategia estrategia) throws SQLException {
 
-		initializeDriver();	
 		Connection con = null;
 
 		try{
 
-			con = DriverManager.getConnection(url,dbUsername,dbPassword);
+			con = dbResources.getConection();
 			con.setAutoCommit(false);
 
 			String sql = "INSERT INTO estrategia (nombre,estado,fechaInicio,fechaFin,equipo_id) values "
@@ -190,13 +176,11 @@ public class EstrategiaService {
 	}
 
 	@Transactional
-	public void deleteEstrategia(int IDestrategia) throws ClassNotFoundException {
-
-		initializeDriver();	 
+	public void deleteEstrategia(int IDestrategia){
 
 		try{
 
-			Connection con = DriverManager.getConnection(url,dbUsername,dbPassword);
+			Connection con = dbResources.getConection();
 			con.setAutoCommit(false); 
 			Statement  stmt  = con.createStatement(); 
 			stmt.execute("DELETE FROM estrategia where id ="+IDestrategia);

@@ -8,41 +8,24 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.plataformas.model.User;
+import com.plataformas.recursos.DbResources;
 @Service
 public class UserService {
-	//private String url = "jdbc:db2://dashdb-txn-sbox-yp-lon02-01.services.eu-gb.bluemix.net:50001/BLUDB:user=rvg03272;password=0@vn6gg9jg7zqjb1;sslConnection=true;";
-	private String url = "jdbc:db2://dashdb-txn-sbox-yp-lon02-01.services.eu-gb.bluemix.net:50000/BLUDB";
-	private String dbUsername = "rvg03272";
-	private String dbPassword = "0@vn6gg9jg7zqjb1";
+	
+	@Autowired
+	DbResources  dbResources;
 
-	public void initializeDriver() throws ClassNotFoundException {
+	public List<User> findAll(){
 
-		try {
-
-			Class.forName("com.ibm.db2.jcc.DB2Driver");  
-
-		}catch (ClassNotFoundException e) {
-
-			System.out.println("Class driver not found");
-
-		}catch (Exception e) {
-
-			System.out.println("Unknow error with driver");
-		}
-
-	}
-
-	public List<User> findAll() throws ClassNotFoundException{
-
-		List<User> userList = new ArrayList<User>();
-		initializeDriver();		
+		List<User> userList = new ArrayList<User>();		
 
 		try{
 
-			Connection con = DriverManager.getConnection(url,dbUsername,dbPassword);
+			Connection con = dbResources.getConection();
 			con.setAutoCommit(false);
 			Statement  stmt = con.createStatement(); 
 			ResultSet rs = stmt.executeQuery("SELECT * FROM USER"); 
@@ -74,14 +57,13 @@ public class UserService {
 	}
 
 
-	public User findByUsername(String username) throws ClassNotFoundException, SQLException {
+	public User findByUsername(String username) {
 		
 		User user = null;
-		initializeDriver();  
 		
 		try {
 			
-			Connection con = DriverManager.getConnection(url,dbUsername,dbPassword);
+			Connection con = dbResources.getConection();
 			con.setAutoCommit(false);
 			Statement  stmt = con.createStatement(); 
 			ResultSet rs = stmt.executeQuery("SELECT  U.*, E.name FROM user U join equipo E  on (U.equipo_id = E.id) where username = '"+username+"'"); 			
