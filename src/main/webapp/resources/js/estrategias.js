@@ -167,6 +167,7 @@ function saveStrategy() {
 
 	strategy.tasks.forEach(task => {
 		tasksToString += "RTC:" + task.id + "--";
+		console.log(task.id);
 		tasksToString += "Tipo:" + task.tipo + "--";
 		tasksToString += "Estado:" + task.estado + "--";
 		tasksToString += "EstadoFinal:" + task.estadoFinal+ "--";
@@ -193,7 +194,7 @@ function saveStrategy() {
 	});
 
 	tasksToString = tasksToString.substring(0, tasksToString.length - 4);
-	console.log(tasksToString)
+//	console.log(tasksToString)
 
 	console.log(strategy.tasks)
 	$.ajax({
