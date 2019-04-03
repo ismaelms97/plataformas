@@ -191,19 +191,13 @@ function verDetallesRTC(array, i){
  *		@param  {filtros} Un objeto con los filtros como nombres de propiedad
  */
 function filter(array, filtros){
-	var filtrado;
-//	let filterKeys = Object.keys(filtros);
-	
-	
-	// COMPLETAR FILTRADO COMPLEJO
+	// REVISAR FILTRADO COMPLEJO
 	//	https://gist.github.com/jherax/f11d669ba286f21b7a2dcff69621eb72
 	
+//	var filtrado;
 //	filtrado = array.filter(item => item.tipo.toLowerCase() == filtros.tipo[0] ||  item.tipo.toLowerCase() == filtros.tipo[1] ||  item.tipo.toLowerCase() == filtros.tipo[2]);
 //	
 //	return filtrado;
-	
-	
-//	filtrado = array.filter((item) => filterKeys.every((key) => (filtros[key].indexOf(item[key]) !== -1)));
 	
 	 const filterKeys = Object.keys(filtros);
 	  return array.filter(eachObj => {
