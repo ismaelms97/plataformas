@@ -1,5 +1,3 @@
-import { timingSafeEqual } from "crypto";
-
 var arrayTasksBackup = [];
 
 function dragDrop(arr){

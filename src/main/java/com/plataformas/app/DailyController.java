@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.plataformas.Db2.DailyService;
+import com.plataformas.Db2.EstrategiaService;
 import com.plataformas.model.Daily;
+import com.plataformas.model.Tarea;
 import com.plataformas.recursos.SessionResources;
 @Controller
 @RequestMapping(value = "/daily")
@@ -25,6 +27,9 @@ public class DailyController {
 	DailyService dailyService;
 	@Autowired
 	SessionResources sessionResources;
+	@Autowired
+	EstrategiaService estrategiaService;
+	
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -48,7 +53,9 @@ public class DailyController {
 				try {
 					
 					List<Daily> listaDaily = dailyService.findDailyById(Integer.parseInt(id));
+					List<Tarea> tareas = estrategiaService.findTareasByEstrategia(Integer.parseInt(id));
 					model.addAttribute("listaDaily", listaDaily);
+					model.addAttribute("listaTareas",tareas);
 					
 				}catch (Exception e) {
 					
@@ -57,22 +64,21 @@ public class DailyController {
 				
 			}
 		}
-		return "mainPanel";
+		return "plataforma";
 
 	}
 	
 	@PostMapping(value = "/saveDaily")
-	public @ResponseBody String  saveDaily ( String stratDaily,Model model,HttpSession session) {
+	public @ResponseBody String  saveDaily ( String stratDaily,String date,Model model,HttpSession session) {
 
 		synchronized (session) {
 
 			try {
 
-				List<Daily> listDaily =  Daily.stringToObject(stratDaily);					
+				
 				int idEstrategia  = (Integer) session.getAttribute("estrategiaID");
-				Daily newDaily = null;
-				newDaily.setEstrategiaId(idEstrategia);
-				//dailyService.saveDaily(newDaily,idEstrategia);
+				List<Daily> listDaily =  Daily.stringToObject(stratDaily,date,idEstrategia);
+				dailyService.saveDaily(listDaily);
 				System.out.println("Daily   Guardada");
 
 			}catch (Exception e) {

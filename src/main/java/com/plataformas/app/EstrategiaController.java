@@ -160,7 +160,7 @@ public class EstrategiaController {
 				System.out.println("Error delete");
 			}
 		}
-		
+
 		return "mainPanel";
 	}
 
