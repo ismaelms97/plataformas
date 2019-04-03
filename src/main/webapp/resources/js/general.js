@@ -5,7 +5,9 @@ $(document).ready(function(){
 	estados = [];
 	rellenarEstados();
 	inputTasks();
+	getNameEstrategia();
 
+	document.getElementsByClassName("mainTitle")[0] ? document.getElementsByClassName("mainTitle")[0].innerHTML = sessionStorage.getItem('titulo') : document.getElementsByClassName("mainTitle")[0].innerHTML =  " ";
 
 	if(document.getElementById("formContent")){
 
@@ -163,7 +165,6 @@ function tooltip(){
 }
 
 if(document.getElementById("save")){
-	getNameEstrategia();
 	document.getElementById("save").addEventListener('click', saveStrategy);
 }
 
@@ -202,8 +203,8 @@ function emptyTable(){
 
 function getNameEstrategia(){
 	$(document).ready(function(){
-		$("#estartegiasCard").on("click", function(e) {
-			$(".mainTitle").html(e.target.innerHTML.trim());
+		$(".estartegiasCard").on("click", function(e) {
+			sessionStorage.setItem('titulo', e.target.innerHTML.trim());
 		})
 	})
 }

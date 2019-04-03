@@ -8,7 +8,7 @@
 <jsp:include page="modalFiltrado.jsp"></jsp:include>
 
 <body>
-	<h1 class="mainTitle"> </h1>
+	<h1 class="mainTitle"></h1>
 
 	<i class="fa fa-filter fa-2x" id="filter" data-toggle="modal" data-target="#modalFiltrado"></i>
 	
@@ -35,7 +35,6 @@
 				task.prioridad = "${tarea.prioridad}";
 				task.tamano = "${tarea.tamaño}";
 				inTasks.push(task);			
-				console.log(task);
 			</script>
 	</c:forEach>
 	<div class="table-responsive table-bordered">
