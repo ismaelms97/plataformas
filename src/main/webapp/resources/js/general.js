@@ -167,7 +167,9 @@ function tooltip(){
 }
 
 if(document.getElementById("save")){
-	document.getElementById("save").addEventListener('click', saveData);
+	document.getElementById("save").addEventListener('click', function(){
+		saveData();
+	});
 }
 
 function verDetallesRTC(array, i){
@@ -185,13 +187,34 @@ function verDetallesRTC(array, i){
 /*
  * Función que sirve para filtrar las tareas, versión 1.0, solo filtra por el
  * tipo de tareas: Incidencias, Tareas, Consulta.
+ * 		@param  {Array}  la array a filtrar
+ *		@param  {filtros} Un objeto con los filtros como nombres de propiedad
  */
 function filter(array, filtros){
 	var filtrado;
+//	let filterKeys = Object.keys(filtros);
 	
-	filtrado = array.filter(item => item.tipo.toLowerCase() == filtros[0] ||  item.tipo.toLowerCase() == filtros[1] ||  item.tipo.toLowerCase() == filtros[2]);
-
-	return filtrado;
+	
+	// COMPLETAR FILTRADO COMPLEJO
+	//	https://gist.github.com/jherax/f11d669ba286f21b7a2dcff69621eb72
+	
+//	filtrado = array.filter(item => item.tipo.toLowerCase() == filtros.tipo[0] ||  item.tipo.toLowerCase() == filtros.tipo[1] ||  item.tipo.toLowerCase() == filtros.tipo[2]);
+//	
+//	return filtrado;
+	
+	
+//	filtrado = array.filter((item) => filterKeys.every((key) => (filtros[key].indexOf(item[key]) !== -1)));
+	
+	 const filterKeys = Object.keys(filtros);
+	  return array.filter(eachObj => {
+	    return filterKeys.every(eachKey => {
+	      if (!filtros[eachKey].length) {
+	        return true; // passing an empty filter means that filter is ignored.
+	      }
+	      return filtros[eachKey].includes(eachObj[eachKey].toLowerCase());
+	    });
+	  });
+	
 }
 
 /*

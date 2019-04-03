@@ -33,17 +33,17 @@
 						<!-- Material unchecked -->
 						<div class="custom-control custom-checkbox">
 							<input type="checkbox" id="incidencia" value="incidencia"
-								class="custom-control-input filtros"><label
+								class="custom-control-input filtros taskType"><label
 								class="custom-control-label" for="incidencia">Incidencia</label><br>
 						</div>
 						<div class="custom-control custom-checkbox">
 							<input type="checkbox" id="consulta" value="consulta"
-								class="custom-control-input filtros"><label
+								class="custom-control-input filtros taskType"><label
 								class="custom-control-label" for="consulta">Consulta</label><br>
 						</div>
 						<div class="custom-control custom-checkbox">
 							<input type="checkbox" id="tarea" value="tarea"
-								class="custom-control-input filtros"><label
+								class="custom-control-input filtros taskType"><label
 								class="custom-control-label" for="tarea">Tarea</label><br>
 						</div>
 					</div>
@@ -59,9 +59,9 @@
 					<div class="card card-body">
 					<!-- Material unchecked -->
 					<div class="custom-control custom-checkbox">
-						<input type="checkbox" id="incidencia" value="incidencia"
-							class="custom-control-input filtros"><label
-							class="custom-control-label" for="incidencia">Ismael</label><br>
+						<input type="checkbox" id="ismael" value="ismael"
+							class="custom-control-input filtros taskPropertyOf"><label
+							class="custom-control-label" for="ismael">Ismael</label><br>
 					</div>
 					</div>
 				</div>
@@ -77,22 +77,41 @@
 </div>
 <script>
 $(document).ready(function() {
-	var selecciones = [];
+	// Objeto con los filtros
+	var filters = {
+			tipo : [],
+			propiedad : [],
+	};
+	
 	var arrayInTasksBackup = [];
 	$(".filtros").on("click", function(){
+		
 		if((this).checked){
-			selecciones.push(this.value);
+			
+			if($(this).hasClass("taskType")){
+				
+				filters.tipo.push(this.value);
+				
+			}else if($(this).hasClass("taskPropertyOf")) {
+				filters.propiedad.push(this.value);
+			}
 		}else{
-			selecciones.splice(selecciones.indexOf(this.value), 1);
+			if($(this).hasClass("taskType")){
+				filters.tipo.splice(filters.tipo.indexOf(this.value), 1);
+				
+			}else if($(this).hasClass("taskPropertyOf")) {
+				filters.propiedad.splice(filters.propiedad.indexOf(this.value), 1);
+			}
 		}
+		console.log(filters);
 	})
 	
 	$('#modalFiltrado').on('shown.bs.modal',function() {
 		
 		document.getElementById("filter").addEventListener("click", function() {
-			if(selecciones.length >= 1){
-				arrayTasksBackup = filter(tasks, selecciones);
-				arrayInTasksBackup = filter(inTasks, selecciones);
+			if(filters.tipo.length >= 1 || filters.propiedad.length >= 1){
+				arrayTasksBackup = filter(tasks, filters);
+				arrayInTasksBackup = filter(inTasks, filters);
 			}else{
 				arrayTasksBackup = tasks;
 				arrayInTasksBackup = inTasks;
