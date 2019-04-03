@@ -225,7 +225,7 @@ function habilitarBotonEnvio() {
 }
 
 function orderByPrio(arr) {
-	arr = arr.sort(function(a, b){
+	arr.sort(function(a, b){
 		if(a.prioridad < b.prioridad){
 			return 1;
 		}
@@ -248,7 +248,6 @@ function orderByPrio(arr) {
 				orderedArr.push(arr[i])
 			} else if (order >= prio.length && !exists(orderedArr, arr[i])){
 				orderedArr.push(arr[i])
-			} else {
 			}
 		}
 		if(order < prio.length){

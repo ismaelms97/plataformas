@@ -11,8 +11,8 @@ var XW = {
 var global_wb;
 
 var process_wb = (function () {
-	var OUT = document.getElementById('out');
-	var HTMLOUT = document.getElementById('htmlout');
+//	var OUT = document.getElementById('out');
+//	var HTMLOUT = document.getElementById('htmlout');
 
 	var get_format = (function () {
 		var radios = document.getElementsByName("format");

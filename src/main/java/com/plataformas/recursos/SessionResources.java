@@ -1,5 +1,7 @@
 package com.plataformas.recursos;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -28,6 +30,7 @@ public class SessionResources {
 		
 		return false;
 	}
+	
 	public boolean checkUserSession(HttpSession session) {
 		
 				
@@ -38,5 +41,6 @@ public class SessionResources {
 		
 		return true;
 	}
-
+		
 }
+
