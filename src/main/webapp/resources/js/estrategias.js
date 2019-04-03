@@ -176,9 +176,7 @@ function saveStrategy() {
 		tasksToString += "complejidad:" + task.complejidad + "--";
 		tasksToString += "propiedad:" + task.propiedad + "--";
 		tasksToString += "peticionario:" + task.peticionario + "--";
-		tasksToString += "Estrelevanteado:" + task.relevante + "--";
-		tasksToString += "urgente:" + task.urgente + "--";
-
+		
 		if(task.relevante == "Sí"){
 			tasksToString += "relevante:true--";
 		} else {

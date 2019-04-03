@@ -86,9 +86,7 @@ public class HomeController {
 
 			mensaje = "No hay conexion";
 		}
-
 		if(userExist) {
-
 			try {
 
 				List<Estrategia> listaEstrategias = estrategiaService.findEstrategiaById(newUser.getEquipoId());
@@ -99,7 +97,6 @@ public class HomeController {
 
 				System.out.println("listaEstrategia , no se ha encontrado...");
 			}			
-
 			return "mainPanel";
 
 		}else {		
