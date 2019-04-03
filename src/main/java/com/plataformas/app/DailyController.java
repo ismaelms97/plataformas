@@ -74,7 +74,6 @@ public class DailyController {
 		synchronized (session) {
 
 			try {
-
 				
 				int idEstrategia  = (Integer) session.getAttribute("estrategiaID");
 				List<Daily> listDaily =  Daily.stringToObject(stratDaily,date,idEstrategia);

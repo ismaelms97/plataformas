@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.plataformas.Db2.DailyService;
 import com.plataformas.Db2.EstrategiaService;
 import com.plataformas.model.Estrategia;
 import com.plataformas.model.Tarea;
@@ -30,6 +31,8 @@ public class EstrategiaController {
 	EstrategiaService estrategiaService;
 	@Autowired
 	SessionResources sessionResources;
+	@Autowired
+	DailyService dailyService;
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 * @throws SQLException 
@@ -88,12 +91,17 @@ public class EstrategiaController {
 					model.addAttribute("mensajeAcceso", "Acceso Denegado");
 
 					return "accessDenied";
+					
 				}else {
 
 					List<Tarea> tareas = estrategiaService.findTareasByEstrategia(Integer.parseInt(id));
+					List<String> dates = dailyService.findDateDaily(Integer.parseInt(id));
 					session.setAttribute("estrategiaID", Integer.parseInt(id.trim()));
 					model.addAttribute("listaTareas",tareas);
+					model.addAttribute("dates",dates);
+					
 					System.out.println("TAREAS COMPLETE");
+					
 					return "plataforma";
 				}
 
@@ -109,6 +117,7 @@ public class EstrategiaController {
 			}		
 		}
 	}
+	
 
 	@PostMapping(value = "/pushEstrategia")
 	public  String pushEstrategia(@ModelAttribute("estrategia") Estrategia estrategia,Model model,HttpSession session) {	
