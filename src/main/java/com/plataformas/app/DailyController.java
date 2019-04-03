@@ -22,6 +22,7 @@ public class DailyController {
 
 	@Autowired
 	DailyService dailyService;
+	//@A
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -34,6 +35,7 @@ public class DailyController {
 	public  String showDaily(@PathVariable String id,Model model,HttpSession session) {	
 		
 		synchronized (session) {
+		//	if (!sessionResources.checkUserSession(session)){
 			
 			//dailyService.findDailyById(Integer.parseInt(id));
 		}
