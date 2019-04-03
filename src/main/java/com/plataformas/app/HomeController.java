@@ -90,7 +90,7 @@ public class HomeController {
 
 				List<Estrategia> listaEstrategias = estrategiaService.findEstrategiaById(newUser.getEquipoId());
 				model.addAttribute("listaEstrategia",listaEstrategias);
-				session.setAttribute("userStrategy", listaEstrategias);
+				session.setAttribute("userStrategy", listaEstrategias);				
 
 			}catch (Exception e) {
 
