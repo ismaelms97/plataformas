@@ -1,3 +1,4 @@
+import { timingSafeEqual } from "crypto";
 
 var arrayTasksBackup = [];
 
@@ -152,62 +153,88 @@ function dragDrop(arr){
 	})
 }
 
-function saveStrategy() {
-	console.log("Use")
-	strategy = new Object();
-	strategy.tasks = [];
-	strategy.tasksModified = [];
+function saveData() {
+	if(inTasks.length == 0){
+		strategy = new Object();
+		strategy.tasks = [];
+		strategy.tasksModified = [];
 
-	tasks.forEach(task => {
-		if (task.modified) {
-			strategy.tasks.push(task);
-		}
-	});
+		tasks.forEach(task => {
+			if (task.modified) {
+				strategy.tasks.push(task);
+			}
+		});
 
-	var tasksToString = "";
+		var tasksToString = "";
 
-	strategy.tasks.forEach(task => {
-		tasksToString += "RTC:" + task.id + "--";
-		console.log(task.id);
-		tasksToString += "Tipo:" + task.tipo + "--";
-		tasksToString += "Estado:" + task.estado + "--";
-		tasksToString += "EstadoFinal:" + task.estadoFinal+ "--";
-		tasksToString += "prioridad:" + task.prioridad + "--";
-		tasksToString += "resumen:" + task.resumen + "--";
-		tasksToString += "tamaño:" + task.tamano + "--";
-		tasksToString += "complejidad:" + task.complejidad + "--";
-		tasksToString += "propiedad:" + task.propiedad + "--";
-		tasksToString += "peticionario:" + task.peticionario + "--";
+		strategy.tasks.forEach(task => {
+			tasksToString += "RTC:" + task.id + "--";
+			console.log(task.id);
+			tasksToString += "Tipo:" + task.tipo + "--";
+			tasksToString += "Estado:" + task.estado + "--";
+			tasksToString += "EstadoFinal:" + task.estadoFinal+ "--";
+			tasksToString += "prioridad:" + task.prioridad + "--";
+			tasksToString += "resumen:" + task.resumen + "--";
+			tasksToString += "tamaño:" + task.tamano + "--";
+			tasksToString += "complejidad:" + task.complejidad + "--";
+			tasksToString += "propiedad:" + task.propiedad + "--";
+			tasksToString += "peticionario:" + task.peticionario + "--";
+			
+			if(task.relevante == "Sí"){
+				tasksToString += "relevante:true--";
+			} else {
+				tasksToString += "relevante:false--";
+			}
+			console.log(tasksToString);
+			if(task.urgente == "Sí"){
+				tasksToString += "urgente:true--";
+			} else {
+				tasksToString += "urgente:false--";
+			}
+			
+			tasksToString += "planificado:" + task.planificado + "qwer" ;
+		});
+
+		tasksToString = tasksToString.substring(0, tasksToString.length - 4);
+//		console.log(tasksToString)
+
+		console.log(strategy.tasks)
+		$.ajax({
+			type: "POST",
+			url: "/estrategia/saveEstrategia",
+			data: {
+				stratTasks: tasksToString
+			}, success: function (data) {
+				console.log("success");
+				location.href = "/estrategia/panelControl";
+			}
+		});
+	} else {
+		console.log(inTasks)
+		var date = new Date();
+		tasksToString = "";
 		
-		if(task.relevante == "Sí"){
-			tasksToString += "relevante:true--";
-		} else {
-			tasksToString += "relevante:false--";
-		}
-		console.log(tasksToString);
-		if(task.urgente == "Sí"){
-			tasksToString += "urgente:true--";
-		} else {
-			tasksToString += "urgente:false--";
-		}
+		tasks.forEach(task => {
+			tasksToString += "id:" + task.id + "--";
+			tasksToString += "estadoActual:" + task.estado + "--"; 
+			tasksToString += "subEstadoActual:" + " " + "qwer";
+		});
+
+		$.ajax({
+			type: "POST",
+			url: "/daily/saveDaily",
+			data: {
+				date: "" +date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate(),
+				stratDaily: tasksToString
+			}, success: function (data) {
+				console.log("success");
+				location.href = "/estrategia/panelControl";
+			}
+		});
+		console.log("not empty")
 		
-		tasksToString += "planificado:" + task.planificado + "qwer" ;
-	});
-
-	tasksToString = tasksToString.substring(0, tasksToString.length - 4);
-//	console.log(tasksToString)
-
-	console.log(strategy.tasks)
-	$.ajax({
-		type: "POST",
-		url: "/estrategia/saveEstrategia",
-		data: {
-			stratTasks: tasksToString
-		}, success: function (data) {
-			console.log("success");
-			location.href = "/estrategia/panelControl";
-		}
-	});
+	}
+	
 }
 
 function habilitarBotonEnvio() {

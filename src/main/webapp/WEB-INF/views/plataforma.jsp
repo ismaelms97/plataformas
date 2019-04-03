@@ -30,12 +30,12 @@
 				task.planificado = "${tarea.planificado}"
 				task.peticionario = "${tarea.peticionario}"
 				console.log("${tarea.urgente}")
-				/*if("${tarea.urgente}" == "true"){
+				if("${tarea.urgente}" == "true"){
 					task.urgente = "Sí";
 				} else {
 					task.urgente = "No";
-				}*/
-				task.urgente = "${tarea.urgente}";
+				}
+				//task.urgente = "${tarea.urgente}";
 				task.estadoFinal = "${tarea.estadoFinal}";
 				task.complejidad = "${tarea.complejidad}";
 				task.prioridad = "${tarea.prioridad}";

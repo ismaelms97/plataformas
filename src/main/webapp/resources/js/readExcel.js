@@ -113,6 +113,7 @@ var process_wb = (function () {
 		console.log(tasks)
 		if(inTasks.length >= 1){
 			tasks = strategyFilter(tasks);
+			$("div.button").removeClass("disabled");
 		}
 		drawTable(tasks, false);
 	};

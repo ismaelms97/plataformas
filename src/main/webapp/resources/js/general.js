@@ -1,6 +1,5 @@
 var estados;
 
-
 $(document).ready(function(){
 	estados = [];
 	rellenarEstados();
@@ -41,7 +40,7 @@ function inputTasks() {
 	try {
 		if(inTasks.length > 0){
 			drawTable(inTasks, true);
-
+			inTasks = orderByPrio(inTasks);
 		}
 
 	} catch (e) {
@@ -130,6 +129,7 @@ function drawRTC(array, pos, db) {
 				// AZUL, resto
 				classes += ' blue';
 			}
+			console.log(array[pos].id + " " + array[pos].estado + "  " + inTasks[pos].id + " " + inTasks[pos].estadoFinal + "  " + array[pos].estado.toLowerCase().startsWith(inTasks[pos].estadoFinal.toLowerCase()))
 		}
 	}
 
@@ -168,7 +168,7 @@ function tooltip(){
 }
 
 if(document.getElementById("save")){
-	document.getElementById("save").addEventListener('click', saveStrategy);
+	document.getElementById("save").addEventListener('click', saveData);
 }
 
 function verDetallesRTC(array, i){
