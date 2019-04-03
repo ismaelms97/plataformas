@@ -1,7 +1,8 @@
+import { timingSafeEqual } from "crypto";
 
 var arrayTasksBackup = [];
 
-function dragDrop(){
+function dragDrop(arr){
 
 	// Con este codigo conseguimos que se mueva cada tarea unicamente en su eje x, y
 	// a su vez que cuando los dejes en el sitio, cambien de color
@@ -60,20 +61,21 @@ function dragDrop(){
 				stop: function (event, ui) {
 					document.getElementsByClassName("rect")[(this.getAttribute("data-rtc") - 1)].style.display = "";
 
-					if (this.parentElement.classList.contains(estados[this.getAttribute("data-posInitial")].replace(/\s/g, "-")) && tasks[this.getAttribute("data-rtc") - 1].modified) {
+					if (this.parentElement.classList.contains(estados[this.getAttribute("data-posInitial")].replace(/\s/g, "-")) && arr[this.getAttribute("data-rtc") - 1].modified) {
 
-						tasks[this.getAttribute("data-rtc") - 1].modified = false;
+						arr[this.getAttribute("data-rtc") - 1].modified = false;
 
 					} else {
 
 						if (estados.indexOf(this.parentElement.classList[0].replace(/-/g, " ")) >= this.getAttribute("data-posInitial")) {
-							tasks[this.getAttribute("data-rtc") - 1].modified = true;
-							tasks[this.getAttribute("data-rtc") - 1].estadoFinal = this.parentElement.classList[0].replace(/-/g, " ");
+							arr[this.getAttribute("data-rtc") - 1].modified = true;
+							arr[this.getAttribute("data-rtc") - 1].estadoFinal = this.parentElement.classList[0].replace(/-/g, " ");
 						}
 					}
 
 					habilitarBotonEnvio();
-					console.log(tasks[this.getAttribute("data-rtc") - 1]);
+					console.log(arr[this.getAttribute("data-rtc") - 1]);
+					console.log(arr);
 				},
 			});
 
@@ -99,7 +101,7 @@ function dragDrop(){
 						event.target.children[0].style.display = "none";
 
 						// Al colocar el rtc en su posicion inicial, cambiale el color, y su estado de modificado
-						if (tasks[ui.draggable[0].getAttribute("data-rtc") - 1].modified) {
+						if (arr[ui.draggable[0].getAttribute("data-rtc") - 1].modified) {
 							$(ui.draggable[0]).removeClass("orange");
 
 						}
@@ -151,62 +153,88 @@ function dragDrop(){
 	})
 }
 
-function saveStrategy() {
-	console.log("Use")
-	strategy = new Object();
-	strategy.tasks = [];
-	strategy.tasksModified = [];
+function saveData() {
+	if(inTasks.length == 0){
+		strategy = new Object();
+		strategy.tasks = [];
+		strategy.tasksModified = [];
 
-	tasks.forEach(task => {
-		if (task.modified) {
-			strategy.tasks.push(task);
-		}
-	});
+		tasks.forEach(task => {
+			if (task.modified) {
+				strategy.tasks.push(task);
+			}
+		});
 
-	var tasksToString = "";
+		var tasksToString = "";
 
-	strategy.tasks.forEach(task => {
-		tasksToString += "RTC:" + task.id + "--";
-		console.log(task.id);
-		tasksToString += "Tipo:" + task.tipo + "--";
-		tasksToString += "Estado:" + task.estado + "--";
-		tasksToString += "EstadoFinal:" + task.estadoFinal+ "--";
-		tasksToString += "prioridad:" + task.prioridad + "--";
-		tasksToString += "resumen:" + task.resumen + "--";
-		tasksToString += "tamaño:" + task.tamano + "--";
-		tasksToString += "complejidad:" + task.complejidad + "--";
-		tasksToString += "propiedad:" + task.propiedad + "--";
-		tasksToString += "peticionario:" + task.peticionario + "--";
+		strategy.tasks.forEach(task => {
+			tasksToString += "RTC:" + task.id + "--";
+			console.log(task.id);
+			tasksToString += "Tipo:" + task.tipo + "--";
+			tasksToString += "Estado:" + task.estado + "--";
+			tasksToString += "EstadoFinal:" + task.estadoFinal+ "--";
+			tasksToString += "prioridad:" + task.prioridad + "--";
+			tasksToString += "resumen:" + task.resumen + "--";
+			tasksToString += "tamaño:" + task.tamano + "--";
+			tasksToString += "complejidad:" + task.complejidad + "--";
+			tasksToString += "propiedad:" + task.propiedad + "--";
+			tasksToString += "peticionario:" + task.peticionario + "--";
+			
+			if(task.relevante == "Sí"){
+				tasksToString += "relevante:true--";
+			} else {
+				tasksToString += "relevante:false--";
+			}
+			console.log(tasksToString);
+			if(task.urgente == "Sí"){
+				tasksToString += "urgente:true--";
+			} else {
+				tasksToString += "urgente:false--";
+			}
+			
+			tasksToString += "planificado:" + task.planificado + "qwer" ;
+		});
+
+		tasksToString = tasksToString.substring(0, tasksToString.length - 4);
+//		console.log(tasksToString)
+
+		console.log(strategy.tasks)
+		$.ajax({
+			type: "POST",
+			url: "/estrategia/saveEstrategia",
+			data: {
+				stratTasks: tasksToString
+			}, success: function (data) {
+				console.log("success");
+				location.href = "/estrategia/panelControl";
+			}
+		});
+	} else {
+		console.log(inTasks)
+		var date = new Date();
+		tasksToString = "";
 		
-		if(task.relevante == "Sí"){
-			tasksToString += "relevante:true--";
-		} else {
-			tasksToString += "relevante:false--";
-		}
-		
-		if(task.urgente == "Sí"){
-			tasksToString += "urgente:true--";
-		} else {
-			tasksToString += "urgente:false--";
-		}
-		
-		tasksToString += "planificado:" + task.planificado + "qwer" ;
-	});
+		tasks.forEach(task => {
+			tasksToString += "id:" + task.id + "--";
+			tasksToString += "estadoActual:" + task.estado + "--"; 
+			tasksToString += "subEstadoActual:" + " " + "qwer";
+		});
 
-	tasksToString = tasksToString.substring(0, tasksToString.length - 4);
-//	console.log(tasksToString)
-
-	console.log(strategy.tasks)
-	$.ajax({
-		type: "POST",
-		url: "/estrategia/saveEstrategia",
-		data: {
-			stratTasks: tasksToString
-		}, success: function (data) {
-			console.log("success");
-			location.href = "/estrategia/panelControl";
-		}
-	});
+		$.ajax({
+			type: "POST",
+			url: "/daily/saveDaily",
+			data: {
+				date: "" +date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate(),
+				stratDaily: tasksToString
+			}, success: function (data) {
+				console.log("success");
+				location.href = "/estrategia/panelControl";
+			}
+		});
+		console.log("not empty")
+		
+	}
+	
 }
 
 function habilitarBotonEnvio() {
@@ -224,7 +252,7 @@ function habilitarBotonEnvio() {
 }
 
 function orderByPrio(arr) {
-	arr = arr.sort(function(a, b){
+	arr.sort(function(a, b){
 		if(a.prioridad < b.prioridad){
 			return 1;
 		}
@@ -247,7 +275,6 @@ function orderByPrio(arr) {
 				orderedArr.push(arr[i])
 			} else if (order >= prio.length && !exists(orderedArr, arr[i])){
 				orderedArr.push(arr[i])
-			} else {
 			}
 		}
 		if(order < prio.length){

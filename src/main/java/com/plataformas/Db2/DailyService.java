@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.plataformas.model.Daily;
-import com.plataformas.model.Estrategia;
 import com.plataformas.model.Tarea;
 import com.plataformas.recursos.DbResources;
 
