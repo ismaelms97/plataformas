@@ -1,7 +1,7 @@
 
 var arrayTasksBackup = [];
 
-function dragDrop(){
+function dragDrop(arr){
 
 	// Con este codigo conseguimos que se mueva cada tarea unicamente en su eje x, y
 	// a su vez que cuando los dejes en el sitio, cambien de color
@@ -60,20 +60,21 @@ function dragDrop(){
 				stop: function (event, ui) {
 					document.getElementsByClassName("rect")[(this.getAttribute("data-rtc") - 1)].style.display = "";
 
-					if (this.parentElement.classList.contains(estados[this.getAttribute("data-posInitial")].replace(/\s/g, "-")) && tasks[this.getAttribute("data-rtc") - 1].modified) {
+					if (this.parentElement.classList.contains(estados[this.getAttribute("data-posInitial")].replace(/\s/g, "-")) && arr[this.getAttribute("data-rtc") - 1].modified) {
 
-						tasks[this.getAttribute("data-rtc") - 1].modified = false;
+						arr[this.getAttribute("data-rtc") - 1].modified = false;
 
 					} else {
 
 						if (estados.indexOf(this.parentElement.classList[0].replace(/-/g, " ")) >= this.getAttribute("data-posInitial")) {
-							tasks[this.getAttribute("data-rtc") - 1].modified = true;
-							tasks[this.getAttribute("data-rtc") - 1].estadoFinal = this.parentElement.classList[0].replace(/-/g, " ");
+							arr[this.getAttribute("data-rtc") - 1].modified = true;
+							arr[this.getAttribute("data-rtc") - 1].estadoFinal = this.parentElement.classList[0].replace(/-/g, " ");
 						}
 					}
 
 					habilitarBotonEnvio();
-					console.log(tasks[this.getAttribute("data-rtc") - 1]);
+					console.log(arr[this.getAttribute("data-rtc") - 1]);
+					console.log(arr);
 				},
 			});
 
@@ -99,7 +100,7 @@ function dragDrop(){
 						event.target.children[0].style.display = "none";
 
 						// Al colocar el rtc en su posicion inicial, cambiale el color, y su estado de modificado
-						if (tasks[ui.draggable[0].getAttribute("data-rtc") - 1].modified) {
+						if (arr[ui.draggable[0].getAttribute("data-rtc") - 1].modified) {
 							$(ui.draggable[0]).removeClass("orange");
 
 						}
@@ -183,7 +184,7 @@ function saveStrategy() {
 		} else {
 			tasksToString += "relevante:false--";
 		}
-		
+		console.log(tasksToString);
 		if(task.urgente == "Sí"){
 			tasksToString += "urgente:true--";
 		} else {

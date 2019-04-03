@@ -50,7 +50,8 @@ function inputTasks() {
 function drawTable(array , db) {
 //	ORdenamos el array por prioridad, 
 	array = orderByPrio(array);
-
+	//tasks = orderByPrio(tasks);
+	console.log(array)
 	// PIntamos la tabla
 	for (var i = 0; i < array.length; i++) {
 		var tr = document.createElement("tr");
@@ -143,7 +144,7 @@ function drawRTC(array, pos, db) {
 		$(el).parent().append(cln);
 		$(cln).css("display", "none");
 
-		dragDrop();
+		dragDrop(array);
 	}
 	// Ejecutamos la funcion para mostrar los detalles
 	document.getElementsByTagName("TR")[pos + 1].children[estadoActual].addEventListener("click", function(){
