@@ -181,9 +181,9 @@ public class Tarea {
 			String complejidad = rs.getString("complejidad");
 			String propiedad = rs.getString("propiedad");
 			String peticionario = rs.getString("peticionario");
-			boolean relevante = rs.getBoolean("estadoFinal");
-			boolean urgente = rs.getBoolean("estadoFinal");
-			String planificado = rs.getString("peticionario");
+			boolean relevante = rs.getBoolean("relevante");
+			boolean urgente = rs.getBoolean("urgente");
+			String planificado = rs.getString("planificado");
 			Tarea tarea = new Tarea(id,tipo,estadoInicio,estadoFinal,prioridad, resumen,tamaño, complejidad,propiedad, peticionario,relevante,urgente, planificado);
 			tareaList.add(tarea);
 		}
