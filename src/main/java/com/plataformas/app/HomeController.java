@@ -1,5 +1,6 @@
 package com.plataformas.app;
 
+import java.net.PasswordAuthentication;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,7 @@ import com.plataformas.Db2.EstrategiaService;
 import com.plataformas.Db2.UserService;
 import com.plataformas.model.Estrategia;
 import com.plataformas.model.User;
+import com.plataformas.recursos.SessionResources;
 
 
 /**
@@ -57,17 +59,18 @@ public class HomeController {
 		String mensaje = "";
 
 		try{
-
+			
 			session = request.getSession();
 			newUser = userService.findByUsername(user.getUsername());
-
+			user.setPassword(User.encrypt(user.getPassword()));
+		
+		
 			if(newUser.getPassword().equals(user.getPassword())) {
 
 				session.setAttribute("userSession", newUser);
 				USessions.add(newUser);	
 				model.addAttribute("greeting","Hola "+ user.getUsername());
 				model.addAttribute("user",newUser);
-				System.out.println(newUser.getNombreEquipo());
 				model.addAttribute("nombreEquipo", " Nombre de equipo : "+newUser.getNombreEquipo());
 				model.addAttribute("estrategia", new Estrategia());
 				model.addAttribute("equipoId", newUser.getEquipoId());

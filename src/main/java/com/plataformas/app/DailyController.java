@@ -16,13 +16,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.plataformas.Db2.DailyService;
 import com.plataformas.model.Daily;
+import com.plataformas.recursos.SessionResources;
 @Controller
 @RequestMapping(value = "/daily")
 public class DailyController {
 
 	@Autowired
 	DailyService dailyService;
-	//@A
+	@Autowired
+	SessionResources sessionResources;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -31,29 +33,45 @@ public class DailyController {
 	 */
 
 
-	@GetMapping(value = "/showDaily/{id}")
-	public  String showDaily(@PathVariable String id,Model model,HttpSession session) {	
-		
+	@GetMapping(value = "/findDailys/{id}")
+	public  String findDailyById(@PathVariable String id,Model model,HttpSession session) {	
+
 		synchronized (session) {
-		//	if (!sessionResources.checkUserSession(session)){
 			
-			//dailyService.findDailyById(Integer.parseInt(id));
+			if (!sessionResources.checkUserSession(session)){
+				
+				model.addAttribute("mensajeAcceso", "Acceso Denegado");
+				return "accessDenied";
+				
+			}else {
+				
+				try {
+					
+					List<Daily> listaDaily = dailyService.findDailyById(Integer.parseInt(id));
+					model.addAttribute("listaDaily", listaDaily);
+					
+				}catch (Exception e) {
+					
+					System.out.println("Error en showDaily : no se ha encontrado daily con ese ID");
+				}
+				
+			}
 		}
-		
 		return "mainPanel";
 
 	}
 	@PostMapping(value = "/saveDaily")
 	public @ResponseBody String  saveDaily ( String stratDaily,Model model,HttpSession session) {
-		
+
 		synchronized (session) {
-			
+
 			try {
+
+				List<Daily> listDaily =  Daily.stringToObject(stratDaily);	
 				
-				List<Daily> listDaily =  Daily.stringToObject(stratDaily);				
-				//int idEstrategia  = (Integer) session.getAttribute("estrategiaID");
-				//Daily newDaily = null;
-				//newDaily.setEstrategiaId(idEstrategia);
+				int idEstrategia  = (Integer) session.getAttribute("estrategiaID");
+				Daily newDaily = null;
+				newDaily.setEstrategiaId(idEstrategia);
 				//dailyService.saveDaily(newDaily,idEstrategia);
 				System.out.println("Daily   Guardada");
 
@@ -66,8 +84,8 @@ public class DailyController {
 		return "mainPanel";
 
 	}
-	@GetMapping(value = "/findDaily")
-	public String findDailyById(Model model) {	
+	@GetMapping(value = "/showDaily")
+	public String showAllDaily(Model model) {	
 
 
 		return "mainPanel";

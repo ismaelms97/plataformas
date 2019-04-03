@@ -1,5 +1,7 @@
 package com.plataformas.model;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -103,5 +105,21 @@ public class User {
 		
 		return user;
 	}
-
+	
+	@SuppressWarnings("restriction")
+	public static String encrypt(String pass) {
+		  
+	    try {
+	    	
+	      MessageDigest md = MessageDigest.getInstance("SHA-256");
+	      md.update(pass.getBytes());
+	      return new sun.misc.BASE64Encoder().encode(md.digest());
+	      
+	    } catch (NoSuchAlgorithmException e) {
+	    	
+	      //_log.error("Failed to encrypt password.", e);
+	    }
+	    return "";
+	  
+	}
 }
