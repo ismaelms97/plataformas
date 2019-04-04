@@ -256,10 +256,10 @@ a:hover {
 	animation: .4s linear example;
 }
 
-.active:not(.ended) {
+a .active:not(.ended) {
   background-color: #65c26d;
 }
-.active{
+a .active{
 	background-color: rgb(231, 132, 114);
 }
 
