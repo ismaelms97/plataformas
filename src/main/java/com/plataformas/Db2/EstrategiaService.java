@@ -25,8 +25,7 @@ public class EstrategiaService {
 	
 	public List<Estrategia> findEstrategiaById(int idUser){
 		
-		List<Estrategia> estrategiaList = new ArrayList<Estrategia>();		
-		
+		List<Estrategia> estrategiaList = new ArrayList<Estrategia>();			
 		
 		try {
 
@@ -59,9 +58,7 @@ public class EstrategiaService {
 			Connection con = dbResources.getConection();
 			con.setAutoCommit(false);
 			Statement  stmt = con.createStatement(); 
-
 			ResultSet rs = stmt.executeQuery("select distinct T.* , ET.estadoInicio,ET.estadoFinal from tarea T , estrategia E , estrategia_tarea ET where T.id = ET.tarea_id AND ET.estrategia_id = "+idEstrategia+"");
-
 
 			return Tarea.converFromDatabase(rs, tareaList);
 

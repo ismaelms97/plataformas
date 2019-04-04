@@ -112,6 +112,7 @@ public class HomeController {
 		synchronized (session) {
 
 			session.invalidate();
+			System.out.println("Session closed");
 		}
 
 		return "redirect:/";

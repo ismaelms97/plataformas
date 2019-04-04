@@ -117,6 +117,8 @@ var process_wb = (function () {
 		}
 		// Collect Users from propertyOf 
 		owners();
+		// Activate the action to filter
+		filtering();
 		drawTable(tasks, false);
 	};
 })();
