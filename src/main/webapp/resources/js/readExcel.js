@@ -1,5 +1,6 @@
 
 var tasks = []
+var equipo = [];
 var idPos, typePos, prioPos, resuPos, statusPos, sizePos, complejPos, ownerPos, petPos, relevancePos, urgenPos, plannedPos;
 var X = XLSX;
 var XW = {
@@ -116,7 +117,7 @@ var process_wb = (function () {
 			$("div.button").removeClass("disabled");
 		}
 		// Collect Users from propertyOf 
-		owners();
+		equipo = owners();
 		// Activate the action to filter
 		filtering();
 		drawTable(tasks, false);

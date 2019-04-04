@@ -242,6 +242,18 @@ a:hover {
 	background-color: rgb(182, 182, 182); 
 }
 
+.divOptions{
+	display: flex;
+	flex-direction: column;
+	transition: 0.4s ease-in-out;
+	margin-top : 2px;
+}
+.options{
+	background: silver;
+	color: white;
+	padding: 2px;
+}
+
 /*########### MODAL ###########*/
 .detailsSubtitle{
 	font-size:18px;

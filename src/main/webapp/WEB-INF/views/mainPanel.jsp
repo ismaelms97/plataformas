@@ -6,10 +6,12 @@
 <jsp:include page="header.jsp"></jsp:include>
 <jsp:include page="formularioEstrategia.jsp"></jsp:include>
 <script src="/resources/js/mainPanel.js"></script>
+
 <body>
 	<div class="parent cartas">
 
-		<c:forEach items="${listaEstrategia}" var="estrategia" varStatus="item">
+		<c:forEach items="${listaEstrategia}" var="estrategia"
+			varStatus="item">
 			<script>
 				var estrategia = new Object();
 				estrategia.id = "${estrategia.id}";
@@ -17,9 +19,13 @@
 				console.log("ID " + estrategia.endDate)
 				estrategias.push(estrategia);
 			</script>
-			<a href="/estrategia/findEstrategia/${estrategia.id}">
+			<a href="#<%-- /estrategia/findEstrategia/${estrategia.id} --%>">
 				<div class="estartegiasCard">
-					<c:out value="${estrategia.nombre}"/>
+					<c:out value="${estrategia.nombre}" />
+					<div class="divOptions">
+						<span class="options">Crear</span>
+						<span class="options">Ver</span>
+					</div>
 				</div>
 			</a>
 		</c:forEach>
@@ -31,6 +37,15 @@
 
 	<script>
 		checkStatus();
+		
+		$(document).ready(function() {
+		    $(".estartegiasCard").click(function () {
+		        $(".options", this).toggle();
+		    });
+		    
+		    $(".options", this).toggle();
+		});
+
 	</script>
 	<jsp:include page="footer.jsp"></jsp:include>
 </body>
