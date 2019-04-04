@@ -94,11 +94,9 @@ public class EstrategiaController {
 				}else {
 
 					List<Tarea> tareas = estrategiaService.findTareasByEstrategia(Integer.parseInt(id));
-					List<String> dates = dailyService.findDateDaily(Integer.parseInt(id));
+					
 					session.setAttribute("estrategiaID", Integer.parseInt(id.trim()));
 					model.addAttribute("listaTareas",tareas);
-					model.addAttribute("dates",dates);
-					
 					System.out.println("TAREAS COMPLETE");
 					
 					return "plataforma";
