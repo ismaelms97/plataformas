@@ -29,7 +29,7 @@ public class DailyController {
 	SessionResources sessionResources;
 	@Autowired
 	EstrategiaService estrategiaService;
-	
+
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -42,39 +42,39 @@ public class DailyController {
 	public  String findDailyById(@PathVariable String id,Model model,HttpSession session) {	
 
 		synchronized (session) {
-			
+
 			if (!sessionResources.checkUserSession(session)){
-				
+
 				model.addAttribute("mensajeAcceso", "Acceso Denegado");
 				return "accessDenied";
-				
+
 			}else {
-				
+
 				try {
-					
+
 					List<Daily> listaDaily = dailyService.findDailyById(Integer.parseInt(id));
 					List<Tarea> tareas = estrategiaService.findTareasByEstrategia(Integer.parseInt(id));
 					model.addAttribute("listaDaily", listaDaily);
 					model.addAttribute("listaTareas",tareas);
-					
+
 				}catch (Exception e) {
-					
+
 					System.out.println("Error en showDaily : no se ha encontrado daily con ese ID");
 				}
-				
+
 			}
 		}
 		return "plataforma";
 
 	}
-	
+
 	@PostMapping(value = "/saveDaily")
 	public @ResponseBody String  saveDaily ( String stratDaily,String date,Model model,HttpSession session) {
 
 		synchronized (session) {
 
 			try {
-				
+
 				int idEstrategia  = (Integer) session.getAttribute("estrategiaID");
 				List<Daily> listDaily =  Daily.stringToObject(stratDaily,date,idEstrategia);
 				dailyService.saveDaily(listDaily);
@@ -89,6 +89,35 @@ public class DailyController {
 		return "mainPanel";
 
 	}
+
+	@PostMapping(value = "/date")
+	public @ResponseBody String getDatesOfDaily(String id ,Model model,HttpSession session) {	
+
+		synchronized (session) {
+			String date = "";
+			if (!sessionResources.checkUserSession(session)){
+
+				model.addAttribute("mensajeAcceso", "Acceso Denegado");
+				return "accessDenied";
+
+			}else {
+
+				try {
+
+					date = dailyService.findDateDaily(Integer.parseInt(id));
+
+				}catch (Exception e) {
+
+					System.out.println("Error al recoger fechas");
+				}
+			}
+			
+			return date;
+		}
+		
+
+	}
+
 	@GetMapping(value = "/showDaily")
 	public String showAllDaily(Model model) {	
 
