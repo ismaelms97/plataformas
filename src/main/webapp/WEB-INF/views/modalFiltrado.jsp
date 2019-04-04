@@ -61,6 +61,30 @@
 
 					</div>
 				</div>
+				<div class="card">
+					<div class="card-header" id="headingOne" data-toggle="collapse"
+						data-target="#collapseUrgent">
+						<h6 class="d-inline accordion-toggle" aria-expanded="false"
+							aria-controls="collapseExample">Urgente</h6>
+					</div>
+				</div>
+				<div class="collapse" id="collapseUrgent">
+					<div class="card card-body">
+						<!-- Urgencia -->
+						<div class="custom-control custom-radio">
+						  <input type="radio" class="custom-control-input filtros taskUrgent" id="isUrgent" name="urgentRadio" value="sí">
+						  <label class="custom-control-label" for="isUrgent">Sí</label>
+						</div>
+						<div class="custom-control custom-radio">
+						  <input type="radio" class="custom-control-input filtros taskUrgent" id="isntUrgent" name="urgentRadio" value="no">
+						  <label class="custom-control-label" for="isntUrgent">No</label>
+						</div>
+						<div class="custom-control custom-radio">
+						  <input type="radio" class="custom-control-input filtros taskUrgent" id="both" name="urgentRadio" value="">
+						  <label class="custom-control-label" for="both">Ambos</label>
+						</div>
+					</div>
+				</div>
 			</div>
 			<div class="modal-footer">
 				<button type="button" id="filter" class="btn btn-warning"

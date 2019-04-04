@@ -7,5 +7,6 @@
 	<!-- MDB core JavaScript -->
 	<script type="text/javascript" src="/resources/libs/js/mdb.js"></script>
 	<script src="/resources/js/estrategias.js"></script>
+	<script src="/resources/js/filtros.js"></script>
 	<script src="/resources/js/general.js"></script>
 </footer>
