@@ -18,8 +18,10 @@
 				estrategia.endDate = "${estrategia.fechaFin}";
 				console.log("ID " + estrategia.endDate)
 				estrategias.push(estrategia);
+				//href="/estrategia/findEstrategia/${estrategia.id}"
 			</script>
-			<a href="#<%-- /estrategia/findEstrategia/${estrategia.id} --%>">
+			
+			<a id="${estrategia.id}" class="a">
 				<div class="estartegiasCard">
 					<c:out value="${estrategia.nombre}" />
 				</div>
@@ -39,14 +41,14 @@
 		checkStatus();
 		
  		$(document).ready(function() {
-		    $(".estartegiasCard").click(function () {
-		        $(".divOptions", this).toggle();
+		    $(".a").click(function () {
+		        $(".options", this).toggle();
 		    });
 		    
-		    $(".divOptions", this).toggle();
+		    $(".options", this).toggle();
 		}); 
 
-		var acc = document.getElementsByClassName("estartegiasCard");
+		var acc = document.getElementsByClassName(".a");
 		var i;
 
 		for (i = 0; i < acc.length; i++) {
@@ -61,7 +63,7 @@
 		    } 
 		  });
 		}
-		
+
 	</script>
 	<jsp:include page="footer.jsp"></jsp:include>
 </body>

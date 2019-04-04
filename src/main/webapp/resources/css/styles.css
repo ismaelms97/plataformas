@@ -207,7 +207,7 @@ td .ui-selected {
 	width: 187.52px;
 	height: 96px;
 	max-width: 187.52px;
-/* 	max-height: 96px; */
+	max-height: 96px;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -256,8 +256,11 @@ a:hover {
 	padding: 0 18px;
 }
 
-.active /*, .accordion:hover */ {
-  background-color: #ccc;
+.active:not(.ended)/*, .accordion:hover */ {
+  background-color: #65c26d; 
+}
+.active{
+	background-color: rgb(231, 132, 114);
 }
 
 
