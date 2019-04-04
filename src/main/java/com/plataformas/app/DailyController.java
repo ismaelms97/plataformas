@@ -90,7 +90,7 @@ public class DailyController {
 
 	}
 
-	@PostMapping(value = "/date/{id}")
+	@PostMapping(value = "/date")
 	public @ResponseBody String getDatesOfDaily(String id ,Model model,HttpSession session) {	
 
 		synchronized (session) {
