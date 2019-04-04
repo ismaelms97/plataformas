@@ -35,7 +35,6 @@
 				} else {
 					task.urgente = "No";
 				}
-				//task.urgente = "${tarea.urgente}";
 				task.estadoFinal = "${tarea.estadoFinal}";
 				task.complejidad = "${tarea.complejidad}";
 				task.prioridad = "${tarea.prioridad}";

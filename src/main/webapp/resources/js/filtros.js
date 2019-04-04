@@ -39,6 +39,11 @@ function owners(){
 	var nombre = "";
 	tasks.forEach(function(task){
 		if(!own.includes(task.propiedad)){
+			
+			if(task.propiedad.toLowerCase() == "unassigned") {
+				task.propiedad = "";
+			}
+			
 			own.push(task.propiedad);
 			nombre = task.propiedad.toLowerCase();
 			var texto = '<div class="custom-control custom-checkbox">'+
@@ -48,6 +53,7 @@ function owners(){
 			$("#collapsePropertyOf").children(".card").append(texto);
 		}
 	})
+	return own;
 }
 
 /**
@@ -80,10 +86,10 @@ function filtering(){
 
 			}else if($(this).hasClass("taskPropertyOf")) {
 				filters.propiedad.push(this.value);
-				
+
 			}else if($(this).hasClass("taskUrgent")){
 				filters.urgente.length = 0;
-				
+
 				if(this.value == ""){
 					filters.urgente.push("sí");
 					filters.urgente.push("no");
@@ -92,9 +98,9 @@ function filtering(){
 				filters.urgente.push(this.value);
 				console.log(this.value);
 			}
-			
+
 		}else{
-			
+
 			if($(this).hasClass("taskType")){
 				filters.tipo.splice(filters.tipo.indexOf(this.value), 1);
 
@@ -103,11 +109,11 @@ function filtering(){
 
 			}
 		}
-		
+
 		console.log("filtered:");
 		console.log(filters);
 	})
-	
+
 	modalFilter(filters);
 }
 

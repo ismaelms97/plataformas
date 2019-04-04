@@ -6,20 +6,28 @@
 <jsp:include page="header.jsp"></jsp:include>
 <jsp:include page="formularioEstrategia.jsp"></jsp:include>
 <script src="/resources/js/mainPanel.js"></script>
+
 <body>
 	<div class="parent cartas">
 
-		<c:forEach items="${listaEstrategia}" var="estrategia" varStatus="item">
+		<c:forEach items="${listaEstrategia}" var="estrategia"
+			varStatus="item">
 			<script>
 				var estrategia = new Object();
 				estrategia.id = "${estrategia.id}";
 				estrategia.endDate = "${estrategia.fechaFin}";
 				console.log("ID " + estrategia.endDate)
 				estrategias.push(estrategia);
+				//href="/estrategia/findEstrategia/${estrategia.id}"
 			</script>
-			<a href="/estrategia/findEstrategia/${estrategia.id}">
+			
+			<a id="${estrategia.id}" class="a">
 				<div class="estartegiasCard">
-					<c:out value="${estrategia.nombre}"/>
+					<c:out value="${estrategia.nombre}" />
+				</div>
+				<div class="divOptions">
+						<span class="options">Crear</span>
+						<span class="options">Ver</span>
 				</div>
 			</a>
 		</c:forEach>
@@ -31,6 +39,31 @@
 
 	<script>
 		checkStatus();
+		
+ 		$(document).ready(function() {
+		    $(".a").click(function () {
+		        $(".options", this).toggle();
+		    });
+		    
+		    $(".options", this).toggle();
+		}); 
+
+		var acc = document.getElementsByClassName(".a");
+		var i;
+
+		for (i = 0; i < acc.length; i++) {
+		  acc[i].addEventListener("click", function() {
+		    this.classList.toggle("active");
+		    console.log(this);
+		    var panel = this.nextElementSibling;
+		    if (panel.style.maxHeight){
+		      panel.style.maxHeight = null;
+		    } else {
+		      panel.style.maxHeight = panel.scrollHeight + "px";
+		    } 
+		  });
+		}
+
 	</script>
 	<jsp:include page="footer.jsp"></jsp:include>
 </body>
