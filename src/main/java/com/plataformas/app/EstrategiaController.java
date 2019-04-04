@@ -54,7 +54,7 @@ public class EstrategiaController {
 					return "accessDenied";
 
 				}else {
-
+					
 					User actualUser = (User) session.getAttribute("userSession");
 					List<Estrategia> listaEstrategias = estrategiaService.findEstrategiaById(actualUser.getEquipoId());	
 					model.addAttribute("listaEstrategia",listaEstrategias);
@@ -94,7 +94,6 @@ public class EstrategiaController {
 				}else {
 
 					List<Tarea> tareas = estrategiaService.findTareasByEstrategia(Integer.parseInt(id));
-					
 					session.setAttribute("estrategiaID", Integer.parseInt(id.trim()));
 					model.addAttribute("listaTareas",tareas);
 					System.out.println("TAREAS COMPLETE");

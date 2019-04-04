@@ -94,7 +94,9 @@ public class DailyController {
 	public @ResponseBody String getDatesOfDaily(String id ,Model model,HttpSession session) {	
 
 		synchronized (session) {
+			
 			String date = "";
+			
 			if (!sessionResources.checkUserSession(session)){
 
 				model.addAttribute("mensajeAcceso", "Acceso Denegado");
