@@ -10,7 +10,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="estrategia")
 public class Estrategia {
-	
+
 	@Id
 	private int Id;
 	private String nombre;
@@ -22,8 +22,6 @@ public class Estrategia {
 	public Estrategia() {
 		super();
 	}
-	
-	
 
 	public Estrategia(int id,String nombre, String estado, String fechaInicio, String fechaFin, int equipoId) {
 		super();
@@ -34,8 +32,6 @@ public class Estrategia {
 		this.fechaFin = fechaFin;
 		this.equipoId = equipoId;
 	}
-
-
 
 	public Estrategia(String nombre,String estado, String fechaInicio, String fechaFin, int equipoId) {
 		super();
@@ -49,14 +45,14 @@ public class Estrategia {
 	public int getId() {
 		return Id;
 	}
+
 	public void setId(int id) {
 		Id = id;
 	}
-	
+
 	public String getNombre() {
 		return nombre;
 	}
-
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
@@ -65,32 +61,39 @@ public class Estrategia {
 	public String getEstado() {
 		return estado;
 	}
+
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
+
 	public String getFechaInicio() {
 		return fechaInicio;
 	}
+
 	public void setFechaInicio(String fechaInicio) {
 		this.fechaInicio = fechaInicio;
 	}
+
 	public String getFechaFin() {
 		return fechaFin;
 	}
+
 	public void setFechaFin(String fechaFin) {
 		this.fechaFin = fechaFin;
 	}
+
 	public int getEquipoId() {
 		return equipoId;
 	}
+
 	public void setEquipoId(int equipoId) {
 		this.equipoId = equipoId;
 	}
-	
+
 	public static  List<Estrategia> converFromDatabase(ResultSet rs,List<Estrategia> estrategiaList ) throws SQLException {
-		
+
 		while (rs.next()) {
-			
+
 			int id = rs.getInt("id");
 			String nombre = rs.getString("nombre");
 			String estado = rs.getString("estado");
@@ -100,8 +103,7 @@ public class Estrategia {
 			Estrategia estrategia = new Estrategia( id,nombre, estado,fechaInicio ,fechafin ,equipo_id);
 			estrategiaList.add(estrategia);
 		}
-		
+
 		return estrategiaList;
-	}
-	
+	}	
 }

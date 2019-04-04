@@ -30,13 +30,11 @@ public class DailyController {
 	@Autowired
 	EstrategiaService estrategiaService;
 
-
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 * @throws SQLException 
 	 * @throws ClassNotFoundException 
 	 */
-
 
 	@GetMapping(value = "/findDailys/{id}")
 	public  String findDailyById(@PathVariable String id,Model model,HttpSession session) {	
@@ -72,21 +70,28 @@ public class DailyController {
 	public @ResponseBody String  saveDaily ( String stratDaily,String date,Model model,HttpSession session) {
 
 		synchronized (session) {
+			if (!sessionResources.checkUserSession(session)){
 
-			try {
+				model.addAttribute("mensajeAcceso", "Acceso Denegado");
+				return "accessDenied";
 
-				int idEstrategia  = (Integer) session.getAttribute("estrategiaID");
-				List<Daily> listDaily =  Daily.stringToObject(stratDaily,date,idEstrategia);
-				dailyService.saveDaily(listDaily);
-				System.out.println("Daily   Guardada");
+			}else {
 
-			}catch (Exception e) {
+				try {
 
-				System.out.println("error al guardar");
+					int idEstrategia  = (Integer) session.getAttribute("estrategiaID");
+					List<Daily> listDaily =  Daily.stringToObject(stratDaily,date,idEstrategia);
+					dailyService.saveDaily(listDaily);
+					System.out.println("Daily   Guardada");
+
+				}catch (Exception e) {
+
+					System.out.println("error al guardar");
+				}
+
 			}
-
+			return "mainPanel";
 		}
-		return "mainPanel";
 
 	}
 
@@ -94,9 +99,9 @@ public class DailyController {
 	public @ResponseBody String getDatesOfDaily(String id ,Model model,HttpSession session) {	
 
 		synchronized (session) {
-			
+
 			String date = "";
-			
+
 			if (!sessionResources.checkUserSession(session)){
 
 				model.addAttribute("mensajeAcceso", "Acceso Denegado");
@@ -113,10 +118,10 @@ public class DailyController {
 					System.out.println("Error al recoger fechas");
 				}
 			}
-			
+
 			return date;
 		}
-		
+
 
 	}
 

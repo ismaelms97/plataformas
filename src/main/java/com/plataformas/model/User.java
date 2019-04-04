@@ -10,13 +10,13 @@ import javax.persistence.Table;
 @Entity
 @Table(name="user")
 public class User {
-	
+
 	private int Id;
 	private String username;
 	private String password;
 	private int equipoId;
 	private String NombreEquipo;
-	
+
 	public User() {
 		super();
 	}
@@ -29,7 +29,6 @@ public class User {
 		this.equipoId = equipoId;
 	}
 
-	
 	public User(int id, String username, String password ,int equipoId,String NombreEquipo) {
 		super();
 		Id = id;
@@ -39,62 +38,52 @@ public class User {
 		this.NombreEquipo = NombreEquipo;
 	}
 
-
 	public int getEquipoId() {
 		return equipoId;
 	}
-
 
 	public void setEquipoId(int equipoId) {
 		this.equipoId = equipoId;
 	}
 
-
 	public int getId() {
 		return Id;
 	}
-
 
 	public void setId(int id) {
 		Id = id;
 	}
 
-
 	public String getUsername() {
 		return username;
 	}
-
 
 	public void setUsername(String username) {
 		this.username = username;
 	}
 
-
 	public String getPassword() {
 		return password;
 	}
-
 
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
-
 	public String getNombreEquipo() {
 		return NombreEquipo;
 	}
-
 
 	public void setNombreEquipo(String nombreEquipo) {
 		NombreEquipo = nombreEquipo;
 	}
 
 	public static User converFromDataBase(ResultSet rs) throws SQLException {
-		
+
 		User user = null;
-		
+
 		if(rs.next()) {
-			
+
 			int id = rs.getInt("id");
 			String username = rs.getString("username");
 			String password = rs.getString("password");
@@ -102,24 +91,26 @@ public class User {
 			String nombreEquipo = rs.getString("name");
 			user  = new User(id,username,password,equipo_id,nombreEquipo);			
 		}
-		
+
 		return user;
 	}
-	
+
 	@SuppressWarnings("restriction")
 	public static String encrypt(String pass) {
-		  
-	    try {
-	    	
-	      MessageDigest md = MessageDigest.getInstance("SHA-256");
-	      md.update(pass.getBytes());
-	      return new sun.misc.BASE64Encoder().encode(md.digest());
-	      
-	    } catch (NoSuchAlgorithmException e) {
-	    	
-	      //_log.error("Failed to encrypt password.", e);
-	    }
-	    return "";
-	  
+
+		try {
+
+			MessageDigest md = MessageDigest.getInstance("SHA-256");
+			md.update(pass.getBytes());
+			return new sun.misc.BASE64Encoder().encode(md.digest());
+
+		} catch (NoSuchAlgorithmException e) {
+
+			System.out.println("User -> encrypt() Failed");
+
+		}
+
+		return "";
+
 	}
 }

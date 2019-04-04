@@ -11,16 +11,16 @@ import javax.persistence.Table;
 @Entity
 @Table(name="daily")
 public class Daily {
-	
+
 	private int Id;
 	private String fecha;
 	private int estrategiaId;
 	private String estadoActual;
 	private String subEstadoActual;
 	private int tareaId;
-	
-	
-	
+
+
+
 	public Daily() {
 		super();
 	}
@@ -49,7 +49,6 @@ public class Daily {
 		this.subEstadoActual = subEstadoActual;
 	}
 
-
 	public int getId() {
 		return Id;
 	}
@@ -74,16 +73,13 @@ public class Daily {
 		this.estrategiaId = dailyId;
 	}
 
-
 	public String getEstadoActual() {
 		return estadoActual;
 	}
 
-
 	public void setEstadoActual(String estadoActual) {
 		this.estadoActual = estadoActual;
 	}
-
 
 	public String getSubEstadoActual() {
 		return subEstadoActual;
@@ -94,8 +90,6 @@ public class Daily {
 		this.subEstadoActual = subEstadoActual;
 	}
 
-	
-
 	public int getTareaId() {
 		return tareaId;
 	}
@@ -105,9 +99,9 @@ public class Daily {
 	}
 
 	public static  List<Daily> converFromDatabase(ResultSet rs,List<Daily> dailyList ) throws SQLException {
-		
+
 		while (rs.next()) {
-			
+
 			String fecha = rs.getString("fecha");
 			int tareaId = rs.getInt("tarea_id");
 			String estadoActual = rs.getString("estadoActual");
@@ -119,7 +113,7 @@ public class Daily {
 			daily.setSubEstadoActual(subEstadoActual);
 			dailyList.add(daily);
 		}
-		
+
 		return dailyList;
 	}
 
@@ -128,9 +122,9 @@ public class Daily {
 		List<Daily> listaDaily =  new ArrayList<Daily>();
 
 		String[][] dailys = new String[stratDaily.split("qwer").length][4];
-		
+
 		for(int i = 0; i < dailys.length; i++) {
-			
+
 			String[] dailystr = stratDaily.split("qwer");
 			dailys[i] = dailystr[i].split("--");	
 			String idTarea = (dailys[i][0].split(":"))[1];		
@@ -144,7 +138,7 @@ public class Daily {
 			daily.setEstrategiaId(idEstrategia);
 			listaDaily.add(daily);
 		}
-		
+
 		return listaDaily;
 
 	}

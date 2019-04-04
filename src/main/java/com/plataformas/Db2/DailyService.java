@@ -1,21 +1,16 @@
 package com.plataformas.Db2;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.plataformas.model.Daily;
-import com.plataformas.model.Tarea;
-import com.plataformas.model.User;
 import com.plataformas.recursos.DbResources;
 
 @Service
@@ -79,7 +74,7 @@ public class DailyService {
 
 		}catch (Exception e) {
 
-			System.out.println("Error en findDailyById ");
+			System.out.println("Error en findDateDaily ");
 			return date;
 		}
 
@@ -95,8 +90,7 @@ public class DailyService {
 			con = dbResources.getConection();
 			con.setAutoCommit(false);
 
-			String sql = "INSERT INTO daily (fecha,estrategia_id) values "
-					+ "('"+listDailty.get(0).getFecha()+"',"+listDailty.get(0).getEstrategiaId()+")";
+			String sql = "INSERT INTO daily (fecha,estrategia_id) values ('"+listDailty.get(0).getFecha()+"',"+listDailty.get(0).getEstrategiaId()+")";
 
 			PreparedStatement  stmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS); 
 			stmt.executeUpdate();
@@ -114,6 +108,7 @@ public class DailyService {
 				stmt.setString(4, daily.getSubEstadoActual());
 
 				try {
+					
 					stmt.executeUpdate();
 
 				}catch  (Exception e) {

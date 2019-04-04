@@ -66,9 +66,9 @@ public class HomeController {
 				session = request.getSession();
 				session.setAttribute("userSession", newUser);
 				USessions.add(newUser);	
-				model.addAttribute("greeting","Hola "+ user.getUsername());
+				model.addAttribute("greeting","Usuario: "+ user.getUsername());
 				model.addAttribute("user",newUser);
-				model.addAttribute("nombreEquipo", " Nombre de equipo : "+newUser.getNombreEquipo());
+				model.addAttribute("nombreEquipo", " Equipo: "+newUser.getNombreEquipo());
 				model.addAttribute("estrategia", new Estrategia());
 				model.addAttribute("equipoId", newUser.getEquipoId());
 				userExist = true;

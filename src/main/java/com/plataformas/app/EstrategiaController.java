@@ -2,10 +2,7 @@ package com.plataformas.app;
 
 import java.sql.SQLException;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,13 +12,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.plataformas.Db2.DailyService;
 import com.plataformas.Db2.EstrategiaService;
 import com.plataformas.model.Estrategia;
 import com.plataformas.model.Tarea;
 import com.plataformas.model.User;
 import com.plataformas.recursos.SessionResources;
+
+
 @Controller
 @RequestMapping(value = "/estrategia")
 public class EstrategiaController {
@@ -50,11 +48,10 @@ public class EstrategiaController {
 				if (!sessionResources.checkUserSession(session)){
 
 					model.addAttribute("mensajeAcceso", "Acceso Denegado");
-
 					return "accessDenied";
 
 				}else {
-					
+
 					User actualUser = (User) session.getAttribute("userSession");
 					List<Estrategia> listaEstrategias = estrategiaService.findEstrategiaById(actualUser.getEquipoId());	
 					model.addAttribute("listaEstrategia",listaEstrategias);
@@ -90,14 +87,14 @@ public class EstrategiaController {
 
 					model.addAttribute("mensajeAcceso", "Acceso Denegado");
 					return "accessDenied";
-					
+
 				}else {
 
 					List<Tarea> tareas = estrategiaService.findTareasByEstrategia(Integer.parseInt(id));
 					session.setAttribute("estrategiaID", Integer.parseInt(id.trim()));
 					model.addAttribute("listaTareas",tareas);
 					System.out.println("TAREAS COMPLETE");
-					
+
 					return "plataforma";
 				}
 
@@ -113,17 +110,25 @@ public class EstrategiaController {
 			}		
 		}
 	}
-	
+
 
 	@PostMapping(value = "/pushEstrategia")
 	public  String pushEstrategia(@ModelAttribute("estrategia") Estrategia estrategia,Model model,HttpSession session) {	
 
 		synchronized (session) {
 
-			User us = (User) session.getAttribute("userSession");
-			estrategia.setEquipoId(us.getEquipoId());
-			session.setAttribute("newEstrategia", estrategia);
-			model.addAttribute("tarea", new Tarea());
+			if (!sessionResources.checkUserSession(session)){
+
+				model.addAttribute("mensajeAcceso", "Acceso Denegado");
+				return "accessDenied";
+
+			}else {
+
+				User us = (User) session.getAttribute("userSession");
+				estrategia.setEquipoId(us.getEquipoId());
+				session.setAttribute("newEstrategia", estrategia);
+				model.addAttribute("tarea", new Tarea());
+			}
 
 			return "plataforma";
 		}
@@ -134,39 +139,53 @@ public class EstrategiaController {
 
 		synchronized (session) {
 
-			Estrategia newEstrategia = (Estrategia) session.getAttribute("newEstrategia");
+			if (!sessionResources.checkUserSession(session)){
 
-			try {
+				model.addAttribute("mensajeAcceso", "Acceso Denegado");
+				return "accessDenied";
 
-				List<Tarea> listaTareas = Tarea.stringToObject(stratTasks);
-				estrategiaService.saveEstrategiaAndTarea(listaTareas,newEstrategia);
+			}else {
+				Estrategia newEstrategia = (Estrategia) session.getAttribute("newEstrategia");
 
-			}catch (Exception e) {
+				try {
 
-				System.out.println("error al guardar");
+					List<Tarea> listaTareas = Tarea.stringToObject(stratTasks);
+					estrategiaService.saveEstrategiaAndTarea(listaTareas,newEstrategia);
+
+				}catch (Exception e) {
+
+					System.out.println("error al guardar");
+				}
 			}
-		}
 
-		return "redirect:/estrategia/panelControl";
+			return "redirect:/estrategia/panelControl";
+		}
 
 	}
 
 	@PostMapping(value = "/deleteEstrategia")
-	public String deleteEstrategia(@ModelAttribute("estrategia") Estrategia estrategia,Model Model,HttpSession session) {
+	public String deleteEstrategia(@ModelAttribute("estrategia") Estrategia estrategia,Model model,HttpSession session) {
 
 		synchronized (session) {
+			
+			if (!sessionResources.checkUserSession(session)){
 
-			try {
+				model.addAttribute("mensajeAcceso", "Acceso Denegado");
+				return "accessDenied";
 
-				estrategiaService.deleteEstrategia(estrategia.getId());
+			}else {
+				try {
 
-			} catch (Exception e) {
+					estrategiaService.deleteEstrategia(estrategia.getId());
 
-				System.out.println("Error delete");
+				} catch (Exception e) {
+
+					System.out.println("Error delete");
+				}
 			}
-		}
 
-		return "mainPanel";
+			return "mainPanel";
+		}
 	}
 
 }

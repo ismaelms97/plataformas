@@ -1,18 +1,16 @@
 package com.plataformas.Db2;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.plataformas.model.User;
 import com.plataformas.recursos.DbResources;
+
 @Service
 public class UserService {
 	
@@ -36,9 +34,7 @@ public class UserService {
 				String username = rs.getString("username");
 				String password = rs.getString("password");
 				int equipo_id = rs.getInt("equipo_id");
-
 				User user = new User( id, username,password ,equipo_id );
-
 				userList.add(user);
 			}
 

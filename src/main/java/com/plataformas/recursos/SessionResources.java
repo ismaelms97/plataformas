@@ -29,8 +29,7 @@ public class SessionResources {
 		return false;
 	}
 	
-	public boolean checkUserSession(HttpSession session) {
-		
+	public boolean checkUserSession(HttpSession session) {		
 				
 		if(session.getAttribute("userSession") == null) {
 			
@@ -38,7 +37,5 @@ public class SessionResources {
 		}
 		
 		return true;
-	}
-		
+	}		
 }
-

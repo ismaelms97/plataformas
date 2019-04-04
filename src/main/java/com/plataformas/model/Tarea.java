@@ -10,7 +10,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="tarea")
 public class Tarea {
-	
+
 	private int Id;
 	private String tipo;
 	private String prioridad ;
@@ -31,7 +31,6 @@ public class Tarea {
 		super();
 	}
 
-
 	public Tarea(int id, String tipo, String estadoInicio, String estadoFinal, String prioridad, String resumen, String tamaño, String complejidad,
 			String propiedad, String peticionario, boolean relevante, boolean urgente, String planificado) {
 		super();
@@ -50,7 +49,6 @@ public class Tarea {
 		this.estadoFinal = estadoFinal;
 	}
 
-
 	public int getId() {
 		return Id;
 	}
@@ -61,18 +59,23 @@ public class Tarea {
 	public String getTipo() {
 		return tipo;
 	}
+
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
+
 	public String getEstadoInicio() {
 		return estadoInicio;
 	}
+
 	public void setEstadoInicio(String estadoInicio) {
 		this.estadoInicio = estadoInicio;
 	}
+
 	public String getEstadoFinal() {
 		return estadoFinal;
 	}
+
 	public void setEstadoFinal(String estadoFinal) {
 		this.estadoFinal = estadoFinal;
 	}
@@ -81,96 +84,78 @@ public class Tarea {
 		return prioridad;
 	}
 
-
 	public void setPrioridad(String prioridad) {
 		this.prioridad = prioridad;
 	}
-
 
 	public String getResumen() {
 		return resumen;
 	}
 
-
 	public void setResumen(String resumen) {
 		this.resumen = resumen;
 	}
-
 
 	public String getTamaño() {
 		return tamaño;
 	}
 
-
 	public void setTamaño(String tamaño) {
 		this.tamaño = tamaño;
 	}
-
 
 	public String getComplejidad() {
 		return complejidad;
 	}
 
-
 	public void setComplejidad(String complejidad) {
 		this.complejidad = complejidad;
 	}
-
 
 	public String getPropiedad() {
 		return propiedad;
 	}
 
-
 	public void setPropiedad(String propiedad) {
 		this.propiedad = propiedad;
 	}
-
 
 	public String getPeticionario() {
 		return peticionario;
 	}
 
-
 	public void setPeticionario(String peticionario) {
 		this.peticionario = peticionario;
 	}
-
 
 	public boolean isRelevante() {
 		return relevante;
 	}
 
-
 	public void setRelevante(boolean relevante) {
 		this.relevante = relevante;
 	}
-
 
 	public boolean isUrgente() {
 		return urgente;
 	}
 
-
 	public void setUrgente(boolean urgente) {
 		this.urgente = urgente;
 	}
-
 
 	public String getPlanificado() {
 		return planificado;
 	}
 
-
 	public void setPlanificado(String planificado) {
 		this.planificado = planificado;
 	}
 
-
 	public static  List<Tarea> converFromDatabase(ResultSet rs,List<Tarea> tareaList ) throws SQLException {
-		
+
 		while (rs.next()) {
-			
+
 			int id = rs.getInt("id");
 			String tipo = rs.getString("tipo");
 			String estadoInicio = rs.getString("estadoInicio");
@@ -187,10 +172,10 @@ public class Tarea {
 			Tarea tarea = new Tarea(id,tipo,estadoInicio,estadoFinal,prioridad, resumen,tamaño, complejidad,propiedad, peticionario,relevante,urgente, planificado);
 			tareaList.add(tarea);
 		}
-		
+
 		return tareaList;
 	}
-	
+
 	public static  List<Tarea> stringToObject(String stratTasks ){
 
 		List<Tarea> listaTareas =  new ArrayList<Tarea>();
@@ -198,7 +183,7 @@ public class Tarea {
 		String[][] tasks = new String[stratTasks.split("qwer").length][12];
 
 		for(int i = 0; i < tasks.length; i++) {
-			
+
 			String[] task = stratTasks.split("qwer");
 			tasks[i] = task[i].split("--");
 			int id = Integer.parseInt((tasks[i][0].split(":"))[1]);
@@ -216,11 +201,9 @@ public class Tarea {
 			String planificado = (tasks[i][12].split(":"))[1];
 			Tarea tarea = new Tarea (id,tipo,estadoI,estadoF,prioridad, resumen,tamaño, complejidad,propiedad, peticionario,relevante,urgente, planificado);			
 			listaTareas.add(tarea);
-			
-			
-		}
-		
+
+		}	
+
 		return listaTareas;
 	}
-
 }
