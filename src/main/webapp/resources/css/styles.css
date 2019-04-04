@@ -213,7 +213,6 @@ td .ui-selected {
 	text-overflow: ellipsis;
 	text-decoration: none;
 	color: black;
-	transition: 0.4s;
 }
 
 a:hover {
@@ -248,21 +247,26 @@ a:hover {
 	flex-direction: column;
 	margin-top : 2px;
 	max-height: 0;
-	transition: max-height 0.2s ease-out;
 }
+
 .options{
 	background: silver;
 	color: white;
 	padding: 0 18px;
+	animation: .4s linear example;
 }
 
-.active:not(.ended)/*, .accordion:hover */ {
-  background-color: #65c26d; 
+.active:not(.ended) {
+  background-color: #65c26d;
 }
 .active{
 	background-color: rgb(231, 132, 114);
 }
 
+@keyframes example {
+  from {max-height: 0; color:#eef2f0;}
+  to {max-height: 23px; color:#eef2f0;}
+}
 
 /*########### MODAL ###########*/
 .detailsSubtitle{
