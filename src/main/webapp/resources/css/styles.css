@@ -207,12 +207,13 @@ td .ui-selected {
 	width: 187.52px;
 	height: 96px;
 	max-width: 187.52px;
-	max-height: 96px;
+/* 	max-height: 96px; */
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	text-decoration: none;
 	color: black;
+	transition: 0.4s;
 }
 
 a:hover {
@@ -245,14 +246,20 @@ a:hover {
 .divOptions{
 	display: flex;
 	flex-direction: column;
-	transition: 0.4s ease-in-out;
 	margin-top : 2px;
+	max-height: 0;
+	transition: max-height 0.2s ease-out;
 }
 .options{
 	background: silver;
 	color: white;
-	padding: 2px;
+	padding: 0 18px;
 }
+
+.active /*, .accordion:hover */ {
+  background-color: #ccc;
+}
+
 
 /*########### MODAL ###########*/
 .detailsSubtitle{

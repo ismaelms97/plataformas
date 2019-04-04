@@ -22,10 +22,10 @@
 			<a href="#<%-- /estrategia/findEstrategia/${estrategia.id} --%>">
 				<div class="estartegiasCard">
 					<c:out value="${estrategia.nombre}" />
-					<div class="divOptions">
+				</div>
+				<div class="divOptions">
 						<span class="options">Crear</span>
 						<span class="options">Ver</span>
-					</div>
 				</div>
 			</a>
 		</c:forEach>
@@ -38,14 +38,30 @@
 	<script>
 		checkStatus();
 		
-		$(document).ready(function() {
+ 		$(document).ready(function() {
 		    $(".estartegiasCard").click(function () {
-		        $(".options", this).toggle();
+		        $(".divOptions", this).toggle();
 		    });
 		    
-		    $(".options", this).toggle();
-		});
+		    $(".divOptions", this).toggle();
+		}); 
 
+		var acc = document.getElementsByClassName("estartegiasCard");
+		var i;
+
+		for (i = 0; i < acc.length; i++) {
+		  acc[i].addEventListener("click", function() {
+		    this.classList.toggle("active");
+		    console.log(this);
+		    var panel = this.nextElementSibling;
+		    if (panel.style.maxHeight){
+		      panel.style.maxHeight = null;
+		    } else {
+		      panel.style.maxHeight = panel.scrollHeight + "px";
+		    } 
+		  });
+		}
+		
 	</script>
 	<jsp:include page="footer.jsp"></jsp:include>
 </body>
