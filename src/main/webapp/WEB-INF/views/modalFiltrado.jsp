@@ -42,9 +42,8 @@
 								class="custom-control-label" for="consulta">Consulta</label><br>
 						</div>
 						<div class="custom-control custom-checkbox">
-							<input type="checkbox" id="tarea" value="tarea"
-								class="custom-control-input filtros taskType"><label
-								class="custom-control-label" for="tarea">Tarea</label><br>
+							<input type="checkbox" id="tarea" value="tarea" class="custom-control-input filtros taskType">
+							<label class="custom-control-label" for="tarea">Tarea</label><br>
 						</div>
 					</div>
 				</div>
@@ -57,12 +56,8 @@
 				</div>
 				<div class="collapse" id="collapsePropertyOf">
 					<div class="card card-body">
-					<!-- Material unchecked -->
-					<div class="custom-control custom-checkbox">
-						<input type="checkbox" id="ismael" value="ismael"
-							class="custom-control-input filtros taskPropertyOf"><label
-							class="custom-control-label" for="ismael">Ismael</label><br>
-					</div>
+					<!-- Propietario -->
+					
 					</div>
 				</div>
 			</div>
@@ -83,7 +78,9 @@ $(document).ready(function() {
 			propiedad : [],
 	};
 	
+	
 	var arrayInTasksBackup = [];
+	
 	$(".filtros").on("click", function(){
 		
 		if((this).checked){
@@ -94,6 +91,7 @@ $(document).ready(function() {
 				
 			}else if($(this).hasClass("taskPropertyOf")) {
 				filters.propiedad.push(this.value);
+				console.log(this.value);
 			}
 		}else{
 			if($(this).hasClass("taskType")){
@@ -101,8 +99,10 @@ $(document).ready(function() {
 				
 			}else if($(this).hasClass("taskPropertyOf")) {
 				filters.propiedad.splice(filters.propiedad.indexOf(this.value), 1);
+				
 			}
 		}
+		console.log("filtered:");
 		console.log(filters);
 	})
 	

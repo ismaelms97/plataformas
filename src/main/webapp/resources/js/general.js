@@ -234,3 +234,40 @@ function getNameEstrategia(){
 		})
 	})
 }
+
+/**
+ * Appends al the owners of the tasks to the filtering modal
+ * @returns
+ */
+function owners(){
+	var own = [];
+	var nombre = "";
+	tasks.forEach(function(task){
+		if(!own.includes(task.propiedad)){
+			own.push(task.propiedad);
+			nombre = task.propiedad;
+		var texto = '<div class="custom-control custom-checkbox">'+
+		'<input type="checkbox" id="'+ nombre.toLowerCase() +'" value="'+ nombre.toLowerCase() +'" class="custom-control-input filtros taskPropertyOf">'+
+		'<label class="custom-control-label" for="'+ nombre.toLowerCase()+'">'+ toCamelCase(nombre) +'</label><br> '+
+		'</div>';
+		$("#collapsePropertyOf").children(".card").append(texto);
+		}else{
+			console.log("Repetido");
+		}
+	})
+	console.log("own");
+	console.log(own);
+}
+
+/**
+ * Little function that formats a string a transforms it to camel case
+ * 
+ * @param str String to transform to Camel Case
+ * @returns
+ */
+function toCamelCase(str) {
+    return str.substring(0,1).toUpperCase() + str.substring(1,str.length).replace(/\W+(.)/g, function(match, chr)
+   	     {
+   	          return ' ' + chr.toUpperCase();
+   	      });
+  }
