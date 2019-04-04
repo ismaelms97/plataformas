@@ -115,6 +115,10 @@ var process_wb = (function () {
 			tasks = strategyFilter(tasks);
 			$("div.button").removeClass("disabled");
 		}
+		// Collect Users from propertyOf 
+		owners();
+		// Activate the action to filter
+		filtering();
 		drawTable(tasks, false);
 	};
 })();

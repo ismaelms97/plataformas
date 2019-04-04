@@ -8,9 +8,9 @@ $(document).ready(function(){
 
 	if(document.getElementsByClassName("mainTitle")[0]){
 		document.getElementsByClassName("mainTitle")[0].innerHTML = sessionStorage.getItem('titulo');
-		
+
 	}
-	
+
 	if(document.getElementById("formContent")){
 
 		document.getElementById("butonDestroy").style.display = "none";
@@ -51,7 +51,7 @@ function inputTasks() {
  * Función para pintar la tabla
  */
 function drawTable(array , db) {
-// ORdenamos el array por prioridad,
+//	ORdenamos el array por prioridad,
 	array = orderByPrio(array);
 	//tasks = orderByPrio(tasks);
 	console.log(array)
@@ -132,7 +132,7 @@ function drawRTC(array, pos, db) {
 		}
 	}
 
-// Solucionar problema con onclick event, no nos da ningun valor
+//	Solucionar problema con onclick event, no nos da ningun valor
 	document.getElementsByTagName("TR")[pos + 1].children[estadoActual].innerHTML = '<div class="'+classes+'" data-posInitial="' + estadoActual + '" data-rtc="' + (pos + 1) + '" title="'+ array[pos].resumen +'" data-placement="left">'
 	+ '<small class="tamano">'+ array[pos].tamano + '</small> '+ array[pos].id + ' <small class="complejidad">'+ array[pos].complejidad + '</small></div>';
 
@@ -182,49 +182,6 @@ function verDetallesRTC(array, i){
 		document.getElementById("detallesPropietario").innerHTML = array[i].propiedad;
 		document.getElementById("detallesPlanificadoPara").innerHTML = array[i].planificado;
 	})
-}
-
-/*
- * Función que sirve para filtrar las tareas, versión 1.0, solo filtra por el
- * tipo de tareas: Incidencias, Tareas, Consulta.
- * 		@param  {Array}  la array a filtrar
- *		@param  {filtros} Un objeto con los filtros como nombres de propiedad
- */
-function filter(array, filtros){
-	var filtrado;
-//	let filterKeys = Object.keys(filtros);
-	
-	
-	// COMPLETAR FILTRADO COMPLEJO
-	//	https://gist.github.com/jherax/f11d669ba286f21b7a2dcff69621eb72
-	
-//	filtrado = array.filter(item => item.tipo.toLowerCase() == filtros.tipo[0] ||  item.tipo.toLowerCase() == filtros.tipo[1] ||  item.tipo.toLowerCase() == filtros.tipo[2]);
-//	
-//	return filtrado;
-	
-	
-//	filtrado = array.filter((item) => filterKeys.every((key) => (filtros[key].indexOf(item[key]) !== -1)));
-	
-	 const filterKeys = Object.keys(filtros);
-	  return array.filter(eachObj => {
-	    return filterKeys.every(eachKey => {
-	      if (!filtros[eachKey].length) {
-	        return true; // passing an empty filter means that filter is ignored.
-	      }
-	      return filtros[eachKey].includes(eachObj[eachKey].toLowerCase());
-	    });
-	  });
-	
-}
-
-/*
- * Función que sirve para filtrar las tareas, versión 1.0, solo filtra por el
- * tipo de tareas: Incidencias, Tareas, Consulta.
- */
-function strategyFilter(array){
-
-	var filtrado = array.filter(item => inTasks.find(item2 => item.id === item2.id));
-	return filtrado;
 }
 
 function emptyTable(){

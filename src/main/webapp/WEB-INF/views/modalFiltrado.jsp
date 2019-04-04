@@ -43,7 +43,7 @@
 						</div>
 						<div class="custom-control custom-checkbox">
 							<input type="checkbox" id="tarea" value="tarea"
-								class="custom-control-input filtros taskType"><label
+								class="custom-control-input filtros taskType"> <label
 								class="custom-control-label" for="tarea">Tarea</label><br>
 						</div>
 					</div>
@@ -57,12 +57,32 @@
 				</div>
 				<div class="collapse" id="collapsePropertyOf">
 					<div class="card card-body">
-					<!-- Material unchecked -->
-					<div class="custom-control custom-checkbox">
-						<input type="checkbox" id="ismael" value="ismael"
-							class="custom-control-input filtros taskPropertyOf"><label
-							class="custom-control-label" for="ismael">Ismael</label><br>
+						<!-- Propietario -->
+
 					</div>
+				</div>
+				<div class="card">
+					<div class="card-header" id="headingOne" data-toggle="collapse"
+						data-target="#collapseUrgent">
+						<h6 class="d-inline accordion-toggle" aria-expanded="false"
+							aria-controls="collapseExample">Urgente</h6>
+					</div>
+				</div>
+				<div class="collapse" id="collapseUrgent">
+					<div class="card card-body">
+						<!-- Urgencia -->
+						<div class="custom-control custom-radio">
+						  <input type="radio" class="custom-control-input filtros taskUrgent" id="isUrgent" name="urgentRadio" value="sí">
+						  <label class="custom-control-label" for="isUrgent">Sí</label>
+						</div>
+						<div class="custom-control custom-radio">
+						  <input type="radio" class="custom-control-input filtros taskUrgent" id="isntUrgent" name="urgentRadio" value="no">
+						  <label class="custom-control-label" for="isntUrgent">No</label>
+						</div>
+						<div class="custom-control custom-radio">
+						  <input type="radio" class="custom-control-input filtros taskUrgent" id="both" name="urgentRadio" value="">
+						  <label class="custom-control-label" for="both">Ambos</label>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -75,56 +95,3 @@
 		</div>
 	</div>
 </div>
-<script>
-$(document).ready(function() {
-	// Objeto con los filtros
-	var filters = {
-			tipo : [],
-			propiedad : [],
-	};
-	
-	var arrayInTasksBackup = [];
-	$(".filtros").on("click", function(){
-		
-		if((this).checked){
-			
-			if($(this).hasClass("taskType")){
-				
-				filters.tipo.push(this.value);
-				
-			}else if($(this).hasClass("taskPropertyOf")) {
-				filters.propiedad.push(this.value);
-			}
-		}else{
-			if($(this).hasClass("taskType")){
-				filters.tipo.splice(filters.tipo.indexOf(this.value), 1);
-				
-			}else if($(this).hasClass("taskPropertyOf")) {
-				filters.propiedad.splice(filters.propiedad.indexOf(this.value), 1);
-			}
-		}
-		console.log(filters);
-	})
-	
-	$('#modalFiltrado').on('shown.bs.modal',function() {
-		
-		document.getElementById("filter").addEventListener("click", function() {
-			if(filters.tipo.length >= 1 || filters.propiedad.length >= 1){
-				arrayTasksBackup = filter(tasks, filters);
-				arrayInTasksBackup = filter(inTasks, filters);
-			}else{
-				arrayTasksBackup = tasks;
-				arrayInTasksBackup = inTasks;
-			}
-			
-			emptyTable();
-			drawTable(arrayInTasksBackup, true);
-			drawTable(arrayTasksBackup, false);
-			}, false);
-		
-			$(".card-header").on("click", function(){
-				$(this).toggleClass("arrowDown");
-			})
-		})
-	})
-</script>
