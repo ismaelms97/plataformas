@@ -89,7 +89,6 @@ public class EstrategiaController {
 				if (!sessionResources.checkUserSession(session) || !sessionResources.checkUserStrategy(session,id)) {
 
 					model.addAttribute("mensajeAcceso", "Acceso Denegado");
-
 					return "accessDenied";
 					
 				}else {
