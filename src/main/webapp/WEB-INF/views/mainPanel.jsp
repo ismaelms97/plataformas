@@ -16,8 +16,9 @@
 				estrategia.endDate = "${estrategia.fechaFin}";
 				console.log("ID " + estrategia.endDate)
 				estrategias.push(estrategia);
+				//href="/estrategia/findEstrategia/${estrategia.id}"
 			</script>
-			<a href="/estrategia/findEstrategia/${estrategia.id}">
+			<a id="${estrategia.id}">
 				<div class="estartegiasCard">
 					<c:out value="${estrategia.nombre}"/>
 				</div>
@@ -31,6 +32,9 @@
 
 	<script>
 		checkStatus();
+		$("a").click(function(){
+			console.log("clicked")
+		})
 	</script>
 	<jsp:include page="footer.jsp"></jsp:include>
 </body>
