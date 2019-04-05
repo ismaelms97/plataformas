@@ -20,14 +20,14 @@
 				estrategias.push(estrategia);
 				//href="/estrategia/findEstrategia/${estrategia.id}"
 			</script>
-			
+
 			<a id="${estrategia.id}" class="a">
 				<div class="estartegiasCard">
 					<c:out value="${estrategia.nombre}" />
 				</div>
 				<div class="divOptions">
-						<span class="options">Crear Daily</span>
-						<span class="options">Ver Daily</span>
+					<span class="options">Crear Daily</span> <span class="options">Ver
+						Daily</span>
 				</div>
 			</a>
 		</c:forEach>
@@ -44,9 +44,29 @@
 		
 		 
  		$(document).ready(function() {
-		    $(".a").click(function (evt) {
-		        $(".options", this).toggle();
-		        
+		    $(".a").click(function () {
+					var el = this;
+					$.ajax({
+						type: "POST",
+						url: "/daily/date",
+						data: {
+							id: this.getAttribute("id")
+						}, success: function (data) {
+							var date = new Date();
+							var today = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate()
+							console.log(date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate() + " data: " + data)
+							console.log(today == data)
+							console.log(el.classList)
+							if((today == data && data.trim() != "") || el.children[0].classList.contains("ended")){
+								console.log(el.children[0].nextElementSibling);
+								el.children[0].nextElementSibling.children[0].classList.add("disabled");
+								console.log("Cant create new daily")
+							} else {
+								console.log("You can create new daily")
+							}
+						}
+					});
+		    	$(".options", this).toggle();
 		    });
 		    
 		    $(".options", this).toggle();
@@ -58,6 +78,9 @@
 		for (i = 0; i < acc.length; i++) {
 		  acc[i].addEventListener("click", function() {
 		    this.classList.toggle("active");
+
+				console.log(this);
+
 		    var panel = this.nextElementSibling;
 		    if (panel.style.maxHeight){
 		      panel.style.maxHeight = null;

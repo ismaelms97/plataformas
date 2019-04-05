@@ -102,9 +102,15 @@ div.button{
 }
 div.disabled{
 	pointer-events:none;
-	cursor:not-allowed;
+	cursor:no-drop;
 	-webkit-filter: opacity(30%);
 	filter: opacity(30%);
+}
+.divOptions.disabled{
+	pointer-events:none;
+	cursor:no-drop;
+	-webkit-filter: opacity(30%);
+	filter: opacity(60%);
 }
 
 a.button{
