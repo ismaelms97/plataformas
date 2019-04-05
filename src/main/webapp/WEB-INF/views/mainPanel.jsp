@@ -26,8 +26,8 @@
 					<c:out value="${estrategia.nombre}" />
 				</div>
 				<div class="divOptions">
-					<span class="options">Crear Daily</span> <span class="options">Ver
-						Daily</span>
+					<span class="options createDaily">Crear Daily</span> 
+					<span class="options">Ver Daily</span>
 				</div>
 			</a>
 		</c:forEach>
@@ -45,7 +45,7 @@
 					var el = this;
 					console.log(el.getAttribute("data-dailyDate"))
 					if(el.getAttribute("data-dailyDate") == null){
-						/* $.ajax({
+						 $.ajax({
 							type: "POST",
 							url: "/daily/date",
 							data: {
@@ -66,7 +66,7 @@
 								el.setAttribute("data-dailyDate", data)
 
 							}
-						}); */
+						}); 
 					} else {
 						var date = new Date();
 						var today = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate()
@@ -81,9 +81,14 @@
 		    	$(".options", this).toggle();
 		    });
 		    
-		    $(".options", this).toggle();
+				$(".options", this).toggle();
+				
+				$(".options").click(function(e){
+					if(!e.target.classList.contains("disabled") && e.target.classList.contains("createDaily")){ 
+						window.location.href = "/estrategia/findEstrategia/" + e.target.parentElement.parentElement.getAttribute("id");
+					}
+				});
 		});
-
 		var acc = document.querySelectorAll("a .a");
 		var i;
 
