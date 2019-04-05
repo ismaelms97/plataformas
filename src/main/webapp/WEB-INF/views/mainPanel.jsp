@@ -26,8 +26,8 @@
 					<c:out value="${estrategia.nombre}" />
 				</div>
 				<div class="divOptions">
-					<span class="options">Crear Daily</span> <span class="options">Ver
-						Daily</span>
+					<span class="options">Crear Daily</span>
+					<span class="options">Ver Daily</span>
 				</div>
 			</a>
 		</c:forEach>
@@ -82,16 +82,15 @@
 		    });
 		    
 		    $(".options", this).toggle();
-		});
-
-		var acc = document.querySelectorAll("a .a");
+		    
+		var acc = document.querySelectorAll(".a");
 		var i;
 
 		for (i = 0; i < acc.length; i++) {
 		  acc[i].addEventListener("click", function() {
-		    this.classList.toggle("active");
-
-				console.log(this);
+		    this.classList.toggle("actived");
+			console.log("Activo")
+			console.log(this);
 
 		    var panel = this.nextElementSibling;
 		    if (panel.style.maxHeight){
@@ -100,7 +99,10 @@
 		      panel.style.maxHeight = panel.scrollHeight + "px";
 		    } 
 		  });
-		}
+		} 
+		
+		});
+
 
 	</script>
 	<jsp:include page="footer.jsp"></jsp:include>

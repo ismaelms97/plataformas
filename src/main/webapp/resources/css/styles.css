@@ -267,12 +267,17 @@ a:hover {
 	z-index: 999;
 }
 
+.options:hover{
+	background-color: #b5a9bc;
+}
+
 .actived:not(.ended) {
-  background-color: #65c26d;
+  background-color: #65c26d !important;
 }
+
 .actived{
-	background-color: rgb(231, 132, 114);
-}
+	background-color: rgb(231, 132, 114) !important;
+} 
 
 @keyframes example {
    0%   {max-height: 0; color:#eef2f0;}
