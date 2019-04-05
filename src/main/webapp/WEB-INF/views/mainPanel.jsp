@@ -39,16 +39,13 @@
 
 	<script>
 		checkStatus();
-		
-		// Revisar animación acordeon, y hacer equipo con la array que ya tengo en readExcel
-		
 		 
  		$(document).ready(function() {
 		    $(".a").click(function () {
 					var el = this;
 					console.log(el.getAttribute("data-dailyDate"))
 					if(el.getAttribute("data-dailyDate") == null){
-						$.ajax({
+						/* $.ajax({
 							type: "POST",
 							url: "/daily/date",
 							data: {
@@ -69,7 +66,7 @@
 								el.setAttribute("data-dailyDate", data)
 
 							}
-						});
+						}); */
 					} else {
 						var date = new Date();
 						var today = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate()
