@@ -43,24 +43,38 @@
  		$(document).ready(function() {
 		    $(".a").click(function () {
 					var el = this;
-					$.ajax({
-						type: "POST",
-						url: "/daily/date",
-						data: {
-							id: this.getAttribute("id")
-						}, success: function (data) {
-							var date = new Date();
-							var today = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate()
-							console.log(date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate() + " data: " + data)
-							console.log(today == data)
-							console.log(el.classList)
-							if((today == data && data.trim() != "") || el.children[0].classList.contains("ended")){
-								console.log("Cant create new daily")
-							} else {
-								console.log("You can create new daily")
+					console.log(el.getAttribute("data-dailyDate"))
+					if(el.getAttribute("data-dailyDate") == null){
+						$.ajax({
+							type: "POST",
+							url: "/daily/date",
+							data: {
+								id: this.getAttribute("id")
+							}, success: function (data) {
+								var date = new Date();
+								var today = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate()
+								console.log(date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate() + " data: " + data)
+								console.log(today == data)
+								console.log(el.classList)
+								if((today == data && data.trim() != "") || el.children[0].classList.contains("ended")){
+									console.log("Cant create new daily a")
+								} else {
+									console.log("You can create new daily a")
+								}
+								el.setAttribute("data-dailyDate", data)
 							}
-						}
-					});
+						});
+					} else {
+						var date = new Date();
+						var today = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate()
+						var data = el.getAttribute("data-dailyDate")
+						if((today == data && data.trim() != "") || el.children[0].classList.contains("ended")){
+									console.log("Cant create new daily b")
+								} else {
+									console.log("You can create new daily b")
+								}
+					}
+					
 		    	$(".options", this).toggle();
 		    });
 		    
