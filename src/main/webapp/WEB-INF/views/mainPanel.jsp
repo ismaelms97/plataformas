@@ -42,7 +42,40 @@
 		
  		$(document).ready(function() {
 		    $(".a").click(function () {
-		        $(".options", this).toggle();
+					var el = this;
+					console.log(el.getAttribute("data-dailyDate"))
+					if(el.getAttribute("data-dailyDate") == null){
+						$.ajax({
+							type: "POST",
+							url: "/daily/date",
+							data: {
+								id: this.getAttribute("id")
+							}, success: function (data) {
+								var date = new Date();
+								var today = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate()
+								console.log(date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate() + " data: " + data)
+								console.log(today == data)
+								console.log(el.classList)
+								if((today == data && data.trim() != "") || el.children[0].classList.contains("ended")){
+									console.log("Cant create new daily a")
+								} else {
+									console.log("You can create new daily a")
+								}
+								el.setAttribute("data-dailyDate", data)
+							}
+						});
+					} else {
+						var date = new Date();
+						var today = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate()
+						var data = el.getAttribute("data-dailyDate")
+						if((today == data && data.trim() != "") || el.children[0].classList.contains("ended")){
+									console.log("Cant create new daily b")
+								} else {
+									console.log("You can create new daily b")
+								}
+					}
+					
+		    	$(".options", this).toggle();
 		    });
 		    
 		    $(".options", this).toggle();
@@ -54,7 +87,8 @@
 		for (i = 0; i < acc.length; i++) {
 		  acc[i].addEventListener("click", function() {
 		    this.classList.toggle("active");
-		    console.log(this);
+				console.log(this);
+
 		    var panel = this.nextElementSibling;
 		    if (panel.style.maxHeight){
 		      panel.style.maxHeight = null;
