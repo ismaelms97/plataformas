@@ -47,7 +47,7 @@ public class EstrategiaController {
 
 				if (!sessionResources.checkUserSession(session)){
 
-					model.addAttribute("mensajeAcceso", "Acceso Denegado");
+					model.addAttribute("mensajeAcceso", "Tu sessión esta inactiva");
 					return "accessDenied";
 
 				}else {
@@ -85,7 +85,7 @@ public class EstrategiaController {
 
 				if (!sessionResources.checkUserSession(session) || !sessionResources.checkUserStrategy(session,id)) {
 
-					model.addAttribute("mensajeAcceso", "Acceso Denegado");
+					model.addAttribute("mensajeAcceso", "No tienes acceso a esta estrategia");
 					return "accessDenied";
 
 				}else {
@@ -119,7 +119,7 @@ public class EstrategiaController {
 
 			if (!sessionResources.checkUserSession(session)){
 
-				model.addAttribute("mensajeAcceso", "Acceso Denegado");
+				model.addAttribute("mensajeAcceso", "Tu sessión esta inactiva");
 				return "accessDenied";
 
 			}else {
@@ -141,7 +141,7 @@ public class EstrategiaController {
 
 			if (!sessionResources.checkUserSession(session)){
 
-				model.addAttribute("mensajeAcceso", "Acceso Denegado");
+				model.addAttribute("mensajeAcceso", "Tu sessión esta inactiva");
 				return "accessDenied";
 
 			}else {
@@ -170,7 +170,7 @@ public class EstrategiaController {
 			
 			if (!sessionResources.checkUserSession(session)){
 
-				model.addAttribute("mensajeAcceso", "Acceso Denegado");
+				model.addAttribute("mensajeAcceso", "Tu sessión esta inactiva");
 				return "accessDenied";
 
 			}else {

@@ -43,7 +43,7 @@ public class DailyController {
 
 			if (!sessionResources.checkUserSession(session)){
 
-				model.addAttribute("mensajeAcceso", "Acceso Denegado");
+				model.addAttribute("mensajeAcceso", "Tu sessión esta inactiva");
 				return "accessDenied";
 
 			}else {
@@ -72,7 +72,7 @@ public class DailyController {
 		synchronized (session) {
 			if (!sessionResources.checkUserSession(session)){
 
-				model.addAttribute("mensajeAcceso", "Acceso Denegado");
+				model.addAttribute("mensajeAcceso", "Tu sessión esta inactiva");
 				return "accessDenied";
 
 			}else {
@@ -104,7 +104,7 @@ public class DailyController {
 
 			if (!sessionResources.checkUserSession(session)){
 
-				model.addAttribute("mensajeAcceso", "Acceso Denegado");
+				model.addAttribute("mensajeAcceso", "Tu sessión esta inactiva");
 				return "accessDenied";
 
 			}else {
