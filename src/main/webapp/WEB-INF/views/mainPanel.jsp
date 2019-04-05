@@ -26,8 +26,8 @@
 					<c:out value="${estrategia.nombre}" />
 				</div>
 				<div class="divOptions">
-						<span class="options">Crear</span>
-						<span class="options">Ver</span>
+						<span class="options">Crear Daily</span>
+						<span class="options">Ver Daily</span>
 				</div>
 			</a>
 		</c:forEach>
@@ -40,13 +40,17 @@
 	<script>
 		checkStatus();
 		
+		// Revisar animación acordeon, y hacer equipo con la array que ya tengo en readExcel
+		
+		 
  		$(document).ready(function() {
-		    $(".a").click(function () {
+		    $(".a").click(function (evt) {
 		        $(".options", this).toggle();
+		        
 		    });
 		    
 		    $(".options", this).toggle();
-		}); 
+		});
 
 		var acc = document.querySelectorAll("a .a");
 		var i;
