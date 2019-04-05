@@ -63,7 +63,6 @@ public class DailyController {
 			}
 		}
 		return "plataforma";
-
 	}
 
 	@PostMapping(value = "/saveDaily")
@@ -92,7 +91,6 @@ public class DailyController {
 			}
 			return "mainPanel";
 		}
-
 	}
 
 	@PostMapping(value = "/date")
@@ -121,8 +119,6 @@ public class DailyController {
 
 			return date;
 		}
-
-
 	}
 
 	@GetMapping(value = "/showDaily")
@@ -145,5 +141,4 @@ public class DailyController {
 
 		return "mainPanel";
 	}
-
 }

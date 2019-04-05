@@ -43,7 +43,7 @@ public class HomeController {
 	 */
 
 	@GetMapping(value = "/")
-	public String home(Locale locale, Model model) throws ClassNotFoundException, SQLException  {
+	public String home(Locale locale, Model model)  {
 
 		model.addAttribute("user", new User());
 		return "home";
@@ -59,10 +59,9 @@ public class HomeController {
 		try{
 
 			newUser = userService.findByUsername(user.getUsername());
-			user.setPassword(User.encrypt(user.getPassword()));
+			
+			if(newUser.getPassword().equals(User.encrypt(user.getPassword()))) {
 
-			if(newUser.getPassword().equals(user.getPassword())) {
-				
 				session = request.getSession();
 				session.setAttribute("userSession", newUser);
 				USessions.add(newUser);	
@@ -94,7 +93,7 @@ public class HomeController {
 				List<Estrategia> listaEstrategias = estrategiaService.findEstrategiaById(newUser.getEquipoId());
 				model.addAttribute("listaEstrategia",listaEstrategias);
 				session.setAttribute("userStrategy", listaEstrategias);	
-				
+
 
 			}catch (Exception e) {
 

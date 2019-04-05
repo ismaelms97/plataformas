@@ -93,8 +93,8 @@ CONSTRAINT daily_id FOREIGN KEY (daily_id) REFERENCES daily (id) ON DELETE CASCA
 
 INSERT INTO equipo (name) values ('admin');
 INSERT INTO equipo (name) values ('root');
-INSERT INTO user (username,password,equipo_id) values ('marcos','lMJz/CXvucU8+QTqaiR+Am8Bxchu5VSbsIHttrfVN+0=',1);
-INSERT INTO user (username,password,equipo_id) values ('alejandro','lMJz/CXvucU8+QTqaiR+Am8Bxchu5VSbsIHttrfVN+0=',1);
-INSERT INTO user (username,password,equipo_id) values ('ismael','lMJz/CXvucU8+QTqaiR+Am8Bxchu5VSbsIHttrfVN+0=',1);
-INSERT INTO user (username,password,equipo_id) values ('german','lMJz/CXvucU8+QTqaiR+Am8Bxchu5VSbsIHttrfVN+0=',1);
-INSERT INTO user (username,password,equipo_id) values ('pepe','lMJz/CXvucU8+QTqaiR+Am8Bxchu5VSbsIHttrfVN+0=',2);
+INSERT INTO user (username,password,equipo_id) values ('marcos','A6xnQhbz4Vx2HuGl4lXwZ5U2I8iziLRFnhP5eNfIRvQ=',1);
+INSERT INTO user (username,password,equipo_id) values ('alejandro','A6xnQhbz4Vx2HuGl4lXwZ5U2I8iziLRFnhP5eNfIRvQ=',1);
+INSERT INTO user (username,password,equipo_id) values ('ismael','A6xnQhbz4Vx2HuGl4lXwZ5U2I8iziLRFnhP5eNfIRvQ=',1);
+INSERT INTO user (username,password,equipo_id) values ('german','A6xnQhbz4Vx2HuGl4lXwZ5U2I8iziLRFnhP5eNfIRvQ=',1);
+INSERT INTO user (username,password,equipo_id) values ('pepe','A6xnQhbz4Vx2HuGl4lXwZ5U2I8iziLRFnhP5eNfIRvQ=',2);
