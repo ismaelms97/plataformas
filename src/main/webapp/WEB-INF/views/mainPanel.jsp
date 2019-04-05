@@ -10,8 +10,9 @@
 <body>
 	<div class="parent cartas">
 
-		<c:forEach items="${listaEstrategia}" var="estrategia"
-			varStatus="item">
+		
+		<div class="accordion">
+		<c:forEach items="${listaEstrategia}" var="estrategia" varStatus="item">
 			<script>
 				var estrategia = new Object();
 				estrategia.id = "${estrategia.id}";
@@ -20,18 +21,15 @@
 				estrategias.push(estrategia);
 				//href="/estrategia/findEstrategia/${estrategia.id}"
 			</script>
-
 			<a id="${estrategia.id}" class="a">
 				<div class="estartegiasCard">
 					<c:out value="${estrategia.nombre}" />
 				</div>
-				<div class="divOptions">
-					<span class="options">Crear Daily</span> <span class="options">Ver
-						Daily</span>
-				</div>
+				<span class="options">Crear Daily</span>
+				<span class="options">Ver Daily</span>
 			</a>
 		</c:forEach>
-
+		</div>
 		<a data-toggle="modal" data-target="#estrategiaForm">
 			<div class="estartegiasCard">Nueva Estrategia</div>
 		</a>
@@ -40,44 +38,60 @@
 	<script>
 		checkStatus();
 		
-		// Revisar animación acordeon, y hacer equipo con la array que ya tengo en readExcel
-		
-		 
  		$(document).ready(function() {
+ 			
+		 $( ".accordion" ).accordion({
+			header:"a > :not(script)",
+		}); 
+		
 		    $(".a").click(function () {
 					var el = this;
-					$.ajax({
-						type: "POST",
-						url: "/daily/date",
-						data: {
-							id: this.getAttribute("id")
-						}, success: function (data) {
-							var date = new Date();
-							var today = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate()
-							console.log(date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate() + " data: " + data)
-							console.log(today == data)
-							console.log(el.classList)
-							if((today == data && data.trim() != "") || el.children[0].classList.contains("ended")){
-								console.log(el.children[0].nextElementSibling);
-								el.children[0].nextElementSibling.children[0].classList.add("disabled");
-								console.log("Cant create new daily")
-							} else {
-								console.log("You can create new daily")
+					console.log(el.getAttribute("data-dailyDate"))
+					if(el.getAttribute("data-dailyDate") == null){
+						$.ajax({
+							type: "POST",
+							url: "/daily/date",
+							data: {
+								id: this.getAttribute("id")
+							}, success: function (data) {
+								var date = new Date();
+								var today = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate()
+								console.log(date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate() + " data: " + data)
+								console.log(today == data)
+								console.log(el.classList)
+								if((today == data && data.trim() != "") || el.children[0].classList.contains("ended")){
+									console.log(el.children[0].nextElementSibling);
+									el.children[0].nextElementSibling.children[0].classList.add("disabled");
+									console.log("Cant create new daily a")
+								} else {
+									console.log("You can create new daily a")
+								}
+								el.setAttribute("data-dailyDate", data)
 							}
-						}
-					});
-		    	$(".options", this).toggle();
+						});
+					} else {
+						var date = new Date();
+						var today = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate()
+						var data = el.getAttribute("data-dailyDate")
+						if((today == data && data.trim() != "") || el.children[0].classList.contains("ended")){
+									console.log("Cant create new daily b")
+								} else {
+									console.log("You can create new daily b")
+								}
+					}
+					
+		    /* 	$(".options", this).toggle(); */
 		    });
 		    
-		    $(".options", this).toggle();
+	/* 	    $(".options", this).toggle(); */
 		});
 
-		var acc = document.querySelectorAll("a .a");
+		/* var acc = document.querySelectorAll("a .a");
 		var i;
 
 		for (i = 0; i < acc.length; i++) {
 		  acc[i].addEventListener("click", function() {
-		    this.classList.toggle("active");
+		    this.classList.toggle("actived");
 
 				console.log(this);
 
@@ -88,7 +102,7 @@
 		      panel.style.maxHeight = panel.scrollHeight + "px";
 		    } 
 		  });
-		}
+		} */
 
 	</script>
 	<jsp:include page="footer.jsp"></jsp:include>
