@@ -10,9 +10,8 @@
 <body>
 	<div class="parent cartas">
 
-		
-		<div class="accordion">
-		<c:forEach items="${listaEstrategia}" var="estrategia" varStatus="item">
+		<c:forEach items="${listaEstrategia}" var="estrategia"
+			varStatus="item">
 			<script>
 				var estrategia = new Object();
 				estrategia.id = "${estrategia.id}";
@@ -21,15 +20,18 @@
 				estrategias.push(estrategia);
 				//href="/estrategia/findEstrategia/${estrategia.id}"
 			</script>
+
 			<a id="${estrategia.id}" class="a">
 				<div class="estartegiasCard">
 					<c:out value="${estrategia.nombre}" />
 				</div>
-				<span class="options">Crear Daily</span>
-				<span class="options">Ver Daily</span>
+				<div class="divOptions">
+					<span class="options">Crear Daily</span> <span class="options">Ver
+						Daily</span>
+				</div>
 			</a>
 		</c:forEach>
-		</div>
+
 		<a data-toggle="modal" data-target="#estrategiaForm">
 			<div class="estartegiasCard">Nueva Estrategia</div>
 		</a>
@@ -38,12 +40,10 @@
 	<script>
 		checkStatus();
 		
- 		$(document).ready(function() {
- 			
-		 $( ".accordion" ).accordion({
-			header:"a > :not(script)",
-		}); 
+		// Revisar animación acordeon, y hacer equipo con la array que ya tengo en readExcel
 		
+		 
+ 		$(document).ready(function() {
 		    $(".a").click(function () {
 					var el = this;
 					console.log(el.getAttribute("data-dailyDate"))
@@ -67,6 +67,7 @@
 									console.log("You can create new daily a")
 								}
 								el.setAttribute("data-dailyDate", data)
+
 							}
 						});
 					} else {
@@ -80,18 +81,18 @@
 								}
 					}
 					
-		    /* 	$(".options", this).toggle(); */
+		    	$(".options", this).toggle();
 		    });
 		    
-	/* 	    $(".options", this).toggle(); */
+		    $(".options", this).toggle();
 		});
 
-		/* var acc = document.querySelectorAll("a .a");
+		var acc = document.querySelectorAll("a .a");
 		var i;
 
 		for (i = 0; i < acc.length; i++) {
 		  acc[i].addEventListener("click", function() {
-		    this.classList.toggle("actived");
+		    this.classList.toggle("active");
 
 				console.log(this);
 
@@ -102,7 +103,7 @@
 		      panel.style.maxHeight = panel.scrollHeight + "px";
 		    } 
 		  });
-		} */
+		}
 
 	</script>
 	<jsp:include page="footer.jsp"></jsp:include>

@@ -248,7 +248,7 @@ a:hover {
 	background-color: rgb(182, 182, 182); 
 }
 
-/* .divOptions{
+.divOptions{
 	border-top-left-radius: 10%;
 	border-top-right-radius: 10%;
 	display: flex;
@@ -261,11 +261,11 @@ a:hover {
 .options{
 	background: silver;
 	color: white;
-	padding: 10px 25px;
+	padding: 10px 18px;
 	animation: .4s linear example;
 	border-bottom : 1px solid #e2e2e2;
 	z-index: 999;
-} */
+}
 
 .actived:not(.ended) {
   background-color: #65c26d;
