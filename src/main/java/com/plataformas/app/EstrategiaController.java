@@ -160,14 +160,13 @@ public class EstrategiaController {
 
 			return "redirect:/estrategia/panelControl";
 		}
-
 	}
 
 	@PostMapping(value = "/deleteEstrategia")
 	public String deleteEstrategia(@ModelAttribute("estrategia") Estrategia estrategia,Model model,HttpSession session) {
 
 		synchronized (session) {
-			
+
 			if (!sessionResources.checkUserSession(session)){
 
 				model.addAttribute("mensajeAcceso", "Tu sessión esta inactiva");
@@ -187,5 +186,4 @@ public class EstrategiaController {
 			return "mainPanel";
 		}
 	}
-
 }

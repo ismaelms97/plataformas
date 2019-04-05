@@ -45,7 +45,7 @@ public class DbResources {
 
 		}catch (SQLException e) {
 
-			System.out.println("Connection with DB failed : "+e.getCause());
+			System.out.println("Connection with DB failed -> Message: "+e.getMessage());
 
 		}
 
