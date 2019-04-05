@@ -106,7 +106,7 @@ div.disabled{
 	-webkit-filter: opacity(30%);
 	filter: opacity(30%);
 }
-.divOptions.disabled{
+.divOptions > .disabled{
 	pointer-events:none;
 	cursor:no-drop;
 	-webkit-filter: opacity(30%);
