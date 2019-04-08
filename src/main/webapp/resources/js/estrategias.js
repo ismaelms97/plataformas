@@ -215,7 +215,8 @@ function saveData() {
 		tasks.forEach(task => {
 			tasksToString += "id:" + task.id + "--";
 			tasksToString += "estadoActual:" + task.estado + "--"; 
-			tasksToString += "subEstadoActual:" + " " + "qwer";
+			tasksToString += "subEstadoActual:" + " "+ "--";
+			tasksToString += "propiedad:" + task.propiedad+ "qwer";
 		});
 
 		$.ajax({
