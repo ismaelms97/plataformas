@@ -72,4 +72,23 @@ public class UserService {
 			return user;
 		}
 	}
+	
+	public String findRolebyUserId(int id) {		
+				
+		try {
+			
+			Connection con = dbResources.getConection();
+			con.setAutoCommit(false);
+			Statement  stmt = con.createStatement(); 
+			ResultSet rs = stmt.executeQuery("SELECT R.role FROM role R  WHERE R.id = (SELECT UER.id_role FROM user_equipo_role UER where UER.id_user = "+id+")"); 			
+
+			return rs.getString("role");
+
+		}catch (Exception e) {
+			
+			System.err.println("findRolebyUserId() more inf : "+e.getMessage()+" reason  -> "+e.getCause());
+			
+			return null;
+		}
+	}
 }
