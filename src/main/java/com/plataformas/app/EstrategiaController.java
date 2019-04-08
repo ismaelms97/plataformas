@@ -111,7 +111,6 @@ public class EstrategiaController {
 		}
 	}
 
-
 	@PostMapping(value = "/pushEstrategia")
 	public  String pushEstrategia(@ModelAttribute("estrategia") Estrategia estrategia,Model model,HttpSession session) {	
 

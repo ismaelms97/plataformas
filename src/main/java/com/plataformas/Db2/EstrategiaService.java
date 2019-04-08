@@ -10,6 +10,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.plataformas.model.Daily;
 import com.plataformas.model.Estrategia;
 import com.plataformas.model.Tarea;
 import com.plataformas.recursos.DbResources;
@@ -118,8 +120,8 @@ public class EstrategiaService {
 			rs.next();
 			int lastIndex = rs.getInt(1);
 
-			stmt = con.prepareStatement("INSERT INTO tarea (id,tipo,prioridad,resumen,tamaño,complejidad,propiedad,peticionario,relevante,urgente,planificado)"
-					+ " values (?,?,?,?,?,?,?,?,?,?,?)");
+			stmt = con.prepareStatement("INSERT INTO tarea (id,tipo,resumen,tamaño,complejidad,propiedad,peticionario,relevante,urgente,planificado)"
+					+ " values (?,?,?,?,?,?,?,?,?,?)");
 
 			for (Tarea tarea : tareas) {
 
@@ -129,11 +131,10 @@ public class EstrategiaService {
 				stmt.setString(4, tarea.getResumen());
 				stmt.setString(5, tarea.getTamaño());
 				stmt.setString(6, tarea.getComplejidad());
-				stmt.setString(7, tarea.getPropiedad());
-				stmt.setString(8, tarea.getPeticionario());
-				stmt.setBoolean(9, tarea.isRelevante());
-				stmt.setBoolean(10, tarea.isUrgente());
-				stmt.setString(11, tarea.getPlanificado());
+				stmt.setString(7, tarea.getPeticionario());
+				stmt.setBoolean(8, tarea.isRelevante());
+				stmt.setBoolean(9, tarea.isUrgente());
+				stmt.setString(10, tarea.getPlanificado());
 
 				try {
 
@@ -156,6 +157,32 @@ public class EstrategiaService {
 				stmt.executeUpdate();
 				System.out.println(" intermedia guardada ");
 			}
+			
+			stmt = con.prepareStatement("INSERT INTO daily (estrategia_id) values ("+lastIndex+")");
+			stmt.executeUpdate();
+			rs = stmt.getGeneratedKeys();
+			rs.next();
+			lastIndex = rs.getInt(1);			
+			
+			stmt = con.prepareStatement("INSERT INTO daily_tarea (daily_id,tarea_id,propiedad) values (?,?,?)");
+
+			for (Tarea tarea : tareas) {
+
+				stmt.setInt(1, lastIndex);
+				stmt.setInt(2, tarea.getId());
+				stmt.setString(3, tarea.getPropiedad());
+
+				try {
+					
+					stmt.executeUpdate();
+
+				}catch  (Exception e) {
+
+					System.out.println("Esta intermedia-daily ID ya existe");
+				}
+
+				System.out.println("intermedia guardada ");
+			}
 
 			con.commit();
 
@@ -163,8 +190,6 @@ public class EstrategiaService {
 
 			System.out.println("SQL Exeption  saveEstrategiaAndTarea:  code -> "+e.getErrorCode()+" more inf : "+e.getMessage());
 			con.rollback();
-
-
 
 		}
 	}

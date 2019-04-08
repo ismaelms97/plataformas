@@ -215,7 +215,8 @@ function saveData() {
 		tasks.forEach(task => {
 			tasksToString += "id:" + task.id + "--";
 			tasksToString += "estadoActual:" + task.estado + "--"; 
-			tasksToString += "subEstadoActual:" + " " + "qwer";
+			tasksToString += "subEstadoActual:" + " "+ "--";
+			tasksToString += "propiedad:" + task.propiedad+ "qwer";
 		});
 
 		$.ajax({
@@ -292,4 +293,11 @@ function exists(arr, val){
 		}
 	}
 	return false;
+}
+
+function drawTeamUsers(){
+	for (var i = 0; i < team.length; i++) {
+		document.getElementsByClassName("teamUsers").innerHTML += team[i];
+		
+	}
 }
