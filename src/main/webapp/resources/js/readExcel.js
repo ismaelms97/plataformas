@@ -42,85 +42,92 @@ var process_wb = (function () {
         else OUT.innerText = output;*/
 		//console.log(to_json(wb)) //my console
 		//document.getElementById("drop").style.display =  "none";
-
-		for (var i = 0; i < JSON.parse(output).Tareas[0].length; i++) {
-			if(JSON.parse(output).Tareas[0][i] != null){
-				if (JSON.parse(output).Tareas[0][i].toLowerCase() == "id") {
-					idPos = i;
-				} else if (JSON.parse(output).Tareas[0][i].toLowerCase() == "tipo") {
-					typePos = i;
-				} else if (JSON.parse(output).Tareas[0][i].toLowerCase() == "prioridadcbk") {
-					prioPos = i;
-				} else if (JSON.parse(output).Tareas[0][i].toLowerCase() == "resumen") {
-					resuPos = i;
-				} else if (JSON.parse(output).Tareas[0][i].toLowerCase() == "estado") {
-					statusPos = i;
-				} else if (JSON.parse(output).Tareas[0][i].toLowerCase() == "tamaño") {
-					sizePos = i;
-				} else if (JSON.parse(output).Tareas[0][i].toLowerCase() == "complejidad") {
-					complejPos = i;
-				} else if (JSON.parse(output).Tareas[0][i].toLowerCase() == "propiedad de") {
-					ownerPos = i;
-				} else if (JSON.parse(output).Tareas[0][i].toLowerCase() == "peticionario") {
-					petPos = i;
-				} else if (JSON.parse(output).Tareas[0][i].toLowerCase() == "relevante") {
-					relevancePos = i;
-				} else if (JSON.parse(output).Tareas[0][i].toLowerCase() == "urgente") {
-					urgenPos = i;
-				} else if (JSON.parse(output).Tareas[0][i].toLowerCase() == "planificado para") {
-					plannedPos = i;
-				} 
+		
+		try{
+			for (var i = 0; i < JSON.parse(output).Tareas[0].length; i++) {
+				if(JSON.parse(output).Tareas[0][i] != null){
+					if (JSON.parse(output).Tareas[0][i].toLowerCase() == "id") {
+						idPos = i;
+					} else if (JSON.parse(output).Tareas[0][i].toLowerCase() == "tipo") {
+						typePos = i;
+					} else if (JSON.parse(output).Tareas[0][i].toLowerCase() == "prioridadcbk") {
+						prioPos = i;
+					} else if (JSON.parse(output).Tareas[0][i].toLowerCase() == "resumen") {
+						resuPos = i;
+					} else if (JSON.parse(output).Tareas[0][i].toLowerCase() == "estado") {
+						statusPos = i;
+					} else if (JSON.parse(output).Tareas[0][i].toLowerCase() == "tamaño") {
+						sizePos = i;
+					} else if (JSON.parse(output).Tareas[0][i].toLowerCase() == "complejidad") {
+						complejPos = i;
+					} else if (JSON.parse(output).Tareas[0][i].toLowerCase() == "propiedad de") {
+						ownerPos = i;
+					} else if (JSON.parse(output).Tareas[0][i].toLowerCase() == "peticionario") {
+						petPos = i;
+					} else if (JSON.parse(output).Tareas[0][i].toLowerCase() == "relevante") {
+						relevancePos = i;
+					} else if (JSON.parse(output).Tareas[0][i].toLowerCase() == "urgente") {
+						urgenPos = i;
+					} else if (JSON.parse(output).Tareas[0][i].toLowerCase() == "planificado para") {
+						plannedPos = i;
+					} 
+				}
 			}
-		}
-		for (var i = 1; i < JSON.parse(output).Tareas.length; i++) { //JSON.parse(output).Tareas.length
-			if(JSON.parse(output).Tareas[i][idPos] != null && JSON.parse(output).Tareas[i][statusPos].toLowerCase() != "finalizada"){
+			for (var i = 1; i < JSON.parse(output).Tareas.length; i++) { //JSON.parse(output).Tareas.length
+				if(JSON.parse(output).Tareas[i][idPos] != null && JSON.parse(output).Tareas[i][statusPos].toLowerCase() != "finalizada"){
 
-				var task = new Object();
-				task.id = JSON.parse(output).Tareas[i][idPos]
-				task.tipo = JSON.parse(output).Tareas[i][typePos]
-				task.resumen = JSON.parse(output).Tareas[i][resuPos]
-				task.estado = JSON.parse(output).Tareas[i][statusPos]
-				task.propiedad = JSON.parse(output).Tareas[i][ownerPos]
-				task.relevante = JSON.parse(output).Tareas[i][relevancePos]
-				task.planificado = JSON.parse(output).Tareas[i][plannedPos]
-				task.peticionario = JSON.parse(output).Tareas[i][petPos]
-				task.urgente = JSON.parse(output).Tareas[i][urgenPos];
-				task.estadoFinal = "";
-				
-				// Hacemos comprovaciones
-				if(JSON.parse(output).Tareas[i][complejPos] != null && JSON.parse(output).Tareas[i][complejPos].toLowerCase() != "sin asignar"){
-					task.complejidad = JSON.parse(output).Tareas[i][complejPos].substring(0,1)	
-				}else{
-					task.complejidad = 0;
-				}
-				
-				if(JSON.parse(output).Tareas[i][prioPos] != null && JSON.parse(output).Tareas[i][prioPos] != "undefined"){
-					task.prioridad = JSON.parse(output).Tareas[i][prioPos];
-				} else {
-					task.prioridad = 0;
-				}
+					var task = new Object();
+					task.id = JSON.parse(output).Tareas[i][idPos]
+					task.tipo = JSON.parse(output).Tareas[i][typePos]
+					task.resumen = JSON.parse(output).Tareas[i][resuPos]
+					task.estado = JSON.parse(output).Tareas[i][statusPos]
+					task.propiedad = JSON.parse(output).Tareas[i][ownerPos]
+					task.relevante = JSON.parse(output).Tareas[i][relevancePos]
+					task.planificado = JSON.parse(output).Tareas[i][plannedPos]
+					task.peticionario = JSON.parse(output).Tareas[i][petPos]
+					task.urgente = JSON.parse(output).Tareas[i][urgenPos];
+					task.estadoFinal = "";
+					
+					// Hacemos comprovaciones
+					if(JSON.parse(output).Tareas[i][complejPos] != null && JSON.parse(output).Tareas[i][complejPos].toLowerCase() != "sin asignar"){
+						task.complejidad = JSON.parse(output).Tareas[i][complejPos].substring(0,1)	
+					}else{
+						task.complejidad = 0;
+					}
+					
+					if(JSON.parse(output).Tareas[i][prioPos] != null && JSON.parse(output).Tareas[i][prioPos] != "undefined"){
+						task.prioridad = JSON.parse(output).Tareas[i][prioPos];
+					} else {
+						task.prioridad = 0;
+					}
 
-				if(JSON.parse(output).Tareas[i][sizePos] != null){
-					task.tamano = JSON.parse(output).Tareas[i][sizePos]					
-				}else{
-					task.tamano = 0;
+					if(JSON.parse(output).Tareas[i][sizePos] != null){
+						task.tamano = JSON.parse(output).Tareas[i][sizePos]					
+					}else{
+						task.tamano = 0;
+					}
+					
+					task.modified = false;
+					tasks.push(task);
 				}
-				
-				task.modified = false;
-				tasks.push(task);
 			}
+			document.getElementById("loadAnimation").style.display =  "none"; //Hide load animation
+			console.log(tasks)
+			if(inTasks.length >= 1){
+				tasks = strategyFilter(tasks);
+				$("div.button").removeClass("disabled");
+			}
+			// Collect Users from propertyOf 
+			equipo = owners();
+			// Activate the action to filter
+			filtering();
+			
+			drawTeamUsers(equipo);
+			document.getElementById("errorContainer").setAttribute("style", "display: none")
+			drawTable(tasks, false);
+		} catch (e){
+			dropError();
 		}
-		document.getElementById("loadAnimation").style.display =  "none"; //Hide load animation
-		console.log(tasks)
-		if(inTasks.length >= 1){
-			tasks = strategyFilter(tasks);
-			$("div.button").removeClass("disabled");
-		}
-		// Collect Users from propertyOf 
-		equipo = owners();
-		// Activate the action to filter
-		filtering();
-		drawTable(tasks, false);
 	};
 })();
 
@@ -141,7 +148,7 @@ var do_file = (function () {
 		worker.onmessage = function (e) {
 			switch (e.data.t) {
 			case 'ready': break;
-			case 'e': console.error(e.data.d); break;
+			case 'e': dropError();
 			case XW.msg: cb(JSON.parse(e.data.d)); break;
 			}
 		};
@@ -215,3 +222,13 @@ document.getElementById("xlf").addEventListener('change', () => {
 
 	//console.log(truncated)
 });
+
+
+
+function dropError(){
+
+	console.log("elol")
+	document.getElementById("errorContainer").removeAttribute("style");
+	document.getElementById("drop").removeAttribute("style")
+	document.getElementById("loadAnimation").setAttribute("style", "display: none")
+}

@@ -262,7 +262,7 @@ function orderByPrio(arr) {
 
 		return 0;
 	})
-//	console.log(arr)
+	
 	var orderedArr = []
 	var prio = ["arr[i].urgente", "arr[i].complejidad"]
 	var prioVal = ["Sí", "Sin asignar"]
@@ -295,9 +295,12 @@ function exists(arr, val){
 	return false;
 }
 
-function drawTeamUsers(){
-	for (var i = 0; i < team.length; i++) {
-		document.getElementsByClassName("teamUsers").innerHTML += team[i];
+function drawTeamUsers(array){
+	for (var i = 0; i < array.length; i++) {
+		var txt = '<div class="chip">'
+			+'<img src="https://addons.thunderbird.net/static//img/zamboni/anon_user.png" alt="Person" width="96" height="300"><span class="name">'
+        + toCamelCase(array[i].toLowerCase()) +'</span> <br>Tareas: 2 | K: 10 </div>';
 		
+		document.getElementsByClassName("teamUsers")[0].innerHTML += txt;
 	}
 }

@@ -11,7 +11,9 @@
 	<h1 class="mainTitle"></h1>
 
 	<i class="fa fa-filter fa-2x" id="filter" data-toggle="modal" data-target="#modalFiltrado"></i>
+	
 	<div class="teamUsers"></div>
+	
 	<form:form method="POST" action="/estrategia/saveEstrategia">
 		<div class="button disabled" id="save">Guardar</div>
 	</form:form>
@@ -62,6 +64,7 @@
 			<tbody>
 			</tbody>
 		</table>
+		<div id="errorContainer" style="display: none"><p id="errorMsg" >Archivo no válido</p></div>
 		<div id="drop">
 			Arrastra el archivo excel aquí para cargarlo<input type="file"
 				name="xlfile" id="xlf" hidden="hidden" />
