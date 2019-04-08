@@ -120,6 +120,8 @@ var process_wb = (function () {
 		equipo = owners();
 		// Activate the action to filter
 		filtering();
+		
+		drawTeamUsers(equipo);
 		drawTable(tasks, false);
 	};
 })();

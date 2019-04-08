@@ -21,8 +21,7 @@ function filter(array, filtros){
 }
 
 /*
- * Función que sirve para filtrar las tareas, versión 1.0, solo filtra por el
- * tipo de tareas: Incidencias, Tareas, Consulta.
+ * Función que sirve para filtrar las tareas, versión 2.0, Filtra según un objeto que contiene arrays pasada por parametros
  */
 function strategyFilter(array){
 
@@ -57,7 +56,7 @@ function owners(){
 }
 
 /**
- * Little function that formats a string a transforms it to camel case
+ * Little function that formats a string and transforms it to camel case
  * 
  * @param str String to transform to Camel Case
  * @returns
