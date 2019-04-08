@@ -4,7 +4,6 @@ $(document).ready(function(){
 	estados = [];
 	rellenarEstados();
 	inputTasks();
-	getNameEstrategia();
 
 	if(document.getElementsByClassName("mainTitle")[0]){
 		document.getElementsByClassName("mainTitle")[0].innerHTML = sessionStorage.getItem('titulo');
@@ -188,12 +187,4 @@ function emptyTable(){
 	for (var j = $("TR").length -1; j > 0 ; j--) {
 		$("TR")[j].remove();
 	}
-}
-
-function getNameEstrategia(){
-	$(document).ready(function(){
-		$(".estartegiasCard").on("click", function(e) {
-			sessionStorage.setItem('titulo', e.target.innerHTML.trim());
-		})
-	})
 }

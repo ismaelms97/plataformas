@@ -28,7 +28,7 @@ public class DailyService {
 			Connection con = dbResources.getConection();
 			con.setAutoCommit(false);
 			Statement  stmt = con.createStatement(); 
-			ResultSet rs = stmt.executeQuery("SELECT D.fecha,DT.tarea_id,DT.estadoActual,DT.subEstadoActual FROM daily D,daily_tarea DT where D.estrategia_id = "+idEstrategia+"");
+			ResultSet rs = stmt.executeQuery("SELECT D.fecha,DT.tarea_id,DT.estadoActual,DT.subEstadoActual,DT.propiedad FROM daily D,daily_tarea DT where D.estrategia_id = "+idEstrategia+"");
 			return Daily.converFromDatabase(rs, dailyList);
 
 		} catch (SQLException e) {
@@ -98,7 +98,7 @@ public class DailyService {
 			rs.next();
 			int lastIndex = rs.getInt(1);
 
-			stmt = con.prepareStatement("INSERT INTO daily_tarea (daily_id,tarea_id,estadoActual,subEstadoActual) values (?,?,?,?)");
+			stmt = con.prepareStatement("INSERT INTO daily_tarea (daily_id,tarea_id,estadoActual,subEstadoActual,propiedad) values (?,?,?,?,?)");
 
 			for (Daily daily : listDailty) {
 
@@ -106,6 +106,7 @@ public class DailyService {
 				stmt.setInt(2, daily.getTareaId());
 				stmt.setString(3, daily.getEstadoActual());
 				stmt.setString(4, daily.getSubEstadoActual());
+				stmt.setString(5, daily.getPropiedad());
 
 				try {
 					

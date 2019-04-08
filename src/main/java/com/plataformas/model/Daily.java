@@ -17,6 +17,7 @@ public class Daily {
 	private int estrategiaId;
 	private String estadoActual;
 	private String subEstadoActual;
+	private String propiedad;
 	private int tareaId;
 
 
@@ -25,13 +26,14 @@ public class Daily {
 		super();
 	}
 
-	public Daily(int id, String fecha, int estrategiaId, String estadoActual, String subEstadoActual) {
+	public Daily(int id, String fecha, int estrategiaId, String estadoActual, String subEstadoActual,String propiedad) {
 		super();
 		Id = id;
 		this.fecha = fecha;
 		this.estrategiaId = estrategiaId;
 		this.estadoActual = estadoActual;
 		this.subEstadoActual = subEstadoActual;
+		this.propiedad = propiedad;
 	}
 
 	public Daily(String fecha, int estrategiaId, String estadoActual, String subEstadoActual) {
@@ -97,6 +99,15 @@ public class Daily {
 	public void setTareaId(int tareaId) {
 		this.tareaId = tareaId;
 	}
+	
+
+	public String getPropiedad() {
+		return propiedad;
+	}
+
+	public void setPropiedad(String propiedad) {
+		this.propiedad = propiedad;
+	}
 
 	public static  List<Daily> converFromDatabase(ResultSet rs,List<Daily> dailyList ) throws SQLException {
 
@@ -106,11 +117,13 @@ public class Daily {
 			int tareaId = rs.getInt("tarea_id");
 			String estadoActual = rs.getString("estadoActual");
 			String subEstadoActual = rs.getString("subEstadoActual");
+			String propiedad = rs.getString("propiedad");
 			Daily daily = new Daily();
 			daily.setFecha(fecha);
 			daily.setTareaId(tareaId);
 			daily.setEstadoActual(estadoActual);
 			daily.setSubEstadoActual(subEstadoActual);
+			daily.setPropiedad(propiedad);
 			dailyList.add(daily);
 		}
 
@@ -130,12 +143,14 @@ public class Daily {
 			String idTarea = (dailys[i][0].split(":"))[1];		
 			String estadoActual = (dailys[i][1].split(":"))[1];
 			String subEstadoActual = (dailys[i][2].split(":"))[1];	
+			String propiedad = (dailys[i][3].split(":"))[1];
 			Daily daily = new Daily ();
 			daily.setEstadoActual(estadoActual);
 			daily.setSubEstadoActual(subEstadoActual);
 			daily.setTareaId(Integer.parseInt(idTarea));
 			daily.setFecha(date);
 			daily.setEstrategiaId(idEstrategia);
+			daily.setPropiedad(propiedad);
 			listaDaily.add(daily);
 		}
 
