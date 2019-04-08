@@ -64,7 +64,8 @@
 									console.log("You can create new daily a")
 								}
 								el.setAttribute("data-dailyDate", data)
-
+								
+								
 							}
 						}); 
 					} else {
@@ -89,6 +90,7 @@
 						window.location.href = "/estrategia/findEstrategia/" + e.target.parentElement.parentElement.getAttribute("id");
 					}
 				});
+				
 
 		var acc = document.querySelectorAll(".a");
 		var i;
@@ -107,8 +109,7 @@
 		    } 
 		  });
 		} 
-		
-		//});
+		});
 
 	</script>
 	<jsp:include page="footer.jsp"></jsp:include>
