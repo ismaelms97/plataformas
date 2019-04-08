@@ -85,11 +85,12 @@
 				
 				$(".options").click(function(e){
 					if(!e.target.classList.contains("disabled") && e.target.classList.contains("createDaily")){ 
+						sessionStorage.setItem('titulo', e.target.parentElement.parentElement.children[0].innerHTML.trim());
 						window.location.href = "/estrategia/findEstrategia/" + e.target.parentElement.parentElement.getAttribute("id");
 					}
 				});
-		});
-		var acc = document.querySelectorAll("a .a");
+				
+		var acc = document.querySelectorAll(".a");
 		var i;
 
 		for (i = 0; i < acc.length; i++) {
@@ -107,8 +108,7 @@
 		  });
 		} 
 		
-		});
-
+ 		});
 
 	</script>
 	<jsp:include page="footer.jsp"></jsp:include>

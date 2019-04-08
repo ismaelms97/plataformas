@@ -293,3 +293,10 @@ function exists(arr, val){
 	}
 	return false;
 }
+
+function drawTeamUsers(){
+	for (var i = 0; i < team.length; i++) {
+		document.getElementsByClassName("teamUsers").innerHTML += team[i];
+		
+	}
+}
