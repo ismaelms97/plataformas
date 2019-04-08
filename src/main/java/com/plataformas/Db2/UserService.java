@@ -71,10 +71,5 @@ public class UserService {
 			System.err.println("FIND() more inf : "+e.getMessage()+" reason  -> "+e.getCause());
 			return user;
 		}
-
-
 	}
-
-
-
 }

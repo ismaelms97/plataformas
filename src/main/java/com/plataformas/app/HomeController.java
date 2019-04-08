@@ -57,7 +57,7 @@ public class HomeController {
 		String mensaje = "";
 
 		try{
-
+			
 			newUser = userService.findByUsername(user.getUsername());
 			
 			if(newUser.getPassword().equals(User.encrypt(user.getPassword()))) {

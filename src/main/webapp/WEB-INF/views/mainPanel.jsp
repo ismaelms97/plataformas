@@ -88,7 +88,7 @@
 						window.location.href = "/estrategia/findEstrategia/" + e.target.parentElement.parentElement.getAttribute("id");
 					}
 				});
-		});
+	
 		var acc = document.querySelectorAll("a .a");
 		var i;
 

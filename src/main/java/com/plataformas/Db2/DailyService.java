@@ -123,7 +123,7 @@ public class DailyService {
 
 		}catch (SQLException e) {
 
-			System.out.println("SQL Exeption  saveEstrategiaAndTarea:  code -> "+e.getErrorCode()+" more inf : "+e.getMessage());
+			System.out.println("SQL Exeption  daily_tarea:  code -> "+e.getErrorCode()+" more inf : "+e.getMessage());
 			con.rollback();
 
 		}

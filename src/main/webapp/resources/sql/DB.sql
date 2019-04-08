@@ -54,6 +54,7 @@ urgente   boolean,
 planificado  varchar(25) not null
 
 );
+
 CREATE TABLE estrategia_tarea(    
 
 estadoInicio varchar(50) NOT NULL,
