@@ -54,13 +54,18 @@ $('#estrategiaForm').on('shown.bs.modal', function () {
 		  
 		  if(hoy <= fecha){
 			  $("#crearEstrategia").prop( "disabled", false );
+			  $("#crearEstrategia").click(function(){
+				 console.log(toCamelCase(document.getElementById("estrategiaFormInputName").innerHTML.trim()))
+				 sessionStorage.setItem('titulo', toCamelCase(document.getElementById("estrategiaFormInputName").value.trim()));
+			  })
+			
 		  }else{
 			  $("#crearEstrategia").prop( "disabled", true );
 		  }
 	  })
 	  
 	})
-	
+	 
 	$("#estrategiaFormInputDateInit").val(new Date().getFullYear() + "-" +  new Date().getMonth() + "-" + new Date().getDate());
 	$("#estrategiaFormInputEstado").val("En Curso");
 	$("#estrategiaFormInputEquipoId").val("1");

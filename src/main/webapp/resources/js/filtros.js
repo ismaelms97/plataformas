@@ -35,21 +35,34 @@ function strategyFilter(array){
  */
 function owners(){
 	var own = [];
+	var bool = false;
 	var nombre = "";
 	tasks.forEach(function(task){
 		if(!own.includes(task.propiedad)){
 			
-			if(task.propiedad.toLowerCase() == "unassigned") {
-				task.propiedad = "";
+			if(task.propiedad.toLowerCase() == "unassigned" && !bool) {
+				task.propiedad = "Desasignar Usuario";
+				
+				own.push(task.propiedad);
+				nombre = task.propiedad.toLowerCase();
+				var texto = '<div class="custom-control custom-checkbox">'+
+				'<input type="checkbox" id="'+ nombre +'" value="'+ nombre +'" class="custom-control-input filtros taskPropertyOf">'+
+				'<label class="custom-control-label" for="'+ nombre +'">'+ toCamelCase(nombre) +'</label><br> '+
+				'</div>';
+				$("#collapsePropertyOf").children(".card").append(texto);
+				bool = true;
+			}else if (task.propiedad.toLowerCase() != "unassigned"){
+				
+				own.push(task.propiedad);
+				nombre = task.propiedad.toLowerCase();
+				var texto = '<div class="custom-control custom-checkbox">'+
+				'<input type="checkbox" id="'+ nombre +'" value="'+ nombre +'" class="custom-control-input filtros taskPropertyOf">'+
+				'<label class="custom-control-label" for="'+ nombre +'">'+ toCamelCase(nombre) +'</label><br> '+
+				'</div>';
+				$("#collapsePropertyOf").children(".card").append(texto);
+				
 			}
 			
-			own.push(task.propiedad);
-			nombre = task.propiedad.toLowerCase();
-			var texto = '<div class="custom-control custom-checkbox">'+
-			'<input type="checkbox" id="'+ nombre +'" value="'+ nombre +'" class="custom-control-input filtros taskPropertyOf">'+
-			'<label class="custom-control-label" for="'+ nombre +'">'+ toCamelCase(nombre) +'</label><br> '+
-			'</div>';
-			$("#collapsePropertyOf").children(".card").append(texto);
 		}
 	})
 	return own;

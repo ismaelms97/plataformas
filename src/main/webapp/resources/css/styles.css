@@ -404,6 +404,11 @@ a:hover {
 	z-index: 2;
 }
 /*########### TEAM ###########*/
+.teamUsers{
+	max-height: 170px;
+	overflow-x: auto;
+	white-space: nowrap;
+}
 .chip {
 	display: inline-block;
 	padding: 0 25px;
@@ -412,15 +417,16 @@ a:hover {
 	line-height: 33px;
 	border-radius: 25px;
 	background-color: #ced5da;
-	margin-right: 5px;
+	margin: 5px;
 }
 
-.chip img {
+.chip img, .imgClone{
 	float: left;
 	margin: 10px 10px 0 -25px;
 	height: 50px;
 	width: 50px;
 	border-radius: 50%;
+	z-index: 90;
 }
 .name{
 	font-weight: bolder;
