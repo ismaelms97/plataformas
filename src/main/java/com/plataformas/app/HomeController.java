@@ -55,44 +55,30 @@ public class HomeController {
 	@PostMapping(value = "/mainPanel")
 	public String login(@ModelAttribute("user") User user, Model model,HttpServletRequest request,HttpSession session){
 
-		User newUser = null;
+		User userTeamAndRoles = null;
 		boolean userExist = false;
 		String mensaje = "";
 
 		try{
 			
-			newUser = userService.findByUsername(user.getUsername());
+			User newUser = userService.findByUsername(user.getUsername());
 			System.out.println(newUser.getUsername()+" "+newUser.getPassword());
 			
 			if(newUser.getPassword().equals(User.encrypt(user.getPassword()))) {
 
+				userTeamAndRoles = userService.findRolebyUserId(newUser);
 				
-				
-				
-				User UserTeamAndRoles = userService.findRolebyUserId(newUser);
-				System.out.println(UserTeamAndRoles.getUsername()+" "+UserTeamAndRoles.getPassword()+" "+UserTeamAndRoles.getRole());
-				
-
 				session = request.getSession();
 				session.setAttribute("userSession", newUser);
 				USessions.add(newUser);	
-				model.addAttribute("greeting","Usuario: "+ user.getUsername());
 				
-				HashMap<Integer, String> equipos = new HashMap<Integer, String>();
-				int index = 0;
-				for (String nombre : UserTeamAndRoles.getNombreEquipo()) {
-					
-					equipos.put(UserTeamAndRoles.getEquipoId().get(index), nombre);
-					index++;
-				} 
-		  
-				model.addAttribute("teams", UserTeamAndRoles.getNombreEquipo());
+				model.addAttribute("greeting","Usuario: "+ user.getUsername());				  
+				model.addAttribute("teams", userTeamAndRoles.getNombreEquipo());				
+				model.addAttribute("roles", userTeamAndRoles.getRole());
 				
-				model.addAttribute("roles", UserTeamAndRoles.getRole());
-				model.addAttribute("equipos", equipos);
-				
+				HashMap<Integer, String> equipos = user.crearEquiposIdNombre(userTeamAndRoles);	
+				model.addAttribute("equipos", equipos);	
 				model.addAttribute("estrategia", new Estrategia());
-				model.addAttribute("equipoId", newUser.getEquipoId());
 				userExist = true;
 
 			}else {
@@ -113,7 +99,11 @@ public class HomeController {
 
 			try {
 
-				List<Estrategia> listaEstrategias = estrategiaService.findEstrategiaById(newUser.getEquipoId());
+				List<Estrategia> listaEstrategias = estrategiaService.findEstrategiaById(userTeamAndRoles.getEquipoId());
+				for (Estrategia estrategia : listaEstrategias) {
+					System.out.println(estrategia.getNombre());
+					System.out.println(estrategia.getEquipoId());
+				}
 				model.addAttribute("listaEstrategia",listaEstrategias);
 				session.setAttribute("userStrategy", listaEstrategias);	
 

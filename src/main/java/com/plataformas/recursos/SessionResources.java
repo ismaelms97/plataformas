@@ -1,5 +1,6 @@
 package com.plataformas.recursos;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -37,5 +38,5 @@ public class SessionResources {
 		}
 		
 		return true;
-	}		
+	}	
 }
