@@ -9,15 +9,17 @@
 
 <body>
 	<h1 class="mainTitle"></h1>
-	
-	<form:form method="POST" action="/estrategia/saveEstrategia">
-		<div class="button disabled" id="save">Guardar</div>
-	</form:form>
+	<div class="flexButton">
+		<i class="fa fa-filter fa-2x" id="filter" data-toggle="modal" data-target="#modalFiltrado"></i>
+		<form:form method="POST" action="/estrategia/saveEstrategia">
+			<div class="button disabled" id="save">Guardar</div>
+		</form:form>
+	</div>
 	<script>
 		var inTasks = [];
 	</script>
 	
-	<i class="fa fa-filter fa-2x" id="filter" data-toggle="modal" data-target="#modalFiltrado"></i>
+	
 	
 	<div class="teamUsers"></div>
 	

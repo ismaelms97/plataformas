@@ -29,6 +29,9 @@
 						<tr>
 							<td><form:label path="" for="estrategiaFormSelectTeam">Equipo</form:label></td>
 							<td><form:select path=""  cssClass="form-control" id="estrategiaFormSelectTeam" items="${teams}"/></td>
+							<%-- <c:forEach items="${teamsID}" var="id" varStatus="item">
+								<option value="id"></option>
+								</c:forEach> --%>
 						</tr>
 						<tr>
 

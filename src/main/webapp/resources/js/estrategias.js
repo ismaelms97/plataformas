@@ -326,6 +326,6 @@ function moveUsers(){
 		},
 	});
 }
-function getTasksByUser(array){
+function getTasksByUser(user, tareas){
 	
 }

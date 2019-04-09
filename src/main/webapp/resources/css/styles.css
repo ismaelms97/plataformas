@@ -87,10 +87,12 @@ thead{
 	border-top: 1px solid #0000bb;
 }
 /*########### BUTTON SAVE STARTEGY ###########*/
+.flexButton{
+	display: flex;
+	justify-content:space-between;
+	flex-direction: row;
+}
 div.button{
-	float:right;
-	position:absolute;
-	right:0;
 	margin: 0 20px 20px 0;
 	padding: 7px 20px;
 	border: 1px solid black;
@@ -100,7 +102,7 @@ div.button{
 	text-shadow: 1px 1px black;
 	box-shadow: 0 2px 2px black;
 	cursor:pointer;
-	display: inline-block;
+	
 	
 }
 div.disabled{
