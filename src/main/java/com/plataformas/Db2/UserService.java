@@ -17,42 +17,6 @@ public class UserService {
 	@Autowired
 	DbResources  dbResources;
 
-	public List<User> findAll(){
-
-		List<User> userList = new ArrayList<User>();		
-
-		try{
-
-			Connection con = dbResources.getConection();
-			con.setAutoCommit(false);
-			Statement  stmt = con.createStatement(); 
-			ResultSet rs = stmt.executeQuery("SELECT * FROM USER"); 
-
-			while (rs.next()) {
-
-				int id = rs.getInt("id");
-				String username = rs.getString("username");
-				String password = rs.getString("password");
-				int equipo_id = rs.getInt("equipo_id");
-				User user = new User( id, username,password ,equipo_id );
-				userList.add(user);
-			}
-
-			return userList;
-
-		}catch (SQLException e) {
-			
-			System.out.println("SQL Exeption  findEstrategiaById:  code -> "+e.getErrorCode());
-			return userList;
-
-		}catch (Exception e) {
-			
-			System.out.println("Error en findEstrategiaById ");
-			return userList;
-		}
-	}
-
-
 	public User findByUsername(String username) {
 		
 		User user = null;
@@ -62,7 +26,7 @@ public class UserService {
 			Connection con = dbResources.getConection();
 			con.setAutoCommit(false);
 			Statement  stmt = con.createStatement(); 
-			ResultSet rs = stmt.executeQuery("SELECT  U.*, E.name FROM user U join equipo E  on (U.equipo_id = E.id) where username = '"+username+"'"); 			
+			ResultSet rs = stmt.executeQuery("SELECT U.id, U.username,U.password FROM user U  where username = '"+username+"'"); 			
 
 			return User.converFromDataBase(rs);
 
@@ -73,22 +37,40 @@ public class UserService {
 		}
 	}
 	
-	public String findRolebyUserId(int id) {		
-				
+	public User findRolebyUserId(User newUser) {		
+			
 		try {
+			
+			List<String> listaEquipos = new ArrayList<String>();
+			List<String> listaRoles = new ArrayList<String>();
+			List<Integer> listaIdTeams = new ArrayList<Integer>();
 			
 			Connection con = dbResources.getConection();
 			con.setAutoCommit(false);
 			Statement  stmt = con.createStatement(); 
-			ResultSet rs = stmt.executeQuery("SELECT R.role FROM role R  WHERE R.id = (SELECT UER.id_role FROM user_equipo_role UER where UER.id_user = "+id+")"); 			
-
-			return rs.getString("role");
+			ResultSet rs = stmt.executeQuery("SELECT name, role, UER.id_equipo FROM equipo E INNER JOIN user_equipo_role UER ON (E.id = UER.id_equipo) "
+					+ "INNER JOIN user U ON (UER.id_user = U.id) "
+					+ "INNER JOIN role R ON (UER.id_role = R.id) "
+					+ "WHERE U.id = "+newUser.getId()+""); 
+			
+			while (rs.next()) {
+				
+				listaEquipos.add(rs.getString("name"));
+				listaRoles.add(rs.getString("role"));
+				listaIdTeams.add(rs.getInt("id_equipo"));
+			}
+			
+			newUser.setNombreEquipo(listaEquipos);
+			newUser.setRole(listaRoles);
+			newUser.setEquipoId(listaIdTeams);
+			
+			return newUser;
 
 		}catch (Exception e) {
 			
 			System.err.println("findRolebyUserId() more inf : "+e.getMessage()+" reason  -> "+e.getCause());
 			
-			return null;
+			return newUser;
 		}
 	}
 }

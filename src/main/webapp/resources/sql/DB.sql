@@ -19,10 +19,7 @@ CREATE TABLE  user (
 
 id int NOT NULL  PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1),
 username varchar(50) NOT NULL,
-password varchar(100) NOT NULL,
-equipo_id INT NOT NULL,
-constraint equipo_id foreign key (equipo_id) references equipo (id)
-ON DELETE CASCADE
+password varchar(100) NOT NULL
 
 );
 CREATE TABLE  role (
@@ -116,11 +113,11 @@ CONSTRAINT daily_id FOREIGN KEY (daily_id) REFERENCES daily (id) ON DELETE CASCA
 INSERT INTO equipo (name) values ('Equipo 1');
 INSERT INTO equipo (name) values ('Equipo 2');
 
-INSERT INTO user (username,password,equipo_id) values ('marcos','A6xnQhbz4Vx2HuGl4lXwZ5U2I8iziLRFnhP5eNfIRvQ=',1);
-INSERT INTO user (username,password,equipo_id) values ('alejandro','A6xnQhbz4Vx2HuGl4lXwZ5U2I8iziLRFnhP5eNfIRvQ=',1);
-INSERT INTO user (username,password,equipo_id) values ('ismael','A6xnQhbz4Vx2HuGl4lXwZ5U2I8iziLRFnhP5eNfIRvQ=',1);
-INSERT INTO user (username,password,equipo_id) values ('german','A6xnQhbz4Vx2HuGl4lXwZ5U2I8iziLRFnhP5eNfIRvQ=',1);
-INSERT INTO user (username,password,equipo_id) values ('pepe','A6xnQhbz4Vx2HuGl4lXwZ5U2I8iziLRFnhP5eNfIRvQ=',2);
+INSERT INTO user (username,password) values ('marcos','A6xnQhbz4Vx2HuGl4lXwZ5U2I8iziLRFnhP5eNfIRvQ=');
+INSERT INTO user (username,password) values ('alejandro','A6xnQhbz4Vx2HuGl4lXwZ5U2I8iziLRFnhP5eNfIRvQ=');
+INSERT INTO user (username,password) values ('ismael','A6xnQhbz4Vx2HuGl4lXwZ5U2I8iziLRFnhP5eNfIRvQ=');
+INSERT INTO user (username,password) values ('german','A6xnQhbz4Vx2HuGl4lXwZ5U2I8iziLRFnhP5eNfIRvQ=');
+INSERT INTO user (username,password) values ('pepe','A6xnQhbz4Vx2HuGl4lXwZ5U2I8iziLRFnhP5eNfIRvQ=');
 
 INSERT INTO role (role) values ('admin');
 INSERT INTO role (role) values ('root');
@@ -131,5 +128,12 @@ INSERT INTO user_equipo_role (id_equipo,id_user,id_role) values (1,3,1);
 INSERT INTO user_equipo_role (id_equipo,id_user,id_role) values (1,4,1);
 INSERT INTO user_equipo_role (id_equipo,id_user,id_role) values (2,5,2);
 
+INSERT INTO user_equipo_role (id_equipo,id_user,id_role) values (1,1,2);
+INSERT INTO user_equipo_role (id_equipo,id_user,id_role) values (1,2,2);
+INSERT INTO user_equipo_role (id_equipo,id_user,id_role) values (1,3,2);
+INSERT INTO user_equipo_role (id_equipo,id_user,id_role) values (1,4,2);
 
-
+INSERT INTO user_equipo_role (id_equipo,id_user,id_role) values (2,1,2);
+INSERT INTO user_equipo_role (id_equipo,id_user,id_role) values (2,2,2);
+INSERT INTO user_equipo_role (id_equipo,id_user,id_role) values (2,3,2);
+INSERT INTO user_equipo_role (id_equipo,id_user,id_role) values (2,4,2);

@@ -27,6 +27,10 @@
 							<td><form:input path="fechaFin" type="date" cssClass="form-control" id="estrategiaFormInputDate"/></td>
 						</tr>
 						<tr>
+							<td><form:label path="" for="estrategiaFormSelectTeam">Equipo</form:label></td>
+							<td><form:select path=""  cssClass="form-control" id="estrategiaFormSelectTeam" items="${teams}"/></td>
+						</tr>
+						<tr>
 
 						<form:input path="fechaInicio" class="form-control" id="estrategiaFormInputDateInit" type="hidden"/>
 						<form:input path="estado" class="form-control" id="estrategiaFormInputEstado" type="hidden"/>

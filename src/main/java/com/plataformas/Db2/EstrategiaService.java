@@ -22,7 +22,7 @@ public class EstrategiaService {
 	@Autowired
 	DbResources  dbResources;
 	
-	public List<Estrategia> findEstrategiaById(int idUser){
+	public List<Estrategia> findEstrategiaById(List<Integer> listId){
 		
 		List<Estrategia> estrategiaList = new ArrayList<Estrategia>();			
 		
@@ -31,7 +31,20 @@ public class EstrategiaService {
 			Connection con = dbResources.getConection();
 			con.setAutoCommit(false);
 			Statement  stmt = con.createStatement(); 
-			ResultSet rs = stmt.executeQuery("SELECT * FROM estrategia Es where Es.equipo_id = "+idUser+"");
+			String query = "SELECT * FROM estrategia Es where ";
+			int i = 1;
+			for (Integer id : listId) {
+				
+				query += "Es.equipo_id = "+id;
+				if(i<listId.size()) {
+					query += " AND ";
+				}
+				
+				i++;
+			
+			}
+			System.out.println(query);
+			ResultSet rs = stmt.executeQuery(query);
 			return Estrategia.converFromDatabase(rs, estrategiaList);
 
 		} catch (SQLException e) {

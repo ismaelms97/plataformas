@@ -4,6 +4,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -14,22 +15,32 @@ public class User {
 	private int Id;
 	private String username;
 	private String password;
-	private int equipoId;
-	private String NombreEquipo;
+	private List<Integer> equipoId;
+	private List<String> NombreEquipo;
+	private List<String> role;
 
 	public User() {
 		super();
 	}
+	
+	
+	
+	public User(List<String> nombreEquipo, List<String> role) {
+		super();
+		NombreEquipo = nombreEquipo;
+		this.role = role;
+	}
 
-	public User(int id, String username, String password ,int equipoId) {
+
+
+	public User(int id, String username, String password ) {
 		super();
 		Id = id;
 		this.username = username;
 		this.password = password;
-		this.equipoId = equipoId;
 	}
 
-	public User(int id, String username, String password ,int equipoId,String NombreEquipo) {
+	public User(int id, String username, String password ,List<Integer> equipoId,List<String> NombreEquipo) {
 		super();
 		Id = id;
 		this.username = username;
@@ -38,11 +49,13 @@ public class User {
 		this.NombreEquipo = NombreEquipo;
 	}
 
-	public int getEquipoId() {
+
+
+	public List<Integer> getEquipoId() {
 		return equipoId;
 	}
 
-	public void setEquipoId(int equipoId) {
+	public void setEquipoId(List<Integer> equipoId) {
 		this.equipoId = equipoId;
 	}
 
@@ -70,13 +83,25 @@ public class User {
 		this.password = password;
 	}
 
-	public String getNombreEquipo() {
+	public List<String> getNombreEquipo() {
 		return NombreEquipo;
 	}
 
-	public void setNombreEquipo(String nombreEquipo) {
+	public void setNombreEquipo(List<String> nombreEquipo) {
 		NombreEquipo = nombreEquipo;
 	}
+
+	public List<String> getRole() {
+		return role;
+	}
+
+
+
+	public void setRole(List<String> role) {
+		this.role = role;
+	}
+
+
 
 	public static User converFromDataBase(ResultSet rs) throws SQLException {
 
@@ -87,9 +112,7 @@ public class User {
 			int id = rs.getInt("id");
 			String username = rs.getString("username");
 			String password = rs.getString("password");
-			int equipo_id = rs.getInt("equipo_id");
-			String nombreEquipo = rs.getString("name");
-			user  = new User(id,username,password,equipo_id,nombreEquipo);			
+			user  = new User(id,username,password);			
 		}
 
 		return user;
