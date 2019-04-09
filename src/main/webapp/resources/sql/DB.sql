@@ -92,7 +92,7 @@ CREATE TABLE daily (
 
 id int NOT NULL  PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1),
 fecha varchar(20) NOT NULL,
-estrategia_id INT NOT NULL,
+estrategia_id int NOT NULL,
 constraint estrategia_id foreign key (estrategia_id) references estrategia (id)
 ON DELETE CASCADE
     
@@ -128,12 +128,6 @@ INSERT INTO user_equipo_role (id_equipo,id_user,id_role) values (1,3,1);
 INSERT INTO user_equipo_role (id_equipo,id_user,id_role) values (1,4,1);
 INSERT INTO user_equipo_role (id_equipo,id_user,id_role) values (2,5,2);
 
-INSERT INTO user_equipo_role (id_equipo,id_user,id_role) values (1,1,2);
-INSERT INTO user_equipo_role (id_equipo,id_user,id_role) values (1,2,2);
-INSERT INTO user_equipo_role (id_equipo,id_user,id_role) values (1,3,2);
-INSERT INTO user_equipo_role (id_equipo,id_user,id_role) values (1,4,2);
-
 INSERT INTO user_equipo_role (id_equipo,id_user,id_role) values (2,1,2);
 INSERT INTO user_equipo_role (id_equipo,id_user,id_role) values (2,2,2);
 INSERT INTO user_equipo_role (id_equipo,id_user,id_role) values (2,3,2);
-INSERT INTO user_equipo_role (id_equipo,id_user,id_role) values (2,4,2);

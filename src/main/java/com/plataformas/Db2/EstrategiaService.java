@@ -33,17 +33,19 @@ public class EstrategiaService {
 			Statement  stmt = con.createStatement(); 
 			String query = "SELECT * FROM estrategia Es where ";
 			int i = 1;
+			
 			for (Integer id : listId) {
 				
 				query += "Es.equipo_id = "+id;
+				
 				if(i<listId.size()) {
+					
 					query += " AND ";
 				}
 				
-				i++;
-			
+				i++;			
 			}
-			System.out.println(query);
+		
 			ResultSet rs = stmt.executeQuery(query);
 			return Estrategia.converFromDatabase(rs, estrategiaList);
 
@@ -128,12 +130,12 @@ public class EstrategiaService {
 					+ "('"+estrategia.getNombre()+"','"+estrategia.getEstado()+"','"+estrategia.getFechaInicio()+"','"+estrategia.getFechaFin()+"',"+estrategia.getEquipoId()+")";
 
 			PreparedStatement  stmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS); 
-			stmt.executeUpdate();
+			stmt.executeUpdate();			
 			ResultSet rs = stmt.getGeneratedKeys();
 			rs.next();
 			int lastIndex = rs.getInt(1);
-
-			stmt = con.prepareStatement("INSERT INTO tarea (id,tipo,resumen,tamaño,complejidad,propiedad,peticionario,relevante,urgente,planificado)"
+		
+			stmt = con.prepareStatement("INSERT INTO tarea (id,tipo,prioridad,resumen,tamaño,complejidad,peticionario,relevante,urgente,planificado)"
 					+ " values (?,?,?,?,?,?,?,?,?,?)");
 
 			for (Tarea tarea : tareas) {
@@ -158,7 +160,7 @@ public class EstrategiaService {
 					System.out.println("Esta tarea ya existe");
 				}
 			}
-
+			
 			stmt = con.prepareStatement("INSERT INTO estrategia_tarea (estadoInicio,estadoFinal,tarea_id,estrategia_id) values (?,?,?,?)");
 
 			for (Tarea tarea : tareas) {
@@ -168,14 +170,13 @@ public class EstrategiaService {
 				stmt.setInt(3, tarea.getId());
 				stmt.setInt(4, lastIndex);
 				stmt.executeUpdate();
-				System.out.println(" intermedia guardada ");
 			}
 			
-			stmt = con.prepareStatement("INSERT INTO daily (estrategia_id) values ("+lastIndex+")");
+			stmt = con.prepareStatement("INSERT INTO daily (fecha,estrategia_id) values (' ',"+lastIndex+")",Statement.RETURN_GENERATED_KEYS);
 			stmt.executeUpdate();
 			rs = stmt.getGeneratedKeys();
 			rs.next();
-			lastIndex = rs.getInt(1);			
+			lastIndex = rs.getInt(1);		
 			
 			stmt = con.prepareStatement("INSERT INTO daily_tarea (daily_id,tarea_id,propiedad) values (?,?,?)");
 
@@ -193,8 +194,6 @@ public class EstrategiaService {
 
 					System.out.println("Esta intermedia-daily ID ya existe");
 				}
-
-				System.out.println("intermedia guardada ");
 			}
 
 			con.commit();
