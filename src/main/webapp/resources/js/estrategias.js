@@ -298,7 +298,7 @@ function exists(arr, val){
 
 function drawTeamUsers(array){
 	for (var i = 0; i < array.length; i++) {
-		
+
 		var txt = '<div class="chip">'
 			+'<img src="https://addons.thunderbird.net/static//img/zamboni/anon_user.png" alt="Person" width="96" height="300"><span class="name">'
 			+ toCamelCase(array[i].toLowerCase()) +'</span> <br>Tareas: 2 | K: 10 </div>';
@@ -308,24 +308,54 @@ function drawTeamUsers(array){
 		document.getElementsByClassName("teamUsers")[0].innerHTML += txt;
 	}
 	moveUsers();
+
 }
 
 function moveUsers(){
 	$(".chip").draggable({
 		cursorAt: { top: 30, left: 0 },
-		revert: true,
 		helper: function( event ) {
 			return $('<img src="https://addons.thunderbird.net/static//img/zamboni/anon_user.png" alt="Person" width="96" height="96" class="imgClone">');
 		},
-		
-		stop: function (event, ui) {
-			
-			console.log(event);
-			console.log(ui);
-			
-		},
+		stop: function(event, ui ){
+			try{
+				var el = allElementsFromPoint(event.pageX, event.pageY);
+				var td = $(el).filter('.rect').not($(this));
+				console.log(td);
+				td.css({'backgroundColor': 'red'});
+				
+				console.log(tasks.findIndex(tarea => parseInt(tarea.id) === parseInt(td[0].innerText.split("\n")[1].trim())));
+
+//				var tarea = tasks.findIndex(tarea => parseInt(tarea.id) === parseInt(td[0].innerText.split("\n")[1].trim()));
+
+//				tasks[tarea].propiedad = event.target.innerText.split("\n")[0].toLowerCase();
+				
+				console.log(tasks);
+			}catch(e){
+				console.log(e)
+			}
+		}
 	});
 }
+
+function allElementsFromPoint(x, y) {
+	var element, elements = [];
+	var old_visibility = [];
+	while (true) {
+		element = document.elementFromPoint(x, y);
+		if (!element || element === document.documentElement) {
+			break;
+		}
+		elements.push(element);
+		old_visibility.push(element.style.visibility);
+		element.style.visibility = 'hidden'; // Temporarily hide the element (without changing the layout)
+	}
+	for (var k = 0; k < elements.length; k++) {
+		elements[k].style.visibility = old_visibility[k];
+	}
+	elements.reverse();
+	return elements;
+}
 function getTasksByUser(user, tareas){
-	
+
 }
