@@ -27,17 +27,17 @@
 							<td><form:input path="fechaFin" type="date" cssClass="form-control" id="estrategiaFormInputDate"/></td>
 						</tr>
 						<tr>
-							<td><form:label path="" for="estrategiaFormSelectTeam">Equipo</form:label></td>
-							<td><form:select path=""  cssClass="form-control" id="estrategiaFormSelectTeam" items="${teams}"/></td>
-							<%-- <c:forEach items="${teamsID}" var="id" varStatus="item">
-								<option value="id"></option>
-								</c:forEach> --%>
+							<td><form:label path="equipoId" for="estrategiaFormSelectTeam">Equipo</form:label></td>
+							<td><form:select path="equipoId"  cssClass="form-control" id="estrategiaFormSelectTeam">
+								<form:options items="${equipos}" />
+								</form:select>
+							</td>
 						</tr>
 						<tr>
 
 						<form:input path="fechaInicio" class="form-control" id="estrategiaFormInputDateInit" type="hidden"/>
 						<form:input path="estado" class="form-control" id="estrategiaFormInputEstado" type="hidden"/>
-						<form:input path="equipoId" class="form-control" id="estrategiaFormInputEquipoId" type="hidden"/>
+						<%-- <form:input path="equipoId" class="form-control" id="estrategiaFormInputEquipoId" type="hidden"/> --%>
 							<td><input type="submit" value="Crear" class="btn btn-primary" id="crearEstrategia" disabled/></td>
 						</tr>
 					</table>
