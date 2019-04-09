@@ -301,7 +301,7 @@ function drawTeamUsers(array){
 		
 		var txt = '<div class="chip">'
 			+'<img src="https://addons.thunderbird.net/static//img/zamboni/anon_user.png" alt="Person" width="96" height="300"><span class="name">'
-			+ toCamelCase(array[i].toLowerCase()) +'</span> <br>Tareas: 2 | K: 10 </div>';
+			+ toCamelCase(array[i].toLowerCase()) +'</span> <br>Tareas: ' + getTasksByUser(array[i], tasks) + ' | K: 10 </div>';
 		if(i + 1 == Math.round((array.length / 2))){
 			txt += "<br>";
 		}
@@ -327,5 +327,13 @@ function moveUsers(){
 	});
 }
 function getTasksByUser(user, tareas){
-	
+
+	var count = 0;
+	tareas.forEach(function(task){
+		if(task.propiedad.toLowerCase() == user.toLowerCase()){
+			count++;
+		}
+	});
+
+	return count;
 }
