@@ -100,10 +100,7 @@ public class HomeController {
 			try {
 
 				List<Estrategia> listaEstrategias = estrategiaService.findEstrategiaById(userTeamAndRoles.getEquipoId());
-				for (Estrategia estrategia : listaEstrategias) {
-					System.out.println(estrategia.getNombre());
-					System.out.println(estrategia.getEquipoId());
-				}
+				
 				model.addAttribute("listaEstrategia",listaEstrategias);
 				session.setAttribute("userStrategy", listaEstrategias);	
 

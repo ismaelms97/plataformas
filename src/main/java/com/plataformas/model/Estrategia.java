@@ -103,7 +103,6 @@ public class Estrategia {
 			Estrategia estrategia = new Estrategia( id,nombre, estado,fechaInicio ,fechafin ,equipo_id);
 			estrategiaList.add(estrategia);
 		}
-
 		return estrategiaList;
 	}	
 }

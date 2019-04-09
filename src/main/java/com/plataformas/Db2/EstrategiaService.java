@@ -40,12 +40,12 @@ public class EstrategiaService {
 				
 				if(i<listId.size()) {
 					
-					query += " AND ";
+					query += " OR ";
 				}
 				
 				i++;			
 			}
-		
+			
 			ResultSet rs = stmt.executeQuery(query);
 			return Estrategia.converFromDatabase(rs, estrategiaList);
 
@@ -178,13 +178,15 @@ public class EstrategiaService {
 			rs.next();
 			lastIndex = rs.getInt(1);		
 			
-			stmt = con.prepareStatement("INSERT INTO daily_tarea (daily_id,tarea_id,propiedad) values (?,?,?)");
+			stmt = con.prepareStatement("INSERT INTO daily_tarea (daily_id,tarea_id,estadoActual,subEstadoActual,propiedad) values (?,?,?,?,?)");
 
 			for (Tarea tarea : tareas) {
 
 				stmt.setInt(1, lastIndex);
 				stmt.setInt(2, tarea.getId());
-				stmt.setString(3, tarea.getPropiedad());
+				stmt.setString(3, " ");
+				stmt.setString(4, " ");
+				stmt.setString(5, tarea.getPropiedad());
 
 				try {
 					
