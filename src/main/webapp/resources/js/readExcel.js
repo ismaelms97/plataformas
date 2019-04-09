@@ -126,6 +126,7 @@ var process_wb = (function () {
 			document.getElementById("errorContainer").setAttribute("style", "display: none")
 			drawTable(tasks, false);
 		} catch (e){
+			console.log(e)
 			dropError();
 		}
 	};
