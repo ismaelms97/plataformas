@@ -298,10 +298,13 @@ function exists(arr, val){
 
 function drawTeamUsers(array){
 	for (var i = 0; i < array.length; i++) {
+		
 		var txt = '<div class="chip">'
 			+'<img src="https://addons.thunderbird.net/static//img/zamboni/anon_user.png" alt="Person" width="96" height="300"><span class="name">'
 			+ toCamelCase(array[i].toLowerCase()) +'</span> <br>Tareas: 2 | K: 10 </div>';
-
+		if(i + 1 == Math.round((array.length / 2))){
+			txt += "<br>";
+		}
 		document.getElementsByClassName("teamUsers")[0].innerHTML += txt;
 	}
 	moveUsers();
@@ -309,11 +312,20 @@ function drawTeamUsers(array){
 
 function moveUsers(){
 	$(".chip").draggable({
-		cursor: pointer,
 		cursorAt: { top: 30, left: 0 },
 		revert: true,
 		helper: function( event ) {
 			return $('<img src="https://addons.thunderbird.net/static//img/zamboni/anon_user.png" alt="Person" width="96" height="96" class="imgClone">');
-		}
+		},
+		
+		stop: function (event, ui) {
+			
+			console.log(event);
+			console.log(ui);
+			
+		},
 	});
+}
+function getTasksByUser(array){
+	
 }

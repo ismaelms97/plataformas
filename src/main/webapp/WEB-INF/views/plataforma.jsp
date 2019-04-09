@@ -9,17 +9,18 @@
 
 <body>
 	<h1 class="mainTitle"></h1>
-
-	<i class="fa fa-filter fa-2x" id="filter" data-toggle="modal" data-target="#modalFiltrado"></i>
-	
-	<div class="teamUsers"></div>
 	
 	<form:form method="POST" action="/estrategia/saveEstrategia">
 		<div class="button disabled" id="save">Guardar</div>
 	</form:form>
-		<script>
+	<script>
 		var inTasks = [];
 	</script>
+	
+	<i class="fa fa-filter fa-2x" id="filter" data-toggle="modal" data-target="#modalFiltrado"></i>
+	
+	<div class="teamUsers"></div>
+	
 	<c:forEach items="${listaTareas}" var="tarea" varStatus="item">
 			<script>
 				var task = new Object();

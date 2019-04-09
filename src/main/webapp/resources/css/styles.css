@@ -89,6 +89,7 @@ thead{
 /*########### BUTTON SAVE STARTEGY ###########*/
 div.button{
 	float:right;
+	position:absolute;
 	margin: 0 20px 20px 0;
 	padding: 7px 20px;
 	border: 1px solid black;
@@ -98,6 +99,7 @@ div.button{
 	text-shadow: 1px 1px black;
 	box-shadow: 0 2px 2px black;
 	cursor:pointer;
+	display: inline !important;
 	
 }
 div.disabled{
@@ -405,9 +407,11 @@ a:hover {
 }
 /*########### TEAM ###########*/
 .teamUsers{
-	max-height: 170px;
+	max-height: 200px;
 	overflow-x: auto;
+	overflow-y:hidden;
 	white-space: nowrap;
+	height: 100%;
 }
 .chip {
 	display: inline-block;
@@ -418,6 +422,7 @@ a:hover {
 	border-radius: 25px;
 	background-color: #ced5da;
 	margin: 5px;
+	cursor: pointer;
 }
 
 .chip img, .imgClone{
