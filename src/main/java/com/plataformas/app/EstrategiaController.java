@@ -122,9 +122,7 @@ public class EstrategiaController {
 				return "accessDenied";
 
 			}else {
-
-				User us = (User) session.getAttribute("userSession");
-				estrategia.setEquipoId(us.getEquipoId());
+		
 				session.setAttribute("newEstrategia", estrategia);
 				model.addAttribute("tarea", new Tarea());
 			}

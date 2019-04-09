@@ -59,15 +59,24 @@ public class HomeController {
 		try{
 			
 			newUser = userService.findByUsername(user.getUsername());
+			System.out.println(newUser.getUsername()+" "+newUser.getPassword());
 			
 			if(newUser.getPassword().equals(User.encrypt(user.getPassword()))) {
+
+				
+				
+				
+				User UserTeamAndRoles = userService.findRolebyUserId(newUser);
+				System.out.println(UserTeamAndRoles.getUsername()+" "+UserTeamAndRoles.getPassword()+" "+UserTeamAndRoles.getRole());
+				
 
 				session = request.getSession();
 				session.setAttribute("userSession", newUser);
 				USessions.add(newUser);	
 				model.addAttribute("greeting","Usuario: "+ user.getUsername());
-				model.addAttribute("user",newUser);
-				model.addAttribute("nombreEquipo", " Equipo: "+newUser.getNombreEquipo());
+				model.addAttribute("teams", UserTeamAndRoles.getNombreEquipo());
+				model.addAttribute("roles", UserTeamAndRoles.getRole());
+				
 				model.addAttribute("estrategia", new Estrategia());
 				model.addAttribute("equipoId", newUser.getEquipoId());
 				userExist = true;
