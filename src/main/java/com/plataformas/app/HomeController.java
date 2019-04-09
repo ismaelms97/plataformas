@@ -2,6 +2,9 @@ package com.plataformas.app;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
@@ -74,9 +77,19 @@ public class HomeController {
 				session.setAttribute("userSession", newUser);
 				USessions.add(newUser);	
 				model.addAttribute("greeting","Usuario: "+ user.getUsername());
+				
+				HashMap<Integer, String> equipos = new HashMap<Integer, String>();
+				int index = 0;
+				for (String nombre : UserTeamAndRoles.getNombreEquipo()) {
+					
+					equipos.put(UserTeamAndRoles.getEquipoId().get(index), nombre);
+					index++;
+				} 
+		  
 				model.addAttribute("teams", UserTeamAndRoles.getNombreEquipo());
+				
 				model.addAttribute("roles", UserTeamAndRoles.getRole());
-				model.addAttribute("teamsID", UserTeamAndRoles.getEquipoId());
+				model.addAttribute("equipos", equipos);
 				
 				model.addAttribute("estrategia", new Estrategia());
 				model.addAttribute("equipoId", newUser.getEquipoId());
