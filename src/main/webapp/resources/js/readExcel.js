@@ -227,7 +227,7 @@ document.getElementById("xlf").addEventListener('change', () => {
 
 function dropError(){
 
-	console.log("elol")
+	console.log("Drop Error")
 	document.getElementById("errorContainer").removeAttribute("style");
 	document.getElementById("drop").removeAttribute("style")
 	document.getElementById("loadAnimation").setAttribute("style", "display: none")

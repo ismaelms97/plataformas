@@ -309,10 +309,11 @@ function drawTeamUsers(array){
 
 function moveUsers(){
 	$(".chip").draggable({
+		cursor: pointer,
 		cursorAt: { top: 30, left: 0 },
 		revert: true,
 		helper: function( event ) {
-			return $('<img src="https://addons.thunderbird.net/static//img/zamboni/anon_user.png" alt="Person" width="96" height="96" class="clone">');
+			return $('<img src="https://addons.thunderbird.net/static//img/zamboni/anon_user.png" alt="Person" width="96" height="96" class="imgClone">');
 		}
 	});
 }
