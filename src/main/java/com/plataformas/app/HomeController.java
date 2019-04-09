@@ -76,6 +76,7 @@ public class HomeController {
 				model.addAttribute("greeting","Usuario: "+ user.getUsername());
 				model.addAttribute("teams", UserTeamAndRoles.getNombreEquipo());
 				model.addAttribute("roles", UserTeamAndRoles.getRole());
+				model.addAttribute("teamsID", UserTeamAndRoles.getEquipoId());
 				
 				model.addAttribute("estrategia", new Estrategia());
 				model.addAttribute("equipoId", newUser.getEquipoId());
