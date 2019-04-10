@@ -28,7 +28,7 @@
 						class="btn-primary form-control">Login</button>
 				</form:form>
 
-				<div>${errorMsg}</div>
+				<div class="errorMsg" style="display:none">${errorMsg}</div>
 			</div>
 		</div>
 	</div>
@@ -58,6 +58,29 @@
 			document.getElementById("formContent").style.display = "none";
 			document.getElementById("loadAnimation").style.display = "inline";
 		});
+		
+		$(document).ready(function(){
+			var doc = document.getElementsByClassName("errorMsg")[0].innerHTML;
+			 document.getElementsByClassName("errorMsg")[0].innerHTML = "";
+			 
+			if(doc != ""){
+
+				$.notify({
+					title: '<strong>Error</strong>',
+					message: doc
+				},{
+					type: 'danger',
+					newest_on_top: true,
+					placement: {
+						from: "top",
+						align: "center"
+					},
+					delay: 2000
+				});
+				
+			}
+		
+		})
 	</script>
 </body>
 </html>
