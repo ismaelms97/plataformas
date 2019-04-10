@@ -8,11 +8,11 @@ drop table estrategia_tarea;
 drop table daily;
 drop table daily_tarea;
 
-
 CREATE TABLE  equipo (
 
 id int NOT NULL  PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1),
- name varchar(50) NOT NULL   
+name varchar(50) NOT NULL 
+ 
 );
 
 CREATE TABLE  user (
@@ -22,6 +22,7 @@ username varchar(50) NOT NULL,
 password varchar(100) NOT NULL
 
 );
+
 CREATE TABLE  role (
 
 id int NOT NULL  PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1),
@@ -84,7 +85,6 @@ primary Key (tarea_id,estrategia_id),
 CONSTRAINT tarea_id FOREIGN KEY (tarea_id)  REFERENCES tarea (id) ON DELETE CASCADE, 
 CONSTRAINT estrategia_id FOREIGN KEY (estrategia_id) REFERENCES estrategia (id) ON DELETE CASCADE
 
-
 );
 
 
@@ -108,6 +108,7 @@ propiedad   varchar(25) not null,
 primary Key (daily_id,tarea_id),
 CONSTRAINT tarea_id FOREIGN KEY (tarea_id) REFERENCES tarea (id) ON DELETE CASCADE,
 CONSTRAINT daily_id FOREIGN KEY (daily_id) REFERENCES daily (id) ON DELETE CASCADE
+
 );
 
 INSERT INTO equipo (name) values ('Equipo 1');

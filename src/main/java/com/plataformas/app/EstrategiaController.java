@@ -63,8 +63,10 @@ public class EstrategiaController {
 						session.removeAttribute("newEstrategia");
 					}
 
-					model.addAttribute("nombreEquipo", " Nombre de equipo : "+actualUser.getNombreEquipo());
-					model.addAttribute("greeting","Hola "+ actualUser.getUsername());
+					model.addAttribute("greeting","Usuario: "+ actualUser.getUsername());				  
+					model.addAttribute("teams", actualUser.getNombreEquipo());				
+					model.addAttribute("roles", actualUser.getRole());
+					
 					return "mainPanel";
 				}
 
@@ -171,6 +173,7 @@ public class EstrategiaController {
 				return "accessDenied";
 
 			}else {
+				
 				try {
 
 					estrategiaService.deleteEstrategia(estrategia.getId());
