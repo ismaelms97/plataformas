@@ -56,8 +56,8 @@ function owners(){
 		}
 	})
 			
-		own.push("Desasignar Usuario");
-		nombre = "Desasignar Usuario".toLowerCase();
+		own.push("Sin Propietario");
+		nombre = "Sin Propietario".toLowerCase();
 		var texto = '<div class="custom-control custom-checkbox">'+
 		'<input type="checkbox" id="'+ nombre +'" value="'+ nombre +'" class="custom-control-input filtros taskPropertyOf">'+
 		'<label class="custom-control-label" for="'+ nombre +'">'+ toCamelCase(nombre) +'</label><br> '+
