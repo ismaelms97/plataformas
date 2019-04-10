@@ -52,8 +52,23 @@
 								id: this.getAttribute("id")
 							}, success: function (data) {
 								var date = new Date();
-								var today = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate()
-								console.log(date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate() + " data: " + data)
+								var day;
+								var month;
+								
+								if((date.getMonth()+1) < 10){
+									month = "0" + (date.getMonth()+1);
+								} else {
+									month = (date.getMonth()+1);
+								}
+								
+								if(date.getDate() < 10){
+									day = "0" + date.getDate();
+								} else {
+									day = date.getDate();
+								}
+								
+								var today = date.getFullYear() + "-" + month + "-" + day;
+								console.log(date.getFullYear() + "-" + month + "-" + day)
 								console.log(today == data)
 								console.log(el.classList)
 								if((today == data && data.trim() != "") || el.children[0].classList.contains("ended")){
