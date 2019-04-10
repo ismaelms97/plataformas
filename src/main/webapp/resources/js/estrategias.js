@@ -118,36 +118,56 @@ function dragDrop(arr){
 
 								$(ui.draggable[0]).appendTo(event.target);
 							}
+						}else{
+							// SI estas arrastrando a los usuarios
+							if(event.target.children.length >= 1){
+								tasks.find(tarea => parseInt(tarea.id) === parseInt(event.target.children[0].innerText.split("\n")[1].trim())).propiedad = $(ui.draggable[0]).find(".name").text()
+								console.log(tasks);
+
+								$.notify({
+									title: '<strong>Cambio de Propietario</strong>',
+									message: ' en la tarea ' + event.target.children[0].innerText.split("\n")[1].trim() + '.'
+								},{
+									type: 'success',
+									newest_on_top: true,
+									placement: {
+										from: "bottom",
+										align: "right"
+									},
+									delay: 1000
+								});
+
+							}
 						}
 					}
 				});
 
-		// SI se quiere seleccionar, solo hace falta desbloquear el siguiente
-		// codigo, aunque si se quiere seleccionar, buscar información sobre  la seleccion multiple
+	// SI se quiere seleccionar, solo hace falta desbloquear el siguiente
+	// codigo, aunque si se quiere seleccionar, buscar información sobre  la seleccion multiple
 
-		// $(".rect").selectable()
+	// $(".rect").selectable()
 
-		// Manualmente activa el select que los elementos clicados
-		// $( ".rect" ).click( function(e){
-		// if (e.ctrlKey == false) {
-		// // Si la tecla de comando se presiona no deselecciones los elementos
-		// $( ".rect" ).removeClass("ui-selected");
-		// $(this).addClass("ui-selecting");
-		// }
-		// else {
-		// if ($(this).hasClass("ui-selected")) {
-		// // Elimina la clase selected de lo elementos seleccionados
-		// $(this).removeClass("ui-selected");
-		// }
-		// else {
-		// // Sino, añadeles la clase
-		// $(this).addClass("ui-selecting");
-		// }
-		// }
+	// Manualmente activa el select que los elementos clicados
+	// $( ".rect" ).click( function(e){
+	// if (e.ctrlKey == false) {
+	// // Si la tecla de comando se presiona no deselecciones los elementos
+	// $( ".rect" ).removeClass("ui-selected");
+	// $(this).addClass("ui-selecting");
+	// }
+	// else {
+	// if ($(this).hasClass("ui-selected")) {
+	// // Elimina la clase selected de lo elementos seleccionados
+	// $(this).removeClass("ui-selected");
+	// }
+	// else {
+	// // Sino, añadeles la clase
+	// $(this).addClass("ui-selecting");
+	// }
+	// }
 
-		// $( ".rect" ).data("selectable")._mouseStop(null);
+	// $( ".rect" ).data("selectable")._mouseStop(null);
 
-		// });
+	// });
 
 	})
 }
@@ -317,45 +337,7 @@ function moveUsers(){
 		helper: function( event ) {
 			return $('<img src="https://addons.thunderbird.net/static//img/zamboni/anon_user.png" alt="Person" width="96" height="96" class="imgClone">');
 		},
-		stop: function(event, ui ){
-			try{
-
-				var el = allElementsFromPoint(event.pageX, event.pageY);
-				var td = $(el).filter('.rect');
-				console.log("Elementos" , el);
-				console.log(td);
-				td.css({'backgroundColor': 'red'});
-				
-				console.log(parseInt(td[0].innerText.split("\n")[1].trim()));
-				console.log(tasks.find(tarea => parseInt(tarea.id) === parseInt(td[0].innerText.split("\n")[1].trim())).propiedad);
-
-				tasks.find(tarea => parseInt(tarea.id) === parseInt(td[0].innerText.split("\n")[1].trim())).propiedad = event.target.innerText.split("\n")[0].toLowerCase();
-				
-				console.log("Reasignación", tasks);
-			}catch(e){
-				console.log('%c' + e, 'background: #222; color: #bada55')
-			}
-		}
 	});
-}
-
-function allElementsFromPoint(x, y) {
-	var element, elements = [];
-	var old_visibility = [];
-	while (true) {
-		element = document.elementFromPoint(x, y);
-		if (!element || element === document.documentElement) {
-			break;
-		}
-		elements.push(element);
-		old_visibility.push(element.style.visibility);
-		element.style.visibility = 'hidden'; // Temporarily hide the element (without changing the layout)
-	}
-	for (var k = 0; k < elements.length; k++) {
-		elements[k].style.visibility = old_visibility[k];
-	}
-	elements.reverse();
-	return elements;
 }
 
 function getTasksByUser(user, tareas){

@@ -20,6 +20,7 @@
 <link rel="stylesheet" href="/resources/libs/css/jquery-ui.css">
 <script src="/resources/libs/js/jquery.ui.touch-punch.min.js"></script>
 
+
 <!-- Bootstrap -->
 <link rel="stylesheet"
 	href="/resources/libs/css/bootstrap/4.1.3/css/bootstrap.min.css">
@@ -30,7 +31,7 @@
 	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
 	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
 	crossorigin="anonymous">
-
+<script src="/resources/libs/js/bootstrap-notify.min.js"></script>
 <!-- Propio -->
 <link rel="stylesheet" type="text/css" media="screen"
 	href="/resources/css/styles.css">
