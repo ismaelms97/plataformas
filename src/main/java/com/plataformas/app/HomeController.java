@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.plataformas.Db2.EstrategiaService;
+import com.plataformas.Db2.StrategyService;
 import com.plataformas.Db2.UserService;
 import com.plataformas.model.Estrategia;
 import com.plataformas.model.User;
@@ -35,7 +35,7 @@ public class HomeController {
 	@Autowired
 	UserService userService;
 	@Autowired
-	EstrategiaService estrategiaService;
+	StrategyService strategyService;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -73,37 +73,37 @@ public class HomeController {
 				model.addAttribute("teams", userTeamAndRoles.getNombreEquipo());				
 				model.addAttribute("roles", userTeamAndRoles.getRole());
 				
-				HashMap<Integer, String> equipos = User.crearEquiposIdNombre(userTeamAndRoles);	
+				HashMap<Integer, String> equipos = User.createTeamsIdNames(userTeamAndRoles);	
 				model.addAttribute("equipos", equipos);	
 				model.addAttribute("estrategia", new Estrategia());
 				userExist = true;
 
 			}else {
 
-				mensaje = "Contraseña incorrecta";
+				mensaje = "Incorrect Password";
 			}
 
 		}catch (NullPointerException e) { 	
 
-			mensaje = "El usuario no existe";
+			mensaje = "User does not exist ";
 
 		}catch (Exception e) {		
 
-			mensaje = "No hay conexion";
+			mensaje = "not connection";
 		}
 
 		if(userExist) {
 
 			try {
 
-				List<Estrategia> listaEstrategias = estrategiaService.findEstrategiaById(userTeamAndRoles.getEquipoId());				
+				List<Estrategia> listaEstrategias = strategyService.findEstrategiaById(userTeamAndRoles.getEquipoId());				
 				model.addAttribute("listaEstrategia",listaEstrategias);
 				session.setAttribute("userStrategy", listaEstrategias);	
 
 
 			}catch (Exception e) {
 
-				System.out.println("listaEstrategia , no se ha encontrado...");
+				System.out.println("listaEstrategia , not found...");
 			}	
 
 			return "mainPanel";

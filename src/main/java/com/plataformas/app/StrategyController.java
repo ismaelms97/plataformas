@@ -3,7 +3,9 @@ package com.plataformas.app;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
+
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,8 +15,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.plataformas.Db2.DailyService;
-import com.plataformas.Db2.EstrategiaService;
+import com.plataformas.Db2.StrategyService;
 import com.plataformas.model.Estrategia;
 import com.plataformas.model.Tarea;
 import com.plataformas.model.User;
@@ -23,11 +26,11 @@ import com.plataformas.recursos.SessionResources;
 
 @Controller
 @RequestMapping(value = "/estrategia")
-public class EstrategiaController {
+public class StrategyController {
 
 
 	@Autowired
-	EstrategiaService estrategiaService;
+	StrategyService strategyService;
 	@Autowired
 	SessionResources sessionResources;
 	@Autowired
@@ -48,13 +51,13 @@ public class EstrategiaController {
 
 				if (!sessionResources.checkUserSession(session)){
 
-					model.addAttribute("mensajeAcceso", "Tu sessión esta inactiva");
+					model.addAttribute("mensajeAcceso", "Inactive Session");
 					return "accessDenied";
 
 				}else {
 
 					User actualUser = (User) session.getAttribute("userSession");
-					List<Estrategia> listaEstrategias = estrategiaService.findEstrategiaById(actualUser.getEquipoId());	
+					List<Estrategia> listaEstrategias = strategyService.findEstrategiaById(actualUser.getEquipoId());	
 					model.addAttribute("listaEstrategia",listaEstrategias);
 					session.setAttribute("userStrategy", listaEstrategias);
 					model.addAttribute("estrategia", new Estrategia());
@@ -64,7 +67,7 @@ public class EstrategiaController {
 						session.removeAttribute("newEstrategia");
 					}
 
-					HashMap<Integer, String> equipos = User.crearEquiposIdNombre(actualUser);	
+					HashMap<Integer, String> equipos = User.createTeamsIdNames(actualUser);	
 					model.addAttribute("equipos", equipos);	
 					model.addAttribute("greeting","Usuario: "+ actualUser.getUsername());				  
 					model.addAttribute("teams", actualUser.getNombreEquipo());				
@@ -75,7 +78,7 @@ public class EstrategiaController {
 
 			}catch (Exception e) {
 
-				System.out.println("Panel de control Error con session o con estrategias");
+				System.out.println("Panel  control Error with session or strategy");
 				return "redirect:/";
 			}
 		}
@@ -90,12 +93,12 @@ public class EstrategiaController {
 
 				if (!sessionResources.checkUserSession(session) || !sessionResources.checkUserStrategy(session,id)) {
 
-					model.addAttribute("mensajeAcceso", "No tienes acceso a esta estrategia");
+					model.addAttribute("mensajeAcceso", "You have not acces with this strategy");
 					return "accessDenied";
 
 				}else {
 
-					List<Tarea> tareas = estrategiaService.findTareasByEstrategia(Integer.parseInt(id));
+					List<Tarea> tareas = strategyService.findTareasByEstrategia(Integer.parseInt(id));
 					session.setAttribute("estrategiaID", Integer.parseInt(id.trim()));
 					model.addAttribute("listaTareas",tareas);
 					System.out.println("TAREAS COMPLETE");
@@ -105,12 +108,12 @@ public class EstrategiaController {
 
 			}catch (NumberFormatException e) {
 
-				System.out.println("formato incorrecto en mostrarTareasEstrategia Controller");
+				System.out.println("Incorrect format en mostrarTareasEstrategia Controller");
 				return "mainPanel";
 
 			}catch (Exception e) {
 
-				System.out.println("otra error en mostrarTareasEstrategia Controller");
+				System.out.println("other error in strategy Controller");
 				return "mainPanel";
 			}		
 		}
@@ -123,7 +126,7 @@ public class EstrategiaController {
 
 			if (!sessionResources.checkUserSession(session)){
 
-				model.addAttribute("mensajeAcceso", "Tu sessión esta inactiva");
+				model.addAttribute("mensajeAcceso", "Inactive Session");
 				return "accessDenied";
 
 			}else {
@@ -143,7 +146,7 @@ public class EstrategiaController {
 
 			if (!sessionResources.checkUserSession(session)){
 
-				model.addAttribute("mensajeAcceso", "Tu sessión esta inactiva");
+				model.addAttribute("mensajeAcceso", "Inactive Session");
 				return "accessDenied";
 
 			}else {
@@ -153,7 +156,7 @@ public class EstrategiaController {
 				try {
 
 					List<Tarea> listaTareas = Tarea.stringToObject(stratTasks);
-					estrategiaService.saveEstrategiaAndTarea(listaTareas,newEstrategia);
+					strategyService.saveEstrategiaAndTarea(listaTareas,newEstrategia);
 
 				}catch (Exception e) {
 
@@ -172,14 +175,14 @@ public class EstrategiaController {
 
 			if (!sessionResources.checkUserSession(session)){
 
-				model.addAttribute("mensajeAcceso", "Tu sessión esta inactiva");
+				model.addAttribute("mensajeAcceso", "Inactive Session");
 				return "accessDenied";
 
 			}else {
 				
 				try {
 
-					estrategiaService.deleteEstrategia(estrategia.getId());
+					strategyService.deleteEstrategia(estrategia.getId());
 
 				} catch (Exception e) {
 
