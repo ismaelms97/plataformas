@@ -122,7 +122,7 @@ public class EstrategiaController {
 				return "accessDenied";
 
 			}else {
-		
+
 				session.setAttribute("newEstrategia", estrategia);
 				model.addAttribute("tarea", new Tarea());
 			}
@@ -142,6 +142,7 @@ public class EstrategiaController {
 				return "accessDenied";
 
 			}else {
+
 				Estrategia newEstrategia = (Estrategia) session.getAttribute("newEstrategia");
 
 				try {

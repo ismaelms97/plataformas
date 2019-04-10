@@ -5,7 +5,6 @@
  *		@param  {filtros} Un objeto con los filtros como nombres de propiedad
  */
 function filter(array, filtros){
-	// REVISAR FILTRADO COMPLEJO
 	//	https://gist.github.com/jherax/f11d669ba286f21b7a2dcff69621eb72
 
 	const filterKeys = Object.keys(filtros);
@@ -76,10 +75,17 @@ function owners(){
  * @returns
  */
 function toCamelCase(str) {
-	return str.substring(0,1).toUpperCase() + str.substring(1,str.length).replace(/\W+(.)/g, function(match, chr)
-			{
-		return ' ' + chr.toUpperCase();
-			});
+	
+		str = str.toLowerCase().split(' ');
+		for (var i = 0; i < str.length; i++) {
+			str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
+		}
+		return str.join(' ');
+	
+//	return str.substring(0,1).toUpperCase() + str.substring(1,str.length).replace(/\W+(.)/g, function(match, chr)
+//			{
+//		return ' ' + chr.toUpperCase();
+//			});
 }
 
 function filtering(){

@@ -251,7 +251,7 @@ function habilitarBotonEnvio() {
 	}
 }
 
-function orderByPrio(arr) {
+function orderBy(arr) {
 	arr.sort(function(a, b){
 		if(a.prioridad < b.prioridad){
 			return 1;
@@ -301,7 +301,7 @@ function drawTeamUsers(array){
 
 		var txt = '<div class="chip">'
 			+'<img src="https://addons.thunderbird.net/static//img/zamboni/anon_user.png" alt="Person" width="96" height="300"><span class="name">'
-			+ toCamelCase(array[i].toLowerCase()) +'</span> <br>Tareas: 2 | K: 10 </div>';
+			+ toCamelCase(array[i].toLowerCase()) +'</span> <br>Tareas: ' + getTasksByUser(array[i], tasks) + ' | K: 10 </div>';
 		if(i + 1 == Math.round((array.length / 2))){
 			txt += "<br>";
 		}
@@ -319,20 +319,21 @@ function moveUsers(){
 		},
 		stop: function(event, ui ){
 			try{
+
 				var el = allElementsFromPoint(event.pageX, event.pageY);
-				var td = $(el).filter('.rect').not($(this));
+				var td = $(el).filter('.rect');
+				console.log("Elementos" , el);
 				console.log(td);
 				td.css({'backgroundColor': 'red'});
 				
-				console.log(tasks.findIndex(tarea => parseInt(tarea.id) === parseInt(td[0].innerText.split("\n")[1].trim())));
+				console.log(parseInt(td[0].innerText.split("\n")[1].trim()));
+				console.log(tasks.find(tarea => parseInt(tarea.id) === parseInt(td[0].innerText.split("\n")[1].trim())).propiedad);
 
-//				var tarea = tasks.findIndex(tarea => parseInt(tarea.id) === parseInt(td[0].innerText.split("\n")[1].trim()));
-
-//				tasks[tarea].propiedad = event.target.innerText.split("\n")[0].toLowerCase();
+				tasks.find(tarea => parseInt(tarea.id) === parseInt(td[0].innerText.split("\n")[1].trim())).propiedad = event.target.innerText.split("\n")[0].toLowerCase();
 				
-				console.log(tasks);
+				console.log("Reasignación", tasks);
 			}catch(e){
-				console.log(e)
+				console.log('%c' + e, 'background: #222; color: #bada55')
 			}
 		}
 	});
@@ -356,6 +357,15 @@ function allElementsFromPoint(x, y) {
 	elements.reverse();
 	return elements;
 }
+
 function getTasksByUser(user, tareas){
 
+	var count = 0;
+	tareas.forEach(function(task){
+		if(task.propiedad.toLowerCase() == user.toLowerCase()){
+			count++;
+		}
+	});
+
+	return count;
 }

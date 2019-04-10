@@ -112,11 +112,16 @@ var process_wb = (function () {
 				}
 			}
 			document.getElementById("loadAnimation").style.display =  "none"; //Hide load animation
-			console.log(tasks)
+			
 			if(inTasks.length >= 1){
 				tasks = strategyFilter(tasks);
 				$("div.button").removeClass("disabled");
 			}
+			
+
+			tasks = orderBy(tasks);
+			
+			console.log(tasks)
 			// Collect Users from propertyOf 
 			equipo = owners();
 			// Activate the action to filter
@@ -124,8 +129,10 @@ var process_wb = (function () {
 			
 			drawTeamUsers(equipo);
 			document.getElementById("errorContainer").setAttribute("style", "display: none")
+			
 			drawTable(tasks, false);
 		} catch (e){
+			console.log(e)
 			dropError();
 		}
 	};

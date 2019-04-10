@@ -4,6 +4,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -135,5 +136,18 @@ public class User {
 
 		return "";
 
+	}
+	public static HashMap<Integer, String> crearEquiposIdNombre (User userTeamAndRoles) {
+		
+		HashMap<Integer, String> equipos = new HashMap<Integer, String>();
+		int index = 0;
+		
+		for (String nombre : userTeamAndRoles.getNombreEquipo()) {
+			
+			equipos.put(userTeamAndRoles.getEquipoId().get(index), nombre);
+			index++;
+		} 
+		
+		return equipos;
 	}
 }

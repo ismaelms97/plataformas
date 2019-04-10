@@ -30,7 +30,7 @@ function rellenarEstados() {
 		for (var i = 0; i < $("th").length; i++) {
 			estados[i] = document.querySelectorAll("th")[i].innerText.toLowerCase();
 		}
-		console.log(estados);
+		console.log("Estados", estados);
 	}
 }
 
@@ -38,7 +38,7 @@ function inputTasks() {
 	try {
 		if(inTasks.length > 0){
 			drawTable(inTasks, true);
-			inTasks = orderByPrio(inTasks);
+			inTasks = orderBy(inTasks);
 		}
 
 	} catch (e) {
@@ -51,9 +51,10 @@ function inputTasks() {
  */
 function drawTable(array , db) {
 //	ORdenamos el array por prioridad,
-	array = orderByPrio(array);
-	//tasks = orderByPrio(tasks);
-	console.log(array)
+	array = orderBy(array);
+	//tasks = orderBy(tasks);
+	
+	console.log("Array Ordenado: ", array)
 	// PIntamos la tabla
 	for (var i = 0; i < array.length; i++) {
 		var tr = document.createElement("tr");

@@ -6,7 +6,9 @@
 <jsp:include page="header.jsp"></jsp:include>
 <jsp:include page="detallesRTC.jsp"></jsp:include>
 <jsp:include page="modalFiltrado.jsp"></jsp:include>
-
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
 <body>
 	<h1 class="mainTitle"></h1>
 	<div class="flexButton">
@@ -14,6 +16,7 @@
 		<form:form method="POST" action="/estrategia/saveEstrategia">
 			<div class="button disabled" id="save">Guardar</div>
 		</form:form>
+		
 	</div>
 	<script>
 		var inTasks = [];
