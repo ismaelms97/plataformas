@@ -1,6 +1,7 @@
 package com.plataformas.app;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,6 +64,8 @@ public class EstrategiaController {
 						session.removeAttribute("newEstrategia");
 					}
 
+					HashMap<Integer, String> equipos = User.crearEquiposIdNombre(actualUser);	
+					model.addAttribute("equipos", equipos);	
 					model.addAttribute("greeting","Usuario: "+ actualUser.getUsername());				  
 					model.addAttribute("teams", actualUser.getNombreEquipo());				
 					model.addAttribute("roles", actualUser.getRole());

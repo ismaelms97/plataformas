@@ -31,6 +31,24 @@ public class Tarea {
 		super();
 	}
 
+				  
+	public Tarea(int id, String tipo, String prioridad, String resumen, String tamaño,String complejidad, String peticionario, boolean relevante, boolean urgente,
+							String planificado, String estadoInicio, String estadoFinal) {
+		super();
+		Id = id;
+		this.tipo = tipo;
+		this.prioridad = prioridad;
+		this.resumen = resumen;
+		this.tamaño = tamaño;
+		this.complejidad = complejidad;
+		this.peticionario = peticionario;
+		this.relevante = relevante;
+		this.urgente = urgente;
+		this.planificado = planificado;
+		this.estadoInicio = estadoInicio;
+		this.estadoFinal = estadoFinal;
+	}
+	
 	public Tarea(int id, String tipo, String estadoInicio, String estadoFinal, String prioridad, String resumen, String tamaño, String complejidad,
 			String propiedad, String peticionario, boolean relevante, boolean urgente, String planificado) {
 		super();
@@ -47,6 +65,7 @@ public class Tarea {
 		this.planificado = planificado;
 		this.estadoInicio = estadoInicio;
 		this.estadoFinal = estadoFinal;
+		
 	}
 	public Tarea(int id, String tipo, String estadoInicio, String estadoFinal, String resumen, String tamaño, String complejidad,
 			String propiedad, String peticionario, boolean relevante, boolean urgente, String planificado) {
@@ -185,7 +204,7 @@ public class Tarea {
 			boolean relevante = rs.getBoolean("relevante");
 			boolean urgente = rs.getBoolean("urgente");
 			String planificado = rs.getString("planificado");
-			Tarea tarea = new Tarea(id,tipo,estadoInicio,estadoFinal,prioridad, resumen,tamaño, complejidad, peticionario,relevante,urgente, planificado);
+			Tarea tarea = new Tarea(id,tipo,prioridad,resumen,tamaño,complejidad,peticionario, relevante,urgente,planificado,estadoInicio,estadoFinal);
 			tareaList.add(tarea);
 		}
 
