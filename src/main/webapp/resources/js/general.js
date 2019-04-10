@@ -25,10 +25,12 @@ $(document).ready(function(){
 })
 
 function rellenarEstados() {
-
+	var est = []
+	var pes = []
 	if($("th").length >= 1){
 		for (var i = 0; i < $("th").length; i++) {
 			estados[i] = document.querySelectorAll("th")[i].innerText.toLowerCase();
+			
 		}
 		console.log("Estados", estados);
 	}

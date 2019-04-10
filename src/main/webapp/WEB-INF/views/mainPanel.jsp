@@ -27,7 +27,7 @@
 				</div>
 				<div class="divOptions">
 					<span class="options createDaily">Crear Daily</span> 
-					<span class="options">Ver Daily</span>
+					<span class="options viewDailys">Ver Daily</span>
 				</div>
 			</a>
 		</c:forEach>
@@ -52,8 +52,8 @@
 								id: this.getAttribute("id")
 							}, success: function (data) {
 								var date = new Date();
-								var today = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate()
-								console.log(date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate() + " data: " + data)
+								var today = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate()
+								console.log(date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate() + " data: " + data)
 								console.log(today == data)
 								console.log(el.classList)
 								if((today == data && data.trim() != "") || el.children[0].classList.contains("ended")){
@@ -70,7 +70,7 @@
 						}); 
 					} else {
 						var date = new Date();
-						var today = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate()
+						var today = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate()
 						var data = el.getAttribute("data-dailyDate")
 						if((today == data && data.trim() != "") || el.children[0].classList.contains("ended")){
 									console.log("Cant create new daily b")
@@ -88,6 +88,9 @@
 					if(!e.target.classList.contains("disabled") && e.target.classList.contains("createDaily")){ 
 						sessionStorage.setItem('titulo', e.target.parentElement.parentElement.children[0].innerHTML.trim());
 						window.location.href = "/estrategia/findEstrategia/" + e.target.parentElement.parentElement.getAttribute("id");
+					} else if(e.target.classList.contains("viewDailys")){
+						console.log("View")
+						window.location.href = "/daily/findDailys/" + e.target.parentElement.parentElement.getAttribute("id");
 					}
 				});
 				

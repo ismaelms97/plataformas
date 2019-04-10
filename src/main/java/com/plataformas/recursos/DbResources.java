@@ -3,6 +3,8 @@ package com.plataformas.recursos;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import org.springframework.stereotype.Component;
 
@@ -51,4 +53,12 @@ public class DbResources {
 
 		return con;
 	}	
+	
+	public String currentDateForDaily() {
+		
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		LocalDate localDate = LocalDate.now();
+		
+		return dtf.format(localDate);
+	}
 }
