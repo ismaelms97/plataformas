@@ -174,10 +174,8 @@ public class EstrategiaService {
 				stmt.setInt(4, lastIndex);
 				stmt.executeUpdate();
 			}
-			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-			LocalDate localDate = LocalDate.now();
-			String currentDate = dtf.format(localDate);
-			System.out.println();
+			
+			String currentDate = dbResources.currentDateForDaily();
 			stmt = con.prepareStatement("INSERT INTO daily (fecha,estrategia_id) values ('"+currentDate+"',"+lastIndex+")",Statement.RETURN_GENERATED_KEYS);
 			stmt.executeUpdate();
 			rs = stmt.getGeneratedKeys();

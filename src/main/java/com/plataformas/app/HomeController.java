@@ -52,7 +52,7 @@ public class HomeController {
 
 	@PostMapping(value = "/mainPanel")
 	public String login(@ModelAttribute("user") User user, Model model,HttpServletRequest request,HttpSession session){
-
+		
 		User userTeamAndRoles = null;
 		boolean userExist = false;
 		String mensaje = "";

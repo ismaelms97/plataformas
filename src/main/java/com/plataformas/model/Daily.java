@@ -112,13 +112,14 @@ public class Daily {
 	public static  List<Daily> converFromDatabase(ResultSet rs,List<Daily> dailyList ) throws SQLException {
 
 		while (rs.next()) {
-
+			int id= rs.getInt("id");
 			String fecha = rs.getString("fecha");
 			int tareaId = rs.getInt("tarea_id");
 			String estadoActual = rs.getString("estadoActual");
 			String subEstadoActual = rs.getString("subEstadoActual");
 			String propiedad = rs.getString("propiedad");
 			Daily daily = new Daily();
+			daily.setId(id);
 			daily.setFecha(fecha);
 			daily.setTareaId(tareaId);
 			daily.setEstadoActual(estadoActual);
