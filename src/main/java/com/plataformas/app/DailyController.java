@@ -54,7 +54,21 @@ public class DailyController {
 					List<Tarea> tareas = estrategiaService.findTareasByEstrategia(Integer.parseInt(id));
 					model.addAttribute("listaDaily", listaDaily);
 					model.addAttribute("listaTareas",tareas);
-
+					System.out.println("______-----_____ DAILY _____-----_____");
+					for (Daily daily : listaDaily) {
+						System.out.println("DailyID : "+daily.getId());
+						System.out.println("Fecha : "+daily.getFecha());
+						System.out.println("tareaID : "+daily.getTareaId());
+					}
+					
+					
+					System.out.println("______-----_____ TAREA  _____-----_____");
+				
+					for (Tarea tarea : tareas) {
+						System.out.println("TareaID : "+tarea.getId());
+						System.out.println("Tamaño : "+tarea.getTamaño());
+						System.out.println("Resumen : "+tarea.getResumen());
+					}
 				}catch (Exception e) {
 
 					System.out.println("Error en showDaily : no se ha encontrado daily con ese ID");
