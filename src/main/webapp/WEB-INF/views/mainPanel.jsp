@@ -52,8 +52,8 @@
 								id: this.getAttribute("id")
 							}, success: function (data) {
 								var date = new Date();
-								var today = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate()
-								console.log(date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate() + " data: " + data)
+								var today = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate()
+								console.log(date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate() + " data: " + data)
 								console.log(today == data)
 								console.log(el.classList)
 								if((today == data && data.trim() != "") || el.children[0].classList.contains("ended")){
@@ -70,7 +70,7 @@
 						}); 
 					} else {
 						var date = new Date();
-						var today = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate()
+						var today = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate()
 						var data = el.getAttribute("data-dailyDate")
 						if((today == data && data.trim() != "") || el.children[0].classList.contains("ended")){
 									console.log("Cant create new daily b")

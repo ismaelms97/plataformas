@@ -224,7 +224,6 @@ function saveData() {
 			type: "POST",
 			url: "/daily/saveDaily",
 			data: {
-				date: "" +date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate(),
 				stratDaily: tasksToString
 			}, success: function (data) {
 				console.log("success");

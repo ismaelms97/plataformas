@@ -18,6 +18,7 @@ import com.plataformas.Db2.DailyService;
 import com.plataformas.Db2.EstrategiaService;
 import com.plataformas.model.Daily;
 import com.plataformas.model.Tarea;
+import com.plataformas.recursos.DbResources;
 import com.plataformas.recursos.SessionResources;
 @Controller
 @RequestMapping(value = "/daily")
@@ -29,6 +30,8 @@ public class DailyController {
 	SessionResources sessionResources;
 	@Autowired
 	EstrategiaService estrategiaService;
+	@Autowired
+	DbResources dbResources;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -80,7 +83,7 @@ public class DailyController {
 	}
 
 	@PostMapping(value = "/saveDaily")
-	public @ResponseBody String  saveDaily ( String stratDaily,String date,Model model,HttpSession session) {
+	public @ResponseBody String  saveDaily ( String stratDaily,Model model,HttpSession session) {
 
 		synchronized (session) {
 			if (!sessionResources.checkUserSession(session)){
@@ -93,7 +96,7 @@ public class DailyController {
 				try {
 
 					int idEstrategia  = (Integer) session.getAttribute("estrategiaID");
-					List<Daily> listDaily =  Daily.stringToObject(stratDaily,date,idEstrategia);
+					List<Daily> listDaily =  Daily.stringToObject(stratDaily,dbResources.currentDateForDaily(),idEstrategia);
 					dailyService.saveDaily(listDaily);
 					System.out.println("Daily   Guardada");
 
