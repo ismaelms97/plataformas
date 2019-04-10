@@ -137,7 +137,7 @@ public class User {
 		return "";
 
 	}
-	public static HashMap<Integer, String> crearEquiposIdNombre (User userTeamAndRoles) {
+	public static HashMap<Integer, String> createTeamsIdNames (User userTeamAndRoles) {
 		
 		HashMap<Integer, String> equipos = new HashMap<Integer, String>();
 		int index = 0;

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.plataformas.Db2.DailyService;
-import com.plataformas.Db2.EstrategiaService;
+import com.plataformas.Db2.StrategyService;
 import com.plataformas.model.Daily;
 import com.plataformas.model.Tarea;
 import com.plataformas.recursos.DbResources;
@@ -29,7 +29,7 @@ public class DailyController {
 	@Autowired
 	SessionResources sessionResources;
 	@Autowired
-	EstrategiaService estrategiaService;
+	StrategyService strategyService;
 	@Autowired
 	DbResources dbResources;
 
@@ -46,7 +46,7 @@ public class DailyController {
 
 			if (!sessionResources.checkUserSession(session)){
 
-				model.addAttribute("mensajeAcceso", "Tu sessión esta inactiva");
+				model.addAttribute("mensajeAcceso", "Inactive Session");
 				return "accessDenied";
 
 			}else {
@@ -54,7 +54,7 @@ public class DailyController {
 				try {
 
 					List<Daily> listaDaily = dailyService.findDailyById(Integer.parseInt(id));
-					List<Tarea> tareas = estrategiaService.findTareasByEstrategia(Integer.parseInt(id));
+					List<Tarea> tareas = strategyService.findTareasByEstrategia(Integer.parseInt(id));
 					model.addAttribute("listaDaily", listaDaily);
 					model.addAttribute("listaTareas",tareas);
 					System.out.println("______-----_____ DAILY _____-----_____");
@@ -88,7 +88,7 @@ public class DailyController {
 		synchronized (session) {
 			if (!sessionResources.checkUserSession(session)){
 
-				model.addAttribute("mensajeAcceso", "Tu sessión esta inactiva");
+				model.addAttribute("mensajeAcceso", "Inactive Session");
 				return "accessDenied";
 
 			}else {
@@ -119,7 +119,7 @@ public class DailyController {
 
 			if (!sessionResources.checkUserSession(session)){
 
-				model.addAttribute("mensajeAcceso", "Tu sessión esta inactiva");
+				model.addAttribute("mensajeAcceso", "Inactive Session");
 				return "accessDenied";
 
 			}else {

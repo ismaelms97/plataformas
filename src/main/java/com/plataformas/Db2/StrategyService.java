@@ -20,7 +20,7 @@ import com.plataformas.model.Tarea;
 import com.plataformas.recursos.DbResources;
 
 @Service
-public class EstrategiaService {
+public class StrategyService {
 
 	@Autowired
 	DbResources  dbResources;
