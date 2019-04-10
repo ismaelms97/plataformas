@@ -3,8 +3,6 @@ package com.plataformas.app;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
@@ -62,21 +60,20 @@ public class HomeController {
 		try{
 			
 			User newUser = userService.findByUsername(user.getUsername());
-			System.out.println(newUser.getUsername()+" "+newUser.getPassword());
 			
 			if(newUser.getPassword().equals(User.encrypt(user.getPassword()))) {
 
 				userTeamAndRoles = userService.findRolebyUserId(newUser);
 				
 				session = request.getSession();
-				session.setAttribute("userSession", newUser);
+				session.setAttribute("userSession", userTeamAndRoles);
 				USessions.add(newUser);	
 				
 				model.addAttribute("greeting","Usuario: "+ user.getUsername());				  
 				model.addAttribute("teams", userTeamAndRoles.getNombreEquipo());				
 				model.addAttribute("roles", userTeamAndRoles.getRole());
 				
-				HashMap<Integer, String> equipos = user.crearEquiposIdNombre(userTeamAndRoles);	
+				HashMap<Integer, String> equipos = User.crearEquiposIdNombre(userTeamAndRoles);	
 				model.addAttribute("equipos", equipos);	
 				model.addAttribute("estrategia", new Estrategia());
 				userExist = true;
@@ -99,8 +96,7 @@ public class HomeController {
 
 			try {
 
-				List<Estrategia> listaEstrategias = estrategiaService.findEstrategiaById(userTeamAndRoles.getEquipoId());
-				
+				List<Estrategia> listaEstrategias = estrategiaService.findEstrategiaById(userTeamAndRoles.getEquipoId());				
 				model.addAttribute("listaEstrategia",listaEstrategias);
 				session.setAttribute("userStrategy", listaEstrategias);	
 
