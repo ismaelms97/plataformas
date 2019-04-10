@@ -1,6 +1,7 @@
 package com.plataformas.app;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,8 +64,12 @@ public class EstrategiaController {
 						session.removeAttribute("newEstrategia");
 					}
 
-					model.addAttribute("nombreEquipo", " Nombre de equipo : "+actualUser.getNombreEquipo());
-					model.addAttribute("greeting","Hola "+ actualUser.getUsername());
+					HashMap<Integer, String> equipos = User.crearEquiposIdNombre(actualUser);	
+					model.addAttribute("equipos", equipos);	
+					model.addAttribute("greeting","Usuario: "+ actualUser.getUsername());				  
+					model.addAttribute("teams", actualUser.getNombreEquipo());				
+					model.addAttribute("roles", actualUser.getRole());
+					
 					return "mainPanel";
 				}
 
@@ -171,6 +176,7 @@ public class EstrategiaController {
 				return "accessDenied";
 
 			}else {
+				
 				try {
 
 					estrategiaService.deleteEstrategia(estrategia.getId());

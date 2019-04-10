@@ -5,13 +5,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.plataformas.model.Daily;
 import com.plataformas.model.Estrategia;
 import com.plataformas.model.Tarea;
 import com.plataformas.recursos.DbResources;
@@ -171,8 +174,11 @@ public class EstrategiaService {
 				stmt.setInt(4, lastIndex);
 				stmt.executeUpdate();
 			}
-			
-			stmt = con.prepareStatement("INSERT INTO daily (fecha,estrategia_id) values (' ',"+lastIndex+")",Statement.RETURN_GENERATED_KEYS);
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+			LocalDate localDate = LocalDate.now();
+			String currentDate = dtf.format(localDate);
+			System.out.println();
+			stmt = con.prepareStatement("INSERT INTO daily (fecha,estrategia_id) values ('"+currentDate+"',"+lastIndex+")",Statement.RETURN_GENERATED_KEYS);
 			stmt.executeUpdate();
 			rs = stmt.getGeneratedKeys();
 			rs.next();
