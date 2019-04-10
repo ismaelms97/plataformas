@@ -122,7 +122,6 @@ function dragDrop(arr){
 							// SI estas arrastrando a los usuarios
 							if(event.target.children.length >= 1){
 								tasks.find(tarea => parseInt(tarea.id) === parseInt(event.target.children[0].innerText.split("\n")[1].trim())).propiedad = $(ui.draggable[0]).find(".name").text()
-								console.log(tasks);
 
 								$.notify({
 									title: '<strong>Cambio de Propietario</strong>',
@@ -138,6 +137,7 @@ function dragDrop(arr){
 								});
 
 							}
+							drawTeamUsers(equipo);
 						}
 					}
 				});
@@ -316,12 +316,14 @@ function exists(arr, val){
 }
 
 function drawTeamUsers(array){
+	document.getElementsByClassName("teamUsers")[0].innerHTML = "";
+	
 	for (var i = 0; i < array.length; i++) {
 
 		var txt = '<div class="chip">'
 			+'<img src="https://addons.thunderbird.net/static//img/zamboni/anon_user.png" alt="Person" width="96" height="300"><span class="name">'
 			+ toCamelCase(array[i].toLowerCase()) +'</span> <br>Tareas: ' + getTasksByUser(array[i], tasks) + ' | K: 10 </div>';
-		if(i + 1 == Math.round((array.length / 2))){
+		if(array.length >= 7 && i + 1 == Math.round((array.length / 2))){
 			txt += "<br>";
 		}
 		document.getElementsByClassName("teamUsers")[0].innerHTML += txt;
