@@ -359,3 +359,6 @@ function getTasksByUser(user, tareas){
 
 	return count;
 }
+function calculateK(){
+	
+}

@@ -20,7 +20,6 @@
 <link rel="stylesheet" href="/resources/libs/css/jquery-ui.css">
 <script src="/resources/libs/js/jquery.ui.touch-punch.min.js"></script>
 
-
 <!-- Bootstrap -->
 <link rel="stylesheet"
 	href="/resources/libs/css/bootstrap/4.1.3/css/bootstrap.min.css">
