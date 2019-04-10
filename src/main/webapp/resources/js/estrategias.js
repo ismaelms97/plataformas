@@ -121,7 +121,11 @@ function dragDrop(arr){
 						}else{
 							// SI estas arrastrando a los usuarios
 							if(event.target.children.length >= 1){
-								tasks.find(tarea => parseInt(tarea.id) === parseInt(event.target.children[0].innerText.split("\n")[1].trim())).propiedad = $(ui.draggable[0]).find(".name").text()
+								var user = $(ui.draggable[0]).find(".name").text();
+								if(user.toLowerCase() == "sin propietario"){
+									user = "unassigned"
+								}
+								tasks.find(tarea => parseInt(tarea.id) === parseInt(event.target.children[0].innerText.split("\n")[1].trim())).propiedad = user;
 
 								$.notify({
 									title: '<strong>Cambio de Propietario</strong>',
@@ -346,6 +350,9 @@ function getTasksByUser(user, tareas){
 	var count = 0;
 	tareas.forEach(function(task){
 		if(task.propiedad.toLowerCase() == user.toLowerCase()){
+			count++;
+		}
+		if(user.toLowerCase() == "sin propietario" && task.propiedad.toLowerCase()  == "unassigned"){
 			count++;
 		}
 	});
