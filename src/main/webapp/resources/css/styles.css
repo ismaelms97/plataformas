@@ -373,6 +373,9 @@ a:hover {
 .card{
 	margin-top: 5px;
 }
+.daily-body{
+	display:none;
+}
 /*########### LOGIN FORM ###########*/
 .login-container{
     margin-top: 5%;
