@@ -31,8 +31,30 @@
 				console.log("${daily.id}")
 				var exists = false;
 				
+				/*inDailys.forEach(el => {
+					if(el.id == "${daily.id}"){
+						exists = true;
+					} 
+				});*/
+				console.log(exists)
+				//if(!exists){
+					var daily = new Object();
+					daily.id = "${daily.id}";
+					daily.fecha = "${daily.fecha}";
+					daily.estadoActual = [];
+					inDailys.push(daily);
+					console.log("Daly", "${daily.tareaId}")
+				//}
+				
+			</script>
+	</c:forEach>
+
+	<c:forEach items="${listaDaily}" var="daily" varStatus="item">
+			<script>
+				console.log("${daily.id}")
+				var exists = false;
+				
 				inDailys.forEach(el => {
-					console.log(el.id +" "+ "${daily.id}")
 					if(el.id == "${daily.id}"){
 						exists = true;
 					} 
@@ -42,13 +64,13 @@
 					var daily = new Object();
 					daily.id = "${daily.id}";
 					daily.fecha = "${daily.fecha}";
-					daily.estadoActual = "${daily.estadoActual}";
 					inDailys.push(daily);
 					console.log("Daly", daily)
 				}
 				
 			</script>
 	</c:forEach>
+
 	<c:forEach items="${listaTareas}" var="tarea" varStatus="item">
 			<script>
 				var task = new Object();
