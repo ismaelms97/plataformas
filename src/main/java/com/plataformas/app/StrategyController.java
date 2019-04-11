@@ -141,7 +141,7 @@ public class StrategyController {
 
 	@PostMapping(value = "/saveEstrategia")
 	public @ResponseBody String saveEstrategia(String stratTasks ,Model model,HttpSession session) {	
-
+		System.out.println("Tasks " + stratTasks);
 		synchronized (session) {
 
 			if (!sessionResources.checkUserSession(session)){

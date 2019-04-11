@@ -105,6 +105,7 @@ public class DailyService {
 				stmt.setInt(1, lastIndex);
 				stmt.setInt(2, daily.getTareaId());
 				stmt.setString(3, daily.getEstadoActual());
+				System.out.println("Estado actual " + daily.getEstadoActual());
 				stmt.setString(4, daily.getSubEstadoActual());
 				stmt.setString(5, daily.getPropiedad());
 

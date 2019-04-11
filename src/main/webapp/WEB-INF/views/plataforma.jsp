@@ -31,29 +31,6 @@
 				console.log("${daily.id}")
 				var exists = false;
 				
-				/*inDailys.forEach(el => {
-					if(el.id == "${daily.id}"){
-						exists = true;
-					} 
-				});*/
-				console.log(exists)
-				//if(!exists){
-					var daily = new Object();
-					daily.id = "${daily.id}";
-					daily.fecha = "${daily.fecha}";
-					daily.estadoActual = [];
-					inDailys.push(daily);
-					console.log("Daly", "${daily.tareaId}")
-				//}
-				
-			</script>
-	</c:forEach>
-
-	<c:forEach items="${listaDaily}" var="daily" varStatus="item">
-			<script>
-				console.log("${daily.id}")
-				var exists = false;
-				
 				inDailys.forEach(el => {
 					if(el.id == "${daily.id}"){
 						exists = true;
@@ -64,10 +41,24 @@
 					var daily = new Object();
 					daily.id = "${daily.id}";
 					daily.fecha = "${daily.fecha}";
+					daily.estadoActual = [];
 					inDailys.push(daily);
-					console.log("Daly", daily)
-				}
-				
+					console.log("Daly", "${daily.tareaId}")
+				}	
+			</script>
+	</c:forEach>
+
+	<c:forEach items="${listaDaily}" var="daily" varStatus="item">
+			<script>
+				var taskState = [];
+				inDailys.forEach(function(daily) {
+					if(daily.id == "${daily.id}"){
+						taskState.push("${daily.tareaId}");
+						taskState.push("${daily.estadoActual}");
+						daily.estadoActual.push(taskState);
+					}
+				});
+				console.log(inDailys)
 			</script>
 	</c:forEach>
 
@@ -124,7 +115,12 @@
 	<div id="loadAnimation" class="lds-dual-ring" style="display: none"></div>
 	<!--style="display: none"-->
 
-	
+	<script>
+			if(inDailys.length > 0){
+				document.getElementById("drop").style.display =  "none";
+			}
+	</script>
+		
 	<script src="/resources/libs/js/shim.js"></script>
 	<script src="/resources/libs/js/xlsx.full.min.js"></script>
 	<script src="/resources/js/readExcel.js"></script>
