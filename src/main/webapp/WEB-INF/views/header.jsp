@@ -39,12 +39,9 @@
 <!-- Header -->
 <div
 	class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-	<h5 id="greeting" class="my-0 mr-md-auto font-weight-normal">${greeting}
-	<c:forEach items="${teams}" var="team" varStatus="item"> <c:out value = "${team}"/><p>
-	  	</c:forEach>
-	  	
-	  	<c:forEach items="${roles}" var="rol" varStatus="item"> <c:out value = "${rol}"/><p>
-	  	</c:forEach>
+	<h5 id="greeting" class="my-0 mr-md-auto font-weight-normal">${greeting}	  	
+<%-- 	  	<c:forEach items="${roles}" var="rol" varStatus="item"> <c:out value = "${rol}"/><p>
+	  	</c:forEach> --%>
 	  	</h5>
 
 	<form method="GET" action="/estrategia/panelControl">

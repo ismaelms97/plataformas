@@ -161,19 +161,23 @@ function modalFilter(filters){
 	})
 }
 function showListDaily(){
-	if(inDailys.length >= 1){
-		$(".daily-body").show();
-		inDailys.forEach(function(d){
+	try{
+		if(inDailys.length >= 1){
+			$(".daily-body").show();
+			inDailys.forEach(function(d){
 
-			var daily = '<div class="custom-control custom-radio">'+
-			'<input type="radio" class="custom-control-input filtros daily" id="'+d.id+'" name="dailyRadio" value="'+d.id+'">'+
-			'<label class="custom-control-label" for="'+d.id+'">'+d.fecha+'</label></div>';
+				var daily = '<div class="custom-control custom-radio">'+
+				'<input type="radio" class="custom-control-input filtros daily" id="'+d.id+'" name="dailyRadio" value="'+d.id+'">'+
+				'<label class="custom-control-label" for="'+d.id+'">'+d.fecha+'</label></div>';
 
 
-			$("#collapseDaily").children(".card").append(daily);
-		})
-		
-	}else{
-		$(".daily-body").hide();
+				$("#collapseDaily").children(".card").append(daily);
+			})
+
+		}else{
+			$(".daily-body").hide();
+		}
+	}catch(e){
+		console.log(e)
 	}
 }
