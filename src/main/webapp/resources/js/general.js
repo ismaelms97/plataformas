@@ -4,7 +4,8 @@ $(document).ready(function(){
 	estados = [];
 	rellenarEstados();
 	inputTasks();
-		
+	showListDaily();
+	
 	if(document.getElementsByClassName("mainTitle")[0]){
 		document.getElementsByClassName("mainTitle")[0].innerHTML = sessionStorage.getItem('titulo');
 

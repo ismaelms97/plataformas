@@ -30,7 +30,7 @@
 				</div>
 				<div class="collapse" id="collapseType">
 					<div class="card card-body">
-						<!-- Material unchecked -->
+					
 						<div class="custom-control custom-checkbox">
 							<input type="checkbox" id="incidencia" value="incidencia"
 								class="custom-control-input filtros taskType"><label
@@ -48,6 +48,7 @@
 						</div>
 					</div>
 				</div>
+				<!-- Propietario -->
 				<div class="card">
 					<div class="card-header" id="headingOne" data-toggle="collapse"
 						data-target="#collapsePropertyOf">
@@ -57,10 +58,11 @@
 				</div>
 				<div class="collapse" id="collapsePropertyOf">
 					<div class="card card-body">
-						<!-- Propietario -->
+						
 
 					</div>
 				</div>
+				<!-- Urgencia -->
 				<div class="card">
 					<div class="card-header" id="headingOne" data-toggle="collapse"
 						data-target="#collapseUrgent">
@@ -70,7 +72,7 @@
 				</div>
 				<div class="collapse" id="collapseUrgent">
 					<div class="card card-body">
-						<!-- Urgencia -->
+						
 						<div class="custom-control custom-radio">
 						  <input type="radio" class="custom-control-input filtros taskUrgent" id="isUrgent" name="urgentRadio" value="sí">
 						  <label class="custom-control-label" for="isUrgent">Sí</label>
@@ -83,6 +85,20 @@
 						  <input type="radio" class="custom-control-input filtros taskUrgent" id="both" name="urgentRadio" value="">
 						  <label class="custom-control-label" for="both">Ambos</label>
 						</div>
+					</div>
+				</div>
+				
+				<!-- DAILY -->
+				<div class="card">
+					<div class="card-header" id="headingOne" data-toggle="collapse"
+						data-target="#collapseDaily">
+						<h6 class="d-inline accordion-toggle" aria-expanded="false"
+							aria-controls="collapseExample">Daily</h6>
+					</div>
+				</div>
+				<div class="collapse" id="collapseDaily">
+					<div class="card card-body">
+						
 					</div>
 				</div>
 			</div>
