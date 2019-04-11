@@ -23,7 +23,7 @@
 							<td><form:input path="nombre" cssClass="form-control" placeholder="Introduce Nombre Estrategia" id="estrategiaFormInputName"/></td>
 						</tr>
 						<tr>
-							<td><form:label path="fechaFin" for="estrategiaFormInputDate">Fecha Fin</form:label></td>
+							<td><form:label path="fechaFin" for="estrategiaFormInputDate">Planificado Para</form:label></td>
 							<td><form:input path="fechaFin" type="date" cssClass="form-control" id="estrategiaFormInputDate"/></td>
 						</tr>
 						<tr>
@@ -62,7 +62,6 @@ $('#estrategiaForm').on('shown.bs.modal', function () {
 		  if(hoy <= fecha){
 			  $("#crearEstrategia").prop( "disabled", false );
 			  $("#crearEstrategia").click(function(){
-				 console.log(toCamelCase(document.getElementById("estrategiaFormInputName").innerHTML.trim()))
 				 sessionStorage.setItem('titulo', toCamelCase(document.getElementById("estrategiaFormInputName").value.trim()));
 			  })
 			
