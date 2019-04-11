@@ -371,3 +371,4 @@ function calculateK(){
 	var complejidad = [2, 5, 20, 50, 100];
 	
 }
+

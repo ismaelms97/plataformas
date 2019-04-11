@@ -55,6 +55,7 @@
 					if(daily.id == "${daily.id}"){
 						taskState.push("${daily.tareaId}");
 						taskState.push("${daily.estadoActual}");
+						taskState.push("${daily.propiedad}");
 						daily.estadoActual.push(taskState);
 					}
 				});
