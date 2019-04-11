@@ -28,7 +28,7 @@ public class DailyService {
 			Connection con = dbResources.getConection();
 			con.setAutoCommit(false);
 			Statement  stmt = con.createStatement(); 
-			ResultSet rs = stmt.executeQuery("SELECT D.id,D.fecha,DT.tarea_id,DT.estadoActual,DT.subEstadoActual,DT.propiedad FROM daily D,daily_tarea DT where D.estrategia_id = "+idEstrategia+"");
+			ResultSet rs = stmt.executeQuery("SELECT D.id,D.fecha,DT.tarea_id,DT.estadoActual,DT.subEstadoActual,DT.propiedad FROM daily D,daily_tarea DT where D.estrategia_id = "+idEstrategia+" AND DT.daily_id = D.id");
 			return Daily.converFromDatabase(rs, dailyList);
 
 		} catch (SQLException e) {
