@@ -140,12 +140,12 @@
 			console.log("Activo")
 			console.log(this);
 
-		    var panel = this.nextElementSibling;
+		   /*  var panel = this.nextElementSibling;
 		    if (panel.style.maxHeight){
 		      panel.style.maxHeight = null;
 		    } else {
 		      panel.style.maxHeight = panel.scrollHeight + "px";
-		    } 
+		    } */
 		  });
 		} 
 
