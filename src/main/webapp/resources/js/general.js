@@ -39,7 +39,6 @@ function inputTasks() {
 	try {
 		if(inTasks.length > 0){
 			drawTable(inTasks, true);
-			inTasks = orderBy(inTasks);
 		}
 
 	} catch (e) {
@@ -53,8 +52,8 @@ function inputTasks() {
 function drawTable(array , db) {
 //	ORdenamos el array por prioridad,
 	array = orderBy(array);
-
-	console.log("Array Ordenado: ", array)
+	inTasks = orderBy(inTasks);
+	
 	// PIntamos la tabla
 	for (var i = 0; i < array.length; i++) {
 		var tr = document.createElement("tr");
