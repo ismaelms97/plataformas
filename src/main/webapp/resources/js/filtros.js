@@ -38,11 +38,11 @@ function owners(){
 	var nombre = "";
 	tasks.forEach(function(task){
 		if(!own.includes(task.propiedad)){
-			
+
 //			if(task.propiedad.toLowerCase() == "unassigned" && !bool) {
-//				bool = true; }else
+//			bool = true; }else
 			if (task.propiedad.toLowerCase() != "unassigned"){
-				
+
 				own.push(task.propiedad);
 				nombre = task.propiedad.toLowerCase();
 				var texto = '<div class="custom-control custom-checkbox">'+
@@ -50,21 +50,21 @@ function owners(){
 				'<label class="custom-control-label" for="'+ nombre +'">'+ toCamelCase(nombre) +'</label><br> '+
 				'</div>';
 				$("#collapsePropertyOf").children(".card").append(texto);
-				
+
 			}
-			
+
 		}
 	})
-			
-		own.push("Sin Propietario");
-		nombre = "Sin Propietario".toLowerCase();
-		var texto = '<div class="custom-control custom-checkbox">'+
-		'<input type="checkbox" id="'+ nombre +'" value="'+ nombre +'" class="custom-control-input filtros taskPropertyOf">'+
-		'<label class="custom-control-label" for="'+ nombre +'">'+ toCamelCase(nombre) +'</label><br> '+
-		'</div>';
-		$("#collapsePropertyOf").children(".card").append(texto);
-		
-	
+
+	own.push("Sin Propietario");
+	nombre = "Sin Propietario".toLowerCase();
+	var texto = '<div class="custom-control custom-checkbox">'+
+	'<input type="checkbox" id="'+ nombre +'" value="'+ nombre +'" class="custom-control-input filtros taskPropertyOf">'+
+	'<label class="custom-control-label" for="'+ nombre +'">'+ toCamelCase(nombre) +'</label><br> '+
+	'</div>';
+	$("#collapsePropertyOf").children(".card").append(texto);
+
+
 	return own;
 }
 
@@ -75,17 +75,17 @@ function owners(){
  * @returns
  */
 function toCamelCase(str) {
-	
-		str = str.toLowerCase().split(' ');
-		for (var i = 0; i < str.length; i++) {
-			str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
-		}
-		return str.join(' ');
-	
+
+	str = str.toLowerCase().split(' ');
+	for (var i = 0; i < str.length; i++) {
+		str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
+	}
+	return str.join(' ');
+
 //	return str.substring(0,1).toUpperCase() + str.substring(1,str.length).replace(/\W+(.)/g, function(match, chr)
-//			{
-//		return ' ' + chr.toUpperCase();
-//			});
+//	{
+//	return ' ' + chr.toUpperCase();
+//	});
 }
 
 function filtering(){
@@ -158,5 +158,37 @@ function modalFilter(filters){
 		$(".card-header").on("click", function(){
 			$(this).toggleClass("arrowDown");
 		})
+		chooseDaily();
 	})
+}
+function showListDaily(){
+	try{
+		if(inDailys.length >= 1){
+			$(".daily-body").show();
+			inDailys.forEach(function(d){
+
+				var daily = '<div class="custom-control custom-radio">'+
+				'<input type="radio" class="custom-control-input filtros daily" id="'+d.id+'" name="dailyRadio" value="'+d.id+'">'+
+				'<label class="custom-control-label" for="'+d.id+'">'+d.fecha+'</label></div>';
+
+
+
+				$("#collapseDaily").children(".card").append(daily);
+			})
+			chooseDaily();
+		}else{
+			$(".daily-body").hide();
+		}
+	}catch(e){
+		console.log(e)
+	}
+}
+
+
+function chooseDaily(){
+
+	$('input[name="dailyRadio"]').change(function(){
+		console.log("AAA")
+	});
+
 }

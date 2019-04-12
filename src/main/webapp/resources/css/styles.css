@@ -177,7 +177,7 @@ td .ui-selected {
 	color: #961a1aab;
 }
 
-/*########### ANIMACIï¿½N CARGA ###########*/
+/*########### ANIMACIïóN CARGA ###########*/
 
 .lds-dual-ring {
  	display: inline-block; 
@@ -217,9 +217,19 @@ td .ui-selected {
 
 /*########### ESTRATEGIAS ###########*/
 .cartas{
+	flex-direction: column !important;
+}
+.strategyContainer{
+	display: flex;
 	flex-direction: row !important;
 	flex-wrap: wrap;
+	justify-content: space-between;
 }
+.strategyTeams{
+	align-content: space-around;
+	position:relative;
+}
+
 .cartas > a{
 	margin: 0 2% 1% 0;
 }
@@ -372,6 +382,9 @@ a:hover {
 }
 .card{
 	margin-top: 5px;
+}
+.daily-body{
+	display:none;
 }
 /*########### LOGIN FORM ###########*/
 .login-container{

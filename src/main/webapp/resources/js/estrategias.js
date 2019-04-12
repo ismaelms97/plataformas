@@ -359,6 +359,16 @@ function getTasksByUser(user, tareas){
 
 	return count;
 }
-function calculateK(){
+
+function calculateK(){ 
+	
+//	Listo para analizar; Cierre de requirimientos; En análisis; Aceptación usuario; En curso; Aceptación pruebas; Pendiente implantar; Implantado; Cerrado
+//	K = COMPLEJIDAD * TAMAÑO * suma(PESO_FASE_COMPLETADA)
+	
+	var pesoFase = [0.4, 0.2, 0.12, 0.05, 0.2, 0.3];
+	var tamano = {"XXS": 1, "XS": 1.1, "S":1.2, "M": 1.3, "L": 1.4, "XL": 1.5, "XXL": 1.6, "XXXL": 1.7};
+//	var tamanoNum = [1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7];
+	var complejidad = [2, 5, 20, 50, 100];
 	
 }
+

@@ -10,28 +10,44 @@
 <body>
 	<div class="parent cartas">
 
+		<c:forEach items="${equipos}" var="team">
+			<script>;
+			var eq = "${team}".split("=");
+			var equipo = new Object();
+			equipo.id = eq[0];
+			equipo.name= eq[1];
+			$(".cartas ").append('<div id="'+ equipo.name.replace(/\s/g, "-") +'" class="strategyTeams">'+ equipo.name +'<div class="strategyContainer"></div></div><br>'); 
+			equipos.push(equipo);
+			</script>
+					
+			
+		</c:forEach>
 		<c:forEach items="${listaEstrategia}" var="estrategia"
 			varStatus="item">
 			<script>
 				var estrategia = new Object();
 				estrategia.id = "${estrategia.id}";
 				estrategia.endDate = "${estrategia.fechaFin}";
+				estrategia.equipoId = "${estrategia.equipoId}";
+				estrategia.equipo = equipos[equipos.findIndex(equipo => parseInt(equipo.id) === parseInt(estrategia.equipoId))].name;
+				console.log("Equipo Estrategia", estrategia.equipo)
 				console.log("ID " + estrategia.endDate)
 				estrategias.push(estrategia);
-				//href="/estrategia/findEstrategia/${estrategia.id}"
+				console.log(estrategia.equipo);
+				//href="/estrategia/findEstrategia/${estrategia.id}"	
+				
+				var nombre = "${estrategia.nombre}";
+
+				$("#" + estrategia.equipo.replace(/\s/g, "-") + ">.strategyContainer").append(
+						'<a id="'+estrategia.id+'" class="a">'+
+						'<div class="estartegiasCard">'+ nombre +'</div>'+
+					'<div class="divOptions">'+
+						'<span class="options createDaily">Crear Daily</span> '+
+						'<span class="options viewDailys">Ver Daily</span>'+
+					'</div></a>');
 			</script>
-
-			<a id="${estrategia.id}" class="a">
-				<div class="estartegiasCard">
-					<c:out value="${estrategia.nombre}" />
-				</div>
-				<div class="divOptions">
-					<span class="options createDaily">Crear Daily</span> 
-					<span class="options viewDailys">Ver Daily</span>
-				</div>
-			</a>
 		</c:forEach>
-
+ 
 		<a data-toggle="modal" data-target="#estrategiaForm">
 			<div class="estartegiasCard">Nueva Estrategia</div>
 		</a>
@@ -39,7 +55,7 @@
 
 	<script>
 		checkStatus();
-		 
+		 console.log("Equipos", equipos);
  		$(document).ready(function() {
 		    $(".a").click(function () {
 					var el = this;

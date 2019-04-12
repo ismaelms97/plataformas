@@ -1,4 +1,5 @@
 var estrategias = [];
+var equipos = [];
 
 function checkStatus(){
 	var estrategiaCards = document.getElementsByTagName("a");

@@ -70,7 +70,6 @@ public class DailyController {
 
 	@PostMapping(value = "/saveDaily")
 	public @ResponseBody String  saveDaily ( String stratDaily,Model model,HttpSession session) {
-
 		synchronized (session) {
 			
 			if (!sessionResources.checkUserSession(session)){
