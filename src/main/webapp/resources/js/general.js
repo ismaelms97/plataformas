@@ -97,9 +97,16 @@ function drawRTC(array, pos, db) {
 	if(estados.length >= 1){
 
 		for (var j = 0; j < estados.length; j++) {
-			if (array[pos].estado.toLowerCase().startsWith(estados[j])) {
-				estadoActual = j
+			if(db){
+				if (array[pos].estado.toLowerCase().startsWith(estados[j])) {
+					estadoActual = j
+				}
+			} else {
+				if (array[pos].estadoActual.toLowerCase().startsWith(estados[j])) {
+					estadoActual = j
+				}
 			}
+			
 		}
 	}
 
@@ -111,17 +118,17 @@ function drawRTC(array, pos, db) {
 		// creamos el clon de los RTC
 		if(inTasks.length > 0){
 			if(inTasks[pos].estadoFinal.toLowerCase().startsWith(inTasks[pos].estado.toLowerCase()) &&
-					array[pos].estado.toLowerCase().startsWith(inTasks[pos].estado.toLowerCase())){
+					array[pos].estadoActual.toLowerCase().startsWith(inTasks[pos].estado.toLowerCase())){
 
 				// Tricolor, inicio == Actual == Final
 				classes += ' gradientGreyBlueOrange';
 
-			}else if(array[pos].estado.toLowerCase().startsWith(inTasks[pos].estadoFinal.toLowerCase())){
+			}else if(array[pos].estadoActual.toLowerCase().startsWith(inTasks[pos].estadoFinal.toLowerCase())){
 
 				// Verde, COMPLETADO
 				classes += ' green';
 
-			}else if(array[pos].estado.toLowerCase().startsWith(inTasks[pos].estado.toLowerCase())){
+			}else if(array[pos].estadoActual.toLowerCase().startsWith(inTasks[pos].estado.toLowerCase())){
 
 				// GRIS/AZUL Inicio == Actual
 				classes += ' gradientGreyBlue';
@@ -131,7 +138,7 @@ function drawRTC(array, pos, db) {
 				// AZUL, resto
 				classes += ' blue';
 			}
-			console.log(array[pos].id + " " + array[pos].estado + "  " + inTasks[pos].id + " " + inTasks[pos].estadoFinal + "  " + array[pos].estado.toLowerCase().startsWith(inTasks[pos].estadoFinal.toLowerCase()))
+			console.log(array[pos].id + " " + array[pos].estadoActual + "  " + inTasks[pos].id + " " + inTasks[pos].estadoFinal + "  " + array[pos].estadoActual.toLowerCase().startsWith(inTasks[pos].estadoFinal.toLowerCase()))
 		}
 	}
 
