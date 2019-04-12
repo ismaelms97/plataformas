@@ -108,6 +108,7 @@ public class StrategyController {
 				model.addAttribute("listaTareas",tareas);
 				for (Tarea tarea : tareas) {
 					System.out.println(tarea.getId());
+					System.out.println("recuperando..estado"+tarea.getEstadoInicio());
 				}
 				System.out.println("TAREAS COMPLETE");
 
