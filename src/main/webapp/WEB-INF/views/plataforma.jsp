@@ -93,7 +93,7 @@
 			<thead>
 				<tr class="table-info">
 					<th scope="col">Pte Alta</th>
-					<th scope="col">Pte.Cuantificar</th>
+					<th scope="col">Pte. Cuantificar</th>
 					<th scope="col">Listo Para Analizar</th>
 					<th scope="col">Cierre Requerimientos</th>
 					<th scope="col">En Análisis</th>
@@ -107,7 +107,7 @@
 			<tbody>
 			</tbody>
 		</table>
-		<div id="errorContainer" style="display: none"><p id="errorMsg" >Archivo no válido</p></div>
+		<!-- <div id="errorContainer" style="display: none"><p id="errorMsg" >Archivo no válido</p></div> -->
 		<div id="drop">
 			Arrastra el archivo excel aquí para cargarlo<input type="file"
 				name="xlfile" id="xlf" hidden="hidden" />

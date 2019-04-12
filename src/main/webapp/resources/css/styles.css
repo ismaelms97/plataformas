@@ -220,6 +220,7 @@ td .ui-selected {
 	flex-direction: column !important;
 }
 .strategyContainer{
+	padding-top: 1%;
 	display: flex;
 	flex-direction: row !important;
 	flex-wrap: wrap;
@@ -227,10 +228,21 @@ td .ui-selected {
 }
 .strategyTeams{
 	position:relative;
-	font-weight: bolder;
 	width: 60%;
 }
+.teamName{
+	font-family: Helvetica Neue,Arial,Helvetica,sans-serif;
+	font-size: 16px;
+	
+	font-weight: 700;
+}
 
+.strategyTeams:before{
+	font-family: "Font Awesome 5 Free";
+  	font-weight: 900;
+  	content: "\f0c0";
+  	margin-right: 1%;
+}
 .cartas > a{
 	margin: 0 5% 1% 0;
 }
@@ -290,6 +302,13 @@ a:hover {
 	max-height: 0;
 	z-index: 999;
 }
+input[type='submit']{
+	padding: 10px 18px !important;
+	cursor: pointer;
+}
+form{
+	z-index: 9999;
+}
 
 .options{
 	background: silver;
@@ -298,6 +317,7 @@ a:hover {
 	border-bottom : 1px solid #e2e2e2;
 	animation: .1s ease-out example;
 	z-index: 999;
+	width: 187.516px;
 }
 
 .options:hover{
