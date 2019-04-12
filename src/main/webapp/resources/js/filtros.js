@@ -188,11 +188,11 @@ function showListDaily(){
 function chooseDaily(){
 
 	$('input[name="dailyRadio"]').change(function(){
-		var auxArr = inTasks.slice();
+		var arr = orderBy(inTasks)
 		var dateSelected = this.nextSibling.innerHTML;
 		inDailys.forEach(function(daily){
 			if(daily.fecha == dateSelected){
-				auxArr.forEach(function(task){
+				arr.forEach(function(task){
 					daily.estadoActual.forEach(function(taskStatus){
 						if(task.id == taskStatus[0]){
 							task.estadoActual = taskStatus[1].toLowerCase();
@@ -205,7 +205,7 @@ function chooseDaily(){
 		});
 		emptyTable();
 		drawTable(inTasks, true);
-		drawTable(auxArr, false);
+		drawTable(arr, false);
 	});
 
 }
