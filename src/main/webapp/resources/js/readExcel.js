@@ -42,7 +42,7 @@ var process_wb = (function () {
         else OUT.innerText = output;*/
 		//console.log(to_json(wb)) //my console
 		//document.getElementById("drop").style.display =  "none";
-		
+
 		try{
 			for (var i = 0; i < JSON.parse(output).Tareas[0].length; i++) {
 				if(JSON.parse(output).Tareas[0][i] != null){
@@ -74,7 +74,7 @@ var process_wb = (function () {
 				}
 			}
 			for (var i = 1; i < JSON.parse(output).Tareas.length; i++) { //JSON.parse(output).Tareas.length
-				if(JSON.parse(output).Tareas[i][idPos] != null && JSON.parse(output).Tareas[i][statusPos].toLowerCase() != "finalizada"){
+				if(JSON.parse(output).Tareas[i][idPos] != null && (JSON.parse(output).Tareas[i][statusPos].toLowerCase() != "finalizada" && JSON.parse(output).Tareas[i][statusPos].toLowerCase() != "en especificación")){
 
 					var task = new Object();
 					task.id = JSON.parse(output).Tareas[i][idPos]
@@ -87,14 +87,14 @@ var process_wb = (function () {
 					task.peticionario = JSON.parse(output).Tareas[i][petPos]
 					task.urgente = JSON.parse(output).Tareas[i][urgenPos];
 					task.estadoFinal = "";
-					
+
 					// Hacemos comprovaciones
 					if(JSON.parse(output).Tareas[i][complejPos] != null && JSON.parse(output).Tareas[i][complejPos].toLowerCase() != "sin asignar"){
 						task.complejidad = JSON.parse(output).Tareas[i][complejPos].substring(0,1)	
 					}else{
 						task.complejidad = 0;
 					}
-					
+
 					if(JSON.parse(output).Tareas[i][prioPos] != null && JSON.parse(output).Tareas[i][prioPos] != "undefined"){
 						task.prioridad = JSON.parse(output).Tareas[i][prioPos];
 					} else {
@@ -102,34 +102,34 @@ var process_wb = (function () {
 					}
 
 					if(JSON.parse(output).Tareas[i][sizePos] != null){
-						task.tamano = JSON.parse(output).Tareas[i][sizePos]					
+						task.tamano = JSON.parse(output).Tareas[i][sizePos]	
 					}else{
 						task.tamano = 0;
 					}
-					
+
 					task.modified = false;
 					tasks.push(task);
 				}
 			}
 			document.getElementById("loadAnimation").style.display =  "none"; //Hide load animation
-			
+
 			if(inTasks.length >= 1){
 				tasks = strategyFilter(tasks);
 				$("div.button").removeClass("disabled");
 			}
-			
+
 
 			tasks = orderBy(tasks);
-			
+
 			console.log(tasks)
 			// Collect Users from propertyOf 
 			equipo = owners();
 			// Activate the action to filter
 			filtering();
-			
+
 			drawTeamUsers(equipo);
-			document.getElementById("errorContainer").setAttribute("style", "display: none")
-			
+//			document.getElementById("errorContainer").setAttribute("style", "display: none")
+
 			drawTable(tasks, false);
 		} catch (e){
 			console.log(e)
@@ -235,7 +235,22 @@ document.getElementById("xlf").addEventListener('change', () => {
 function dropError(){
 
 	console.log("Drop Error")
-	document.getElementById("errorContainer").removeAttribute("style");
-	document.getElementById("drop").removeAttribute("style")
+//	document.getElementById("errorContainer").removeAttribute("style");
+	emptyTable();
+	document.getElementsByClassName("teamUsers")[0].innerHTML = "";
+	document.getElementById("drop").removeAttribute("style");
+	$.notify({
+		title: '<strong>Error</strong>',
+		message: 'Archivo no Válido'
+	},{
+		type: 'danger',
+		newest_on_top: true,
+		placement: {
+			from: "bottom",
+			align: "center"
+		},
+		delay: 2000
+	});
+
 	document.getElementById("loadAnimation").setAttribute("style", "display: none")
 }

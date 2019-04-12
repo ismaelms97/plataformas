@@ -59,15 +59,15 @@ function dragDrop(arr){
 					stop: function (event, ui) {
 						document.getElementsByClassName("rect")[(this.getAttribute("data-rtc") - 1)].style.display = "";
 
-						if (this.parentElement.classList.contains(estados[this.getAttribute("data-posInitial")].replace(/[\.,\s]/g, "-")) && arr[this.getAttribute("data-rtc") - 1].modified) {
+						if (this.parentElement.classList.contains(estados[this.getAttribute("data-posInitial")].replace(/\s/g, "-").replace(/[\.]/g, "_")) && arr[this.getAttribute("data-rtc") - 1].modified) {
 
 							arr[this.getAttribute("data-rtc") - 1].modified = false;
 
 						} else {
 
-							if (estados.indexOf(this.parentElement.classList[0].replace(/-/g, " ")) >= this.getAttribute("data-posInitial")) {
+							if (estados.indexOf(this.parentElement.classList[0].replace(/-/g, " ").replace(/_/g, ".")) >= this.getAttribute("data-posInitial")) {
 								arr[this.getAttribute("data-rtc") - 1].modified = true;
-								arr[this.getAttribute("data-rtc") - 1].estadoFinal = this.parentElement.classList[0].replace(/-/g, " ");
+								arr[this.getAttribute("data-rtc") - 1].estadoFinal = this.parentElement.classList[0].replace(/-/g, " ").replace(/_/g, ".");
 							}
 						}
 
@@ -107,7 +107,7 @@ function dragDrop(arr){
 							}
 
 							$(ui.draggable[0]).addClass("noLeft");
-							if (estados.indexOf(event.target.classList[0].replace(/-/g, " ")) >= ui.draggable[0].getAttribute("data-posInitial")) {
+							if (estados.indexOf(event.target.classList[0].replace(/-/g, " ").replace(/_/g, ".")) >= ui.draggable[0].getAttribute("data-posInitial")) {
 
 								if (document.getElementsByClassName("clone")[(ui.draggable[0].getAttribute("data-rtc") - 1)].style.display == "none"
 									&& !(event.target.children.length >= 1)) {
@@ -371,4 +371,3 @@ function calculateK(){
 	var complejidad = [2, 5, 20, 50, 100];
 	
 }
-
