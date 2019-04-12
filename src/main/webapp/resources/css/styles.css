@@ -302,6 +302,7 @@ a:hover {
 	max-height: 0;
 	z-index: 999;
 }
+
 input[type='submit']{
 	padding: 10px 18px !important;
 	cursor: pointer;

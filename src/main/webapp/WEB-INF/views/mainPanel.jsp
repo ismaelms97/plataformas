@@ -63,6 +63,9 @@
 		checkStatus();
 		 console.log("Equipos", equipos);
  		$(document).ready(function() {
+ 			$("a:not(.a)").on("click",function(){
+ 				$(".options").hide();
+ 			});
 		    $(".a").click(function () {
 					var el = this;
 					console.log(el.getAttribute("data-dailyDate"))
@@ -121,9 +124,11 @@
 		    
 				$(".options", this).toggle();
 				
-				$(".options").click(function(e){
+
+				$(".estartegiasCard").click(function(e){
 					if(!e.target.classList.contains("disabled")){ 
-						sessionStorage.setItem('titulo', e.target.parentElement.parentElement.children[0].innerHTML.trim());
+						sessionStorage.setItem('titulo', e.target.innerHTML.trim());
+						console.log(sessionStorage.getItem('titulo'));
 					}
 				});
 				

@@ -59,6 +59,14 @@ public class DailyController {
 					List<Tarea> tareas = strategyService.findTasksByStrategy(id);
 					model.addAttribute("listaDaily", listaDaily);
 					model.addAttribute("listaTareas",tareas);
+					
+					for (Tarea tarea : tareas) {
+						System.out.println("tarea: "+tarea.getId());
+					}
+					for (Daily daily : listaDaily) {
+						
+						System.out.println("daily: "+daily.getId());
+					}
 				
 				
 				}catch (Exception e) {
