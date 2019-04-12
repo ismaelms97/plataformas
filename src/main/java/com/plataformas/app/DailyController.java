@@ -1,8 +1,8 @@
 package com.plataformas.app;
 
-import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,30 +33,30 @@ public class DailyController {
 	@Autowired
 	DbResources dbResources;
 
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 * @throws SQLException 
-	 * @throws ClassNotFoundException 
-	 */
+		
+	public static final String REDIRECT_HOME = "redirect:/";
+	public static final String MAIN_PANEL = "mainPanel";
+	public static final String PLATAFORMA = "plataforma";
 
-	@GetMapping(value = "/findDailys/{id}")
-	public  String findDailyById(@PathVariable String id,Model model,HttpSession session) {	
+
+	@PostMapping(value = "/findDailys")
+	public  String findDailyById(HttpServletRequest request,Model model,HttpSession session) {	
 
 		synchronized (session) {
 
 			if (!sessionResources.checkUserSession(session)){
 
-				model.addAttribute("mensajeAcceso", "Inactive Session");
-				return "accessDenied";
+				return REDIRECT_HOME;
 
 			}else {
 
 				try {
-
+					request.getParameter("id");
 					List<Daily> listaDaily = dailyService.findDailyById(Integer.parseInt(id));
 					List<Tarea> tareas = strategyService.findTasksByStrategy(Integer.parseInt(id));
 					model.addAttribute("listaDaily", listaDaily);
 					model.addAttribute("listaTareas",tareas);
+				
 				
 				}catch (Exception e) {
 
@@ -65,7 +65,7 @@ public class DailyController {
 
 			}
 		}
-		return "plataforma";
+		return PLATAFORMA;
 	}
 
 	@PostMapping(value = "/saveDaily")
@@ -74,8 +74,7 @@ public class DailyController {
 			
 			if (!sessionResources.checkUserSession(session)){
 
-				model.addAttribute("mensajeAcceso", "Inactive Session");
-				return "accessDenied";
+				return REDIRECT_HOME;
 
 			}else {
 
@@ -92,7 +91,7 @@ public class DailyController {
 				}
 
 			}
-			return "mainPanel";
+			return MAIN_PANEL;
 		}
 	}
 
@@ -105,8 +104,7 @@ public class DailyController {
 
 			if (!sessionResources.checkUserSession(session)){
 
-				model.addAttribute("mensajeAcceso", "Inactive Session");
-				return "accessDenied";
+				return REDIRECT_HOME;
 
 			}else {
 
