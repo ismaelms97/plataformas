@@ -16,7 +16,7 @@
 			var equipo = new Object();
 			equipo.id = eq[0];
 			equipo.name= eq[1];
-			$(".cartas ").append('<div id="'+ equipo.name.replace(/\s/g, "-") +'" class="strategyTeams">'+ equipo.name +'<div class="strategyContainer"></div></div><br>'); 
+			$(".cartas ").append('<div id="'+ equipo.name.replace(/\s/g, "-") +'" class="strategyTeams"><span class="teamName">'+ equipo.name +'</span><div class="strategyContainer"></div></div><br>'); 
 			equipos.push(equipo);
 			</script>
 					
@@ -43,8 +43,12 @@
 						'<a id="'+estrategia.id+'" class="a">'+
 						'<div class="estartegiasCard">'+ nombre +'</div>'+
 					'<div class="divOptions">'+
-						'<span class="options createDaily">Crear Daily</span> '+
-						'<span class="options viewDailys">Ver Daily</span>'+
+						'<form action="/estrategia/findEstrategia" method="post">'+
+							'<input class="options createDaily" type="submit" value="Crear Daily" name="'+estrategia.id+'">'+
+						'</form>'+
+						'<form action="/daily/FindDailys" method="post">'+
+							'<input class="options viewDailys" type="submit" value="Ver Daily" name="'+estrategia.id+'">'+
+						'</form>'+
 					'</div></a>');
 			</script>
 		</c:forEach>
