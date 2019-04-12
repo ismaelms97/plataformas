@@ -53,29 +53,29 @@
 
 <script>
 $(document).ready(function(){
-$('#estrategiaForm').on('shown.bs.modal', function () {
-	  $('#estrategiaFormInputDate').change(function(e){
-		  var hoy = new Date().setHours(0,0,0,0);
-		  var fechaIntroducida = e.target.value;
-		  var fecha = new Date(fechaIntroducida).getTime();
+	$('#estrategiaForm').on('shown.bs.modal', function () {
+		
+		  $('#estrategiaFormInputDate').change(function(e){
+			  var hoy = new Date().setHours(0,0,0,0);
+			  var fechaIntroducida = e.target.value;
+			  var fecha = new Date(fechaIntroducida).getTime();
+			  
+			  if(hoy <= fecha){
+				  $("#crearEstrategia").prop( "disabled", false );
+				  $("#crearEstrategia").click(function(){
+					 sessionStorage.setItem('titulo', toCamelCase(document.getElementById("estrategiaFormInputName").value.trim()));
+				  })
+				
+			  }else{
+				  $("#crearEstrategia").prop( "disabled", true );
+			  }
+		  })
 		  
-		  if(hoy <= fecha){
-			  $("#crearEstrategia").prop( "disabled", false );
-			  $("#crearEstrategia").click(function(){
-				 sessionStorage.setItem('titulo', toCamelCase(document.getElementById("estrategiaFormInputName").value.trim()));
-			  })
-			
-		  }else{
-			  $("#crearEstrategia").prop( "disabled", true );
-		  }
-	  })
-	  
-	})
-	 
-	$("#estrategiaFormInputDateInit").val(new Date().getFullYear() + "-" +  new Date().getMonth() + "-" + new Date().getDate());
-	$("#estrategiaFormInputEstado").val("En Curso");
-	$("#estrategiaFormInputEquipoId").val("1");
-	
-	
+		})
+		 
+		$("#estrategiaFormInputDateInit").val(new Date().getFullYear() + "-" +  new Date().getMonth() + "-" + new Date().getDate());
+		$("#estrategiaFormInputEstado").val("En Curso");
+		$("#estrategiaFormInputEquipoId").val("1");
+		
 })
 </script>
