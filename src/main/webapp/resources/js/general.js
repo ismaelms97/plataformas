@@ -5,7 +5,7 @@ $(document).ready(function(){
 	rellenarEstados();
 	inputTasks();
 	showListDaily();
-	
+
 	if(document.getElementsByClassName("mainTitle")[0]){
 		document.getElementsByClassName("mainTitle")[0].innerHTML = sessionStorage.getItem('titulo');
 
@@ -26,12 +26,10 @@ $(document).ready(function(){
 })
 
 function rellenarEstados() {
-	var est = []
-	var pes = []
 	if($("th").length >= 1){
 		for (var i = 0; i < $("th").length; i++) {
 			estados[i] = document.querySelectorAll("th")[i].innerText.toLowerCase();
-			
+
 		}
 		console.log("Estados", estados);
 	}
@@ -55,7 +53,7 @@ function inputTasks() {
 function drawTable(array , db) {
 //	ORdenamos el array por prioridad,
 	array = orderBy(array);
-	
+
 	console.log("Array Ordenado: ", array)
 	// PIntamos la tabla
 	for (var i = 0; i < array.length; i++) {
@@ -64,7 +62,7 @@ function drawTable(array , db) {
 		for (var j = 0; j < 10; j++) {
 			if(document.getElementsByTagName("TR")[i+1].children.length != 10){
 				var td = document.createElement("td");
-				td.setAttribute("class", estados[j].replace(/[\.,\s]/g, "-"));
+				td.setAttribute("class", estados[j].replace(/\s/g, "-").replace(/[\.]/g,  "_"));
 				document.getElementsByTagName("TR")[i + 1].appendChild(td);
 			}
 		} 
@@ -81,7 +79,7 @@ function drawTable(array , db) {
 			var el = rect[i];
 			var cln = $(el).clone();
 			cln.attr("class", "clone orange");
-			$(el).parent().siblings("."+array[i].estadoFinal.replace(/[\.,\s]/g, "-")).append(cln);
+			$(el).parent().siblings("."+array[i].estadoFinal.replace(/\s/g, "-").replace(/[\.]/g,  "_")).append(cln);
 			$(cln).css("display", "inline-block");
 		}
 	}
@@ -91,7 +89,7 @@ function drawTable(array , db) {
  * Función para pintar los RTC
  */
 function drawRTC(array, pos, db) {
-	var estadoActual = 0;
+	var estadoActual = -1;
 
 	if(estados.length >= 1){
 
@@ -105,8 +103,8 @@ function drawRTC(array, pos, db) {
 					estadoActual = j
 				}
 			}
-			
 		}
+		console.log(estadoActual)
 	}
 
 
@@ -141,13 +139,11 @@ function drawRTC(array, pos, db) {
 		}
 	}
 
-	document.getElementsByTagName("TR")[pos + 1].children[estadoActual].innerHTML = '<div class="'+classes+'" data-posInitial="' + estadoActual + '" data-rtc="' + (pos + 1) + '" title="'+ array[pos].resumen +'" data-placement="left">'
-	+ '<small class="tamano">'+ array[pos].tamano + '</small> '+ array[pos].id + ' <small class="complejidad">'+ array[pos].complejidad + '</small></div>';
+	if(estadoActual != -1){
+		document.getElementsByTagName("TR")[pos + 1].children[estadoActual].innerHTML = '<div class="'+classes+'" data-posInitial="' + estadoActual + '" data-rtc="' + (pos + 1) + '" title="'+ array[pos].resumen +'" data-placement="left">'
+		+ '<small class="tamano">'+ array[pos].tamano + '</small> '+ array[pos].id + ' <small class="complejidad">'+ array[pos].complejidad + '</small></div>';
+	}
 
-//	document.getElementsByTagName("TR")[pos + 1].children[estadoActual].innerHTML = '<div class="'+classes+'" data-posInitial="' + estadoActual + '" data-rtc="' + (pos + 1) + '" title="'+ array[pos].resumen +'" data-placement="left">'
-//	+ '<small class="tamano">'+ array[pos].tamano + '</small> '+ array[pos].id + ' <small class="complejidad">'+ array[pos].complejidad + '</small></div>';
-//
-//
 
 
 	if(inTasks.length <= 0 && !db){
@@ -160,11 +156,12 @@ function drawRTC(array, pos, db) {
 
 		dragDrop(array);
 	}
-	// Ejecutamos la funcion para mostrar los detalles
-	document.getElementsByTagName("TR")[pos + 1].children[estadoActual].addEventListener("click", function(){
-		verDetallesRTC(array, pos);
-	})
-
+	if(estadoActual != -1){
+		// Ejecutamos la funcion para mostrar los detalles
+		document.getElementsByTagName("TR")[pos + 1].children[estadoActual].addEventListener("click", function(){
+			verDetallesRTC(array, pos);
+		})
+	}
 	tooltip();
 }
 
