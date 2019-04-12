@@ -12,16 +12,16 @@ import com.plataformas.recursos.DbResources;
 
 @Service
 public class UserService {
-	
+
 	@Autowired
 	DbResources  dbResources;
 
 	public User findByUsername(String username) {
-		
+
 		User user = null;
-		
+
 		try {
-			
+
 			Connection con = dbResources.getConection();
 			con.setAutoCommit(false);
 			Statement  stmt = con.createStatement(); 
@@ -30,20 +30,20 @@ public class UserService {
 			return User.converFromDataBase(rs);
 
 		}catch (Exception e) {
-			
+
 			System.err.println("FIND() more inf : "+e.getMessage()+" reason  -> "+e.getCause());
 			return user;
 		}
 	}
-	
+
 	public User findRolebyUserId(User newUser) {		
-			
+
 		try {
-			
+
 			List<String> listaEquipos = new ArrayList<String>();
 			List<String> listaRoles = new ArrayList<String>();
 			List<Integer> listaIdTeams = new ArrayList<Integer>();
-			
+
 			Connection con = dbResources.getConection();
 			con.setAutoCommit(false);
 			Statement  stmt = con.createStatement(); 
@@ -51,24 +51,24 @@ public class UserService {
 					+ "INNER JOIN user U ON (UER.id_user = U.id) "
 					+ "INNER JOIN role R ON (UER.id_role = R.id) "
 					+ "WHERE U.id = "+newUser.getId()+""); 
-			
+
 			while (rs.next()) {
-				
+
 				listaEquipos.add(rs.getString("name"));
 				listaRoles.add(rs.getString("role"));
 				listaIdTeams.add(rs.getInt("id_equipo"));
 			}
-			
+
 			newUser.setNombreEquipo(listaEquipos);
 			newUser.setRole(listaRoles);
 			newUser.setEquipoId(listaIdTeams);
-			
+
 			return newUser;
 
 		}catch (Exception e) {
-			
+
 			System.err.println("findRolebyUserId() more inf : "+e.getMessage()+" reason  -> "+e.getCause());
-			
+
 			return newUser;
 		}
 	}

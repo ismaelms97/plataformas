@@ -23,16 +23,12 @@ public class User {
 	public User() {
 		super();
 	}
-	
-	
-	
+		
 	public User(List<String> nombreEquipo, List<String> role) {
 		super();
 		NombreEquipo = nombreEquipo;
 		this.role = role;
 	}
-
-
 
 	public User(int id, String username, String password ) {
 		super();
@@ -49,8 +45,6 @@ public class User {
 		this.equipoId = equipoId;
 		this.NombreEquipo = NombreEquipo;
 	}
-
-
 
 	public List<Integer> getEquipoId() {
 		return equipoId;
@@ -137,6 +131,7 @@ public class User {
 		return "";
 
 	}
+	
 	public static HashMap<Integer, String> createTeamsIdNames (User userTeamAndRoles) {
 		
 		HashMap<Integer, String> equipos = new HashMap<Integer, String>();
