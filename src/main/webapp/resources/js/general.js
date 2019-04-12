@@ -173,6 +173,7 @@ function tooltip(){
 
 if(document.getElementById("save")){
 	document.getElementById("save").addEventListener('click', function(){
+		$("div.button").addClass("disabled");
 		saveData();
 	});
 }

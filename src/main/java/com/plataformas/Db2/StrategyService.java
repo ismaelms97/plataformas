@@ -5,10 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +21,11 @@ public class StrategyService {
 
 	@Autowired
 	DbResources  dbResources;
-	
-	public List<Estrategia> findEstrategiaById(List<Integer> listId){
-		
+
+	public List<Estrategia> findStrategyById(List<Integer> listId){
+
 		List<Estrategia> estrategiaList = new ArrayList<Estrategia>();			
-		
+
 		try {
 
 			Connection con = dbResources.getConection();
@@ -36,42 +33,42 @@ public class StrategyService {
 			Statement  stmt = con.createStatement(); 
 			String query = "SELECT * FROM estrategia Es where ";
 			int i = 1;
-			
+
 			for (Integer id : listId) {
-				
+
 				query += "Es.equipo_id = "+id;
-				
+
 				if(i<listId.size()) {
-					
+
 					query += " OR ";
 				}
-				
+
 				i++;			
 			}
-			
+
 			ResultSet rs = stmt.executeQuery(query);
 			return Estrategia.converFromDatabase(rs, estrategiaList);
 
 		} catch (SQLException e) {
-			
+
 			System.err.println("SQL Exeption  findEstrategiaById:  code -> "+e.getErrorCode());
 			System.err.println("more inf : "+e.getMessage()+" reason  -> "+e.getCause());
 			return estrategiaList;
 
 		}catch (Exception e) {
-			
+
 			System.out.println("Error en findEstrategiaById ");
 			return estrategiaList;
 		}
 
 	}
 
-	public List<Tarea> findTareasByEstrategia(int idEstrategia){
-		
+	public List<Tarea> findTasksByStrategy(int idEstrategia){
+
 		List<Tarea> tareaList = new ArrayList<Tarea>();		
-				
+
 		try {
-			
+
 			Connection con = dbResources.getConection();
 			con.setAutoCommit(false);
 			Statement  stmt = con.createStatement(); 
@@ -80,22 +77,22 @@ public class StrategyService {
 			return Tarea.converFromDatabase(rs, tareaList);
 
 		} catch (SQLException e) {
-			
+
 			System.err.println("SQL Exeption  findTareasByEstrategia:  code -> "+e.getErrorCode());
 			System.err.println("more inf : "+e.getMessage()+" reason  -> "+e.getCause());
 			return tareaList;
 
 		}catch (Exception e) {
-			
+
 			System.out.println("Error en findEstrategiaById ");
 			return tareaList;
 		}
 	}
 
-	public List<Estrategia> findEstrategiaByTeam(int idUser){
+	public List<Estrategia> findStrategyByTeam(int idUser){
 
 		List<Estrategia> estrategiaList = new ArrayList<Estrategia>();		
-		
+
 		try {
 
 			Connection con = dbResources.getConection();
@@ -120,7 +117,7 @@ public class StrategyService {
 	}
 
 	@Transactional
-	public void saveEstrategiaAndTarea(List<Tarea> tareas,Estrategia estrategia) throws SQLException {
+	public void saveStrategyAndTask(List<Tarea> tareas,Estrategia estrategia) throws SQLException {
 
 		Connection con = null;
 
@@ -137,7 +134,7 @@ public class StrategyService {
 			ResultSet rs = stmt.getGeneratedKeys();
 			rs.next();
 			int lastIndex = rs.getInt(1);
-		
+
 			stmt = con.prepareStatement("INSERT INTO tarea (id,tipo,prioridad,resumen,tamaño,complejidad,peticionario,relevante,urgente,planificado)"
 					+ " values (?,?,?,?,?,?,?,?,?,?)");
 
@@ -163,7 +160,7 @@ public class StrategyService {
 					System.out.println("Esta tarea ya existe");
 				}
 			}
-			
+
 			stmt = con.prepareStatement("INSERT INTO estrategia_tarea (estadoInicio,estadoFinal,tarea_id,estrategia_id) values (?,?,?,?)");
 
 			for (Tarea tarea : tareas) {
@@ -174,14 +171,14 @@ public class StrategyService {
 				stmt.setInt(4, lastIndex);
 				stmt.executeUpdate();
 			}
-			
+
 			String currentDate = dbResources.currentDateForDaily();
 			stmt = con.prepareStatement("INSERT INTO daily (fecha,estrategia_id) values ('"+currentDate+"',"+lastIndex+")",Statement.RETURN_GENERATED_KEYS);
 			stmt.executeUpdate();
 			rs = stmt.getGeneratedKeys();
 			rs.next();
 			lastIndex = rs.getInt(1);		
-			
+
 			stmt = con.prepareStatement("INSERT INTO daily_tarea (daily_id,tarea_id,estadoActual,subEstadoActual,propiedad) values (?,?,?,?,?)");
 
 			for (Tarea tarea : tareas) {
@@ -193,7 +190,7 @@ public class StrategyService {
 				stmt.setString(5, tarea.getPropiedad());
 
 				try {
-					
+
 					stmt.executeUpdate();
 
 				}catch  (Exception e) {
@@ -213,7 +210,28 @@ public class StrategyService {
 	}
 
 	@Transactional
-	public void deleteEstrategia(int IDestrategia){
+	public void updateStrategy(int IDestrategia){
+
+		try{
+
+			Connection con = dbResources.getConection();
+			con.setAutoCommit(false); 
+			Statement  stmt  = con.createStatement(); 			
+			stmt.executeUpdate("UPDATE estrategia SET estado = 'Finalizada' WHERE id = "+IDestrategia);
+			con.commit();
+
+		}catch (SQLException e) {
+
+			System.out.println("SQL Exeption  updateStrategy:  code -> "+e.getErrorCode()+" more inf : "+e.getMessage());
+
+		}catch (Exception e) {
+
+			System.out.println("Error en updateStrategy ");
+		}
+	}
+
+	@Transactional
+	public void deleteStrategy(int IDestrategia){
 
 		try{
 
@@ -229,10 +247,7 @@ public class StrategyService {
 
 		}catch (Exception e) {
 
-			System.out.println("Error en savaTarea ");
+			System.out.println("Error en deleteStrategy ");
 		}
 	}
 }
-
-
-

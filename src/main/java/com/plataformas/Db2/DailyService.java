@@ -47,22 +47,22 @@ public class DailyService {
 	}
 
 	public String findDateDaily(int idEstrategia){
-		
+
 		String date = null;
-		
+
 		try {
 
 			Connection con = dbResources.getConection();
 			con.setAutoCommit(false);
 			Statement  stmt = con.createStatement(); 
 			ResultSet rs = stmt.executeQuery("Select D.fecha FROM daily D where D.estrategia_id = "+idEstrategia+" AND"
-							+ " D.id = (Select MAX(D.id) from daily D where D.estrategia_id ="+idEstrategia+")");		
-			
+					+ " D.id = (Select MAX(D.id) from daily D where D.estrategia_id ="+idEstrategia+")");		
+
 			while (rs.next()) {
-				
+
 				date = rs.getString("fecha");
 			}
-			
+
 			return date;
 
 		} catch (SQLException e) {
@@ -105,12 +105,11 @@ public class DailyService {
 				stmt.setInt(1, lastIndex);
 				stmt.setInt(2, daily.getTareaId());
 				stmt.setString(3, daily.getEstadoActual());
-				System.out.println("Estado actual " + daily.getEstadoActual());
 				stmt.setString(4, daily.getSubEstadoActual());
 				stmt.setString(5, daily.getPropiedad());
 
 				try {
-					
+
 					stmt.executeUpdate();
 
 				}catch  (Exception e) {
@@ -131,4 +130,3 @@ public class DailyService {
 		}
 	}
 }
-

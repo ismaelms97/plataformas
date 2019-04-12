@@ -54,24 +54,10 @@ public class DailyController {
 				try {
 
 					List<Daily> listaDaily = dailyService.findDailyById(Integer.parseInt(id));
-					List<Tarea> tareas = strategyService.findTareasByEstrategia(Integer.parseInt(id));
+					List<Tarea> tareas = strategyService.findTasksByStrategy(Integer.parseInt(id));
 					model.addAttribute("listaDaily", listaDaily);
 					model.addAttribute("listaTareas",tareas);
-					System.out.println("______-----_____ DAILY _____-----_____");
-					for (Daily daily : listaDaily) {
-						System.out.println("DailyID : "+daily.getId());
-						System.out.println("Fecha : "+daily.getFecha());
-						System.out.println("tareaID : "+daily.getTareaId());
-					}
-					
-					
-					System.out.println("______-----_____ TAREA  _____-----_____");
 				
-					for (Tarea tarea : tareas) {
-						System.out.println("TareaID : "+tarea.getId());
-						System.out.println("Tamaño : "+tarea.getTamaño());
-						System.out.println("Resumen : "+tarea.getResumen());
-					}
 				}catch (Exception e) {
 
 					System.out.println("Error en showDaily : no se ha encontrado daily con ese ID");
@@ -85,6 +71,7 @@ public class DailyController {
 	@PostMapping(value = "/saveDaily")
 	public @ResponseBody String  saveDaily ( String stratDaily,Model model,HttpSession session) {
 		synchronized (session) {
+			
 			if (!sessionResources.checkUserSession(session)){
 
 				model.addAttribute("mensajeAcceso", "Inactive Session");
@@ -135,26 +122,5 @@ public class DailyController {
 
 			return date;
 		}
-	}
-
-	@GetMapping(value = "/showDaily")
-	public String showAllDaily(Model model) {	
-
-
-		return "mainPanel";
-
-	}
-	@PostMapping(value = "/updateDaily")
-	public String updateDaily(Model model) {	
-
-
-		return "mainPanel";
-
-	}
-	@PostMapping(value = "/deleteDaily")
-	public String deleteDaily(Model model) {	
-
-
-		return "mainPanel";
 	}
 }

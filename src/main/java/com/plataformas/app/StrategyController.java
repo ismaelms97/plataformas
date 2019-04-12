@@ -57,7 +57,7 @@ public class StrategyController {
 				}else {
 
 					User actualUser = (User) session.getAttribute("userSession");
-					List<Estrategia> listaEstrategias = strategyService.findEstrategiaById(actualUser.getEquipoId());	
+					List<Estrategia> listaEstrategias = strategyService.findStrategyById(actualUser.getEquipoId());	
 					model.addAttribute("listaEstrategia",listaEstrategias);
 					session.setAttribute("userStrategy", listaEstrategias);
 					model.addAttribute("estrategia", new Estrategia());
@@ -69,8 +69,7 @@ public class StrategyController {
 
 					HashMap<Integer, String> equipos = User.createTeamsIdNames(actualUser);	
 					model.addAttribute("equipos", equipos);	
-					model.addAttribute("greeting","Usuario: "+ actualUser.getUsername());				  
-					model.addAttribute("teams", actualUser.getNombreEquipo());				
+					model.addAttribute("greeting","Usuario: "+ actualUser.getUsername());	
 					model.addAttribute("roles", actualUser.getRole());
 					
 					return "mainPanel";
@@ -98,7 +97,7 @@ public class StrategyController {
 
 				}else {
 
-					List<Tarea> tareas = strategyService.findTareasByEstrategia(Integer.parseInt(id));
+					List<Tarea> tareas = strategyService.findTasksByStrategy(Integer.parseInt(id));
 					session.setAttribute("estrategiaID", Integer.parseInt(id.trim()));
 					model.addAttribute("listaTareas",tareas);
 					System.out.println("TAREAS COMPLETE");
@@ -156,7 +155,7 @@ public class StrategyController {
 				try {
 
 					List<Tarea> listaTareas = Tarea.stringToObject(stratTasks);
-					strategyService.saveEstrategiaAndTarea(listaTareas,newEstrategia);
+					strategyService.saveStrategyAndTask(listaTareas,newEstrategia);
 
 				}catch (Exception e) {
 
@@ -165,6 +164,32 @@ public class StrategyController {
 			}
 
 			return "redirect:/estrategia/panelControl";
+		}
+	}
+	
+	@PostMapping(value = "/updateEstrategia")
+	public String updateEstrategia(@ModelAttribute("estrategia") Estrategia estrategia,Model model,HttpSession session) {
+
+		synchronized (session) {
+
+			if (!sessionResources.checkUserSession(session)){
+
+				model.addAttribute("mensajeAcceso", "Inactive Session");
+				return "accessDenied";
+
+			}else {
+				
+				try {
+
+					strategyService.updateStrategy(estrategia.getId());
+
+				} catch (Exception e) {
+
+					System.out.println("Error update");
+				}
+			}
+
+			return "mainPanel";
 		}
 	}
 
@@ -182,7 +207,7 @@ public class StrategyController {
 				
 				try {
 
-					strategyService.deleteEstrategia(estrategia.getId());
+					strategyService.deleteStrategy(estrategia.getId());
 
 				} catch (Exception e) {
 

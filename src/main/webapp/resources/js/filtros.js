@@ -158,6 +158,7 @@ function modalFilter(filters){
 		$(".card-header").on("click", function(){
 			$(this).toggleClass("arrowDown");
 		})
+		chooseDaily();
 	})
 }
 function showListDaily(){
@@ -171,13 +172,23 @@ function showListDaily(){
 				'<label class="custom-control-label" for="'+d.id+'">'+d.fecha+'</label></div>';
 
 
+
 				$("#collapseDaily").children(".card").append(daily);
 			})
-
+			chooseDaily();
 		}else{
 			$(".daily-body").hide();
 		}
 	}catch(e){
 		console.log(e)
 	}
+}
+
+
+function chooseDaily(){
+
+	$('input[name="dailyRadio"]').change(function(){
+		console.log("AAA")
+	});
+
 }

@@ -52,27 +52,26 @@ public class HomeController {
 
 	@PostMapping(value = "/mainPanel")
 	public String login(@ModelAttribute("user") User user, Model model,HttpServletRequest request,HttpSession session){
-		
+
 		User userTeamAndRoles = null;
 		boolean userExist = false;
 		String mensaje = "";
 
 		try{
-			
+
 			User newUser = userService.findByUsername(user.getUsername());
-			
+
 			if(newUser.getPassword().equals(User.encrypt(user.getPassword()))) {
 
 				userTeamAndRoles = userService.findRolebyUserId(newUser);
-				
+
 				session = request.getSession();
 				session.setAttribute("userSession", userTeamAndRoles);
 				USessions.add(newUser);	
-				
-				model.addAttribute("greeting","Usuario: "+ user.getUsername());				  
-				model.addAttribute("teams", userTeamAndRoles.getNombreEquipo());				
+
+				model.addAttribute("greeting","Usuario: "+ user.getUsername());				
 				model.addAttribute("roles", userTeamAndRoles.getRole());
-				
+
 				HashMap<Integer, String> equipos = User.createTeamsIdNames(userTeamAndRoles);	
 				model.addAttribute("equipos", equipos);	
 				model.addAttribute("estrategia", new Estrategia());
@@ -96,7 +95,7 @@ public class HomeController {
 
 			try {
 
-				List<Estrategia> listaEstrategias = strategyService.findEstrategiaById(userTeamAndRoles.getEquipoId());				
+				List<Estrategia> listaEstrategias = strategyService.findStrategyById(userTeamAndRoles.getEquipoId());				
 				model.addAttribute("listaEstrategia",listaEstrategias);
 				session.setAttribute("userStrategy", listaEstrategias);	
 
