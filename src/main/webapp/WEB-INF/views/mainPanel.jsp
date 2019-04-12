@@ -29,6 +29,7 @@
 				estrategia.id = "${estrategia.id}";
 				estrategia.endDate = "${estrategia.fechaFin}";
 				estrategia.equipoId = "${estrategia.equipoId}";
+				estrategia.estado ="${estrategia.estado}";
 				estrategia.equipo = equipos[equipos.findIndex(equipo => parseInt(equipo.id) === parseInt(estrategia.equipoId))].name;
 				console.log("Equipo Estrategia", estrategia.equipo)
 				console.log("ID " + estrategia.endDate)

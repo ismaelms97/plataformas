@@ -6,7 +6,7 @@ function checkStatus(){
 	estrategias.forEach(estrategia => {
 			var today = new Date().setHours(0, 0, 0, 0);
 		    var fecha = new Date(estrategia.endDate).getTime();
-		    if (today <= fecha) {
+		    if (today <= fecha && estrategia.estado.trim() != "Finalizada") {
 		        for(var i = 0; i < estrategiaCards.length; i++){
 						console.log(estrategiaCards[i].getAttribute("id") + " " + estrategia.id)
 		        		if(estrategiaCards[i].getAttribute("id") == estrategia.id){
