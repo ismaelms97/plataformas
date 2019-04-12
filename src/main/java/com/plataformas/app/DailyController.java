@@ -71,7 +71,7 @@ public class DailyController {
 	@PostMapping(value = "/saveDaily")
 	public @ResponseBody String  saveDaily ( String stratDaily,Model model,HttpSession session) {
 		synchronized (session) {
-			
+			System.out.println("Daily " + stratDaily);
 			if (!sessionResources.checkUserSession(session)){
 
 				model.addAttribute("mensajeAcceso", "Inactive Session");

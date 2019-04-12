@@ -194,7 +194,7 @@ function saveData() {
 			tasksToString += "RTC:" + task.id + "--";
 			console.log(task.id);
 			tasksToString += "Tipo:" + task.tipo + "--";
-			tasksToString += "Estado:" + task.estado + "--";
+			tasksToString += "Estado:" + task.estadoActual + "--";
 			tasksToString += "EstadoFinal:" + task.estadoFinal+ "--";
 			tasksToString += "prioridad:" + task.prioridad + "--";
 			tasksToString += "resumen:" + task.resumen + "--";
@@ -236,11 +236,10 @@ function saveData() {
 		console.log(inTasks)
 		var date = new Date();
 		tasksToString = "";
-		console.log("Date", date.getFullYear() + "-" + date.getMonth() + "-" + date.getDate())
 		tasks.forEach(task => {
 			tasksToString += "id:" + task.id + "--";
-			tasksToString += "estadoActual:" + task.estado + "--"; 
-			tasksToString += "subEstadoActual:" + " "+ "--";
+			tasksToString += "estadoActual:" + task.estadoActual + "--"; 
+			tasksToString += "subEstadoActual:" + task.estadoActual+ "--";
 			tasksToString += "propiedad:" + task.propiedad+ "qwer";
 		});
 

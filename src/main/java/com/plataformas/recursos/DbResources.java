@@ -59,6 +59,6 @@ public class DbResources {
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		LocalDate localDate = LocalDate.now();
 		
-		return dtf.format(localDate);
+		return "2019-04-13";//dtf.format(localDate)
 	}
 }
