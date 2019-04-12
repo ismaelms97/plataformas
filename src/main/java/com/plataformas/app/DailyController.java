@@ -37,6 +37,7 @@ public class DailyController {
 	public static final String REDIRECT_HOME = "redirect:/";
 	public static final String MAIN_PANEL = "mainPanel";
 	public static final String PLATAFORMA = "plataforma";
+	public static final String REDIRECT_PANEL_CONTROL = REDIRECT_HOME+"estrategia/panelControl";
 
 
 	@PostMapping(value = "/findDailys")
@@ -51,9 +52,11 @@ public class DailyController {
 			}else {
 
 				try {
-					request.getParameter("id");
-					List<Daily> listaDaily = dailyService.findDailyById(Integer.parseInt(id));
-					List<Tarea> tareas = strategyService.findTasksByStrategy(Integer.parseInt(id));
+					
+					int id = Integer.parseInt(request.getParameter("id"));
+					System.out.println(id);
+					List<Daily> listaDaily = dailyService.findDailyById(id);
+					List<Tarea> tareas = strategyService.findTasksByStrategy(id);
 					model.addAttribute("listaDaily", listaDaily);
 					model.addAttribute("listaTareas",tareas);
 				
@@ -66,6 +69,22 @@ public class DailyController {
 			}
 		}
 		return PLATAFORMA;
+	}
+	
+	@GetMapping(value = "/findDailys/{id}")
+	public  String findDaily(HttpSession session) {	
+
+		synchronized (session) {
+
+			if (!sessionResources.checkUserSession(session)){
+
+				return REDIRECT_HOME;
+
+			}else {
+
+				return REDIRECT_PANEL_CONTROL;
+			}
+		}		
 	}
 
 	@PostMapping(value = "/saveDaily")

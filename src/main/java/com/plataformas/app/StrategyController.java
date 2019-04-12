@@ -3,6 +3,7 @@ package com.plataformas.app;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,7 @@ public class StrategyController {
 
 
 	public static final String REDIRECT_HOME = "redirect:/";
-	public static final String REDIRECT_MAIN_CONTROL = REDIRECT_HOME+"estrategia/panelControl";
+	public static final String REDIRECT_PANEL_CONTROL = REDIRECT_HOME+"estrategia/panelControl";
 	public static final String MAIN_PANEL = "mainPanel";
 	public static final String PLATAFORMA = "plataforma";
 
@@ -82,25 +83,32 @@ public class StrategyController {
 		}
 	}
 
-	@GetMapping(value = "/findEstrategia/{id}")
-	public  String findEstrategia(@PathVariable String id,Model model,HttpSession session) {	
+	@PostMapping(value = "/findEstrategia")
+	public  String findEstrategia(HttpServletRequest request,Model model,HttpSession session) {	
 
 		synchronized (session) {
 
 			try {
-
+				
+				int id = Integer.parseInt(request.getParameter("id"));
+				System.out.println(id);
+				
 				if (!sessionResources.checkUserSession(session)){
 
 					return REDIRECT_HOME;
 
 				}else if (!sessionResources.checkUserStrategy(session,id)){
 
-					return REDIRECT_MAIN_CONTROL;
-				}		
-
-				List<Tarea> tareas = strategyService.findTasksByStrategy(Integer.parseInt(id));
-				session.setAttribute("estrategiaID", Integer.parseInt(id.trim()));
+					return REDIRECT_PANEL_CONTROL;
+				}	
+				
+				
+				List<Tarea> tareas = strategyService.findTasksByStrategy(id);
+				session.setAttribute("estrategiaID", id);
 				model.addAttribute("listaTareas",tareas);
+				for (Tarea tarea : tareas) {
+					System.out.println(tarea.getId());
+				}
 				System.out.println("TAREAS COMPLETE");
 
 				return PLATAFORMA;
@@ -117,6 +125,22 @@ public class StrategyController {
 				return MAIN_PANEL;
 			}		
 		}
+	}
+	
+	@GetMapping(value = "/findEstrategia/{id}")
+	public  String findDaily(HttpSession session) {	
+
+		synchronized (session) {
+
+			if (!sessionResources.checkUserSession(session)){
+
+				return REDIRECT_HOME;
+
+			}else {
+
+				return REDIRECT_PANEL_CONTROL;
+			}
+		}		
 	}
 
 	@PostMapping(value = "/pushEstrategia")
@@ -162,7 +186,7 @@ public class StrategyController {
 				}
 			}
 
-			return REDIRECT_MAIN_CONTROL;
+			return REDIRECT_PANEL_CONTROL;
 		}
 	}
 
