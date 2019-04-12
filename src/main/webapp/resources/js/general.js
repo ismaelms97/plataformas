@@ -55,7 +55,6 @@ function inputTasks() {
 function drawTable(array , db) {
 //	ORdenamos el array por prioridad,
 	array = orderBy(array);
-	//tasks = orderBy(tasks);
 	
 	console.log("Array Ordenado: ", array)
 	// PIntamos la tabla
@@ -65,7 +64,7 @@ function drawTable(array , db) {
 		for (var j = 0; j < 10; j++) {
 			if(document.getElementsByTagName("TR")[i+1].children.length != 10){
 				var td = document.createElement("td");
-				td.setAttribute("class", estados[j].replace(/\s/g, "-"));
+				td.setAttribute("class", estados[j].replace(/[\.,\s]/g, "-"));
 				document.getElementsByTagName("TR")[i + 1].appendChild(td);
 			}
 		} 
@@ -82,7 +81,7 @@ function drawTable(array , db) {
 			var el = rect[i];
 			var cln = $(el).clone();
 			cln.attr("class", "clone orange");
-			$(el).parent().siblings("."+array[i].estadoFinal.replace(/\s/g, "-")).append(cln);
+			$(el).parent().siblings("."+array[i].estadoFinal.replace(/[\.,\s]/g, "-")).append(cln);
 			$(cln).css("display", "inline-block");
 		}
 	}
@@ -97,9 +96,16 @@ function drawRTC(array, pos, db) {
 	if(estados.length >= 1){
 
 		for (var j = 0; j < estados.length; j++) {
-			if (array[pos].estado.toLowerCase().startsWith(estados[j])) {
-				estadoActual = j
+			if(db){
+				if (array[pos].estado.toLowerCase().startsWith(estados[j])) {
+					estadoActual = j
+				}
+			} else {
+				if (array[pos].estadoActual.toLowerCase().startsWith(estados[j])) {
+					estadoActual = j
+				}
 			}
+			
 		}
 	}
 
@@ -111,17 +117,17 @@ function drawRTC(array, pos, db) {
 		// creamos el clon de los RTC
 		if(inTasks.length > 0){
 			if(inTasks[pos].estadoFinal.toLowerCase().startsWith(inTasks[pos].estado.toLowerCase()) &&
-					array[pos].estado.toLowerCase().startsWith(inTasks[pos].estado.toLowerCase())){
+					array[pos].estadoActual.toLowerCase().startsWith(inTasks[pos].estado.toLowerCase())){
 
 				// Tricolor, inicio == Actual == Final
 				classes += ' gradientGreyBlueOrange';
 
-			}else if(array[pos].estado.toLowerCase().startsWith(inTasks[pos].estadoFinal.toLowerCase())){
+			}else if(array[pos].estadoActual.toLowerCase().startsWith(inTasks[pos].estadoFinal.toLowerCase())){
 
 				// Verde, COMPLETADO
 				classes += ' green';
 
-			}else if(array[pos].estado.toLowerCase().startsWith(inTasks[pos].estado.toLowerCase())){
+			}else if(array[pos].estadoActual.toLowerCase().startsWith(inTasks[pos].estado.toLowerCase())){
 
 				// GRIS/AZUL Inicio == Actual
 				classes += ' gradientGreyBlue';
@@ -131,15 +137,17 @@ function drawRTC(array, pos, db) {
 				// AZUL, resto
 				classes += ' blue';
 			}
-			console.log(array[pos].id + " " + array[pos].estado + "  " + inTasks[pos].id + " " + inTasks[pos].estadoFinal + "  " + array[pos].estado.toLowerCase().startsWith(inTasks[pos].estadoFinal.toLowerCase()))
+			console.log(array[pos].id + " " + array[pos].estadoActual + "  " + inTasks[pos].id + " " + inTasks[pos].estadoFinal + "  " + array[pos].estadoActual.toLowerCase().startsWith(inTasks[pos].estadoFinal.toLowerCase()))
 		}
 	}
 
-//	Solucionar problema con onclick event, no nos da ningun valor
 	document.getElementsByTagName("TR")[pos + 1].children[estadoActual].innerHTML = '<div class="'+classes+'" data-posInitial="' + estadoActual + '" data-rtc="' + (pos + 1) + '" title="'+ array[pos].resumen +'" data-placement="left">'
 	+ '<small class="tamano">'+ array[pos].tamano + '</small> '+ array[pos].id + ' <small class="complejidad">'+ array[pos].complejidad + '</small></div>';
 
-
+//	document.getElementsByTagName("TR")[pos + 1].children[estadoActual].innerHTML = '<div class="'+classes+'" data-posInitial="' + estadoActual + '" data-rtc="' + (pos + 1) + '" title="'+ array[pos].resumen +'" data-placement="left">'
+//	+ '<small class="tamano">'+ array[pos].tamano + '</small> '+ array[pos].id + ' <small class="complejidad">'+ array[pos].complejidad + '</small></div>';
+//
+//
 
 
 	if(inTasks.length <= 0 && !db){

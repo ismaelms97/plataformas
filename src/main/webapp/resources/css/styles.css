@@ -223,17 +223,24 @@ td .ui-selected {
 	display: flex;
 	flex-direction: row !important;
 	flex-wrap: wrap;
-	justify-content: space-between;
+	justify-content: flex-start;
 }
 .strategyTeams{
-	align-content: space-around;
 	position:relative;
+	font-weight: bolder;
+	width: 60%;
 }
 
 .cartas > a{
-	margin: 0 2% 1% 0;
+	margin: 0 5% 1% 0;
 }
+
+.a{
+	margin-right: 2% !important;
+}
+
 .estartegiasCard{
+	
 	border-radius: 5%;
 	padding: 20px;
 	width: 187.52px;

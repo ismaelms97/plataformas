@@ -59,7 +59,7 @@ function dragDrop(arr){
 					stop: function (event, ui) {
 						document.getElementsByClassName("rect")[(this.getAttribute("data-rtc") - 1)].style.display = "";
 
-						if (this.parentElement.classList.contains(estados[this.getAttribute("data-posInitial")].replace(/\s/g, "-")) && arr[this.getAttribute("data-rtc") - 1].modified) {
+						if (this.parentElement.classList.contains(estados[this.getAttribute("data-posInitial")].replace(/[\.,\s]/g, "-")) && arr[this.getAttribute("data-rtc") - 1].modified) {
 
 							arr[this.getAttribute("data-rtc") - 1].modified = false;
 

@@ -30,7 +30,7 @@
 			<script>
 				console.log("${daily.id}")
 				var exists = false;
-				
+				// Si da error es por que jsp no detecta en su codigo que es un Sccript con codigo js
 				inDailys.forEach(el => {
 					if(el.id == "${daily.id}"){
 						exists = true;
@@ -100,7 +100,7 @@
 					<th scope="col">Aceptación Usuario</th>
 					<th scope="col">En Curso</th>
 					<th scope="col">Aceptación a las Pruebas</th>
-					<th scope="col">Pendiente Implantar</th>
+					<th scope="col">Pte. Implantar</th>
 					<th scope="col">Implantado</th>
 				</tr>
 			</thead>
