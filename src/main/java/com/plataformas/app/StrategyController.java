@@ -1,9 +1,9 @@
 package com.plataformas.app;
 
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,11 +35,12 @@ public class StrategyController {
 	SessionResources sessionResources;
 	@Autowired
 	DailyService dailyService;
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 * @throws SQLException 
-	 * @throws ClassNotFoundException 
-	 */
+
+
+	public static final String REDIRECT_HOME = "redirect:/";
+	public static final String REDIRECT_PANEL_CONTROL = REDIRECT_HOME+"estrategia/panelControl";
+	public static final String MAIN_PANEL = "mainPanel";
+	public static final String PLATAFORMA = "plataforma";
 
 
 	@GetMapping(value = "/panelControl")
@@ -51,71 +52,95 @@ public class StrategyController {
 
 				if (!sessionResources.checkUserSession(session)){
 
-					model.addAttribute("mensajeAcceso", "Inactive Session");
-					return "accessDenied";
+					return REDIRECT_HOME;
 
 				}else {
 
 					User actualUser = (User) session.getAttribute("userSession");
+					HashMap<Integer, String> equipos = User.createTeamsIdNames(actualUser);	
 					List<Estrategia> listaEstrategias = strategyService.findStrategyById(actualUser.getEquipoId());	
-					model.addAttribute("listaEstrategia",listaEstrategias);
 					session.setAttribute("userStrategy", listaEstrategias);
-					model.addAttribute("estrategia", new Estrategia());
-
+					
 					if( session.getAttribute("newEstrategia") != null) {
 
 						session.removeAttribute("newEstrategia");
 					}
-
-					HashMap<Integer, String> equipos = User.createTeamsIdNames(actualUser);	
+					
 					model.addAttribute("equipos", equipos);	
 					model.addAttribute("greeting","Usuario: "+ actualUser.getUsername());	
-					model.addAttribute("roles", actualUser.getRole());
+					model.addAttribute("roles", actualUser.getRole());					
+					model.addAttribute("listaEstrategia",listaEstrategias);					
+					model.addAttribute("estrategia", new Estrategia());
 					
-					return "mainPanel";
+					return MAIN_PANEL;
 				}
 
 			}catch (Exception e) {
 
 				System.out.println("Panel  control Error with session or strategy");
-				return "redirect:/";
+				return REDIRECT_HOME;
 			}
 		}
 	}
 
-	@GetMapping(value = "/findEstrategia/{id}")
-	public  String findEstrategia(@PathVariable String id,Model model,HttpSession session) {	
+	@PostMapping(value = "/findEstrategia")
+	public  String findEstrategia(HttpServletRequest request,Model model,HttpSession session) {	
 
 		synchronized (session) {
 
 			try {
+				
+				int id = Integer.parseInt(request.getParameter("id"));
+				System.out.println(id);
+				
+				if (!sessionResources.checkUserSession(session)){
 
-				if (!sessionResources.checkUserSession(session) || !sessionResources.checkUserStrategy(session,id)) {
+					return REDIRECT_HOME;
 
-					model.addAttribute("mensajeAcceso", "You have not acces with this strategy");
-					return "accessDenied";
+				}else if (!sessionResources.checkUserStrategy(session,id)){
 
-				}else {
-
-					List<Tarea> tareas = strategyService.findTasksByStrategy(Integer.parseInt(id));
-					session.setAttribute("estrategiaID", Integer.parseInt(id.trim()));
-					model.addAttribute("listaTareas",tareas);
-					System.out.println("TAREAS COMPLETE");
-
-					return "plataforma";
+					return REDIRECT_PANEL_CONTROL;
+				}	
+				
+				
+				List<Tarea> tareas = strategyService.findTasksByStrategy(id);
+				session.setAttribute("estrategiaID", id);
+				model.addAttribute("listaTareas",tareas);
+				for (Tarea tarea : tareas) {
+					System.out.println(tarea.getId());
 				}
+				System.out.println("TAREAS COMPLETE");
+
+				return PLATAFORMA;
+
 
 			}catch (NumberFormatException e) {
 
 				System.out.println("Incorrect format en mostrarTareasEstrategia Controller");
-				return "mainPanel";
+				return MAIN_PANEL;
 
 			}catch (Exception e) {
 
 				System.out.println("other error in strategy Controller");
-				return "mainPanel";
+				return MAIN_PANEL;
 			}		
 		}
+	}
+	
+	@GetMapping(value = "/findEstrategia/{id}")
+	public  String findDaily(HttpSession session) {	
+
+		synchronized (session) {
+
+			if (!sessionResources.checkUserSession(session)){
+
+				return REDIRECT_HOME;
+
+			}else {
+
+				return REDIRECT_PANEL_CONTROL;
+			}
+		}		
 	}
 
 	@PostMapping(value = "/pushEstrategia")
@@ -125,8 +150,7 @@ public class StrategyController {
 
 			if (!sessionResources.checkUserSession(session)){
 
-				model.addAttribute("mensajeAcceso", "Inactive Session");
-				return "accessDenied";
+				return REDIRECT_HOME;
 
 			}else {
 
@@ -134,7 +158,7 @@ public class StrategyController {
 				model.addAttribute("tarea", new Tarea());
 			}
 
-			return "plataforma";
+			return PLATAFORMA;
 		}
 	}
 
@@ -145,8 +169,7 @@ public class StrategyController {
 
 			if (!sessionResources.checkUserSession(session)){
 
-				model.addAttribute("mensajeAcceso", "Inactive Session");
-				return "accessDenied";
+				return REDIRECT_HOME;
 
 			}else {
 
@@ -163,10 +186,10 @@ public class StrategyController {
 				}
 			}
 
-			return "redirect:/estrategia/panelControl";
+			return REDIRECT_PANEL_CONTROL;
 		}
 	}
-	
+
 	@PostMapping(value = "/updateEstrategia")
 	public String updateEstrategia(@ModelAttribute("estrategia") Estrategia estrategia,Model model,HttpSession session) {
 
@@ -174,11 +197,10 @@ public class StrategyController {
 
 			if (!sessionResources.checkUserSession(session)){
 
-				model.addAttribute("mensajeAcceso", "Inactive Session");
-				return "accessDenied";
+				return REDIRECT_HOME;
 
 			}else {
-				
+
 				try {
 
 					strategyService.updateStrategy(estrategia.getId());
@@ -189,7 +211,7 @@ public class StrategyController {
 				}
 			}
 
-			return "mainPanel";
+			return MAIN_PANEL;
 		}
 	}
 
@@ -200,11 +222,10 @@ public class StrategyController {
 
 			if (!sessionResources.checkUserSession(session)){
 
-				model.addAttribute("mensajeAcceso", "Inactive Session");
-				return "accessDenied";
+				return REDIRECT_HOME;
 
 			}else {
-				
+
 				try {
 
 					strategyService.deleteStrategy(estrategia.getId());
@@ -215,7 +236,7 @@ public class StrategyController {
 				}
 			}
 
-			return "mainPanel";
+			return MAIN_PANEL;
 		}
 	}
 }

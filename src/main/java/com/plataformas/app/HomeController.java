@@ -1,6 +1,5 @@
 package com.plataformas.app;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,51 +29,45 @@ import com.plataformas.model.User;
 @RequestMapping(value = "/")
 public class HomeController {
 
-	private static  List<User> USessions = new ArrayList<User>();
-
 	@Autowired
 	UserService userService;
 	@Autowired
 	StrategyService strategyService;
+	
+	
+	public static final String HOME = "home";
+	public static final String REDIRECT_HOME = "redirect:/";
+	public static final String REDIRECT_MAIN_CONTROL = REDIRECT_HOME+"estrategia/panelControl";
+	public static final String MAIN_PANEL = "mainPanel";
 
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 * @throws SQLException 
-	 * @throws ClassNotFoundException 
-	 */
 
 	@GetMapping(value = "/")
 	public String home(Locale locale, Model model)  {
 
 		model.addAttribute("user", new User());
-		return "home";
+		return HOME;
+	}
+	
+	@GetMapping(value = "/mainPanel")
+	public String logGet(Locale locale, Model model)  {
+		
+		return "redirect:/estrategia/panelControl";
 	}
 
 	@PostMapping(value = "/mainPanel")
 	public String login(@ModelAttribute("user") User user, Model model,HttpServletRequest request,HttpSession session){
 
-		User userTeamAndRoles = null;
+		
 		boolean userExist = false;
 		String mensaje = "";
+		User newUser = null;
 
 		try{
 
-			User newUser = userService.findByUsername(user.getUsername());
+			newUser = userService.findByUsername(user.getUsername());
 
-			if(newUser.getPassword().equals(User.encrypt(user.getPassword()))) {
+			if(newUser.getPassword().equals(User.encrypt(user.getPassword()))) {		
 
-				userTeamAndRoles = userService.findRolebyUserId(newUser);
-
-				session = request.getSession();
-				session.setAttribute("userSession", userTeamAndRoles);
-				USessions.add(newUser);	
-
-				model.addAttribute("greeting","Usuario: "+ user.getUsername());				
-				model.addAttribute("roles", userTeamAndRoles.getRole());
-
-				HashMap<Integer, String> equipos = User.createTeamsIdNames(userTeamAndRoles);	
-				model.addAttribute("equipos", equipos);	
-				model.addAttribute("estrategia", new Estrategia());
 				userExist = true;
 
 			}else {
@@ -91,26 +84,19 @@ public class HomeController {
 			mensaje = "not connection";
 		}
 
-		if(userExist) {
-
-			try {
-
-				List<Estrategia> listaEstrategias = strategyService.findStrategyById(userTeamAndRoles.getEquipoId());				
-				model.addAttribute("listaEstrategia",listaEstrategias);
-				session.setAttribute("userStrategy", listaEstrategias);	
-
-
-			}catch (Exception e) {
-
-				System.out.println("listaEstrategia , not found...");
-			}	
-
-			return "mainPanel";
-
-		}else {		
-
+		if(!userExist) {
+			
 			model.addAttribute("errorMsg",mensaje);
-			return  "home";
+			return  HOME;			
+
+		}else {	
+			
+			User userTeamAndRoles = userService.findRolebyUserId(newUser);
+			session = request.getSession();
+			session.setAttribute("userSession", userTeamAndRoles);
+
+			return REDIRECT_MAIN_CONTROL;
+		
 		}
 	}
 
@@ -123,6 +109,6 @@ public class HomeController {
 			System.out.println("Session closed");
 		}
 
-		return "redirect:/";
+		return REDIRECT_HOME;
 	}
 }

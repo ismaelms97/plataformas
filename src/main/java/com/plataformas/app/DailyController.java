@@ -1,8 +1,8 @@
 package com.plataformas.app;
 
-import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,30 +33,41 @@ public class DailyController {
 	@Autowired
 	DbResources dbResources;
 
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 * @throws SQLException 
-	 * @throws ClassNotFoundException 
-	 */
+		
+	public static final String REDIRECT_HOME = "redirect:/";
+	public static final String MAIN_PANEL = "mainPanel";
+	public static final String PLATAFORMA = "plataforma";
+	public static final String REDIRECT_PANEL_CONTROL = REDIRECT_HOME+"estrategia/panelControl";
 
-	@GetMapping(value = "/findDailys/{id}")
-	public  String findDailyById(@PathVariable String id,Model model,HttpSession session) {	
+
+	@PostMapping(value = "/findDailys")
+	public  String findDailyById(HttpServletRequest request,Model model,HttpSession session) {	
 
 		synchronized (session) {
 
 			if (!sessionResources.checkUserSession(session)){
 
-				model.addAttribute("mensajeAcceso", "Inactive Session");
-				return "accessDenied";
+				return REDIRECT_HOME;
 
 			}else {
 
 				try {
-
-					List<Daily> listaDaily = dailyService.findDailyById(Integer.parseInt(id));
-					List<Tarea> tareas = strategyService.findTasksByStrategy(Integer.parseInt(id));
+					
+					int id = Integer.parseInt(request.getParameter("id"));
+					System.out.println(id);
+					List<Daily> listaDaily = dailyService.findDailyById(id);
+					List<Tarea> tareas = strategyService.findTasksByStrategy(id);
 					model.addAttribute("listaDaily", listaDaily);
 					model.addAttribute("listaTareas",tareas);
+					
+					for (Tarea tarea : tareas) {
+						System.out.println("tarea: "+tarea.getId());
+					}
+					for (Daily daily : listaDaily) {
+						
+						System.out.println("daily: "+daily.getId());
+					}
+				
 				
 				}catch (Exception e) {
 
@@ -65,7 +76,23 @@ public class DailyController {
 
 			}
 		}
-		return "plataforma";
+		return PLATAFORMA;
+	}
+	
+	@GetMapping(value = "/findDailys/{id}")
+	public  String findDaily(HttpSession session) {	
+
+		synchronized (session) {
+
+			if (!sessionResources.checkUserSession(session)){
+
+				return REDIRECT_HOME;
+
+			}else {
+
+				return REDIRECT_PANEL_CONTROL;
+			}
+		}		
 	}
 
 	@PostMapping(value = "/saveDaily")
@@ -74,8 +101,7 @@ public class DailyController {
 			System.out.println("Daily " + stratDaily);
 			if (!sessionResources.checkUserSession(session)){
 
-				model.addAttribute("mensajeAcceso", "Inactive Session");
-				return "accessDenied";
+				return REDIRECT_HOME;
 
 			}else {
 
@@ -92,7 +118,7 @@ public class DailyController {
 				}
 
 			}
-			return "mainPanel";
+			return MAIN_PANEL;
 		}
 	}
 
@@ -105,8 +131,7 @@ public class DailyController {
 
 			if (!sessionResources.checkUserSession(session)){
 
-				model.addAttribute("mensajeAcceso", "Inactive Session");
-				return "accessDenied";
+				return REDIRECT_HOME;
 
 			}else {
 

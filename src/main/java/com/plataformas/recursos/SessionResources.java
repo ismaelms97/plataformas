@@ -11,7 +11,7 @@ import com.plataformas.model.Estrategia;
 @Component
 public class SessionResources {
 	
-	public boolean checkUserStrategy(HttpSession session, String id) {
+	public boolean checkUserStrategy(HttpSession session, int id) {
 		
 		@SuppressWarnings("unchecked")
 		List<Estrategia> listaEstrategias  = (List<Estrategia>) session.getAttribute("userStrategy");
@@ -20,7 +20,7 @@ public class SessionResources {
 			
 			System.out.println(estrategia.getId()+" == "+id);
 			
-			if(estrategia.getId() == Integer.parseInt(id)) {
+			if(estrategia.getId() == id) {
 				
 				return true;
 			}

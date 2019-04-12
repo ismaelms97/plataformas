@@ -44,10 +44,12 @@
 						'<div class="estartegiasCard">'+ nombre +'</div>'+
 					'<div class="divOptions">'+
 						'<form action="/estrategia/findEstrategia" method="post">'+
+						'<input  type="hidden" name="id" value="'+estrategia.id+'">'+
 							'<input class="options createDaily" type="submit" value="Crear Daily" name="'+estrategia.id+'">'+
 						'</form>'+
-						'<form action="/daily/FindDailys" method="post">'+
-							'<input class="options viewDailys" type="submit" value="Ver Daily" name="'+estrategia.id+'">'+
+						'<form action="/daily/findDailys" method="post">'+
+						'<input  type="hidden" name="id" value="'+estrategia.id+'">'+
+							'<input class="options viewDailys" type="submit" value="Ver Daily" >'+
 						'</form>'+
 					'</div></a>');
 			</script>
@@ -57,7 +59,6 @@
 			<div class="estartegiasCard">Nueva Estrategia</div>
 		</a>
 	</div>
-
 	<script>
 		checkStatus();
 		 console.log("Equipos", equipos);
@@ -123,6 +124,7 @@
 		    
 				$(".options", this).toggle();
 				
+
 				$(".estartegiasCard").click(function(e){
 					if(!e.target.classList.contains("disabled")){ 
 						sessionStorage.setItem('titulo', e.target.innerHTML.trim());
