@@ -66,13 +66,8 @@
  			});
 		    $(".a").click(function () {
 					var el = this;
+					var elId = this.getAttribute("id");
 					if(el.getAttribute("data-dailyDate") == null){
-						 $.ajax({
-							type: "POST",
-							url: "/daily/date",
-							data: {
-								id: this.getAttribute("id")
-							}, success: function (data) {
 								var date = new Date();
 								var day;
 								var month;
@@ -90,18 +85,15 @@
 								}
 								
 								var today = date.getFullYear() + "-" + month + "-" + day;
-								if((today == data && data.trim() != "") || el.children[0].classList.contains("ended")){
+								if((today == estrategias[elId -1 ].fecha && estrategias[elId -1].fecha.trim() != "") || el.children[0].classList.contains("ended")){
 									el.children[0].nextElementSibling.children[0].classList.add("disabled");
 									el.children[0].nextElementSibling.children[0].setAttribute("style", "display:none");
 									console.log("Cant create new daily")
 								} else {
 									console.log("You can create new daily")
 								}
-								el.setAttribute("data-dailyDate", data)
-								
-								
-							}
-						}); 
+								el.setAttribute("data-dailyDate", estrategias[elId -1].fecha)
+
 					} else {
 						var date = new Date();
 						var today = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate()

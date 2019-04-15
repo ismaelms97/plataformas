@@ -31,7 +31,10 @@ public class StrategyService {
 			Connection con = dbResources.getConection();
 			con.setAutoCommit(false);
 			Statement  stmt = con.createStatement(); 
-			String query = "SELECT * FROM estrategia Es where ";
+			// SELECT Es.*, (Select D.fecha FROM daily D where D.estrategia_id = Es.id AND D.id = (Select MAX(D.id) from daily D where D.estrategia_id = Es.id ))  FROM estrategia Es   where Es.equipo_id = 1 OR Es.equipo_id = 2
+			
+			String query = "SELECT Es.*, (Select D.fecha FROM daily D where D.estrategia_id = Es.id AND D.id = (Select MAX(D.id) from daily D where D.estrategia_id = Es.id ))  FROM estrategia Es   where ";
+			//String query = "SELECT * FROM estrategia Es where ";
 			int i = 1;
 
 			for (Integer id : listId) {
