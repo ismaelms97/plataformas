@@ -56,7 +56,6 @@
 						daily.estadoActual.push(taskState);
 					}
 				});
-				console.log(inDailys)
 			</script>
 	</c:forEach>
 
@@ -81,7 +80,6 @@
 				task.prioridad = "${tarea.prioridad}";
 				task.tamano = "${tarea.tamaño}";
 				inTasks.push(task);	
-				console.log(task)
 			</script>
 	</c:forEach>
 	
