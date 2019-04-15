@@ -1,8 +1,5 @@
 package com.plataformas.app;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,13 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.plataformas.Db2.StrategyService;
 import com.plataformas.Db2.UserService;
-import com.plataformas.model.Estrategia;
 import com.plataformas.model.User;
 
 
-/**
- * Handles requests for the application home page.
- */
 @Controller
 @RequestMapping(value = "/")
 public class HomeController {
@@ -33,8 +26,8 @@ public class HomeController {
 	UserService userService;
 	@Autowired
 	StrategyService strategyService;
-	
-	
+
+
 	public static final String HOME = "home";
 	public static final String REDIRECT_HOME = "redirect:/";
 	public static final String REDIRECT_MAIN_CONTROL = REDIRECT_HOME+"estrategia/panelControl";
@@ -47,17 +40,16 @@ public class HomeController {
 		model.addAttribute("user", new User());
 		return HOME;
 	}
-	
+
 	@GetMapping(value = "/mainPanel")
 	public String logGet(Locale locale, Model model)  {
-		
+
 		return "redirect:/estrategia/panelControl";
 	}
 
 	@PostMapping(value = "/mainPanel")
 	public String login(@ModelAttribute("user") User user, Model model,HttpServletRequest request,HttpSession session){
 
-		
 		boolean userExist = false;
 		String mensaje = "";
 		User newUser = null;
@@ -85,18 +77,18 @@ public class HomeController {
 		}
 
 		if(!userExist) {
-			
+
 			model.addAttribute("errorMsg",mensaje);
 			return  HOME;			
 
 		}else {	
-			
+
 			User userTeamAndRoles = userService.findRolebyUserId(newUser);
 			session = request.getSession();
 			session.setAttribute("userSession", userTeamAndRoles);
 
 			return REDIRECT_MAIN_CONTROL;
-		
+
 		}
 	}
 
