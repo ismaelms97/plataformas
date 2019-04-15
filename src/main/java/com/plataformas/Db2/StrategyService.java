@@ -125,7 +125,7 @@ public class StrategyService {
 
 			con = dbResources.getConection();
 			con.setAutoCommit(false);
-
+System.out.println("guardando Estado... "+estrategia.getEstado());
 			String sql = "INSERT INTO estrategia (nombre,estado,fechaInicio,fechaFin,equipo_id) values "
 					+ "('"+estrategia.getNombre()+"','"+estrategia.getEstado()+"','"+estrategia.getFechaInicio()+"','"+estrategia.getFechaFin()+"',"+estrategia.getEquipoId()+")";
 
