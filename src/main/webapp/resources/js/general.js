@@ -103,7 +103,6 @@ function drawRTC(array, pos, db) {
 				}
 			}
 		}
-		console.log(estadoActual)
 	}
 
 
@@ -112,29 +111,31 @@ function drawRTC(array, pos, db) {
 	if(!db){
 
 		// creamos el clon de los RTC
-		if(inTasks.length > 0){
-			if(inTasks[pos].estadoFinal.toLowerCase().startsWith(inTasks[pos].estado.toLowerCase()) &&
-					array[pos].estadoActual.toLowerCase().startsWith(inTasks[pos].estado.toLowerCase())){
+		console.log("array", array);
+		console.log("arrayInTasksBackup", arrayInTasksBackup);
+		if(arrayInTasksBackup.length > 0){
+			if(arrayInTasksBackup[pos].estadoFinal.toLowerCase().startsWith(arrayInTasksBackup[pos].estado.toLowerCase()) &&
+					array[pos].estadoActual.toLowerCase().startsWith(arrayInTasksBackup[pos].estado.toLowerCase())){
 
 				// Tricolor, inicio == Actual == Final
 				classes += ' gradientGreyBlueOrange';
 
-			}else if(array[pos].estadoActual.toLowerCase().startsWith(inTasks[pos].estadoFinal.toLowerCase())){
+			}else if(array[pos].estadoActual.toLowerCase().startsWith(arrayInTasksBackup[pos].estadoFinal.toLowerCase())){
 
 				// Verde, COMPLETADO
 				classes += ' green';
 
-			}else if(array[pos].estadoActual.toLowerCase().startsWith(inTasks[pos].estado.toLowerCase())){
+			}else if(array[pos].estadoActual.toLowerCase().startsWith(arrayInTasksBackup[pos].estado.toLowerCase())){
 
 				// GRIS/AZUL Inicio == Actual
 				classes += ' gradientGreyBlue';
 
 			}else{
-
+				console.log(array[pos].estadoActual.toLowerCase() + " , "+  arrayInTasksBackup[pos].estado.toLowerCase());
 				// AZUL, resto
 				classes += ' blue';
 			}
-			console.log(array[pos].id + " " + array[pos].estadoActual + "  " + inTasks[pos].id + " " + inTasks[pos].estadoFinal + "  " + array[pos].estadoActual.toLowerCase().startsWith(inTasks[pos].estadoFinal.toLowerCase()))
+			console.log(array[pos].id + " " + array[pos].estadoActual + "  " + arrayInTasksBackup[pos].id + " " + arrayInTasksBackup[pos].estadoFinal + "  " + array[pos].estadoActual.toLowerCase().startsWith(inTasks[pos].estadoFinal.toLowerCase()))
 		}
 	}
 
@@ -153,7 +154,9 @@ function drawRTC(array, pos, db) {
 		$(el).parent().append(cln);
 		$(cln).css("display", "none");
 
-		dragDrop(array);
+		dragDrop(array, true);
+	}else{
+		dragDrop(array, false);
 	}
 	if(estadoActual != -1){
 		// Ejecutamos la funcion para mostrar los detalles

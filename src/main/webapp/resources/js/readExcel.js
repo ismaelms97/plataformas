@@ -116,6 +116,8 @@ var process_wb = (function () {
 			if(inTasks.length >= 1){
 				tasks = strategyFilter(tasks);
 				$("div.button").removeClass("disabled");
+				var filtrado = tasks.filter(item => inTasks.find(item2 => item.id === item2.id).propiedad = item.propiedad);
+				console.log("Filtrado", filtrado);
 			}
 
 

@@ -31,10 +31,7 @@
 				estrategia.equipoId = "${estrategia.equipoId}";
 				estrategia.estado ="${estrategia.estado}";
 				estrategia.equipo = equipos[equipos.findIndex(equipo => parseInt(equipo.id) === parseInt(estrategia.equipoId))].name;
-				console.log("Equipo Estrategia", estrategia.equipo)
-				console.log("ID " + estrategia.endDate)
 				estrategias.push(estrategia);
-				console.log(estrategia.equipo);
 				//href="/estrategia/findEstrategia/${estrategia.id}"	
 				
 				var nombre = "${estrategia.nombre}";
@@ -68,7 +65,6 @@
  			});
 		    $(".a").click(function () {
 					var el = this;
-					console.log(el.getAttribute("data-dailyDate"))
 					if(el.getAttribute("data-dailyDate") == null){
 						 $.ajax({
 							type: "POST",
@@ -93,15 +89,11 @@
 								}
 								
 								var today = date.getFullYear() + "-" + month + "-" + day;
-								console.log(date.getFullYear() + "-" + month + "-" + day)
-								console.log(today == data)
-								console.log(el.classList)
 								if((today == data && data.trim() != "") || el.children[0].classList.contains("ended")){
-									console.log(el.children[0].nextElementSibling);
 									el.children[0].nextElementSibling.children[0].classList.add("disabled");
-									console.log("Cant create new daily a")
+									console.log("Cant create new daily")
 								} else {
-									console.log("You can create new daily a")
+									console.log("You can create new daily")
 								}
 								el.setAttribute("data-dailyDate", data)
 								
@@ -113,9 +105,9 @@
 						var today = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate()
 						var data = el.getAttribute("data-dailyDate")
 						if((today == data && data.trim() != "") || el.children[0].classList.contains("ended")){
-									console.log("Cant create new daily b")
+									console.log("Cant create new daily")
 								} else {
-									console.log("You can create new daily b")
+									console.log("You can create new daily")
 								}
 					}
 					
@@ -139,15 +131,7 @@
 		for (i = 0; i < acc.length; i++) {
 		  acc[i].addEventListener("click", function() {
 		    this.classList.toggle("actived");
-			console.log("Activo")
-			console.log(this);
 
-		   /*  var panel = this.nextElementSibling;
-		    if (panel.style.maxHeight){
-		      panel.style.maxHeight = null;
-		    } else {
-		      panel.style.maxHeight = panel.scrollHeight + "px";
-		    } */
 		  });
 		} 
 
