@@ -18,12 +18,13 @@ public class Estrategia {
 	private String fechaInicio;
 	private String fechaFin;
 	private int equipoId;
+	private String fechaDaily;
 
 	public Estrategia() {
 		super();
 	}
 
-	public Estrategia(int id,String nombre, String estado, String fechaInicio, String fechaFin, int equipoId) {
+	public Estrategia(int id,String nombre, String estado, String fechaInicio, String fechaFin, int equipoId,String fechaDaily) {
 		super();
 		Id = id;
 		this.nombre = nombre;
@@ -31,6 +32,7 @@ public class Estrategia {
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
 		this.equipoId = equipoId;
+		this.fechaDaily = fechaDaily;
 	}
 
 	public Estrategia(String nombre,String estado, String fechaInicio, String fechaFin, int equipoId) {
@@ -90,6 +92,15 @@ public class Estrategia {
 		this.equipoId = equipoId;
 	}
 
+	
+	public String getFechaDaily() {
+		return fechaDaily;
+	}
+
+	public void setFechaDaily(String fechaDaily) {
+		this.fechaDaily = fechaDaily;
+	}
+
 	public static  List<Estrategia> converFromDatabase(ResultSet rs,List<Estrategia> estrategiaList ) throws SQLException {
 
 		while (rs.next()) {
@@ -100,7 +111,8 @@ public class Estrategia {
 			String fechaInicio = rs.getString("fechaInicio");
 			String fechafin = rs.getString("fechafin");
 			int equipo_id = rs.getInt("equipo_id");
-			Estrategia estrategia = new Estrategia( id,nombre, estado,fechaInicio ,fechafin ,equipo_id);
+			String fechaDaily = rs.getString("fecha");
+			Estrategia estrategia = new Estrategia( id,nombre, estado,fechaInicio ,fechafin ,equipo_id,fechaDaily);
 			estrategiaList.add(estrategia);
 		}
 		return estrategiaList;

@@ -1,10 +1,12 @@
-var arrayTasksBackup = [];
+var arrayTasksBackup = tasks.slice(0);
+var arrayInTasksBackup = inTasks.slice(0);
 
-function dragDrop(arr){
+function dragDrop(arr, bool){
 
 	// Con este codigo conseguimos que se mueva cada tarea unicamente en su eje x, y
 	// a su vez que cuando los dejes en el sitio, cambien de color
 	$(function () {
+		if(bool){
 		$(".rect").draggable(
 				{
 					axis: "x",
@@ -72,11 +74,11 @@ function dragDrop(arr){
 						}
 
 						habilitarBotonEnvio();
-						console.log(arr[this.getAttribute("data-rtc") - 1]);
+//						console.log(arr[this.getAttribute("data-rtc") - 1]);
 						console.log(arr);
 					},
 				});
-
+		}
 		$("td").droppable(
 				{
 
@@ -121,6 +123,7 @@ function dragDrop(arr){
 						}else{
 							// SI estas arrastrando a los usuarios
 							if(event.target.children.length >= 1){
+
 								var user = $(ui.draggable[0]).find(".name").text();
 								if(user.toLowerCase() == "sin propietario"){
 									user = "unassigned"
@@ -192,7 +195,7 @@ function saveData() {
 
 		strategy.tasks.forEach(task => {
 			tasksToString += "RTC:" + task.id + "--";
-			console.log(task.id);
+//			console.log(task.id);
 			tasksToString += "Tipo:" + task.tipo + "--";
 			tasksToString += "Estado:" + task.estadoActual + "--";
 			tasksToString += "EstadoFinal:" + task.estadoFinal+ "--";
@@ -208,7 +211,7 @@ function saveData() {
 			} else {
 				tasksToString += "relevante:false--";
 			}
-			console.log(tasksToString);
+
 			if(task.urgente == "Sí"){
 				tasksToString += "urgente:true--";
 			} else {
@@ -233,7 +236,7 @@ function saveData() {
 			}
 		});
 	} else {
-		console.log(inTasks)
+//		console.log(inTasks)
 		var date = new Date();
 		tasksToString = "";
 		tasks.forEach(task => {
@@ -253,7 +256,7 @@ function saveData() {
 				location.href = "/estrategia/panelControl";
 			}
 		});
-		console.log("not empty")
+//		console.log("not empty")
 
 	}
 

@@ -39,8 +39,6 @@ function owners(){
 	tasks.forEach(function(task){
 		if(!own.includes(task.propiedad)){
 
-//			if(task.propiedad.toLowerCase() == "unassigned" && !bool) {
-//			bool = true; }else
 			if (task.propiedad.toLowerCase() != "unassigned"){
 
 				own.push(task.propiedad);
@@ -52,7 +50,6 @@ function owners(){
 				$("#collapsePropertyOf").children(".card").append(texto);
 
 			}
-
 		}
 	})
 
@@ -63,8 +60,7 @@ function owners(){
 	'<label class="custom-control-label" for="'+ nombre +'">'+ toCamelCase(nombre) +'</label><br> '+
 	'</div>';
 	$("#collapsePropertyOf").children(".card").append(texto);
-
-
+	
 	return own;
 }
 
@@ -112,10 +108,8 @@ function filtering(){
 				if(this.value == ""){
 					filters.urgente.push("sí");
 					filters.urgente.push("no");
-					console.log("Urgente");
 				}
 				filters.urgente.push(this.value);
-				console.log(this.value);
 			}
 
 		}else{
@@ -129,33 +123,36 @@ function filtering(){
 			}
 		}
 
-		console.log("filtered:");
-		console.log(filters);
+		console.log("Filtered: " , filters);
 	})
 
 	modalFilter(filters);
 }
 
 function modalFilter(filters){
-	var arrayInTasksBackup = [];
-
+	
 	$('#modalFiltrado').on('shown.bs.modal',function() {
 
 		document.getElementById("filter").addEventListener("click", function() {
 			if(filters.tipo.length >= 1 || filters.propiedad.length >= 1 || filters.urgente.length >= 1){
 				arrayTasksBackup = filter(tasks, filters);
 				arrayInTasksBackup = filter(inTasks, filters);
+				console.log(inTasks);
+				console.log("Entro"); 
 			}else{
-				arrayTasksBackup = tasks;
-				arrayInTasksBackup = inTasks;
+				arrayTasksBackup = tasks.slice(0);
+				arrayInTasksBackup = inTasks.slice(0);
 			}
-
+			console.log("BackUpTasks", arrayTasksBackup);
+			console.log("BackUpInTasks", arrayInTasksBackup);
+			
 			emptyTable();
 			drawTable(arrayInTasksBackup, true);
 			drawTable(arrayTasksBackup, false);
 		}, false);
 
 		$(".card-header").on("click", function(){
+			
 			$(this).toggleClass("arrowDown");
 		})
 		chooseDaily();
