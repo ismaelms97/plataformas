@@ -224,6 +224,7 @@ public class Tarea {
 			int id = Integer.parseInt((tasks[i][0].split(":"))[1]);
 			String tipo = (tasks[i][1].split(":"))[1];			
 			String estadoI = (tasks[i][2].split(":"))[1];
+			System.out.println("pasando a objecto ... ESTADO: "+estadoI);
 			String estadoF = (tasks[i][3].split(":"))[1];
 			String prioridad = (tasks[i][4].split(":"))[1];
 			String resumen = (tasks[i][5].split(":"))[1];			
