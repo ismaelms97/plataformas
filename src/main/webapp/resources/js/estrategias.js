@@ -1,5 +1,11 @@
-var arrayTasksBackup = tasks.slice(0);
-var arrayInTasksBackup = inTasks.slice(0);
+var arrayTasksBackup;
+var arrayTasksBackup;
+try{
+	arrayTasksBackup = tasks.slice(0);
+	arrayTasksBackup = inTasks.slice(0);
+}catch(e){
+	
+}
 
 function dragDrop(arr, bool){
 

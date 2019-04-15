@@ -31,6 +31,7 @@
 				estrategia.equipoId = "${estrategia.equipoId}";
 				estrategia.estado ="${estrategia.estado}";
 				estrategia.equipo = equipos[equipos.findIndex(equipo => parseInt(equipo.id) === parseInt(estrategia.equipoId))].name;
+				estrategia.fecha ="${estrategia.fechaDaily}";
 				estrategias.push(estrategia);
 				//href="/estrategia/findEstrategia/${estrategia.id}"	
 				
@@ -91,6 +92,7 @@
 								var today = date.getFullYear() + "-" + month + "-" + day;
 								if((today == data && data.trim() != "") || el.children[0].classList.contains("ended")){
 									el.children[0].nextElementSibling.children[0].classList.add("disabled");
+									el.children[0].nextElementSibling.children[0].setAttribute("style", "display:none");
 									console.log("Cant create new daily")
 								} else {
 									console.log("You can create new daily")

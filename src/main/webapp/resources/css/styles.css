@@ -111,11 +111,12 @@ div.disabled{
 	-webkit-filter: opacity(30%);
 	filter: opacity(30%);
 }
-.divOptions > .disabled{
+.divOptions > .disabled input{
 	pointer-events:none;
 	cursor:not-allowed;
-	-webkit-filter: opacity(30%);
-	filter: opacity(60%);
+/* 	-webkit-filter: opacity(90%);
+	filter: opacity(90%); */
+	background-color: #e6e6e6!important;
 }
 
 a.button{
