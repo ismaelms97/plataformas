@@ -136,6 +136,8 @@ function filtering(){
 	modalFilter(filters);
 }
 
+/*---------------------REVISRA FILTROS-------------------------------*/
+
 function modalFilter(filters){
 	var arrayInTasksBackup = [];
 
@@ -145,17 +147,21 @@ function modalFilter(filters){
 			if(filters.tipo.length >= 1 || filters.propiedad.length >= 1 || filters.urgente.length >= 1){
 				arrayTasksBackup = filter(tasks, filters);
 				arrayInTasksBackup = filter(inTasks, filters);
+				console.log("Entro");
 			}else{
 				arrayTasksBackup = tasks;
 				arrayInTasksBackup = inTasks;
 			}
-
+			console.log("BackUpTasks", arrayTasksBackup);
+			console.log("BackUpInTasks", arrayInTasksBackup);
+			
 			emptyTable();
 			drawTable(arrayInTasksBackup, true);
 			drawTable(arrayTasksBackup, false);
 		}, false);
 
 		$(".card-header").on("click", function(){
+			
 			$(this).toggleClass("arrowDown");
 		})
 		chooseDaily();

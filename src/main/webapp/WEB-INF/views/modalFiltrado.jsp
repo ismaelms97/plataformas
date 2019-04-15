@@ -32,9 +32,9 @@
 					<div class="card card-body">
 
 						<div class="custom-control custom-checkbox">
-							<input type="checkbox" id="incidencia" value="incidencia"
+							<input type="checkbox" id="incidencia" value="incidencias"
 								class="custom-control-input filtros taskType"><label
-								class="custom-control-label" for="incidencia">Incidencia</label><br>
+								class="custom-control-label" for="incidencia">Incidencias</label><br>
 						</div>
 						<div class="custom-control custom-checkbox">
 							<input type="checkbox" id="consulta" value="consulta"
