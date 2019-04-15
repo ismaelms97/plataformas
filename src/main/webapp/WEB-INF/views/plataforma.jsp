@@ -28,7 +28,6 @@
 	<div class="teamUsers"></div>
 	<c:forEach items="${listaDaily}" var="daily" varStatus="item">
 			<script>
-				console.log("${daily.id}")
 				var exists = false;
 				// Si da error es por que jsp no detecta en su codigo que es un Sccript con codigo js
 				inDailys.forEach(el => {
@@ -36,14 +35,12 @@
 						exists = true;
 					} 
 				});
-				console.log(exists)
 				if(!exists){
 					var daily = new Object();
 					daily.id = "${daily.id}";
 					daily.fecha = "${daily.fecha}";
 					daily.estadoActual = [];
 					inDailys.push(daily);
-					console.log("Daly", "${daily.tareaId}")
 				}	
 			</script>
 	</c:forEach>
@@ -59,7 +56,6 @@
 						daily.estadoActual.push(taskState);
 					}
 				});
-				console.log(inDailys)
 			</script>
 	</c:forEach>
 
@@ -84,7 +80,6 @@
 				task.prioridad = "${tarea.prioridad}";
 				task.tamano = "${tarea.tamaño}";
 				inTasks.push(task);	
-				console.log(task)
 			</script>
 	</c:forEach>
 	

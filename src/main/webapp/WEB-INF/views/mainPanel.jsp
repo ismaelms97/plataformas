@@ -95,6 +95,7 @@
 								var today = date.getFullYear() + "-" + month + "-" + day;
 								console.log(date.getFullYear() + "-" + month + "-" + day)
 								console.log(today == data)
+								console.log("data ", data)
 								console.log(el.classList)
 								if((today == data && data.trim() != "") || el.children[0].classList.contains("ended")){
 									console.log(el.children[0].nextElementSibling);
