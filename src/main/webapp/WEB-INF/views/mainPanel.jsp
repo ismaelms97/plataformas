@@ -33,12 +33,11 @@
 				estrategia.equipo = equipos[equipos.findIndex(equipo => parseInt(equipo.id) === parseInt(estrategia.equipoId))].name;
 				estrategia.fecha ="${estrategia.fechaDaily}";
 				estrategias.push(estrategia);
-				//href="/estrategia/findEstrategia/${estrategia.id}"	
 				
 				var nombre = "${estrategia.nombre}";
-
+				
 				$("#" + estrategia.equipo.replace(/\s/g, "-") + ">.strategyContainer").append(
-						'<a id="'+estrategia.id+'" class="a">'+
+						'<a id="'+estrategia.id+'" class="a" data-index= "'+ ${item.index} +'">'+
 						'<div class="estartegiasCard">'+ nombre +'</div>'+
 					'<div class="divOptions">'+
 						'<form action="/estrategia/findEstrategia" method="post">'+
@@ -66,7 +65,7 @@
  			});
 		    $(".a").click(function () {
 					var el = this;
-					var elId = this.getAttribute("id");
+					var elId = this.getAttribute("data-index");
 					if(el.getAttribute("data-dailyDate") == null){
 								var date = new Date();
 								var day;
@@ -85,14 +84,14 @@
 								}
 								
 								var today = date.getFullYear() + "-" + month + "-" + day;
-								if((today == estrategias[elId -1 ].fecha && estrategias[elId -1].fecha.trim() != "") || el.children[0].classList.contains("ended")){
+								if((today == estrategias[elId].fecha && estrategias[elId].fecha.trim() != "") || el.children[0].classList.contains("ended")){
 									el.children[0].nextElementSibling.children[0].classList.add("disabled");
 									el.children[0].nextElementSibling.children[0].setAttribute("style", "display:none");
 									console.log("Cant create new daily")
 								} else {
 									console.log("You can create new daily")
 								}
-								el.setAttribute("data-dailyDate", estrategias[elId -1].fecha)
+								el.setAttribute("data-dailyDate", estrategias[elId].fecha)
 
 					} else {
 						var date = new Date();
