@@ -5,6 +5,7 @@ $(document).ready(function(){
 	rellenarEstados();
 	inputTasks();
 	showListDaily();
+	console.log(calculateK(0,"XXS",1,1));
 
 	if(document.getElementsByClassName("mainTitle")[0]){
 		document.getElementsByClassName("mainTitle")[0].innerHTML = sessionStorage.getItem('titulo');
