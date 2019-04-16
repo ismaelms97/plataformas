@@ -1,8 +1,9 @@
 var arrayTasksBackup;
-var arrayTasksBackup;
+var arrayInTasksBackup;
+
 try{
 	arrayTasksBackup = tasks.slice(0);
-	arrayTasksBackup = inTasks.slice(0);
+	arrayInTasksBackup = inTasks.slice(0);
 }catch(e){
 	
 }
@@ -372,6 +373,7 @@ function calculateK(){
 	
 //	Listo para analizar; Cierre de requirimientos; En análisis; Aceptación usuario; En curso; Aceptación pruebas; Pendiente implantar; Implantado; Cerrado
 //	K = COMPLEJIDAD * TAMAÑO * suma(PESO_FASE_COMPLETADA)
+//	=SI(I4="Pte Alta";0;SI(I4="Pte. Cuantificar";0;SI(I4="Listo para analizar";0;SI(I4="Cierre requerimientos";0,4;SI(I4="En análisis";0,6;SI(I4="Aceptación usuario";0,72;SI(I4="En curso";0,77;SI(I4="Aceptación a las pruebas";0,97;SI(I4="Pte. implantar";1;SI(I4="Implantado";1;SI(I4="Finalizada";1;-1)))))))))))
 	
 	var pesoFase = [0.4, 0.2, 0.12, 0.05, 0.2, 0.3];
 	var tamano = {"XXS": 1, "XS": 1.1, "S":1.2, "M": 1.3, "L": 1.4, "XL": 1.5, "XXL": 1.6, "XXXL": 1.7};
