@@ -90,7 +90,6 @@ public class StrategyController {
 			try {
 				
 				int id = Integer.parseInt(request.getParameter("id"));
-				System.out.println(id);
 				
 				if (!sessionResources.checkUserSession(session)){
 
@@ -104,11 +103,6 @@ public class StrategyController {
 				List<Tarea> tareas = strategyService.findTasksByStrategy(id);
 				session.setAttribute("estrategiaID", id);
 				model.addAttribute("listaTareas",tareas);
-				for (Tarea tarea : tareas) {
-					System.out.println(tarea.getId());
-					System.out.println("recuperando..estado"+tarea.getEstadoInicio());
-				}
-				System.out.println("TAREAS COMPLETE");
 
 				return PLATAFORMA;
 
@@ -163,9 +157,11 @@ public class StrategyController {
 
 	@PostMapping(value = "/saveEstrategia")
 	public @ResponseBody String saveEstrategia(String stratTasks ,Model model,HttpSession session) {	
-		System.out.println("Tasks " + stratTasks);
+	
 		synchronized (session) {
-
+			
+			String isSaved = "";
+			
 			if (!sessionResources.checkUserSession(session)){
 
 				return REDIRECT_HOME;
@@ -178,14 +174,15 @@ public class StrategyController {
 
 					List<Tarea> listaTareas = Tarea.stringToObject(stratTasks);
 					strategyService.saveStrategyAndTask(listaTareas,newEstrategia);
-
+					isSaved = "true";
+					
 				}catch (Exception e) {
-
+					isSaved = "false";
 					System.out.println("error al guardar");
 				}
 			}
 
-			return REDIRECT_PANEL_CONTROL;
+			return isSaved;
 		}
 	}
 
