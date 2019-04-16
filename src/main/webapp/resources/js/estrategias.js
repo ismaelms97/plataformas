@@ -5,7 +5,7 @@ try{
 	arrayTasksBackup = tasks.slice(0);
 	arrayInTasksBackup = inTasks.slice(0);
 }catch(e){
-	
+
 }
 
 function dragDrop(arr, bool){
@@ -14,77 +14,77 @@ function dragDrop(arr, bool){
 	// a su vez que cuando los dejes en el sitio, cambien de color
 	$(function () {
 		if(bool){
-		$(".rect").draggable(
-				{
-					axis: "x",
-					containment: ".table-responsive",
-					scroll: false,
-					opacity: 0.7,
-					helper: "clone",
-					start: function (event, ui) {
-						$(".ui-draggable-dragging").removeClass("noLeft");
+			$(".rect").draggable(
+					{
+						axis: "x",
+						containment: ".table-responsive",
+						scroll: false,
+						opacity: 0.7,
+						helper: "clone",
+						start: function (event, ui) {
+							$(".ui-draggable-dragging").removeClass("noLeft");
 
-						// Descomentar esto para seleccionar
-						// if ($(this).hasClass("ui-selected")){
-						// selected = $(".ui-selected").each(function()
-						// {
-						// var el = $(this);
-						// el.data("offset", el.offset());
-						// });
-						// }
-						// else {
-						// selected = $([]);
-						// $(".rect").removeClass("ui-selected");
-						// }
-						// offset = $(this).offset();
+							// Descomentar esto para seleccionar
+							// if ($(this).hasClass("ui-selected")){
+							// selected = $(".ui-selected").each(function()
+							// {
+							// var el = $(this);
+							// el.data("offset", el.offset());
+							// });
+							// }
+							// else {
+							// selected = $([]);
+							// $(".rect").removeClass("ui-selected");
+							// }
+							// offset = $(this).offset();
 
-					},
+						},
 
-					drag: function (event, ui) {
+						drag: function (event, ui) {
 
 
 
-						// Descomentar esto para seleccionar
-						// var dt = ui.position.top - offset.top, dl =
-						// ui.position.left
-						// - offset.left;
-						// // Coje todos los elementos seleccionados excepto
-						// $(this),
-						// que es el elemento que queremos mover
-						// selected.not(this).each(function() {
+							// Descomentar esto para seleccionar
+							// var dt = ui.position.top - offset.top, dl =
+							// ui.position.left
+							// - offset.left;
+							// // Coje todos los elementos seleccionados excepto
+							// $(this),
+							// que es el elemento que queremos mover
+							// selected.not(this).each(function() {
 
-						// // Crea la variable para que no necesitemos
-						// llamar a $(this)
-						// // el = Elemento actual
-						// // off = En que posicion esteaba este elemento
-						// antes de
-						// moverlo
-						// var el = $(this), off = el.data("offset");
-						// el.css({top: off.top + dt, left: off.left + dl});
-						// });
-						// },
-					},
+							// // Crea la variable para que no necesitemos
+							// llamar a $(this)
+							// // el = Elemento actual
+							// // off = En que posicion esteaba este elemento
+							// antes de
+							// moverlo
+							// var el = $(this), off = el.data("offset");
+							// el.css({top: off.top + dt, left: off.left + dl});
+							// });
+							// },
+						},
 
-					stop: function (event, ui) {
-						document.getElementsByClassName("rect")[(this.getAttribute("data-rtc") - 1)].style.display = "";
+						stop: function (event, ui) {
+							document.getElementsByClassName("rect")[(this.getAttribute("data-rtc") - 1)].style.display = "";
 
-						if (this.parentElement.classList.contains(estados[this.getAttribute("data-posInitial")].replace(/\s/g, "-").replace(/[\.]/g, "_")) && arr[this.getAttribute("data-rtc") - 1].modified) {
+							if (this.parentElement.classList.contains(estados[this.getAttribute("data-posInitial")].replace(/\s/g, "-").replace(/[\.]/g, "_")) && arr[this.getAttribute("data-rtc") - 1].modified) {
 
-							arr[this.getAttribute("data-rtc") - 1].modified = false;
+								arr[this.getAttribute("data-rtc") - 1].modified = false;
 
-						} else {
+							} else {
 
-							if (estados.indexOf(this.parentElement.classList[0].replace(/-/g, " ").replace(/_/g, ".")) >= this.getAttribute("data-posInitial")) {
-								arr[this.getAttribute("data-rtc") - 1].modified = true;
-								arr[this.getAttribute("data-rtc") - 1].estadoFinal = this.parentElement.classList[0].replace(/-/g, " ").replace(/_/g, ".");
+								if (estados.indexOf(this.parentElement.classList[0].replace(/-/g, " ").replace(/_/g, ".")) >= this.getAttribute("data-posInitial")) {
+									arr[this.getAttribute("data-rtc") - 1].modified = true;
+									arr[this.getAttribute("data-rtc") - 1].estadoFinal = this.parentElement.classList[0].replace(/-/g, " ").replace(/_/g, ".");
+								}
 							}
-						}
 
-						habilitarBotonEnvio();
-//						console.log(arr[this.getAttribute("data-rtc") - 1]);
-						console.log(arr);
-					},
-				});
+							habilitarBotonEnvio();
+//							console.log(arr[this.getAttribute("data-rtc") - 1]);
+							console.log(arr);
+						},
+					});
 		}
 		$("td").droppable(
 				{
@@ -156,32 +156,32 @@ function dragDrop(arr, bool){
 					}
 				});
 
-	// SI se quiere seleccionar, solo hace falta desbloquear el siguiente
-	// codigo, aunque si se quiere seleccionar, buscar información sobre  la seleccion multiple
+		// SI se quiere seleccionar, solo hace falta desbloquear el siguiente
+		// codigo, aunque si se quiere seleccionar, buscar información sobre  la seleccion multiple
 
-	// $(".rect").selectable()
+		// $(".rect").selectable()
 
-	// Manualmente activa el select que los elementos clicados
-	// $( ".rect" ).click( function(e){
-	// if (e.ctrlKey == false) {
-	// // Si la tecla de comando se presiona no deselecciones los elementos
-	// $( ".rect" ).removeClass("ui-selected");
-	// $(this).addClass("ui-selecting");
-	// }
-	// else {
-	// if ($(this).hasClass("ui-selected")) {
-	// // Elimina la clase selected de lo elementos seleccionados
-	// $(this).removeClass("ui-selected");
-	// }
-	// else {
-	// // Sino, añadeles la clase
-	// $(this).addClass("ui-selecting");
-	// }
-	// }
+		// Manualmente activa el select que los elementos clicados
+		// $( ".rect" ).click( function(e){
+		// if (e.ctrlKey == false) {
+		// // Si la tecla de comando se presiona no deselecciones los elementos
+		// $( ".rect" ).removeClass("ui-selected");
+		// $(this).addClass("ui-selecting");
+		// }
+		// else {
+		// if ($(this).hasClass("ui-selected")) {
+		// // Elimina la clase selected de lo elementos seleccionados
+		// $(this).removeClass("ui-selected");
+		// }
+		// else {
+		// // Sino, añadeles la clase
+		// $(this).addClass("ui-selecting");
+		// }
+		// }
 
-	// $( ".rect" ).data("selectable")._mouseStop(null);
+		// $( ".rect" ).data("selectable")._mouseStop(null);
 
-	// });
+		// });
 
 	})
 }
@@ -238,8 +238,41 @@ function saveData() {
 			data: {
 				stratTasks: tasksToString
 			}, success: function (data) {
-				console.log("success");
-				location.href = "/estrategia/panelControl";
+
+				if(data == "true"){
+
+					$.notify({
+						title: '<strong>Guardado</strong>',
+						message: 'Estrategia guardada con éxito'
+					},{
+						type: 'success',
+						newest_on_top: true,
+						placement: {
+							from: "top",
+							align: "center"
+						},
+						delay: 2000
+					});
+					location.href = "/estrategia/panelControl";
+
+					console.log("success");
+				}else{
+
+					$.notify({
+						title: '<strong>Error</strong>',
+						message: 'al guardar estrategia'
+					},{
+						type: 'danger',
+						newest_on_top: true,
+						placement: {
+							from: "top",
+							align: "center"
+						},
+						delay: 2000
+					});
+					$("div.button").removeClass("disabled");
+				}
+
 			}
 		});
 	} else {
@@ -259,8 +292,42 @@ function saveData() {
 			data: {
 				stratDaily: tasksToString
 			}, success: function (data) {
-				console.log("success");
-				location.href = "/estrategia/panelControl";
+
+				if(data == "true"){
+
+					$.notify({
+						title: '<strong>Guardado</strong>',
+						message: 'Daily guardada con éxito'
+					},{
+						type: 'success',
+						newest_on_top: true,
+						placement: {
+							from: "top",
+							align: "center"
+						},
+						delay: 2000
+					});
+					location.href = "/estrategia/panelControl";
+
+					console.log("success");
+				}else{
+
+					$.notify({
+						title: '<strong>Error</strong>',
+						message: 'al guardar daily'
+					},{
+						type: 'danger',
+						newest_on_top: true,
+						placement: {
+							from: "top",
+							align: "center"
+						},
+						delay: 2000
+					});
+					$("div.button").removeClass("disabled");
+
+				}
+
 			}
 		});
 //		console.log("not empty")
@@ -330,7 +397,7 @@ function exists(arr, val){
 
 function drawTeamUsers(array){
 	document.getElementsByClassName("teamUsers")[0].innerHTML = "";
-	
+
 	for (var i = 0; i < array.length; i++) {
 
 		var txt = '<div class="chip">'
@@ -370,14 +437,14 @@ function getTasksByUser(user, tareas){
 }
 
 function calculateK(){ 
-	
+
 //	Listo para analizar; Cierre de requirimientos; En análisis; Aceptación usuario; En curso; Aceptación pruebas; Pendiente implantar; Implantado; Cerrado
 //	K = COMPLEJIDAD * TAMAÑO * suma(PESO_FASE_COMPLETADA)
 //	=SI(I4="Pte Alta";0;SI(I4="Pte. Cuantificar";0;SI(I4="Listo para analizar";0;SI(I4="Cierre requerimientos";0,4;SI(I4="En análisis";0,6;SI(I4="Aceptación usuario";0,72;SI(I4="En curso";0,77;SI(I4="Aceptación a las pruebas";0,97;SI(I4="Pte. implantar";1;SI(I4="Implantado";1;SI(I4="Finalizada";1;-1)))))))))))
-	
+
 	var pesoFase = [0.4, 0.2, 0.12, 0.05, 0.2, 0.3];
 	var tamano = {"XXS": 1, "XS": 1.1, "S":1.2, "M": 1.3, "L": 1.4, "XL": 1.5, "XXL": 1.6, "XXXL": 1.7};
 //	var tamanoNum = [1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7];
 	var complejidad = [2, 5, 20, 50, 100];
-	
+
 }

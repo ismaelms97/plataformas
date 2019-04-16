@@ -60,16 +60,7 @@ public class DailyController {
 					List<Tarea> tareas = strategyService.findTasksByStrategy(id);
 					model.addAttribute("listaDaily", listaDaily);
 					model.addAttribute("listaTareas",tareas);
-					
-					for (Tarea tarea : tareas) {
-						System.out.println("tarea: "+tarea.getId());
-					}
-					for (Daily daily : listaDaily) {
-						
-						System.out.println("daily: "+daily.getId());
-					}
-				
-				
+							
 				}catch (Exception e) {
 
 					System.out.println("Error en showDaily : no se ha encontrado daily con ese ID");
@@ -98,8 +89,11 @@ public class DailyController {
 
 	@PostMapping(value = "/saveDaily")
 	public @ResponseBody String  saveDaily ( String stratDaily,Model model,HttpSession session) {
+		
 		synchronized (session) {
-			System.out.println("Daily " + stratDaily);
+			
+			String isSaved = "";
+			
 			if (!sessionResources.checkUserSession(session)){
 
 				return REDIRECT_HOME;
@@ -112,14 +106,15 @@ public class DailyController {
 					List<Daily> listDaily =  Daily.stringToObject(stratDaily,dbResources.currentDateForDaily(),idEstrategia);
 					dailyService.saveDaily(listDaily);
 					System.out.println("Daily   Guardada");
-
+					isSaved = "true";
 				}catch (Exception e) {
 
 					System.out.println("error al guardar");
+					isSaved = "false";
 				}
 
 			}
-			return MAIN_PANEL;
+			return isSaved;
 		}
 	}
 
