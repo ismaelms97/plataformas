@@ -77,11 +77,6 @@ function toCamelCase(str) {
 		str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
 	}
 	return str.join(' ');
-
-//	return str.substring(0,1).toUpperCase() + str.substring(1,str.length).replace(/\W+(.)/g, function(match, chr)
-//	{
-//	return ' ' + chr.toUpperCase();
-//	});
 }
 
 function filtering(){
