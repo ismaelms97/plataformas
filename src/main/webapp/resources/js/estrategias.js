@@ -240,22 +240,10 @@ function saveData() {
 			}, success: function (data) {
 
 				if(data == "true"){
-
-					$.notify({
-						title: '<strong>Guardado</strong>',
-						message: 'Estrategia guardada con éxito'
-					},{
-						type: 'success',
-						newest_on_top: true,
-						placement: {
-							from: "top",
-							align: "center"
-						},
-						delay: 2000
-					});
+					
 					location.href = "/estrategia/panelControl";
-
 					console.log("success");
+					
 				}else{
 
 					$.notify({
@@ -294,22 +282,10 @@ function saveData() {
 			}, success: function (data) {
 
 				if(data == "true"){
-
-					$.notify({
-						title: '<strong>Guardado</strong>',
-						message: 'Daily guardada con éxito'
-					},{
-						type: 'success',
-						newest_on_top: true,
-						placement: {
-							from: "top",
-							align: "center"
-						},
-						delay: 2000
-					});
+					
 					location.href = "/estrategia/panelControl";
-
 					console.log("success");
+					
 				}else{
 
 					$.notify({
