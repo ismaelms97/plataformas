@@ -34,7 +34,7 @@ public class DailyController {
 	@Autowired
 	DbResources dbResources;
 
-		
+
 	public static final String REDIRECT_HOME = "redirect:/";
 	public static final String MAIN_PANEL = "mainPanel";
 	public static final String PLATAFORMA = "plataforma";
@@ -53,14 +53,13 @@ public class DailyController {
 			}else {
 
 				try {
-					
+
 					int id = Integer.parseInt(request.getParameter("id"));
-					System.out.println(id);
 					List<Daily> listaDaily = dailyService.findDailyById(id);
 					List<Tarea> tareas = strategyService.findTasksByStrategy(id);
 					model.addAttribute("listaDaily", listaDaily);
 					model.addAttribute("listaTareas",tareas);
-							
+
 				}catch (Exception e) {
 
 					System.out.println("Error en showDaily : no se ha encontrado daily con ese ID");
@@ -70,7 +69,7 @@ public class DailyController {
 		}
 		return PLATAFORMA;
 	}
-	
+
 	@GetMapping(value = "/findDailys/{id}")
 	public  String findDaily(HttpSession session) {	
 
@@ -89,11 +88,11 @@ public class DailyController {
 
 	@PostMapping(value = "/saveDaily")
 	public @ResponseBody String  saveDaily ( String stratDaily,Model model,HttpSession session) {
-		
+
 		synchronized (session) {
-			
+
 			String isSaved = "";
-			
+
 			if (!sessionResources.checkUserSession(session)){
 
 				return REDIRECT_HOME;
@@ -107,6 +106,7 @@ public class DailyController {
 					dailyService.saveDaily(listDaily);
 					System.out.println("Daily   Guardada");
 					isSaved = "true";
+
 				}catch (Exception e) {
 
 					System.out.println("error al guardar");

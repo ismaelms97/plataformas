@@ -99,7 +99,7 @@ public class Daily {
 	public void setTareaId(int tareaId) {
 		this.tareaId = tareaId;
 	}
-	
+
 
 	public String getPropiedad() {
 		return propiedad;
@@ -112,6 +112,7 @@ public class Daily {
 	public static  List<Daily> converFromDatabase(ResultSet rs,List<Daily> dailyList ) throws SQLException {
 
 		while (rs.next()) {
+
 			int id= rs.getInt("id");
 			String fecha = rs.getString("fecha");
 			int tareaId = rs.getInt("tarea_id");

@@ -124,7 +124,7 @@ public class User {
 
 		} catch (NoSuchAlgorithmException e) {
 
-			System.out.println("User -> encrypt() Failed");
+			System.err.println("User -> encrypt() Failed");
 
 		}
 

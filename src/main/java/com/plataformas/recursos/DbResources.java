@@ -53,12 +53,12 @@ public class DbResources {
 
 		return con;
 	}	
-	
+
 	public String currentDateForDaily() {
-		
+
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		LocalDate localDate = LocalDate.now();
-		
+
 		return dtf.format(localDate);
 	}
 }
