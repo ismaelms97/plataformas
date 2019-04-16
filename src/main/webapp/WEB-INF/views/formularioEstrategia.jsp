@@ -53,7 +53,13 @@
 
 <script>
 $(document).ready(function(){
-	$('#estrategiaForm').on('shown.bs.modal', function () {
+	var fechaCorrecta = false;
+	var nombreCorrecto = false;
+	
+	 $('#estrategiaForm').on('hide.bs.modal', function () { 
+		 $('#estrategiaFormInputDate').val("")
+		  $('#estrategiaFormInputName').val("");
+	 });
 		
 		  $('#estrategiaFormInputDate').change(function(e){
 			  var hoy = new Date().setHours(0,0,0,0);
@@ -61,21 +67,39 @@ $(document).ready(function(){
 			  var fecha = new Date(fechaIntroducida).getTime();
 			  
 			  if(hoy <= fecha){
-				  $("#crearEstrategia").prop( "disabled", false );
-				  $("#crearEstrategia").click(function(){
-					 sessionStorage.setItem('titulo', toCamelCase(document.getElementById("estrategiaFormInputName").value.trim()));
-				  })
-				
+				  fechaCorrecta = true;		
 			  }else{
-				  $("#crearEstrategia").prop( "disabled", true );
+				  fechaCorrecta = false;
 			  }
+			  isCorrect()
 		  })
 		  
+		  $('#estrategiaFormInputName').change(function(e){
+			  console.log(this.value);
+			  if(this.value.trim() != ""){
+				  nombreCorrecto = true;
+			  }else{
+				  nombreCorrecto = false;
+			  }
+			  isCorrect()
 		})
-		 
+		
+		
 		$("#estrategiaFormInputDateInit").val(new Date().getFullYear() + "-" +  new Date().getMonth() + "-" + new Date().getDate());
 		$("#estrategiaFormInputEstado").val("En Curso");
 		$("#estrategiaFormInputEquipoId").val("1");
 		
+	function isCorrect(){
+		 
+		if(fechaCorrecta && nombreCorrecto){
+			  $("#crearEstrategia").prop( "disabled", false );
+			  $("#crearEstrategia").click(function(){
+				 sessionStorage.setItem('titulo', toCamelCase(document.getElementById("estrategiaFormInputName").value.trim()));
+			  })
+			
+		  }else{
+			  $("#crearEstrategia").prop( "disabled", true );
+		  }
+	}
 })
 </script>
