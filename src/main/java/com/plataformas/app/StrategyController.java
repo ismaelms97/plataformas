@@ -59,24 +59,24 @@ public class StrategyController {
 					HashMap<Integer, String> equipos = User.createTeamsIdNames(actualUser);	
 					List<Estrategia> listaEstrategias = strategyService.findStrategyById(actualUser.getEquipoId());	
 					session.setAttribute("userStrategy", listaEstrategias);
-					
+
 					if( session.getAttribute("newEstrategia") != null) {
 
 						session.removeAttribute("newEstrategia");
 					}
-					
+
 					model.addAttribute("equipos", equipos);	
 					model.addAttribute("greeting","Usuario: "+ actualUser.getUsername());	
 					model.addAttribute("roles", actualUser.getRole());					
 					model.addAttribute("listaEstrategia",listaEstrategias);					
 					model.addAttribute("estrategia", new Estrategia());
-					
+
 					return MAIN_PANEL;
 				}
 
 			}catch (Exception e) {
 
-				System.out.println("Panel  control Error with session or strategy");
+				System.err.println("Panel  control Error with session or strategy");
 				return REDIRECT_HOME;
 			}
 		}
@@ -88,9 +88,9 @@ public class StrategyController {
 		synchronized (session) {
 
 			try {
-				
+
 				int id = Integer.parseInt(request.getParameter("id"));
-				
+
 				if (!sessionResources.checkUserSession(session)){
 
 					return REDIRECT_HOME;
@@ -99,7 +99,7 @@ public class StrategyController {
 
 					return REDIRECT_PANEL_CONTROL;
 				}					
-				
+
 				List<Tarea> tareas = strategyService.findTasksByStrategy(id);
 				session.setAttribute("estrategiaID", id);
 				model.addAttribute("listaTareas",tareas);
@@ -109,17 +109,17 @@ public class StrategyController {
 
 			}catch (NumberFormatException e) {
 
-				System.out.println("Incorrect format en mostrarTareasEstrategia Controller");
+				System.err.println("Incorrect format en mostrarTareasEstrategia Controller");
 				return MAIN_PANEL;
 
 			}catch (Exception e) {
 
-				System.out.println("other error in strategy Controller");
+				System.err.println("other error in strategy Controller");
 				return MAIN_PANEL;
 			}		
 		}
 	}
-	
+
 	@GetMapping(value = "/findEstrategia/{id}")
 	public  String findDaily(HttpSession session) {	
 
@@ -157,11 +157,11 @@ public class StrategyController {
 
 	@PostMapping(value = "/saveEstrategia")
 	public @ResponseBody String saveEstrategia(String stratTasks ,Model model,HttpSession session) {	
-	
+
 		synchronized (session) {
-			
+
 			String isSaved = "";
-			
+
 			if (!sessionResources.checkUserSession(session)){
 
 				return REDIRECT_HOME;
@@ -175,10 +175,11 @@ public class StrategyController {
 					List<Tarea> listaTareas = Tarea.stringToObject(stratTasks);
 					strategyService.saveStrategyAndTask(listaTareas,newEstrategia);
 					isSaved = "true";
-					
+
 				}catch (Exception e) {
+
 					isSaved = "false";
-					System.out.println("error al guardar");
+					System.err.println("error al guardar");
 				}
 			}
 
@@ -203,7 +204,7 @@ public class StrategyController {
 
 				} catch (Exception e) {
 
-					System.out.println("Error update");
+					System.err.println("Error update");
 				}
 			}
 
@@ -228,7 +229,7 @@ public class StrategyController {
 
 				} catch (Exception e) {
 
-					System.out.println("Error delete");
+					System.err.println("Error delete");
 				}
 			}
 

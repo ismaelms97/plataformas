@@ -30,11 +30,9 @@ public class StrategyService {
 
 			Connection con = dbResources.getConection();
 			con.setAutoCommit(false);
-			Statement  stmt = con.createStatement(); 
-			// SELECT Es.*, (Select D.fecha FROM daily D where D.estrategia_id = Es.id AND D.id = (Select MAX(D.id) from daily D where D.estrategia_id = Es.id ))  FROM estrategia Es   where Es.equipo_id = 1 OR Es.equipo_id = 2
-			
+			Statement  stmt = con.createStatement(); 			
 			String query = "SELECT Es.*, (Select D.fecha FROM daily D where D.estrategia_id = Es.id AND D.id = (Select MAX(D.id) from daily D where D.estrategia_id = Es.id ))  FROM estrategia Es   where ";
-			//String query = "SELECT * FROM estrategia Es where ";
+
 			int i = 1;
 
 			for (Integer id : listId) {
@@ -60,7 +58,7 @@ public class StrategyService {
 
 		}catch (Exception e) {
 
-			System.out.println("Error en findEstrategiaById ");
+			System.err.println("Error en findEstrategiaById ");
 			return estrategiaList;
 		}
 
@@ -87,7 +85,7 @@ public class StrategyService {
 
 		}catch (Exception e) {
 
-			System.out.println("Error en findEstrategiaById ");
+			System.err.println("Error en findEstrategiaById ");
 			return tareaList;
 		}
 	}
@@ -113,7 +111,7 @@ public class StrategyService {
 
 		}catch (Exception e) {
 
-			System.out.println("Error en findEstrategiaByTeam ");
+			System.err.println("Error en findEstrategiaByTeam ");
 			return estrategiaList;
 		}
 
@@ -128,7 +126,6 @@ public class StrategyService {
 
 			con = dbResources.getConection();
 			con.setAutoCommit(false);
-System.out.println("guardando Estado... "+estrategia.getEstado());
 			String sql = "INSERT INTO estrategia (nombre,estado,fechaInicio,fechaFin,equipo_id) values "
 					+ "('"+estrategia.getNombre()+"','"+estrategia.getEstado()+"','"+estrategia.getFechaInicio()+"','"+estrategia.getFechaFin()+"',"+estrategia.getEquipoId()+")";
 
@@ -160,7 +157,7 @@ System.out.println("guardando Estado... "+estrategia.getEstado());
 
 				}catch  (Exception e) {
 
-					System.out.println("Esta tarea ya existe");
+					System.err.println("Esta tarea ya existe");
 				}
 			}
 
@@ -198,7 +195,7 @@ System.out.println("guardando Estado... "+estrategia.getEstado());
 
 				}catch  (Exception e) {
 
-					System.out.println("Esta intermedia-daily ID ya existe");
+					System.err.println("Esta intermedia-daily ID ya existe");
 				}
 			}
 
@@ -206,7 +203,7 @@ System.out.println("guardando Estado... "+estrategia.getEstado());
 
 		}catch (SQLException e) {
 
-			System.out.println("SQL Exeption  saveEstrategiaAndTarea:  code -> "+e.getErrorCode()+" more inf : "+e.getMessage());
+			System.err.println("SQL Exeption  saveEstrategiaAndTarea:  code -> "+e.getErrorCode()+" more inf : "+e.getMessage());
 			con.rollback();
 
 		}
@@ -225,11 +222,11 @@ System.out.println("guardando Estado... "+estrategia.getEstado());
 
 		}catch (SQLException e) {
 
-			System.out.println("SQL Exeption  updateStrategy:  code -> "+e.getErrorCode()+" more inf : "+e.getMessage());
+			System.err.println("SQL Exeption  updateStrategy:  code -> "+e.getErrorCode()+" more inf : "+e.getMessage());
 
 		}catch (Exception e) {
 
-			System.out.println("Error en updateStrategy ");
+			System.err.println("Error en updateStrategy ");
 		}
 	}
 
@@ -246,11 +243,11 @@ System.out.println("guardando Estado... "+estrategia.getEstado());
 
 		}catch (SQLException e) {
 
-			System.out.println("SQL Exeption  deleteEstrategia:  code -> "+e.getErrorCode()+" more inf : "+e.getMessage());
+			System.err.println("SQL Exeption  deleteEstrategia:  code -> "+e.getErrorCode()+" more inf : "+e.getMessage());
 
 		}catch (Exception e) {
 
-			System.out.println("Error en deleteStrategy ");
+			System.err.println("Error en deleteStrategy ");
 		}
 	}
 }

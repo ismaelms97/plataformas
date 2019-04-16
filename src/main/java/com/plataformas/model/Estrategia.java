@@ -92,7 +92,7 @@ public class Estrategia {
 		this.equipoId = equipoId;
 	}
 
-	
+
 	public String getFechaDaily() {
 		return fechaDaily;
 	}

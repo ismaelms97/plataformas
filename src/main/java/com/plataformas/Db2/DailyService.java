@@ -40,7 +40,7 @@ public class DailyService {
 
 		}catch (Exception e) {
 
-			System.out.println("Error en findDailyById ");
+			System.err.println("Error en findDailyById ");
 			return dailyList;
 		}
 
@@ -74,7 +74,7 @@ public class DailyService {
 
 		}catch (Exception e) {
 
-			System.out.println("Error en findDateDaily ");
+			System.err.println("Error en findDateDaily ");
 			return date;
 		}
 
@@ -114,17 +114,17 @@ public class DailyService {
 
 				}catch  (Exception e) {
 
-					System.out.println("Esta intermedia-daily ID ya existe");
+					System.err.println("Esta intermedia-daily ID ya existe");
 				}
 
-				System.out.println("intermedia guardada ");
+				System.err.println("intermedia guardada ");
 			}
 
 			con.commit();
 
 		}catch (SQLException e) {
 
-			System.out.println("SQL Exeption  daily_tarea:  code -> "+e.getErrorCode()+" more inf : "+e.getMessage());
+			System.err.println("SQL Exeption  daily_tarea:  code -> "+e.getErrorCode()+" more inf : "+e.getMessage());
 			con.rollback();
 
 		}
