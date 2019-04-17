@@ -111,13 +111,23 @@
 
 	<script>
 			if(inDailys.length > 0){
-				document.getElementById("drop").style.display =  "none";
+				document.getElementById("drop").style.display =  "none";		
 			}
+			
 	</script>
 		
 	<script src="/resources/libs/js/shim.js"></script>
 	<script src="/resources/libs/js/xlsx.full.min.js"></script>
 	<script src="/resources/js/readExcel.js"></script>
 	<jsp:include page="footer.jsp"></jsp:include>
+	
+	<script type="text/javascript">
+		$(document).ready(function(){
+			// Activate the action to filter
+			filtering();
+			
+		});
+	</script>
+	
 </body>
 </html>

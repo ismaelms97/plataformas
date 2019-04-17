@@ -95,9 +95,8 @@ function filtering(){
 	};
 
 	$(".filtros").on("click", function(){
-
+		console.log(this.checked);
 		if((this).checked){
-
 			if($(this).hasClass("taskType")){
 				filters.tipo.push(this.value);
 
@@ -134,7 +133,7 @@ function filtering(){
 function modalFilter(filters){
 	
 	$('#modalFiltrado').on('shown.bs.modal',function() {
-
+		console.log(filters.propiedad.length);
 		document.getElementById("filter").addEventListener("click", function() {
 			if(filters.tipo.length >= 1 || filters.propiedad.length >= 1 || filters.urgente.length >= 1){
 				arrayTasksBackup = filter(tasks, filters);

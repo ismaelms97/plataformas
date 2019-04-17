@@ -125,6 +125,8 @@ var process_wb = (function () {
 //				console.log("Equipo 2: ", equipo);
 			}
 
+			// Activate the action to filter
+			filtering();
 
 			tasks = orderBy(tasks);
 
