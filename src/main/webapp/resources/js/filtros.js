@@ -32,11 +32,10 @@ function strategyFilter(array){
  * Appends al the owners of the tasks to the filtering modal
  * @returns
  */
-function owners(){
+function owners(array){
 	var own = [];
-	var bool = false;
 	var nombre = "";
-	tasks.forEach(function(task){
+	array.forEach(function(task){
 		if(!own.includes(task.propiedad)){
 
 			if (task.propiedad.toLowerCase() != "unassigned"){
@@ -64,6 +63,10 @@ function owners(){
 	return own;
 }
 
+function ownersDaily(array){
+	
+}
+
 /**
  * Little function that formats a string and transforms it to camel case
  * 
@@ -79,6 +82,10 @@ function toCamelCase(str) {
 	return str.join(' ');
 }
 
+/**
+ * Function that activates the filtering system
+ * @returns
+ */
 function filtering(){
 	// Objeto con los filtros
 	var filters = {
@@ -184,6 +191,7 @@ function chooseDaily(){
 		var dateSelected = this.nextSibling.innerHTML;
 		inDailys.forEach(function(daily){
 			if(daily.fecha == dateSelected){
+				console.log(daily.estadoActual);
 				arr.forEach(function(task){
 					daily.estadoActual.forEach(function(taskStatus){
 						if(task.id == taskStatus[0]){

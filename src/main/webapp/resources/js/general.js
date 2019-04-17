@@ -1,4 +1,5 @@
 var estados;
+var equipo = [];
 
 $(document).ready(function(){
 	estados = [];
@@ -54,7 +55,7 @@ function drawTable(array , db) {
 //	ORdenamos el array por prioridad,
 	array = orderBy(array);
 	inTasks = orderBy(inTasks);
-	
+
 	// PIntamos la tabla
 	for (var i = 0; i < array.length; i++) {
 		var tr = document.createElement("tr");
@@ -73,6 +74,9 @@ function drawTable(array , db) {
 
 	if(db){
 
+//		equipo = ownersDaily(inDailys);
+		console.log("Equipo 1: ", equipo);
+		
 		// CLON ESTADO FINAL RECOGIDO DE BASE DE DATOS
 		var rect = document.getElementsByClassName("rect");
 		for (var i = 0; i < rect.length; i++) {
@@ -99,8 +103,16 @@ function drawRTC(array, pos, db) {
 					estadoActual = j
 				}
 			} else {
-				if (array[pos].estadoActual.toLowerCase().startsWith(estados[j])) {
-					estadoActual = j
+				try{
+					console.log("Funciona");
+					if (array[pos].estadoActual.toLowerCase().startsWith(estados[j])) {
+						estadoActual = j
+					}
+				}catch(e){
+					console.log("Catch");
+					if (array[pos].estado.toLowerCase().startsWith(estados[j])) {
+						estadoActual = j
+					}
 				}
 			}
 		}
@@ -112,8 +124,7 @@ function drawRTC(array, pos, db) {
 	if(!db){
 
 		// creamos el clon de los RTC
-		console.log("array", array);
-		console.log("arrayInTasksBackup", arrayInTasksBackup);
+		orderBy(arrayInTasksBackup);
 		if(arrayInTasksBackup.length > 0){
 			if(arrayInTasksBackup[pos].estadoFinal.toLowerCase().startsWith(arrayInTasksBackup[pos].estado.toLowerCase()) &&
 					array[pos].estadoActual.toLowerCase().startsWith(arrayInTasksBackup[pos].estado.toLowerCase())){
