@@ -7,7 +7,9 @@ $(document).ready(function(){
 	inputTasks();
 	showListDaily();
 	console.log(calculateK(0,"XXS",1,1));
-
+	// Activate the action to filter
+	filtering();
+	
 	if(document.getElementsByClassName("mainTitle")[0]){
 		document.getElementsByClassName("mainTitle")[0].innerHTML = sessionStorage.getItem('titulo');
 
@@ -75,7 +77,7 @@ function drawTable(array , db) {
 	if(db){
 
 //		equipo = ownersDaily(inDailys);
-		console.log("Equipo 1: ", equipo);
+//		console.log("Equipo 1: ", equipo);
 		
 		// CLON ESTADO FINAL RECOGIDO DE BASE DE DATOS
 		var rect = document.getElementsByClassName("rect");
@@ -144,7 +146,6 @@ function drawRTC(array, pos, db) {
 				classes += ' gradientGreyBlue';
 
 			}else{
-				console.log(array[pos].estadoActual.toLowerCase() + " , "+  arrayInTasksBackup[pos].estado.toLowerCase());
 				// AZUL, resto
 				classes += ' blue';
 			}

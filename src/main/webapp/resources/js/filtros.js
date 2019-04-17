@@ -191,7 +191,7 @@ function chooseDaily(){
 		var dateSelected = this.nextSibling.innerHTML;
 		inDailys.forEach(function(daily){
 			if(daily.fecha == dateSelected){
-				console.log(daily.estadoActual);
+//				console.log(daily.estadoActual);
 				arr.forEach(function(task){
 					daily.estadoActual.forEach(function(taskStatus){
 						if(task.id == taskStatus[0]){

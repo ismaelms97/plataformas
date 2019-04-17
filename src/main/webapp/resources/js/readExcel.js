@@ -127,10 +127,6 @@ var process_wb = (function () {
 
 
 			tasks = orderBy(tasks);
-			
-			
-			// Activate the action to filter
-			filtering();
 
 			drawTeamUsers(equipo);
 

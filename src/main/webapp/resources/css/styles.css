@@ -346,6 +346,9 @@ form{
 .detailsSubtitle{
 	font-size:18px;
 }
+.modal{
+	z-index: 9999;
+}
 
 /*########### ESTADOS Y DAILY ###########*/
 
