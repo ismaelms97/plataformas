@@ -59,7 +59,7 @@ public class DailyController {
 					List<Tarea> tareas = strategyService.findTasksByStrategy(id);
 					model.addAttribute("listaDaily", listaDaily);
 					model.addAttribute("listaTareas",tareas);
-
+					
 				}catch (Exception e) {
 
 					System.out.println("Error en showDaily : no se ha encontrado daily con ese ID");
