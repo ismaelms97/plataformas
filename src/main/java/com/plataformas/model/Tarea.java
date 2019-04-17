@@ -204,10 +204,10 @@ public class Tarea {
 			boolean relevante = rs.getBoolean("relevante");
 			boolean urgente = rs.getBoolean("urgente");
 			String planificado = rs.getString("planificado");
-			Tarea tarea = new Tarea(id,tipo,prioridad,resumen,tamaño,complejidad,peticionario, relevante,urgente,planificado,estadoInicio,estadoFinal);
+			Tarea tarea = new Tarea(id,tipo,prioridad,resumen,tamaño,complejidad,peticionario, relevante,urgente,planificado,estadoInicio,estadoFinal);			
 			tareaList.add(tarea);
+			
 		}
-
 		return tareaList;
 	}
 

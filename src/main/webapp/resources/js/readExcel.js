@@ -1,6 +1,6 @@
 
 var tasks = []
-var equipo = [];
+
 var idPos, typePos, prioPos, resuPos, statusPos, sizePos, complejPos, ownerPos, petPos, relevancePos, urgenPos, plannedPos;
 var X = XLSX;
 var XW = {
@@ -118,19 +118,21 @@ var process_wb = (function () {
 				$("div.button").removeClass("disabled");
 				var filtrado = tasks.filter(item => inTasks.find(item2 => item.id === item2.id).propiedad = item.propiedad);
 				console.log("Filtrado", filtrado);
+				
+			}else{
+				// Collect Users from propertyOf 
+				equipo = owners(tasks);
+//				console.log("Equipo 2: ", equipo);
 			}
 
 
 			tasks = orderBy(tasks);
-
-			console.log(tasks)
-			// Collect Users from propertyOf 
-			equipo = owners();
+			
+			
 			// Activate the action to filter
 			filtering();
 
 			drawTeamUsers(equipo);
-//			document.getElementById("errorContainer").setAttribute("style", "display: none")
 
 			drawTable(tasks, false);
 		} catch (e){

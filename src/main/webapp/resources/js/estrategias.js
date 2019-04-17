@@ -328,6 +328,18 @@ function habilitarBotonEnvio() {
 
 function orderBy(arr) {
 	arr.sort(function(a, b){
+		if(a.id > b.id){
+			return 1;
+		}
+
+		if(a.id < b.id){
+			return -1;
+		}
+
+		return 0;
+	});
+	
+	arr.sort(function(a, b){
 		if(a.prioridad < b.prioridad){
 			return 1;
 		}
