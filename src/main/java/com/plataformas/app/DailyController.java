@@ -88,7 +88,7 @@ public class DailyController {
 
 	@PostMapping(value = "/saveDaily")
 	public @ResponseBody String  saveDaily ( String stratDaily,Model model,HttpSession session) {
-
+		System.out.println(stratDaily);
 		synchronized (session) {
 
 			String isSaved = "";
