@@ -117,7 +117,6 @@ var process_wb = (function () {
 				tasks = strategyFilter(tasks);
 				$("div.button").removeClass("disabled");
 				var filtrado = tasks.filter(item => inTasks.find(item2 => item.id === item2.id).propiedad = item.propiedad);
-				console.log("Filtrado", filtrado);
 				
 			}else{
 				// Collect Users from propertyOf 
@@ -125,12 +124,10 @@ var process_wb = (function () {
 //				console.log("Equipo 2: ", equipo);
 			}
 
-
-			tasks = orderBy(tasks);
-			
-			
 			// Activate the action to filter
 			filtering();
+
+			tasks = orderBy(tasks);
 
 			drawTeamUsers(equipo);
 

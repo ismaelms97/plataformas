@@ -1,3 +1,10 @@
+// Objeto con los filtros
+	var filters = {
+			tipo : [],
+			propiedad : [],
+			urgente : [],
+	};
+	
 /**
  * Función que sirve para filtrar las tareas, versión 1.0, solo filtra por el
  * tipo de tareas: Incidencias, Tareas, Consulta.
@@ -87,17 +94,10 @@ function toCamelCase(str) {
  * @returns
  */
 function filtering(){
-	// Objeto con los filtros
-	var filters = {
-			tipo : [],
-			propiedad : [],
-			urgente : [],
-	};
+	
 
 	$(".filtros").on("click", function(){
-
 		if((this).checked){
-
 			if($(this).hasClass("taskType")){
 				filters.tipo.push(this.value);
 
@@ -134,30 +134,24 @@ function filtering(){
 function modalFilter(filters){
 	
 	$('#modalFiltrado').on('shown.bs.modal',function() {
-
+	
 		document.getElementById("filter").addEventListener("click", function() {
 			if(filters.tipo.length >= 1 || filters.propiedad.length >= 1 || filters.urgente.length >= 1){
 				arrayTasksBackup = filter(tasks, filters);
 				arrayInTasksBackup = filter(inTasks, filters);
-				console.log(inTasks);
-				console.log("Entro"); 
+				chooseDaily();
 			}else{
 				arrayTasksBackup = tasks.slice(0);
 				arrayInTasksBackup = inTasks.slice(0);
 			}
-			console.log("BackUpTasks", arrayTasksBackup);
-			console.log("BackUpInTasks", arrayInTasksBackup);
 			
-			emptyTable();
-			drawTable(arrayInTasksBackup, true);
-			drawTable(arrayTasksBackup, false);
 		}, false);
 
 		$(".card-header").on("click", function(){
 			
 			$(this).toggleClass("arrowDown");
 		})
-		chooseDaily();
+		
 	})
 }
 function showListDaily(){
@@ -191,7 +185,7 @@ function chooseDaily(){
 		var dateSelected = this.nextSibling.innerHTML;
 		inDailys.forEach(function(daily){
 			if(daily.fecha == dateSelected){
-				console.log(daily.estadoActual);
+//				console.log(daily.estadoActual);
 				arr.forEach(function(task){
 					daily.estadoActual.forEach(function(taskStatus){
 						if(task.id == taskStatus[0]){
@@ -203,9 +197,16 @@ function chooseDaily(){
 				})
 			}
 		});
+		
+		$("#filter").click(function(){
+		
+		arr = filter(arr,filters);
+		
 		emptyTable();
-		drawTable(inTasks, true);
+		drawTable(arrayInTasksBackup, true);
+		drawTable(arrayTasksBackup, false);
 		drawTable(arr, false);
+		})
 	});
 
 }

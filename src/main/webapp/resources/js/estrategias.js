@@ -82,7 +82,7 @@ function dragDrop(arr, bool){
 
 							habilitarBotonEnvio();
 //							console.log(arr[this.getAttribute("data-rtc") - 1]);
-							console.log(arr);
+//							console.log(arr);
 						},
 					});
 		}
@@ -231,7 +231,7 @@ function saveData() {
 		tasksToString = tasksToString.substring(0, tasksToString.length - 4);
 //		console.log(tasksToString)
 
-		console.log(strategy.tasks)
+//		console.log(strategy.tasks)
 		$.ajax({
 			type: "POST",
 			url: "/estrategia/saveEstrategia",

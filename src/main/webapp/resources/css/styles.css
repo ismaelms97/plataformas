@@ -309,7 +309,7 @@ input[type='submit']{
 	cursor: pointer;
 }
 form{
-	z-index: 9999;
+	z-index: 999;
 }
 
 .options{
@@ -345,6 +345,9 @@ form{
 /*########### MODAL ###########*/
 .detailsSubtitle{
 	font-size:18px;
+}
+.modal-dialog{
+	z-index: 9999;
 }
 
 /*########### ESTADOS Y DAILY ###########*/
