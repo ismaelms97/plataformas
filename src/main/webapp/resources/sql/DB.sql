@@ -132,3 +132,8 @@ INSERT INTO user_equipo_role (id_equipo,id_user,id_role) values (2,5,2);
 INSERT INTO user_equipo_role (id_equipo,id_user,id_role) values (2,1,2);
 INSERT INTO user_equipo_role (id_equipo,id_user,id_role) values (2,2,2);
 INSERT INTO user_equipo_role (id_equipo,id_user,id_role) values (2,3,2);
+INSERT INTO user_equipo_role (id_equipo,id_user,id_role) values (2,4,2);
+
+
+
+
