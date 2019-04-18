@@ -97,7 +97,6 @@ function filtering(){
 	
 
 	$(".filtros").on("click", function(){
-		console.log(this.checked);
 		if((this).checked){
 			if($(this).hasClass("taskType")){
 				filters.tipo.push(this.value);
@@ -140,25 +139,19 @@ function modalFilter(filters){
 			if(filters.tipo.length >= 1 || filters.propiedad.length >= 1 || filters.urgente.length >= 1){
 				arrayTasksBackup = filter(tasks, filters);
 				arrayInTasksBackup = filter(inTasks, filters);
-				console.log(inTasks);
-				console.log("Entro"); 
+				chooseDaily();
 			}else{
 				arrayTasksBackup = tasks.slice(0);
 				arrayInTasksBackup = inTasks.slice(0);
 			}
-			console.log("BackUpTasks", arrayTasksBackup);
-			console.log("BackUpInTasks", arrayInTasksBackup);
 			
-			emptyTable();
-			drawTable(arrayInTasksBackup, true);
-			drawTable(arrayTasksBackup, false);
 		}, false);
 
 		$(".card-header").on("click", function(){
 			
 			$(this).toggleClass("arrowDown");
 		})
-		chooseDaily();
+		
 	})
 }
 function showListDaily(){
@@ -205,12 +198,15 @@ function chooseDaily(){
 			}
 		});
 		
+		$("#filter").click(function(){
+		
 		arr = filter(arr,filters);
 		
 		emptyTable();
 		drawTable(arrayInTasksBackup, true);
 		drawTable(arrayTasksBackup, false);
 		drawTable(arr, false);
+		})
 	});
 
 }

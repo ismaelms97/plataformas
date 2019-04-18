@@ -75,7 +75,6 @@ $(document).ready(function(){
 		  })
 		  
 		  $('#estrategiaFormInputName').change(function(e){
-			  console.log(this.value);
 			  if(this.value.trim() != ""){
 				  nombreCorrecto = true;
 			  }else{
