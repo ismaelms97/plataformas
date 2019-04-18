@@ -3,14 +3,14 @@ var arr, daily;
 
 $(document).ready(function(){
 //	Objeto con los filtros
-	 filters = {
+	filters = {
 			tipo : [],
 			propiedad : [],
 			urgente : [],
 	};
 	daily = "";
 	arr =[];
-	
+
 })
 /**
  * Función que sirve para filtrar las tareas, versión 1.0, solo filtra por el
@@ -119,10 +119,9 @@ function filtering(){
 					filters.urgente.push("no");
 				}
 				filters.urgente.push(this.value);
-			
+
 			}else if($(this).hasClass("daily")){
 				daily = (this.value);
-				console.log(this.value);
 			}
 
 		}else{
@@ -142,21 +141,19 @@ function filtering(){
 	modalFilter();
 }
 function onClickedFilter(){
-	console.log("%c---------------------------CLICK-------------------------------------------", "color:red; font-weight:bold; background-color:black")
 	if(filters.tipo.length >= 1 || filters.propiedad.length >= 1 || filters.urgente.length >= 1){
 		arrayTasksBackup = filter(tasks, filters);
 		arrayInTasksBackup = filter(inTasks, filters);				
-		
+
 	}else{
 		arrayTasksBackup = tasks.slice(0);
 		arrayInTasksBackup = inTasks.slice(0);
 	}
-	
+
 	if(daily.trim() != ""){
 		chooseDaily();
-		daily = "";
 	}
-	
+
 	emptyTable();
 	drawTable(arrayInTasksBackup, true);
 	drawTable(arrayTasksBackup, false);
@@ -200,23 +197,20 @@ function showListDaily(){
 
 
 function chooseDaily(){
-//	$('input[name="dailyRadio"]').change(function(){
-		arr = orderBy(inTasks)
-		var dateSelected = daily;
-		inDailys.forEach(function(daily){
-			if(daily.fecha == dateSelected){
-				arr.forEach(function(task){
-					daily.estadoActual.forEach(function(taskStatus){
-						if(task.id == taskStatus[0]){
-							task.estadoActual = taskStatus[1].toLowerCase();
-							task.propiedad = taskStatus[2];
-						}
-					})
-
+	arr = orderBy(inTasks)
+	var dateSelected = daily;
+	inDailys.forEach(function(daily){
+		if(daily.fecha == dateSelected){
+			arr.forEach(function(task){
+				daily.estadoActual.forEach(function(taskStatus){
+					if(task.id == taskStatus[0]){
+						task.estadoActual = taskStatus[1].toLowerCase();
+						task.propiedad = taskStatus[2];
+					}
 				})
-			}
-		});
 
-		arr = filter(arr,filters);
-//	});
+			})
+		}
+	});
+	arr = filter(arr,filters);
 }

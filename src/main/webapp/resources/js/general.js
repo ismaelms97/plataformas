@@ -127,6 +127,7 @@ function drawRTC(array, pos, db) {
 		array = orderBy(array);
 		arrayInTasksBackup = orderBy(arrayInTasksBackup);
 		if(arrayInTasksBackup.length > 0){
+
 			if(arrayInTasksBackup[pos].estadoFinal.toLowerCase().startsWith(arrayInTasksBackup[pos].estado.toLowerCase()) &&
 					array[pos].estadoActual.toLowerCase().startsWith(arrayInTasksBackup[pos].estado.toLowerCase())){
 

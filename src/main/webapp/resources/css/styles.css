@@ -389,7 +389,7 @@ form{
 
 /*########### FILTER ###########*/
 #filter, #modalFilter{
-	cursor:pointer;
+	cursor:pointer !important;
 }
 .accordion-toggle::before{
 	display: inline-block;
