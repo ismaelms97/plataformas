@@ -1,10 +1,17 @@
-// Objeto con los filtros
-	var filters = {
+var filters;
+var arr, daily;
+
+$(document).ready(function(){
+//	Objeto con los filtros
+	 filters = {
 			tipo : [],
 			propiedad : [],
 			urgente : [],
 	};
+	daily = "";
+	arr =[];
 	
+})
 /**
  * Función que sirve para filtrar las tareas, versión 1.0, solo filtra por el
  * tipo de tareas: Incidencias, Tareas, Consulta.
@@ -66,12 +73,12 @@ function owners(array){
 	'<label class="custom-control-label" for="'+ nombre +'">'+ toCamelCase(nombre) +'</label><br> '+
 	'</div>';
 	$("#collapsePropertyOf").children(".card").append(texto);
-	
+
 	return own;
 }
 
 function ownersDaily(array){
-	
+
 }
 
 /**
@@ -94,10 +101,9 @@ function toCamelCase(str) {
  * @returns
  */
 function filtering(){
-	
+
 
 	$(".filtros").on("click", function(){
-		console.log(this.checked);
 		if((this).checked){
 			if($(this).hasClass("taskType")){
 				filters.tipo.push(this.value);
@@ -113,6 +119,10 @@ function filtering(){
 					filters.urgente.push("no");
 				}
 				filters.urgente.push(this.value);
+			
+			}else if($(this).hasClass("daily")){
+				daily = (this.value);
+				console.log(this.value);
 			}
 
 		}else{
@@ -129,36 +139,41 @@ function filtering(){
 		console.log("Filtered: " , filters);
 	})
 
-	modalFilter(filters);
+	modalFilter();
+}
+function onClickedFilter(){
+	console.log("%c---------------------------CLICK-------------------------------------------", "color:red; font-weight:bold; background-color:black")
+	if(filters.tipo.length >= 1 || filters.propiedad.length >= 1 || filters.urgente.length >= 1){
+		arrayTasksBackup = filter(tasks, filters);
+		arrayInTasksBackup = filter(inTasks, filters);				
+		
+	}else{
+		arrayTasksBackup = tasks.slice(0);
+		arrayInTasksBackup = inTasks.slice(0);
+	}
+	
+	if(daily.trim() != ""){
+		chooseDaily();
+		daily = "";
+	}
+	
+	emptyTable();
+	drawTable(arrayInTasksBackup, true);
+	drawTable(arrayTasksBackup, false);
+	drawTable(arr, false);
 }
 
-function modalFilter(filters){
-	
-	$('#modalFiltrado').on('shown.bs.modal',function() {
-	
-		document.getElementById("filter").addEventListener("click", function() {
-			if(filters.tipo.length >= 1 || filters.propiedad.length >= 1 || filters.urgente.length >= 1){
-				arrayTasksBackup = filter(tasks, filters);
-				arrayInTasksBackup = filter(inTasks, filters);
-				console.log(inTasks);
-				console.log("Entro"); 
-			}else{
-				arrayTasksBackup = tasks.slice(0);
-				arrayInTasksBackup = inTasks.slice(0);
-			}
-			console.log("BackUpTasks", arrayTasksBackup);
-			console.log("BackUpInTasks", arrayInTasksBackup);
-			
-			emptyTable();
-			drawTable(arrayInTasksBackup, true);
-			drawTable(arrayTasksBackup, false);
-		}, false);
+function modalFilter(){
+
+	$('#modalFiltrado').on('show.bs.modal',function() {
+		document.getElementById("filter").removeEventListener('click', onClickedFilter);
+		document.getElementById("filter").addEventListener("click", onClickedFilter);
 
 		$(".card-header").on("click", function(){
-			
+
 			$(this).toggleClass("arrowDown");
 		})
-		chooseDaily();
+
 	})
 }
 function showListDaily(){
@@ -168,9 +183,8 @@ function showListDaily(){
 			inDailys.forEach(function(d){
 
 				var daily = '<div class="custom-control custom-radio">'+
-				'<input type="radio" class="custom-control-input filtros daily" id="'+d.id+'" name="dailyRadio" value="'+d.id+'">'+
+				'<input type="radio" class="custom-control-input filtros daily" id="'+d.id+'" name="dailyRadio" value="'+d.fecha+'">'+
 				'<label class="custom-control-label" for="'+d.id+'">'+d.fecha+'</label></div>';
-
 
 
 				$("#collapseDaily").children(".card").append(daily);
@@ -186,13 +200,11 @@ function showListDaily(){
 
 
 function chooseDaily(){
-
-	$('input[name="dailyRadio"]').change(function(){
-		var arr = orderBy(inTasks)
-		var dateSelected = this.nextSibling.innerHTML;
+//	$('input[name="dailyRadio"]').change(function(){
+		arr = orderBy(inTasks)
+		var dateSelected = daily;
 		inDailys.forEach(function(daily){
 			if(daily.fecha == dateSelected){
-//				console.log(daily.estadoActual);
 				arr.forEach(function(task){
 					daily.estadoActual.forEach(function(taskStatus){
 						if(task.id == taskStatus[0]){
@@ -200,17 +212,11 @@ function chooseDaily(){
 							task.propiedad = taskStatus[2];
 						}
 					})
-					
+
 				})
 			}
 		});
-		
-		arr = filter(arr,filters);
-		
-		emptyTable();
-		drawTable(arrayInTasksBackup, true);
-		drawTable(arrayTasksBackup, false);
-		drawTable(arr, false);
-	});
 
+		arr = filter(arr,filters);
+//	});
 }
