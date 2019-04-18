@@ -1,3 +1,10 @@
+// Objeto con los filtros
+	var filters = {
+			tipo : [],
+			propiedad : [],
+			urgente : [],
+	};
+	
 /**
  * Función que sirve para filtrar las tareas, versión 1.0, solo filtra por el
  * tipo de tareas: Incidencias, Tareas, Consulta.
@@ -87,12 +94,7 @@ function toCamelCase(str) {
  * @returns
  */
 function filtering(){
-	// Objeto con los filtros
-	var filters = {
-			tipo : [],
-			propiedad : [],
-			urgente : [],
-	};
+	
 
 	$(".filtros").on("click", function(){
 		console.log(this.checked);
@@ -133,7 +135,7 @@ function filtering(){
 function modalFilter(filters){
 	
 	$('#modalFiltrado').on('shown.bs.modal',function() {
-		console.log(filters.propiedad.length);
+	
 		document.getElementById("filter").addEventListener("click", function() {
 			if(filters.tipo.length >= 1 || filters.propiedad.length >= 1 || filters.urgente.length >= 1){
 				arrayTasksBackup = filter(tasks, filters);
@@ -202,8 +204,12 @@ function chooseDaily(){
 				})
 			}
 		});
+		
+		arr = filter(arr,filters);
+		
 		emptyTable();
-		drawTable(inTasks, true);
+		drawTable(arrayInTasksBackup, true);
+		drawTable(arrayTasksBackup, false);
 		drawTable(arr, false);
 	});
 
