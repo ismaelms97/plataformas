@@ -16,6 +16,26 @@ public class UserService {
 	@Autowired
 	DbResources  dbResources;
 
+//	public User findAllUsers() { // ESTO RECOGE TOOODOS LOS USUARIOS CON SUS RESPECTIVOS EQUIPOS
+//
+//		User user = null;
+//
+//		try {
+//
+//			Connection con = dbResources.getConection();
+//			con.setAutoCommit(false);
+//			Statement  stmt = con.createStatement(); 
+//			ResultSet rs = stmt.executeQuery("SELECT U.username,E.name FROM user U JOIN user_equipo_role UER ON (U.id = UER.id_user) JOIN equipo E ON (E.id = UER.id_equipo)"); 			
+//
+//			return User.converFromDataBase(rs);
+//
+//		}catch (Exception e) {
+//
+//			System.err.println("findAllUsers() more inf : "+e.getMessage()+" reason  -> "+e.getCause());
+//			return user;
+//		}
+//	}
+	
 	public User findByUsername(String username) {
 
 		User user = null;
