@@ -388,8 +388,8 @@ form{
 }
 
 /*########### FILTER ###########*/
-#filter{
-	cursor:pointer;
+#filter, #modalFilter{
+	cursor:pointer !important;
 }
 .accordion-toggle::before{
 	display: inline-block;
