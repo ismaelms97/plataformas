@@ -12,6 +12,7 @@ $(document).ready(function(){
 	arr =[];
 
 })
+
 /**
  * Función que sirve para filtrar las tareas, versión 1.0, solo filtra por el
  * tipo de tareas: Incidencias, Tareas, Consulta.
@@ -33,8 +34,10 @@ function filter(array, filtros){
 
 }
 
-/*
- * Función que sirve para filtrar las tareas, versión 2.0, Filtra según un objeto que contiene arrays pasada por parametros
+/**
+ * 	Función que sirve para filtrar las tareas, versión 2.0, Filtra según un objeto que contiene arrays pasada por parametros
+ *	@returns
+ *
  */
 function strategyFilter(array){
 
@@ -43,8 +46,8 @@ function strategyFilter(array){
 }
 
 /**
- * Appends al the owners of the tasks to the filtering modal
- * @returns
+ * 	Appends all the owners of the tasks to the filtering modal
+ * 	@returns
  */
 function owners(array){
 	var own = [];
@@ -76,7 +79,10 @@ function owners(array){
 
 	return own;
 }
-
+/**
+ * Appends all the owners of the tasks to the filtering modal of a daily, when the users come from the database
+ * @returns
+ */
 function ownersDaily(array){
 
 }
@@ -140,14 +146,21 @@ function filtering(){
 
 	modalFilter();
 }
+
+/**
+ * 	Function with the action performed when the filter button is pressed 
+ * 	@returns
+ */
 function onClickedFilter(){
 	if(filters.tipo.length >= 1 || filters.propiedad.length >= 1 || filters.urgente.length >= 1){
 		arrayTasksBackup = filter(tasks, filters);
-		arrayInTasksBackup = filter(inTasks, filters);				
+		arrayInTasksBackup = filter(inTasks, filters);
 
 	}else{
+
 		arrayTasksBackup = tasks.slice(0);
 		arrayInTasksBackup = inTasks.slice(0);
+
 	}
 
 	if(daily.trim() != ""){
@@ -160,6 +173,10 @@ function onClickedFilter(){
 	drawTable(arr, false);
 }
 
+/**
+ *	Function that make the filtering event possible, when clicked, enables the execution of the filter
+ *	@returns
+ */
 function modalFilter(){
 
 	$('#modalFiltrado').on('show.bs.modal',function() {
@@ -173,6 +190,11 @@ function modalFilter(){
 
 	})
 }
+
+/**
+ *	Function that serves to show all the dailys in the filter modal
+ *	@returns
+ */
 function showListDaily(){
 	try{
 		if(inDailys.length >= 1){
@@ -195,7 +217,10 @@ function showListDaily(){
 	}
 }
 
-
+/**
+ *	Function to activate the actions when a daily is choosed
+ *	@returns
+ */
 function chooseDaily(){
 	arr = orderBy(inTasks)
 	var dateSelected = daily;

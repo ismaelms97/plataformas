@@ -110,9 +110,9 @@
 				$(".options", this).toggle();
 				
 
-				$(".estartegiasCard").click(function(e){
-					if(!e.target.classList.contains("disabled")){ 
-						sessionStorage.setItem('titulo', e.target.innerHTML.trim());
+				$(".options").click(function(e){
+					if(!e.target.parentElement.parentElement.previousSibling.classList.contains("disabled")){ 
+						sessionStorage.setItem('titulo', e.target.parentElement.parentElement.previousSibling.innerHTML.trim());
 						console.log(sessionStorage.getItem('titulo'));
 					}
 				});
