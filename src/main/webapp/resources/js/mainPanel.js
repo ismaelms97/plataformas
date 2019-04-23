@@ -1,5 +1,6 @@
 var estrategias = [];
 var equipos = [];
+var roles = [];
 
 function checkStatus(){
 	var estrategiaCards = document.getElementsByTagName("a");

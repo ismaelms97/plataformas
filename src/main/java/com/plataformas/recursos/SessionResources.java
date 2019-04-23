@@ -18,8 +18,6 @@ public class SessionResources {
 
 		for (Estrategia estrategia : listaEstrategias) {
 
-			System.out.println(estrategia.getId()+" == "+id);
-
 			if(estrategia.getId() == id) {
 
 				return true;
