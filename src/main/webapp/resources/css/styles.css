@@ -178,7 +178,7 @@ td .ui-selected {
 	color: #961a1aab;
 }
 
-/*########### ANIMACIïóN CARGA ###########*/
+/*########### ANIMACIï¿½ï¿½N CARGA ###########*/
 
 .lds-dual-ring {
  	display: inline-block; 
@@ -385,6 +385,11 @@ form{
 .sameEstadoInicialActual, .gradientGreyBlue{
 	background-color: #f55cde !important; /* For browsers that do not support gradients */
 	background-image: linear-gradient(to right, #dbdbdb 30%, #4485fd); /* Standard syntax (must be last) */
+}
+
+.sameEstadoInicialActual, .gradientGreyOrange{
+	background-color: #f55cde !important; /* For browsers that do not support gradients */
+	background-image: linear-gradient(to right, #dbdbdb 30%, #ffaf1b 85%); /* Standard syntax (must be last) */
 }
 
 /*########### FILTER ###########*/

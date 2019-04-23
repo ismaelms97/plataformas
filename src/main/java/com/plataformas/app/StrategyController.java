@@ -146,21 +146,21 @@ public class StrategyController {
 				return REDIRECT_HOME;
 
 			}else {
+
 				User actualUser = (User) session.getAttribute("userSession");
-				List<Integer> ids = actualUser.getEquipoId();
-			
+				List<Integer> ids = actualUser.getEquipoId();			
 				int index = ids.indexOf(estrategia.getEquipoId());				
-				
 				String actualRol = actualUser.getRole().get(index);
 				
 				if(actualRol.equals("root")) {
-					
+
 					return REDIRECT_PANEL_CONTROL;
 				}
-				
+
 				session.setAttribute("newEstrategia", estrategia);
 				model.addAttribute("tarea", new Tarea());
 			}
+
 			return PLATAFORMA;
 		}
 	}
