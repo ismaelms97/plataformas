@@ -319,7 +319,7 @@ function habilitarBotonEnvio() {
 }
 
 function orderBy(inArr) {
-	arr = inArr.slice();
+	arr = inArr.slice()
 	arr.sort(function(a, b){
 		if(a.id > b.id){
 			return 1;

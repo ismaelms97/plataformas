@@ -44,6 +44,7 @@ var process_wb = (function () {
 		//document.getElementById("drop").style.display =  "none";
 
 		try{
+			
 			for (var i = 0; i < JSON.parse(output).Tareas[0].length; i++) {
 				if(JSON.parse(output).Tareas[0][i] != null){
 					if (JSON.parse(output).Tareas[0][i].toLowerCase() == "id") {
@@ -123,14 +124,13 @@ var process_wb = (function () {
 				equipo = owners(tasks);
 //				console.log("Equipo 2: ", equipo);
 			}
-
 			// Activate the action to filter
 			filtering();
 
 			tasks = orderBy(tasks);
-
+			
 			drawTeamUsers(equipo);
-
+			
 			drawTable(tasks, false);
 		} catch (e){
 			console.log(e)
