@@ -111,8 +111,8 @@
 				
 
 				$(".options").click(function(e){
-					if(!e.target.parent.classList.contains("disabled")){ 
-						sessionStorage.setItem('titulo', e.target.innerHTML.trim());
+					if(!e.target.parentElement.parentElement.previousSibling.classList.contains("disabled")){ 
+						sessionStorage.setItem('titulo', e.target.parentElement.parentElement.previousSibling.innerHTML.trim());
 						console.log(sessionStorage.getItem('titulo'));
 					}
 				});
