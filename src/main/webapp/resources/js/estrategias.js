@@ -42,8 +42,6 @@ function dragDrop(arr, bool){
 
 						drag: function (event, ui) {
 
-
-
 							// Descomentar esto para seleccionar
 							// var dt = ui.position.top - offset.top, dl =
 							// ui.position.left

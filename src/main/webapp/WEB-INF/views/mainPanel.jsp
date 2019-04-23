@@ -87,7 +87,7 @@
 								if((today == estrategias[elId].fecha && estrategias[elId].fecha.trim() != "") || el.children[0].classList.contains("ended")){
 									el.children[0].nextElementSibling.children[0].classList.add("disabled");
 									el.children[0].nextElementSibling.children[0].setAttribute("style", "display:none");
-									console.log("Cant create new daily")
+									console.log("Can't create new daily")
 								} else {
 									console.log("You can create new daily")
 								}

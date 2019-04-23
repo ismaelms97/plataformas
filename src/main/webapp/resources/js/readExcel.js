@@ -122,7 +122,6 @@ var process_wb = (function () {
 			}else{
 				// Collect Users from propertyOf 
 				equipo = owners(tasks);
-//				console.log("Equipo 2: ", equipo);
 			}
 			// Activate the action to filter
 			filtering();

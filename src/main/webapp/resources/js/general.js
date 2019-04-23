@@ -52,7 +52,7 @@ function inputTasks() {
  * Función para pintar la tabla
  */
 function drawTable(array , db) {
-//	ORdenamos el array por prioridad,
+//	Ordenamos el array por prioridad,
 	array = orderBy(array);
 	inTasks = orderBy(inTasks);
 
@@ -70,7 +70,6 @@ function drawTable(array , db) {
 		// Pintamos los RTC
 		drawRTC(array, i, db);
 	}
-
 
 	if(db){
 
