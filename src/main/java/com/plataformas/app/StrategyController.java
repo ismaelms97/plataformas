@@ -149,9 +149,9 @@ public class StrategyController {
 
 				User actualUser = (User) session.getAttribute("userSession");
 				List<Integer> ids = actualUser.getEquipoId();			
-				int index = ids.indexOf(estrategia.getEquipoId());					
+				int index = ids.indexOf(estrategia.getEquipoId());				
 				String actualRol = actualUser.getRole().get(index);
-
+				
 				if(actualRol.equals("root")) {
 
 					return REDIRECT_PANEL_CONTROL;
