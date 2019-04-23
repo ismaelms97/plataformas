@@ -110,8 +110,8 @@
 				$(".options", this).toggle();
 				
 
-				$(".estartegiasCard").click(function(e){
-					if(!e.target.classList.contains("disabled")){ 
+				$(".options").click(function(e){
+					if(!e.target.parent.classList.contains("disabled")){ 
 						sessionStorage.setItem('titulo', e.target.innerHTML.trim());
 						console.log(sessionStorage.getItem('titulo'));
 					}

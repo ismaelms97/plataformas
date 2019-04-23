@@ -81,8 +81,6 @@ function dragDrop(arr, bool){
 							}
 
 							habilitarBotonEnvio();
-//							console.log(arr[this.getAttribute("data-rtc") - 1]);
-//							console.log(arr);
 						},
 					});
 		}
@@ -202,7 +200,6 @@ function saveData() {
 
 		strategy.tasks.forEach(task => {
 			tasksToString += "RTC:" + task.id + "--";
-//			console.log(task.id);
 			tasksToString += "Tipo:" + task.tipo + "--";
 			tasksToString += "Estado:" + task.estadoActual + "--";
 			tasksToString += "EstadoFinal:" + task.estadoFinal+ "--";
@@ -229,9 +226,6 @@ function saveData() {
 		});
 
 		tasksToString = tasksToString.substring(0, tasksToString.length - 4);
-//		console.log(tasksToString)
-
-//		console.log(strategy.tasks)
 		$.ajax({
 			type: "POST",
 			url: "/estrategia/saveEstrategia",
@@ -240,10 +234,10 @@ function saveData() {
 			}, success: function (data) {
 
 				if(data == "true"){
-					
+
 					location.href = "/estrategia/panelControl";
 					console.log("success");
-					
+
 				}else{
 
 					$.notify({
@@ -264,7 +258,6 @@ function saveData() {
 			}
 		});
 	} else {
-//		console.log(inTasks)
 		var date = new Date();
 		tasksToString = "";
 		tasks.forEach(task => {
@@ -282,10 +275,10 @@ function saveData() {
 			}, success: function (data) {
 
 				if(data == "true"){
-					
+
 					location.href = "/estrategia/panelControl";
 					console.log("success");
-					
+
 				}else{
 
 					$.notify({
@@ -306,7 +299,6 @@ function saveData() {
 
 			}
 		});
-//		console.log("not empty")
 
 	}
 
@@ -338,7 +330,7 @@ function orderBy(arr) {
 
 		return 0;
 	});
-	
+
 	arr.sort(function(a, b){
 		if(a.prioridad < b.prioridad){
 			return 1;
@@ -357,7 +349,6 @@ function orderBy(arr) {
 	var order = 0;
 	while (orderedArr.length < arr.length) {//orderedArr.length < tasks.length
 		for (var i = 0; i < arr.length; i++) {
-			//console.log(prio[order])
 			if (eval(prio[order]) == prioVal[order] && !exists(orderedArr, arr[i]) && order < prio.length) {
 				orderedArr.push(arr[i])
 			} else if (order >= prio.length && !exists(orderedArr, arr[i])){
@@ -369,14 +360,12 @@ function orderBy(arr) {
 		} 
 
 	}
-//	console.log(orderedArr)
 	return orderedArr;
 }
 
 function exists(arr, val){
 	for(var x = 0; x < arr.length; x++){
 		if(arr[x].id == val.id){
-//			console.log(val.id)
 			return true;
 		}
 	}
@@ -439,11 +428,11 @@ function calculateK(tam, comp, estadoInicial, estadoActual){
 
 function sum(array, posInitial, posFinal){
 	var suma = 0;
-	
+
 	for (var i = posInitial; i <= posFinal; i++) {
-		
+
 		suma += array[i];
 	}
-	
+
 	return suma;
 }

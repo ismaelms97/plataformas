@@ -35,7 +35,7 @@ function rellenarEstados() {
 		}
 		console.log("Estados", estados);
 	}
-}
+} 
 
 function inputTasks() {
 	try {
