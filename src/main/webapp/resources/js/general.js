@@ -149,6 +149,7 @@ function drawRTC(array, pos, db) {
 			}
 			console.log(array[pos].id + " " + array[pos].estadoActual + "  " + arrayInTasksBackup[pos].id + " " + arrayInTasksBackup[pos].estadoFinal + "  " + array[pos].estadoActual.toLowerCase().startsWith(inTasks[pos].estadoFinal.toLowerCase()))
 		}
+		
 	} else {
 		 if(array[pos].estado.toLowerCase().startsWith(array[pos].estadoFinal.toLowerCase())){
 

@@ -44,7 +44,7 @@ var process_wb = (function () {
 		//document.getElementById("drop").style.display =  "none";
 
 		try{
-			
+
 			for (var i = 0; i < JSON.parse(output).Tareas[0].length; i++) {
 				if(JSON.parse(output).Tareas[0][i] != null){
 					if (JSON.parse(output).Tareas[0][i].toLowerCase() == "id") {
@@ -88,6 +88,7 @@ var process_wb = (function () {
 					task.peticionario = JSON.parse(output).Tareas[i][petPos]
 					task.urgente = JSON.parse(output).Tareas[i][urgenPos];
 					task.estadoFinal = "";
+					task.k = 0;
 
 					// Hacemos comprovaciones
 					if(JSON.parse(output).Tareas[i][complejPos] != null && JSON.parse(output).Tareas[i][complejPos].toLowerCase() != "sin asignar"){
@@ -118,7 +119,7 @@ var process_wb = (function () {
 				tasks = strategyFilter(tasks);
 				$("div.button").removeClass("disabled");
 				var filtrado = tasks.filter(item => inTasks.find(item2 => item.id === item2.id).propiedad = item.propiedad);
-				
+
 			}else{
 				// Collect Users from propertyOf 
 				equipo = owners(tasks);
@@ -127,16 +128,16 @@ var process_wb = (function () {
 			filtering();
 
 			tasks = orderBy(tasks);
-			
+
 			drawTeamUsers(equipo);
-			
+
 			drawTable(tasks, false);
 		} catch (e){
 			console.log(e)
 			dropError();
 		}
 	};
-})();
+});
 
 var do_file = (function () {
 	var rABS = typeof FileReader !== "undefined" && (FileReader.prototype || {}).readAsBinaryString;
