@@ -37,7 +37,6 @@
 
 						<form:input path="fechaInicio" class="form-control" id="estrategiaFormInputDateInit" type="hidden"/>
 						<form:input path="estado" class="form-control" id="estrategiaFormInputEstado" type="hidden"/>
-						<%-- <form:input path="equipoId" class="form-control" id="estrategiaFormInputEquipoId" type="hidden"/> --%>
 							<td><input type="submit" value="Crear" class="btn btn-primary" id="crearEstrategia" disabled/></td>
 						</tr>
 					</table>

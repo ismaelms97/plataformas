@@ -42,8 +42,6 @@ function dragDrop(arr, bool){
 
 						drag: function (event, ui) {
 
-
-
 							// Descomentar esto para seleccionar
 							// var dt = ui.position.top - offset.top, dl =
 							// ui.position.left
@@ -77,6 +75,9 @@ function dragDrop(arr, bool){
 								if (estados.indexOf(this.parentElement.classList[0].replace(/-/g, " ").replace(/_/g, ".")) >= this.getAttribute("data-posInitial")) {
 									arr[this.getAttribute("data-rtc") - 1].modified = true;
 									arr[this.getAttribute("data-rtc") - 1].estadoFinal = this.parentElement.classList[0].replace(/-/g, " ").replace(/_/g, ".");
+									arr[this.getAttribute("data-rtc") - 1].k = calculateK(this.childNodes[2].innerHTML - 1, this.childNodes[0].innerHTML, this.getAttribute("data-posInitial"), estados.indexOf(arr[this.getAttribute("data-rtc") - 1].estadoFinal))
+									
+									console.log(arr[this.getAttribute("data-rtc") - 1])
 								}
 							}
 
@@ -124,6 +125,7 @@ function dragDrop(arr, bool){
 								}
 
 								$(ui.draggable[0]).appendTo(event.target);
+								
 							}
 						}else{
 							// SI estas arrastrando a los usuarios
@@ -377,17 +379,17 @@ function drawTeamUsers(array){
 	document.getElementsByClassName("teamUsers")[0].innerHTML = "";
 
 	for (var i = 0; i < array.length; i++) {
-
+		
 		var txt = '<div class="chip">'
 			+'<img src="https://addons.thunderbird.net/static//img/zamboni/anon_user.png" alt="Person" width="96" height="300"><span class="name">'
-			+ toCamelCase(array[i].toLowerCase()) +'</span> <br>Tareas: ' + getTasksByUser(array[i], tasks) + ' | K: 10 </div>';
+			+ toCamelCase(array[i].toLowerCase()) +'</span> <br>Tareas: ' + getTasksByUser(array[i], tasks) + ' | K: '+ array[i].k +' </div>';
 		if(array.length >= 7 && i + 1 == Math.round((array.length / 2))){
 			txt += "<br>";
 		}
 		document.getElementsByClassName("teamUsers")[0].innerHTML += txt;
 	}
 	moveUsers();
-
+	
 }
 
 function moveUsers(){
@@ -405,6 +407,7 @@ function getTasksByUser(user, tareas){
 	tareas.forEach(function(task){
 		if(task.propiedad.toLowerCase() == user.toLowerCase()){
 			count++;
+			user.k += task.k;
 		}
 		if(user.toLowerCase() == "sin propietario" && task.propiedad.toLowerCase()  == "unassigned"){
 			count++;
@@ -414,17 +417,33 @@ function getTasksByUser(user, tareas){
 	return count;
 }
 
-function calculateK(tam, comp, estadoInicial, estadoActual){ 
+function calculateK(comp, tam, estadoInicial, estadoActual){ 
 
 //	Listo para analizar; Cierre de requirimientos; En análisis; Aceptación usuario; En curso; Aceptación pruebas; Pendiente implantar; Implantado; Cerrado
 //	K = COMPLEJIDAD * TAMAÑO * suma(PESO_FASE_COMPLETADA)
 //	=SI(I4="Pte Alta";0;SI(I4="Pte. Cuantificar";0;SI(I4="Listo para analizar";0;SI(I4="Cierre requerimientos";0,4;SI(I4="En análisis";0,6;SI(I4="Aceptación usuario";0,72;SI(I4="En curso";0,77;SI(I4="Aceptación a las pruebas";0,97;SI(I4="Pte. implantar";1;SI(I4="Implantado";1;SI(I4="Finalizada";1;-1)))))))))))
 
-	var pesoFase = [0.4, 0.2, 0.12, 0.05, 0.2, 0.3];
-	var tamano = {"XXS": 1, "XS": 1.1, "S":1.2, "M": 1.3, "L": 1.4, "XL": 1.5, "XXL": 1.6, "XXXL": 1.7};
+	var pesoFase = [0,0,0, 0.4, 0.2, 0.12, 0.05, 0.2, 0.3, 0];
+	var tamano =  expand({"XXS, 50": 1, "XS, 100": 1.1, "S, 200":1.2, "M, 400": 1.3, "L, 800": 1.4, "XL, 1600": 1.5, "XXL, 3200": 1.6, "XXXL, 6400": 1.7});
 	var complejidad = [1, 5, 20, 50, 100];
 
-	return complejidad[tam] * tamano[comp] * sum(pesoFase, estadoInicial,estadoActual);
+	if(parseInt(comp) <= 0 || parseInt(tam) <= 0){
+		return 0;
+	}
+	return complejidad[parseInt(comp)] * tamano[tam] * sum(pesoFase, parseInt(estadoInicial),parseInt(estadoActual));
+	
+}
+
+function expand(obj) {
+    var keys = Object.keys(obj);
+    for (var i = 0; i < keys.length; ++i) {
+        var key = keys[i],
+            subkeys = key.split(/,\s?/),
+            target = obj[key];
+        delete obj[key];
+        subkeys.forEach(function(key) { obj[key] = target; })
+    }
+    return obj;
 }
 
 function sum(array, posInitial, posFinal){
@@ -434,6 +453,6 @@ function sum(array, posInitial, posFinal){
 
 		suma += array[i];
 	}
-
+console.log(suma);
 	return suma;
 }

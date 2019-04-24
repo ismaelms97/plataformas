@@ -29,7 +29,7 @@
 	<c:forEach items="${listaDaily}" var="daily" varStatus="item">
 			<script>
 				var exists = false;
-				// Si da error es por que jsp no detecta en su codigo que es un Sccript con codigo js
+				// Si da error en eclipse es por que jsp no detecta en su codigo que es un Script con codigo js
 				inDailys.forEach(el => {
 					if(el.id == "${daily.id}"){
 						exists = true;
@@ -79,7 +79,7 @@
 				task.complejidad = "${tarea.complejidad}";
 				task.prioridad = "${tarea.prioridad}";
 				task.tamano = "${tarea.tamaño}";
-				inTasks.push(task);	
+				inTasks.push(task);
 			</script>
 	</c:forEach>
 	
