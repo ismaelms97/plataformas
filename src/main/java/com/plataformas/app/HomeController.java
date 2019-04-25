@@ -36,6 +36,7 @@ public class HomeController {
 
 	@GetMapping(value = "/")
 	public String home(Locale locale, Model model)  {
+		
 		model.addAttribute("user", new User());
 		return HOME;
 	}
@@ -43,7 +44,7 @@ public class HomeController {
 	@GetMapping(value = "/mainPanel")
 	public String logGet(Locale locale, Model model)  {
 
-		return "redirect:/estrategia/panelControl";
+		return REDIRECT_MAIN_CONTROL;
 	}
 
 	@PostMapping(value = "/mainPanel")

@@ -137,7 +137,7 @@ var process_wb = (function () {
 			dropError();
 		}
 	};
-});
+})();
 
 var do_file = (function () {
 	var rABS = typeof FileReader !== "undefined" && (FileReader.prototype || {}).readAsBinaryString;
