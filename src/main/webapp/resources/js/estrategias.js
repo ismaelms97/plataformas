@@ -90,7 +90,6 @@ function dragDrop(arr, bool){
 		}
 		$("td").droppable(
 				{
-
 					drop: function (event, ui) {
 						if(!ui.draggable[0].classList.contains("chip")){
 							// Pinta de rojo todos los modificados

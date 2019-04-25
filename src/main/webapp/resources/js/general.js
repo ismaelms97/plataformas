@@ -86,6 +86,17 @@ function drawTable(array , db) {
 			$(el).parent().siblings("."+array[i].estadoFinal.replace(/\s/g, "-").replace(/[\.]/g,  "_")).append(cln);
 			$(cln).css("display", "inline-block");
 		}
+	} else{
+		for (var i = 0; i < array.length; i++) {
+			if(array[i].modified){
+				// CLON ESTADO FINAL RECOGIDO DE BASE DE DATOS
+					var el = document.getElementsByClassName("rect")[i];
+					var cln = $(el).clone();
+					cln.attr("class", "clone orange");
+					$(el).parent().siblings("."+array[i].estadoFinal.replace(/\s/g, "-").replace(/[\.]/g,  "_")).append(cln);
+					$(cln).css("display", "inline-block");
+				}
+		}
 	}
 }
 
@@ -174,7 +185,7 @@ function drawRTC(array, pos, db) {
 		cln.attr("class", "clone");
 		$(el).parent().append(cln);
 		$(cln).css("display", "none");
-
+		
 		dragDrop(array, true);
 	}else{
 		dragDrop(array, false);
