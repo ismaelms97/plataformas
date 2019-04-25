@@ -51,17 +51,20 @@ function strategyFilter(array){
  */
 function owners(array){
 	var own = [];
-	var nombre = "";
+	var backup = [];
+	var name = "";
 	array.forEach(function(task){
-		if(!own.includes(task.propiedad)){
-
+		if(!backup.includes(task.propiedad)){
+			
 			if (task.propiedad.toLowerCase() != "unassigned"){
-
-				own.push(task.propiedad);
-				nombre = task.propiedad.toLowerCase();
+				
+				own.push({nombre : task.propiedad, k: 0});
+				backup.push(task.propiedad);
+				
+				name = task.propiedad.toLowerCase();
 				var texto = '<div class="custom-control custom-checkbox">'+
-				'<input type="checkbox" id="'+ nombre +'" value="'+ nombre +'" class="custom-control-input filtros taskPropertyOf">'+
-				'<label class="custom-control-label" for="'+ nombre +'">'+ toCamelCase(nombre) +'</label><br> '+
+				'<input type="checkbox" id="'+ name +'" value="'+ name +'" class="custom-control-input filtros taskPropertyOf">'+
+				'<label class="custom-control-label" for="'+ name +'">'+ toCamelCase(name) +'</label><br> '+
 				'</div>';
 				$("#collapsePropertyOf").children(".card").append(texto);
 
@@ -69,16 +72,24 @@ function owners(array){
 		}
 	})
 
-	own.push("Sin Propietario");
-	nombre = "Sin Propietario".toLowerCase();
+	own.push({nombre : "Sin Propietario", k: 0});
+	name = "Sin Propietario".toLowerCase();
 	var texto = '<div class="custom-control custom-checkbox">'+
-	'<input type="checkbox" id="'+ nombre +'" value="'+ nombre +'" class="custom-control-input filtros taskPropertyOf">'+
-	'<label class="custom-control-label" for="'+ nombre +'">'+ toCamelCase(nombre) +'</label><br> '+
+	'<input type="checkbox" id="'+ name +'" value="'+ name +'" class="custom-control-input filtros taskPropertyOf">'+
+	'<label class="custom-control-label" for="'+ name +'">'+ toCamelCase(name) +'</label><br> '+
 	'</div>';
 	$("#collapsePropertyOf").children(".card").append(texto);
 
 	return own;
 }
+
+//function userNoExists(array, user){
+//array.forEach(function(us){
+//	if(us.nombre == user) return false;
+//})
+//return true;
+//}
+
 /**
  * Appends all the owners of the tasks to the filtering modal of a daily, when the users come from the database
  * @returns

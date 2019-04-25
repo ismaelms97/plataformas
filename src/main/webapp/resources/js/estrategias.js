@@ -382,7 +382,7 @@ function drawTeamUsers(array){
 		
 		var txt = '<div class="chip">'
 			+'<img src="https://addons.thunderbird.net/static//img/zamboni/anon_user.png" alt="Person" width="96" height="300"><span class="name">'
-			+ toCamelCase(array[i].toLowerCase()) +'</span> <br>Tareas: ' + getTasksByUser(array[i], tasks) + ' | K: '+ array[i].k +' </div>';
+			+ toCamelCase(array[i].nombre.toLowerCase()) +'</span> <br>Tareas: ' + getTasksByUser(array[i], tasks) + ' | K: '+ array[i].k +' </div>';
 		if(array.length >= 7 && i + 1 == Math.round((array.length / 2))){
 			txt += "<br>";
 		}
@@ -405,11 +405,11 @@ function getTasksByUser(user, tareas){
 
 	var count = 0;
 	tareas.forEach(function(task){
-		if(task.propiedad.toLowerCase() == user.toLowerCase()){
+		if(task.propiedad.toLowerCase() == user.nombre.toLowerCase()){
 			count++;
 			user.k += task.k;
 		}
-		if(user.toLowerCase() == "sin propietario" && task.propiedad.toLowerCase()  == "unassigned"){
+		if(user.nombre.toLowerCase() == "sin propietario" && task.propiedad.toLowerCase()  == "unassigned"){
 			count++;
 		}
 	});
@@ -453,6 +453,5 @@ function sum(array, posInitial, posFinal){
 
 		suma += array[i];
 	}
-console.log(suma);
 	return suma;
 }

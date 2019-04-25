@@ -6,7 +6,6 @@ $(document).ready(function(){
 	rellenarEstados();
 	inputTasks();
 	showListDaily();
-	console.log(calculateK(0,"XXS",1,1));
 	
 	if(document.getElementsByClassName("mainTitle")[0]){
 		document.getElementsByClassName("mainTitle")[0].innerHTML = sessionStorage.getItem('titulo');
@@ -55,7 +54,9 @@ function drawTable(array , db) {
 //	Ordenamos el array por prioridad,
 	array = orderBy(array);
 	inTasks = orderBy(inTasks);
-
+	
+	
+	
 	// PIntamos la tabla
 	for (var i = 0; i < array.length; i++) {
 		var tr = document.createElement("tr");
@@ -72,7 +73,7 @@ function drawTable(array , db) {
 	}
 
 	if(db){
-
+		
 //		equipo = ownersDaily(inDailys);
 //		console.log("Equipo 1: ", equipo);
 		
