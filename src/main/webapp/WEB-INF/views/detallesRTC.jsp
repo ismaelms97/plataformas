@@ -34,6 +34,9 @@
 				<hr>
 				<h6 class="detailsSubtitle">Planificado Para</h6>
 				<div id="detallesPlanificadoPara"></div>
+				<hr>
+				<h6 class="detailsSubtitle">K:</h6>
+				<div id="detallesK"></div>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-outline-info" data-dismiss="modal">Close</button>

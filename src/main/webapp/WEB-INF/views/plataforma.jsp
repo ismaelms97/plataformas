@@ -13,6 +13,7 @@
 	<h1 class="mainTitle"></h1>
 	<div class="flexButton">
 		<i class="fa fa-filter fa-2x" id="modalFilter" data-toggle="modal" data-target="#modalFiltrado"></i>
+		<div class="k">K: 0</div>
 		<form:form method="POST" action="/estrategia/saveEstrategia">
 			<div class="button disabled" id="save">Guardar</div>
 		</form:form>
@@ -125,7 +126,6 @@
 		$(document).ready(function(){
 			// Activate the action to filter
 			filtering();
-			
 		});
 	</script>
 	

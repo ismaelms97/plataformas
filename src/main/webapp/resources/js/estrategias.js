@@ -1,6 +1,6 @@
 var arrayTasksBackup;
 var arrayInTasksBackup;
-
+var k = 0;
 try{
 	arrayTasksBackup = tasks.slice(0);
 	arrayInTasksBackup = inTasks.slice(0);
@@ -84,6 +84,7 @@ function dragDrop(arr, bool){
 
 							habilitarBotonEnvio();
 							drawTeamUsers(equipo);
+							document.getElementsByClassName("k")[0].innerHTML = "K: " + k;
 						},
 					});
 		}
@@ -156,6 +157,7 @@ function dragDrop(arr, bool){
 
 							}
 							drawTeamUsers(equipo);
+							document.getElementsByClassName("k")[0].innerHTML = "K: " + k;
 						}
 					}
 				});
@@ -380,6 +382,7 @@ function exists(arr, val){
 }
 
 function drawTeamUsers(array){
+	k = 0;
 	document.getElementsByClassName("teamUsers")[0].innerHTML = "";
 
 	for (var i = 0; i < array.length; i++) {
@@ -390,6 +393,7 @@ function drawTeamUsers(array){
 		if(array.length >= 7 && i + 1 == Math.round((array.length / 2))){
 			txt += "<br>";
 		}
+		k += array[i].k;
 		document.getElementsByClassName("teamUsers")[0].innerHTML += txt;
 	}
 	moveUsers();

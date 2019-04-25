@@ -213,6 +213,7 @@ function verDetallesRTC(array, i){
 		document.getElementById("detallesComplejidad").innerHTML = array[i].complejidad;
 		document.getElementById("detallesPropietario").innerHTML = array[i].propiedad;
 		document.getElementById("detallesPlanificadoPara").innerHTML = array[i].planificado;
+		document.getElementById("detallesK").innerHTML = array[i].k;
 	})
 }
 
