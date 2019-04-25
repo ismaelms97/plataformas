@@ -69,6 +69,7 @@ function dragDrop(arr, bool){
 							if (this.parentElement.classList.contains(estados[this.getAttribute("data-posInitial")].replace(/\s/g, "-").replace(/[\.]/g, "_")) && arr[this.getAttribute("data-rtc") - 1].modified) {
 
 								arr[this.getAttribute("data-rtc") - 1].modified = false;
+								arr[this.getAttribute("data-rtc") - 1].k = 0;
 
 							} else {
 
@@ -82,6 +83,7 @@ function dragDrop(arr, bool){
 							}
 
 							habilitarBotonEnvio();
+							drawTeamUsers(equipo);
 						},
 					});
 		}
@@ -135,8 +137,10 @@ function dragDrop(arr, bool){
 								if(user.toLowerCase() == "sin propietario"){
 									user = "unassigned"
 								}
+								console.log(equipo);
 								tasks.find(tarea => parseInt(tarea.id) === parseInt(event.target.children[0].innerText.split("\n")[1].trim())).propiedad = user;
-
+								console.log(parseInt(event.target.children[0].innerText.split("\n")[1].trim()));
+								
 								$.notify({
 									title: '<strong>Cambio de Propietario</strong>',
 									message: ' en la tarea ' + event.target.children[0].innerText.split("\n")[1].trim() + '.'
@@ -382,7 +386,7 @@ function drawTeamUsers(array){
 		
 		var txt = '<div class="chip">'
 			+'<img src="https://addons.thunderbird.net/static//img/zamboni/anon_user.png" alt="Person" width="96" height="300"><span class="name">'
-			+ toCamelCase(array[i].nombre.toLowerCase()) +'</span> <br>Tareas: ' + getTasksByUser(array[i], tasks) + ' | K: '+ array[i].k +' </div>';
+			+ toCamelCase(array[i].nombre.toLowerCase()) +'</span> <br>Tareas: ' + getTasksByUser(array[i], tasks) + ' | K: '+ array[i].k.toFixed(2) +' </div>';
 		if(array.length >= 7 && i + 1 == Math.round((array.length / 2))){
 			txt += "<br>";
 		}
@@ -402,18 +406,20 @@ function moveUsers(){
 }
 
 function getTasksByUser(user, tareas){
-
+	var sum = 0;
 	var count = 0;
 	tareas.forEach(function(task){
 		if(task.propiedad.toLowerCase() == user.nombre.toLowerCase()){
 			count++;
-			user.k += task.k;
+//			user.k += task.k;
+			sum += task.k;
 		}
 		if(user.nombre.toLowerCase() == "sin propietario" && task.propiedad.toLowerCase()  == "unassigned"){
 			count++;
 		}
 	});
 
+	user.k = sum;
 	return count;
 }
 
@@ -423,13 +429,14 @@ function calculateK(comp, tam, estadoInicial, estadoActual){
 //	K = COMPLEJIDAD * TAMAÑO * suma(PESO_FASE_COMPLETADA)
 //	=SI(I4="Pte Alta";0;SI(I4="Pte. Cuantificar";0;SI(I4="Listo para analizar";0;SI(I4="Cierre requerimientos";0,4;SI(I4="En análisis";0,6;SI(I4="Aceptación usuario";0,72;SI(I4="En curso";0,77;SI(I4="Aceptación a las pruebas";0,97;SI(I4="Pte. implantar";1;SI(I4="Implantado";1;SI(I4="Finalizada";1;-1)))))))))))
 
-	var pesoFase = [0,0,0, 0.4, 0.2, 0.12, 0.05, 0.2, 0.3, 0];
+	var pesoFase = [0,0,0, 0.4, 0.2, 0.12, 0.05, 0.2, 0.03, 0];
 	var tamano =  expand({"XXS, 50": 1, "XS, 100": 1.1, "S, 200":1.2, "M, 400": 1.3, "L, 800": 1.4, "XL, 1600": 1.5, "XXL, 3200": 1.6, "XXXL, 6400": 1.7});
 	var complejidad = [1, 5, 20, 50, 100];
 
 	if(parseInt(comp) <= 0 || parseInt(tam) <= 0){
 		return 0;
 	}
+	
 	return complejidad[parseInt(comp)] * tamano[tam] * sum(pesoFase, parseInt(estadoInicial),parseInt(estadoActual));
 	
 }
@@ -453,5 +460,6 @@ function sum(array, posInitial, posFinal){
 
 		suma += array[i];
 	}
+	
 	return suma;
 }
