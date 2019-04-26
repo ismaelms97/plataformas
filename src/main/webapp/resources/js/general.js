@@ -90,12 +90,15 @@ function drawTable(array , db) {
 		for (var i = 0; i < array.length; i++) {
 			if(array[i].modified){
 				// CLON ESTADO FINAL RECOGIDO DE BASE DE DATOS
-					var el = document.getElementsByClassName("rect")[i];
-					var cln = $(el).clone();
-					cln.attr("class", "clone orange");
-					$(el).parent().siblings("."+array[i].estadoFinal.replace(/\s/g, "-").replace(/[\.]/g,  "_")).append(cln);
-					$(cln).css("display", "inline-block");
-				}
+				var el = document.getElementsByClassName("rect")[i];
+				var cln = $(el).clone();
+				cln.attr("class", "rect orange");
+				console.log(document.getElementsByClassName("rect")[i].parentElement)
+				$(el).parent().siblings("."+array[i].estadoFinal.replace(/\s/g, "-").replace(/[\.]/g,  "_")).append(cln);
+				$(cln).css("display", "inline-block");
+				document.getElementsByClassName("rect")[i].parentElement.firstChild.remove();
+				document.getElementsByClassName("clone")[i].removeAttribute("style")
+			}
 		}
 	}
 }
