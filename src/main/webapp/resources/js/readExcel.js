@@ -127,7 +127,7 @@ var process_wb = (function () {
 			// Activate the action to filter
 			filtering();
 
-			tasks = orderBy(tasks);
+			tasks = orderBy(tasks, orderType, orderStyle);
 
 			drawTeamUsers(equipo);
 

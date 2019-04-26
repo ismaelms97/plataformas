@@ -91,6 +91,29 @@
 					</div>
 				</div>
 			</div>
+			<div class="modal-body order-body">
+					<h5 class="detailsSubtitle">Orden</h5>
+					<hr>
+					<div class="form-group">
+					    <select class="form-control" id="orderByUser">
+					      <option value="">Por Defecto</option>
+					      <option value="rtc">RTC</option>
+					      <option value="propietario">Propietario</option>
+					    </select>
+				  	</div>
+				  	<div class="custom-control custom-radio">
+							<input type="radio"
+								class="custom-control-input filtros orderAsc" id="asc"
+								name="order" value="asc" checked> 
+								<label class="custom-control-label" for="asc">ASC</label>
+						</div>
+						<div class="custom-control custom-radio">
+							<input type="radio"
+								class="custom-control-input filtros orderDesc" id="des"
+								name="order" value="desc"> 
+								<label class="custom-control-label" for="des">DESC</label>
+						</div>
+			</div>
 			<div class="modal-body daily-body">
 					<h5 class="detailsSubtitle">Daily</h5>
 					<hr>
@@ -105,7 +128,7 @@
 					<div class="collapse" id="collapseDaily">
 						<div class="card card-body"></div>
 					</div>
-				</div>
+			</div>
 			<div class="modal-footer">
 				<button type="button" id="filter" class="btn btn-warning"
 					data-dismiss="modal">Filtrar</button>
