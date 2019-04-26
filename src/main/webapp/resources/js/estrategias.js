@@ -77,7 +77,7 @@ function dragDrop(arr, bool){
 									arr[this.getAttribute("data-rtc") - 1].modified = true;
 									arr[this.getAttribute("data-rtc") - 1].estadoFinal = this.parentElement.classList[0].replace(/-/g, " ").replace(/_/g, ".");
 									arr[this.getAttribute("data-rtc") - 1].k = calculateK(this.childNodes[2].innerHTML - 1, this.childNodes[0].innerHTML, this.getAttribute("data-posInitial"), estados.indexOf(arr[this.getAttribute("data-rtc") - 1].estadoFinal))
-									
+
 									console.log(arr[this.getAttribute("data-rtc") - 1])
 								}
 							}
@@ -127,7 +127,7 @@ function dragDrop(arr, bool){
 								}
 
 								$(ui.draggable[0]).appendTo(event.target);
-								
+
 							}
 						}else{
 							// SI estas arrastrando a los usuarios
@@ -140,7 +140,7 @@ function dragDrop(arr, bool){
 								console.log(equipo);
 								tasks.find(tarea => parseInt(tarea.id) === parseInt(event.target.children[0].innerText.split("\n")[1].trim())).propiedad = user;
 								console.log(parseInt(event.target.children[0].innerText.split("\n")[1].trim()));
-								
+
 								$.notify({
 									title: '<strong>Cambio de Propietario</strong>',
 									message: ' en la tarea ' + event.target.children[0].innerText.split("\n")[1].trim() + '.'
@@ -325,50 +325,94 @@ function habilitarBotonEnvio() {
 	}
 }
 
-function orderBy(inArr) {
-	arr = inArr.slice()
-	arr.sort(function(a, b){
-		if(a.id > b.id){
-			return 1;
+function orderBy(inArr, type = undefined) {
+	
+	if(type != undefined){
+		if(type == "rtc"){
+			array.sort(function(a, b){
+				if(a.id > b.id){
+					return 1;
+				}
+
+				if(a.id < b.id){
+					return -1;
+				}
+
+				return 0;
+			});
+		}else if(type == "propietario"){
+			array.sort(function(a, b){
+				if(a.propiedad > b.propiedad){
+					return 1;
+				}
+
+				if(a.propiedad < b.propiedad){
+					return -1;
+				}
+
+				return 0;
+			});
+		}else if(type == "tamano"){
+			array.sort(function(a, b){
+				if(a.tamano > b.tamano){
+					return 1;
+				}
+
+				if(a.tamano < b.tamano){
+					return -1;
+				}
+
+				return 0;
+			});
 		}
-
-		if(a.id < b.id){
-			return -1;
-		}
-
-		return 0;
-	});
-
-	arr.sort(function(a, b){
-		if(a.prioridad < b.prioridad){
-			return 1;
-		}
-
-		if(a.prioridad > b.prioridad){
-			return -1;
-		}
-
-		return 0;
-	})
-
-	var orderedArr = []
-	var prio = ["arr[i].urgente", "arr[i].complejidad"]
-	var prioVal = ["Sí", "Sin asignar"]
-	var order = 0;
-	while (orderedArr.length < arr.length) {//orderedArr.length < tasks.length
-		for (var i = 0; i < arr.length; i++) {
-			if (eval(prio[order]) == prioVal[order] && !exists(orderedArr, arr[i]) && order < prio.length) {
-				orderedArr.push(arr[i])
-			} else if (order >= prio.length && !exists(orderedArr, arr[i])){
-				orderedArr.push(arr[i])
+		
+	}else{
+		
+		arr = inArr.slice()
+		arr.sort(function(a, b){
+			if(a.id > b.id){
+				return 1;
 			}
-		}
-		if(order < prio.length){
-			order++;	
-		} 
 
+			if(a.id < b.id){
+				return -1;
+			}
+
+			return 0;
+		});
+
+		arr.sort(function(a, b){
+			if(a.prioridad < b.prioridad){
+				return 1;
+			}
+
+			if(a.prioridad > b.prioridad){
+				return -1;
+			}
+
+			return 0;
+		})
+
+		var orderedArr = []
+		var prio = ["arr[i].urgente", "arr[i].complejidad"]
+		var prioVal = ["Sí", "Sin asignar"]
+		var order = 0;
+		while (orderedArr.length < arr.length) {//orderedArr.length < tasks.length
+			for (var i = 0; i < arr.length; i++) {
+				if (eval(prio[order]) == prioVal[order] && !exists(orderedArr, arr[i]) && order < prio.length) {
+					orderedArr.push(arr[i])
+				} else if (order >= prio.length && !exists(orderedArr, arr[i])){
+					orderedArr.push(arr[i])
+				}
+			}
+			if(order < prio.length){
+				order++;	
+			} 
+
+		}
+
+		return orderedArr;
 	}
-	return orderedArr;
 }
 
 function exists(arr, val){
@@ -385,7 +429,7 @@ function drawTeamUsers(array){
 	document.getElementsByClassName("teamUsers")[0].innerHTML = "";
 
 	for (var i = 0; i < array.length; i++) {
-		
+
 		var txt = '<div class="chip">'
 			+'<img src="https://addons.thunderbird.net/static//img/zamboni/anon_user.png" alt="Person" width="96" height="300"><span class="name">'
 			+ toCamelCase(array[i].nombre.toLowerCase()) +'</span> <br>Tareas: ' + getTasksByUser(array[i], tasks) + ' | K: '+ array[i].k.toFixed(2) +' </div>';
@@ -396,7 +440,7 @@ function drawTeamUsers(array){
 		document.getElementsByClassName("teamUsers")[0].innerHTML += txt;
 	}
 	moveUsers();
-	
+
 }
 
 function moveUsers(){
@@ -439,21 +483,21 @@ function calculateK(comp, tam, estadoInicial, estadoActual){
 	if(parseInt(comp) <= 0 || parseInt(tam) <= 0){
 		return 0;
 	}
-	
+
 	return complejidad[parseInt(comp)] * tamano[tam] * sum(pesoFase, parseInt(estadoInicial),parseInt(estadoActual));
-	
+
 }
 
 function expand(obj) {
-    var keys = Object.keys(obj);
-    for (var i = 0; i < keys.length; ++i) {
-        var key = keys[i],
-            subkeys = key.split(/,\s?/),
-            target = obj[key];
-        delete obj[key];
-        subkeys.forEach(function(key) { obj[key] = target; })
-    }
-    return obj;
+	var keys = Object.keys(obj);
+	for (var i = 0; i < keys.length; ++i) {
+		var key = keys[i],
+		subkeys = key.split(/,\s?/),
+		target = obj[key];
+		delete obj[key];
+		subkeys.forEach(function(key) { obj[key] = target; })
+	}
+	return obj;
 }
 
 function sum(array, posInitial, posFinal){
@@ -463,6 +507,6 @@ function sum(array, posInitial, posFinal){
 
 		suma += array[i];
 	}
-	
+
 	return suma;
 }
