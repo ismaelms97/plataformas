@@ -23,46 +23,10 @@ function dragDrop(arr, bool){
 						helper: "clone",
 						start: function (event, ui) {
 							$(".ui-draggable-dragging").removeClass("noLeft");
-
-							// Descomentar esto para seleccionar
-							// if ($(this).hasClass("ui-selected")){
-							// selected = $(".ui-selected").each(function()
-							// {
-							// var el = $(this);
-							// el.data("offset", el.offset());
-							// });
-							// }
-							// else {
-							// selected = $([]);
-							// $(".rect").removeClass("ui-selected");
-							// }
-							// offset = $(this).offset();
-
 						},
-
 						drag: function (event, ui) {
 
-							// Descomentar esto para seleccionar
-							// var dt = ui.position.top - offset.top, dl =
-							// ui.position.left
-							// - offset.left;
-							// // Coje todos los elementos seleccionados excepto
-							// $(this),
-							// que es el elemento que queremos mover
-							// selected.not(this).each(function() {
-
-							// // Crea la variable para que no necesitemos
-							// llamar a $(this)
-							// // el = Elemento actual
-							// // off = En que posicion esteaba este elemento
-							// antes de
-							// moverlo
-							// var el = $(this), off = el.data("offset");
-							// el.css({top: off.top + dt, left: off.left + dl});
-							// });
-							// },
 						},
-
 						stop: function (event, ui) {
 							document.getElementsByClassName("rect")[(this.getAttribute("data-rtc") - 1)].style.display = "";
 
@@ -84,7 +48,7 @@ function dragDrop(arr, bool){
 
 							habilitarBotonEnvio();
 							drawTeamUsers(equipo);
-							document.getElementsByClassName("k")[0].innerHTML = "K: " + k;
+							document.getElementsByClassName("k")[0].innerHTML = "K: " + k.toFixed(2);
 						},
 					});
 		}
@@ -156,38 +120,10 @@ function dragDrop(arr, bool){
 
 							}
 							drawTeamUsers(equipo);
-							document.getElementsByClassName("k")[0].innerHTML = "K: " + k;
+							document.getElementsByClassName("k")[0].innerHTML = "K: " + k.toFixed(2);
 						}
 					}
 				});
-
-		// SI se quiere seleccionar, solo hace falta desbloquear el siguiente
-		// codigo, aunque si se quiere seleccionar, buscar información sobre  la seleccion multiple
-
-		// $(".rect").selectable()
-
-		// Manualmente activa el select que los elementos clicados
-		// $( ".rect" ).click( function(e){
-		// if (e.ctrlKey == false) {
-		// // Si la tecla de comando se presiona no deselecciones los elementos
-		// $( ".rect" ).removeClass("ui-selected");
-		// $(this).addClass("ui-selecting");
-		// }
-		// else {
-		// if ($(this).hasClass("ui-selected")) {
-		// // Elimina la clase selected de lo elementos seleccionados
-		// $(this).removeClass("ui-selected");
-		// }
-		// else {
-		// // Sino, añadeles la clase
-		// $(this).addClass("ui-selecting");
-		// }
-		// }
-
-		// $( ".rect" ).data("selectable")._mouseStop(null);
-
-		// });
-
 	})
 }
 
@@ -325,16 +261,24 @@ function habilitarBotonEnvio() {
 	}
 }
 
+/**
+ *  Función que ordenara un array dependiendo de sus parametros
+ *  
+ * @param inArr		Array a ordenar
+ * @param type		El tipo de orden que queremos por defecto es 'undefined'
+ * @param order		Si queremos que se ordene de manera ascente o descendente, por defecto es ascendete
+ * @returns
+ */
 function orderBy(inArr, type = undefined, order = "asc") {
 	var num = 1;
 	arr = inArr.slice()
-	
+
 	if(type != undefined && type != ""){
-		 console.log("Not Undefined")
+		console.log("Not Undefined")
 		if(order.toLowerCase() == "desc"){
 			num = -num;
 		}
-		
+
 		if(type == "rtc"){
 			arr.sort(function(a, b){
 				if(a.id > b.id){
@@ -374,8 +318,8 @@ function orderBy(inArr, type = undefined, order = "asc") {
 		}
 		return arr;
 	}else{
-		 console.log("Undefined")
-		
+		console.log("Undefined")
+
 		arr.sort(function(a, b){
 			if(a.id > b.id){
 				return 1;
