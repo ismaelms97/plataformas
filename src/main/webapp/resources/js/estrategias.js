@@ -325,50 +325,57 @@ function habilitarBotonEnvio() {
 	}
 }
 
-function orderBy(inArr, type = undefined) {
+function orderBy(inArr, type = undefined, order = "asc") {
+	var num = 1;
+	arr = inArr.slice()
 	
-	if(type != undefined){
+	if(type != undefined && type != ""){
+		 console.log("Not Undefined")
+		if(order.toLowerCase() == "desc"){
+			num = -num;
+		}
+		
 		if(type == "rtc"){
-			array.sort(function(a, b){
+			arr.sort(function(a, b){
 				if(a.id > b.id){
-					return 1;
+					return num;
 				}
 
 				if(a.id < b.id){
-					return -1;
+					return -num;
 				}
 
 				return 0;
 			});
 		}else if(type == "propietario"){
-			array.sort(function(a, b){
+			arr.sort(function(a, b){
 				if(a.propiedad > b.propiedad){
-					return 1;
+					return num;
 				}
 
 				if(a.propiedad < b.propiedad){
-					return -1;
+					return -num;
 				}
 
 				return 0;
 			});
 		}else if(type == "tamano"){
-			array.sort(function(a, b){
+			arr.sort(function(a, b){
 				if(a.tamano > b.tamano){
-					return 1;
+					return num;
 				}
 
 				if(a.tamano < b.tamano){
-					return -1;
+					return -num;
 				}
 
 				return 0;
 			});
 		}
-		
+		return arr;
 	}else{
+		 console.log("Undefined")
 		
-		arr = inArr.slice()
 		arr.sort(function(a, b){
 			if(a.id > b.id){
 				return 1;

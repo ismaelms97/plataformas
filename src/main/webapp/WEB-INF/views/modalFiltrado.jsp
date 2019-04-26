@@ -91,14 +91,14 @@
 					</div>
 				</div>
 			</div>
-			<div class="modal-body daily-body">
+			<div class="modal-body order-body">
 					<h5 class="detailsSubtitle">Orden</h5>
 					<hr>
 					<div class="form-group">
 					    <select class="form-control" id="orderByUser">
-					      <option>Por Defecto</option>
-					      <option>RTC</option>
-					      <option>Propietario</option>
+					      <option value="">Por Defecto</option>
+					      <option value="rtc">RTC</option>
+					      <option value="propietario">Propietario</option>
 					    </select>
 				  	</div>
 				  	<div class="custom-control custom-radio">

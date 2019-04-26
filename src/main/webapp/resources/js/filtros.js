@@ -1,5 +1,5 @@
 var filters;
-var arr, daily;
+var arr, daily, orderType, orderStyle;
 
 $(document).ready(function(){
 //	Objeto con los filtros
@@ -9,7 +9,7 @@ $(document).ready(function(){
 			urgente : [],
 	};
 	daily = "";
-	arr =[];
+	arr = [];
 
 })
 
@@ -140,7 +140,12 @@ function filtering(){
 			}else if($(this).hasClass("daily")){
 				daily = (this.value);
 			}
-
+			
+			if($(this).hasClass("orderAsc") || $(this).hasClass("orderDesc")){
+				orderStyle = this.value;
+				console.log(orderStyle);
+			}
+			
 		}else{
 
 			if($(this).hasClass("taskType")){
@@ -173,6 +178,8 @@ function onClickedFilter(){
 		arrayInTasksBackup = inTasks.slice(0);
 
 	}
+	
+	orderType = document.getElementById("orderByUser").value;
 
 	if(daily.trim() != ""){
 		chooseDaily();
@@ -233,7 +240,7 @@ function showListDaily(){
  *	@returns
  */
 function chooseDaily(){
-	arr = orderBy(inTasks)
+	arr = orderBy(inTasks, orderType, orderStyle)
 	var dateSelected = daily;
 	inDailys.forEach(function(daily){
 		if(daily.fecha == dateSelected){
