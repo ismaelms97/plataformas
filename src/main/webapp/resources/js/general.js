@@ -89,15 +89,24 @@ function drawTable(array , db) {
 	} else{
 		for (var i = 0; i < array.length; i++) {
 			if(array[i].modified){
-				// CLON ESTADO FINAL RECOGIDO DE BASE DE DATOS
 				var el = document.getElementsByClassName("rect")[i];
 				var cln = $(el).clone();
 				cln.attr("class", "rect orange");
-				console.log(document.getElementsByClassName("rect")[i].parentElement)
-				$(el).parent().siblings("."+array[i].estadoFinal.replace(/\s/g, "-").replace(/[\.]/g,  "_")).append(cln);
+				if($(el).parent().siblings("."+array[i].estadoFinal.replace(/\s/g, "-").replace(/[\.]/g,  "_")).length != 0){
+					
+					$(el).parent().siblings("."+array[i].estadoFinal.replace(/\s/g, "-").replace(/[\.]/g,  "_")).append(cln);
+					document.getElementsByClassName("clone")[i].setAttribute("style", 'display: inline-block')
+					
+				} else {
+
+					$(el).parent().append(cln);
+					document.getElementsByClassName("clone")[i].setAttribute("style", 'display: none')
+					
+				}
+				console.log()
+				console.log(document.getElementsByClassName("rect")[i].parentElement.children)
 				$(cln).css("display", "inline-block");
 				document.getElementsByClassName("rect")[i].parentElement.firstChild.remove();
-				document.getElementsByClassName("clone")[i].removeAttribute("style")
 			}
 		}
 	}
