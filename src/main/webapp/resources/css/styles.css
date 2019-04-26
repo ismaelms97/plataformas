@@ -26,8 +26,7 @@ body{
 	z-index: 10;
 	cursor: pointer;
 	display: inline-block;
-	width: 100%;
-	text-align: center;
+	width: 150px;
 }
 
 .tamano {
@@ -48,8 +47,7 @@ body{
 .clone {
 	position: relative;
 	background-color: #dbdbdb;
-	width: 100%;
-	text-align: center;
+	width: 150px;
 	padding: 20px 50px;
 	border: 2px solid darkgrey;
 	border-radius: 5%;

@@ -41,7 +41,6 @@ function dragDrop(arr, bool){
 									arr[this.getAttribute("data-rtc") - 1].modified = true;
 									arr[this.getAttribute("data-rtc") - 1].estadoFinal = this.parentElement.classList[0].replace(/-/g, " ").replace(/_/g, ".");
 									arr[this.getAttribute("data-rtc") - 1].k = calculateK(this.childNodes[2].innerHTML - 1, this.childNodes[0].innerHTML, this.getAttribute("data-posInitial"), estados.indexOf(arr[this.getAttribute("data-rtc") - 1].estadoFinal))
-
 									console.log(arr[this.getAttribute("data-rtc") - 1])
 								}
 							}
@@ -95,7 +94,8 @@ function dragDrop(arr, bool){
 							}
 						}else{
 							// SI estas arrastrando a los usuarios
-							if(event.target.children.length >= 1){
+							console.log(event.target.children.length);
+							if(event.target.children.length == 1){
 
 								var user = $(ui.draggable[0]).find(".name").text();
 								if(user.toLowerCase() == "sin propietario"){
