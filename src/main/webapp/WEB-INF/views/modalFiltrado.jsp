@@ -18,6 +18,7 @@
 					<span aria-hidden="true" class="white-text">&times;</span>
 				</button>
 			</div>
+			<!-- Filtro -->
 			<div class="modal-body">
 				<h5 class="detailsSubtitle">Filtros</h5>
 				<hr>
@@ -91,43 +92,43 @@
 					</div>
 				</div>
 			</div>
+			<!-- ORDEN -->
 			<div class="modal-body order-body">
-					<h5 class="detailsSubtitle">Orden</h5>
-					<hr>
-					<div class="form-group">
-					    <select class="form-control" id="orderByUser">
-					      <option value="">Por Defecto</option>
-					      <option value="rtc">RTC</option>
-					      <option value="propietario">Propietario</option>
-					    </select>
-				  	</div>
-				  	<div class="custom-control custom-radio">
-							<input type="radio"
-								class="custom-control-input filtros orderAsc" id="asc"
-								name="order" value="asc" checked> 
-								<label class="custom-control-label" for="asc">ASC</label>
-						</div>
-						<div class="custom-control custom-radio">
-							<input type="radio"
-								class="custom-control-input filtros orderDesc" id="des"
-								name="order" value="desc"> 
-								<label class="custom-control-label" for="des">DESC</label>
-						</div>
+				<h5 class="detailsSubtitle">Orden</h5>
+				<hr>
+				<div class="form-group">
+					<select class="form-control" id="orderByUser">
+						<option value="">Por Defecto</option>
+						<option value="rtc">RTC</option>
+						<option value="propietario">Propietario</option>
+						<option value="tamano">Tamaño</option>
+					</select>
+				</div>
+				<div class="custom-control custom-radio">
+					<input type="radio" class="custom-control-input filtros orderAsc"
+						id="asc" name="order" value="asc" checked> <label
+						class="custom-control-label" for="asc">ASC</label>
+				</div>
+				<div class="custom-control custom-radio">
+					<input type="radio" class="custom-control-input filtros orderDesc"
+						id="des" name="order" value="desc"> <label
+						class="custom-control-label" for="des">DESC</label>
+				</div>
 			</div>
 			<div class="modal-body daily-body">
-					<h5 class="detailsSubtitle">Daily</h5>
-					<hr>
-					<!-- DAILY -->
-					<div class="card">
-						<div class="card-header" id="headingOne" data-toggle="collapse"
-							data-target="#collapseDaily">
-							<h6 class="d-inline accordion-toggle" aria-expanded="false"
-								aria-controls="collapseExample">Daily</h6>
-						</div>
+				<h5 class="detailsSubtitle">Daily</h5>
+				<hr>
+				<!-- DAILY -->
+				<div class="card">
+					<div class="card-header" id="headingOne" data-toggle="collapse"
+						data-target="#collapseDaily">
+						<h6 class="d-inline accordion-toggle" aria-expanded="false"
+							aria-controls="collapseExample">Daily</h6>
 					</div>
-					<div class="collapse" id="collapseDaily">
-						<div class="card card-body"></div>
-					</div>
+				</div>
+				<div class="collapse" id="collapseDaily">
+					<div class="card card-body"></div>
+				</div>
 			</div>
 			<div class="modal-footer">
 				<button type="button" id="filter" class="btn btn-warning"

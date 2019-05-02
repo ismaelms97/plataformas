@@ -5,9 +5,11 @@ html, body {
 	-moz-user-select: none;
 	-ms-user-select: none;
 }
+
 body{
 	overflow-x: hidden;
 }
+
 /* Titulo ESTRATEGIA*/
 .mainTitle {
 	font-size: 5em;
@@ -61,6 +63,7 @@ body{
 .noLeft {
 	left: 0 !important;
 }
+
 /*########### TABLE ###########*/
 div.table-responsive{
 	height: 100%;
@@ -86,6 +89,7 @@ thead{
 	border-color: #0000bb !important;
 	border-top: 1px solid #0000bb;
 }
+
 /*########### BUTTON SAVE STARTEGY ###########*/
 .flexButton{
 	display: flex;
@@ -114,8 +118,6 @@ div.disabled{
 .divOptions > .disabled input{
 	pointer-events:none;
 	cursor:not-allowed;
-/* 	-webkit-filter: opacity(90%);
-	filter: opacity(90%); */
 	background-color: #e6e6e6!important;
 }
 
@@ -178,7 +180,7 @@ td .ui-selected {
 	color: #961a1aab;
 }
 
-/*########### ANIMACI��N CARGA ###########*/
+/*########### ANIMACION CARGA ###########*/
 
 .lds-dual-ring {
  	display: inline-block; 
@@ -253,7 +255,6 @@ td .ui-selected {
 }
 
 .estartegiasCard{
-	
 	border-radius: 5%;
 	padding: 20px;
 	width: 187.52px;
@@ -423,6 +424,7 @@ form{
 .daily-body{
 	display:none;
 }
+
 /*########### LOGIN FORM ###########*/
 .login-container{
     margin-top: 5%;
@@ -458,6 +460,7 @@ form{
 	position: relative;
 	z-index: 2;
 }
+
 /*########### TEAM ###########*/
 .teamUsers{
 	max-height: 200px;
