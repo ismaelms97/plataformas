@@ -354,7 +354,6 @@ function orderBy(inArr, type = undefined, order = "asc") {
 			} 
 
 		}
-
 		return orderedArr;
 	}
 }

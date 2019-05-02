@@ -23,11 +23,11 @@ public class DbResources {
 
 		}catch (ClassNotFoundException e) {
 
-			System.out.println("Class driver not found");
+			System.err.println("Class driver not found");
 
 		}catch (Exception e) {
 
-			System.out.println("Unknow error with driver");
+			System.err.println("Unknow error with driver");
 		}
 
 	}
@@ -43,11 +43,11 @@ public class DbResources {
 
 		}catch (ClassNotFoundException e) {
 
-			System.out.println("Class driver not found");
+			System.err.println("Class driver not found");
 
 		}catch (SQLException e) {
 
-			System.out.println("Connection with DB failed -> Message: "+e.getMessage());
+			System.err.println("Connection with DB failed -> Message: "+e.getMessage());
 
 		}
 

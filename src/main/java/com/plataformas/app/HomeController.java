@@ -88,7 +88,6 @@ public class HomeController {
 			session.setAttribute("userSession", userTeamAndRoles);
 
 			return REDIRECT_MAIN_CONTROL;
-
 		}
 	}
 
