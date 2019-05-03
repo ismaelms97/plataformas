@@ -86,7 +86,11 @@ var process_wb = (function () {
 					task.relevante = JSON.parse(output).Tareas[i][relevancePos]
 					task.planificado = JSON.parse(output).Tareas[i][plannedPos]
 					task.peticionario = JSON.parse(output).Tareas[i][petPos]
-					task.urgente = JSON.parse(output).Tareas[i][urgenPos];
+					if(JSON.parse(output).Tareas[i][urgenPos] == "Sí"){
+						task.urgente = JSON.parse(output).Tareas[i][urgenPos];
+					} else {
+						task.urgente = "No";
+					}
 					task.estadoFinal = "";
 					task.k = 0;
 
