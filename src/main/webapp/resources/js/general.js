@@ -55,8 +55,6 @@ function drawTable(array , db) {
 	array = orderBy(array, orderType, orderStyle);
 	inTasks = orderBy(inTasks, orderType, orderStyle);
 	
-	
-	
 	// PIntamos la tabla
 	for (var i = 0; i < array.length; i++) {
 		var tr = document.createElement("tr");
@@ -103,7 +101,7 @@ function drawTable(array , db) {
 					document.getElementsByClassName("clone")[i].setAttribute("style", 'display: none')
 					
 				}
-				console.log()
+
 				console.log(document.getElementsByClassName("rect")[i].parentElement.children)
 				$(cln).css("display", "inline-block");
 				document.getElementsByClassName("rect")[i].parentElement.firstChild.remove();

@@ -4,9 +4,7 @@ var k = 0;
 try{
 	arrayTasksBackup = tasks.slice(0);
 	arrayInTasksBackup = inTasks.slice(0);
-}catch(e){
-
-}
+}catch(e){}
 
 function dragDrop(arr, bool){
 
@@ -94,7 +92,6 @@ function dragDrop(arr, bool){
 							}
 						}else{
 							// SI estas arrastrando a los usuarios
-							console.log(event.target.children.length);
 							if(event.target.children.length == 1){
 
 								var user = $(ui.draggable[0]).find(".name").text();
@@ -239,12 +236,9 @@ function saveData() {
 					$("div.button").removeClass("disabled");
 
 				}
-
 			}
 		});
-
 	}
-
 }
 
 function habilitarBotonEnvio() {
@@ -274,7 +268,6 @@ function orderBy(inArr, type = undefined, order = "asc") {
 	arr = inArr.slice()
 
 	if(type != undefined && type != ""){
-		console.log("Not Undefined")
 		if(order.toLowerCase() == "desc"){
 			num = -num;
 		}
@@ -317,8 +310,8 @@ function orderBy(inArr, type = undefined, order = "asc") {
 			});
 		}
 		return arr;
+
 	}else{
-		console.log("Undefined")
 
 		arr.sort(function(a, b){
 			if(a.id > b.id){
@@ -390,7 +383,6 @@ function drawTeamUsers(array){
 		document.getElementsByClassName("teamUsers")[0].innerHTML += txt;
 	}
 	moveUsers();
-
 }
 
 function moveUsers(){
@@ -422,9 +414,14 @@ function getTasksByUser(user, tareas){
 
 function calculateK(comp, tam, estadoInicial, estadoActual){ 
 
-//	Listo para analizar; Cierre de requirimientos; En análisis; Aceptación usuario; En curso; Aceptación pruebas; Pendiente implantar; Implantado; Cerrado
-//	K = COMPLEJIDAD * TAMAÑO * suma(PESO_FASE_COMPLETADA)
-//	=SI(I4="Pte Alta";0;SI(I4="Pte. Cuantificar";0;SI(I4="Listo para analizar";0;SI(I4="Cierre requerimientos";0,4;SI(I4="En análisis";0,6;SI(I4="Aceptación usuario";0,72;SI(I4="En curso";0,77;SI(I4="Aceptación a las pruebas";0,97;SI(I4="Pte. implantar";1;SI(I4="Implantado";1;SI(I4="Finalizada";1;-1)))))))))))
+	//	Listo para analizar; Cierre de requirimientos; En análisis; Aceptación usuario; En curso; Aceptación pruebas; Pendiente implantar; Implantado; Cerrado
+	//	K = COMPLEJIDAD * TAMAÑO * suma(PESO_FASE_COMPLETADA)
+
+	//	Este: 
+	//	"Pte Alta" = 0; "Pte. Cuantificar" = 0; "Listo para analizar" = 0; "Cierre requerimientos" = 0,4; "En análisis"= 0,6; "Aceptación usuario"= 0,72; "En curso" = 0,77; "Aceptación a las pruebas" = 0,97; "Pte. implantar" = 1; "Implantado" = 1; "Finalizada" = 1 : -1
+
+	//	O este: 
+	//	"Pte Alta" = 0; "Pte. Cuantificar" = 0; "Listo para analizar" = 0; "Cierre requerimientos" = 0,4; "En análisis"= 0,2; "Aceptación usuario"= 0,12; "En curso" = 0,05; "Aceptación a las pruebas" = 0.2; "Pte. implantar" = 0.03; "Implantado" = 1; "Finalizada" = 0 : -1
 
 	var pesoFase = [0,0,0, 0.4, 0.2, 0.12, 0.05, 0.2, 0.03, 0];
 	var tamano =  expand({"XXS, 50": 1, "XS, 100": 1.1, "S, 200":1.2, "M, 400": 1.3, "L, 800": 1.4, "XL, 1600": 1.5, "XXL, 3200": 1.6, "XXXL, 6400": 1.7});
