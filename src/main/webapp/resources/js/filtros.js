@@ -20,7 +20,7 @@ $(document).ready(function(){
  *		@param  {filtros} Un objeto con los filtros como nombres de propiedad
  */
 function filter(array, filtros){
-	//	https://gist.github.com/jherax/f11d669ba286f21b7a2dcff69621eb72
+	
 
 	const filterKeys = Object.keys(filtros);
 	return array.filter(eachObj => {
@@ -177,7 +177,6 @@ function onClickedFilter(){
 
 		arrayTasksBackup = tasks.slice(0);
 		arrayInTasksBackup = inTasks.slice(0);
-
 	}
 	
 	orderType = document.getElementById("orderByUser").value;
@@ -258,4 +257,36 @@ function chooseDaily(){
 		}
 	});
 	arr = filter(arr,filters);
+}
+
+function fillTypefilter(array){
+	var taskType = document.querySelectorAll(".taskType:checked + label");
+
+	array.forEach(function(task){
+
+		if(!tipoTarea.includes(task.tipo)){
+			tipoTarea.push(task.tipo);
+		}
+	});
+
+	var myNode = document.querySelectorAll("#collapseType  .card")[0];
+	while (myNode.firstChild) {
+		myNode.removeChild(myNode.firstChild);
+	}
+
+	tipoTarea.forEach(function(tipo){
+		console.log(tipo);
+		var i = tipo.toLowerCase();
+		var text = '<div class="custom-control custom-checkbox">';
+
+//		for (var k = 0; k < taskType.length; k++) {
+//		if(taskType)
+		text += '<input type="checkbox" id="'+i+'" value="'+i+'" class="custom-control-input filtros taskType">';
+//		}
+
+		text += '<label class="custom-control-label" for="'+i+'">'+toCamelCase(i)+'</label><br></div>';
+
+		document.querySelectorAll("#collapseType .card")[0].innerHTML += text;
+	})
+	filtering();
 }

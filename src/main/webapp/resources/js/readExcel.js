@@ -133,7 +133,7 @@ var process_wb = (function () {
 			filtering();
 
 			tasks = orderBy(tasks, orderType, orderStyle);
-
+			fillTypefilter(tasks);
 			drawTeamUsers(equipo);
 
 			drawTable(tasks, false);

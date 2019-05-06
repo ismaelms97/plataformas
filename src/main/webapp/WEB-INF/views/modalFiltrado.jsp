@@ -32,21 +32,6 @@
 				<div class="collapse" id="collapseType">
 					<div class="card card-body">
 
-						<div class="custom-control custom-checkbox">
-							<input type="checkbox" id="incidencia" value="incidencias"
-								class="custom-control-input filtros taskType"><label
-								class="custom-control-label" for="incidencia">Incidencias</label><br>
-						</div>
-						<div class="custom-control custom-checkbox">
-							<input type="checkbox" id="consulta" value="consulta"
-								class="custom-control-input filtros taskType"><label
-								class="custom-control-label" for="consulta">Consulta</label><br>
-						</div>
-						<div class="custom-control custom-checkbox">
-							<input type="checkbox" id="tarea" value="tarea"
-								class="custom-control-input filtros taskType"> <label
-								class="custom-control-label" for="tarea">Tarea</label><br>
-						</div>
 					</div>
 				</div>
 				<!-- Propietario -->
