@@ -20,7 +20,7 @@ $(document).ready(function(){
  *		@param  {filtros} Un objeto con los filtros como nombres de propiedad
  */
 function filter(array, filtros){
-	//	https://gist.github.com/jherax/f11d669ba286f21b7a2dcff69621eb72
+	
 
 	const filterKeys = Object.keys(filtros);
 	return array.filter(eachObj => {
@@ -176,8 +176,6 @@ function onClickedFilter(){
 
 		arrayTasksBackup = tasks.slice(0);
 		arrayInTasksBackup = inTasks.slice(0);
-		arr = inTasks.slice(0);
-
 	}
 	
 	orderType = document.getElementById("orderByUser").value;
@@ -186,17 +184,18 @@ function onClickedFilter(){
 		chooseDaily();
 	}
 
-	// para cada elemento... 
-	var auxArr = arr.map( item => { 
-	  // lo guardas temporalmente
-	  var temporal = item.estado;
-	  // eliminas el valor que ya no quieres
-	  // delete item.nombre;
-	  // creas el valor nuevo.
-	  item.estadoActual = temporal;
-	  return item; 
-	});
+//	// para cada elemento... 
+//	var auxArr = arr.map( item => { 
+//	  // lo guardas temporalmente
+//	  var temporal = item.estado;
+//	  // eliminas el valor que ya no quieres
+//	  // delete item.nombre;
+//	  // creas el valor nuevo.
+//	  item.estadoActual = temporal;
+//	  return item; 
+//	});
 	
+	var auxArr = arr.slice();
 	emptyTable();
 	drawTable(arrayInTasksBackup, true);
 	drawTable(arrayTasksBackup, false);
@@ -272,7 +271,6 @@ function chooseDaily(){
 
 function fillTypefilter(array){
 	var taskType = document.querySelectorAll(".taskType:checked + label");
-	console.log(taskType);
 
 	array.forEach(function(task){
 

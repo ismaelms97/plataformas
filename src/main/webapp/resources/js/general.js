@@ -13,6 +13,7 @@ $(document).ready(function(){
 
 	}
 
+
 	if(document.getElementById("formContent")){
 
 		document.getElementById("butonDestroy").style.display = "none";
