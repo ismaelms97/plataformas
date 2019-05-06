@@ -171,6 +171,7 @@ function onClickedFilter(){
 	if(filters.tipo.length >= 1 || filters.propiedad.length >= 1 || filters.urgente.length >= 1){
 		arrayTasksBackup = filter(tasks, filters);
 		arrayInTasksBackup = filter(inTasks, filters);
+		arr = filter(inTasks, filters);
 
 	}else{
 
@@ -184,11 +185,12 @@ function onClickedFilter(){
 	if(daily.trim() != ""){
 		chooseDaily();
 	}
-
+	
+	aurArr = arr.slice();
 	emptyTable();
 	drawTable(arrayInTasksBackup, true);
 	drawTable(arrayTasksBackup, false);
-	drawTable(arr, false);
+	drawTable(aurArr, false);
 }
 
 /**

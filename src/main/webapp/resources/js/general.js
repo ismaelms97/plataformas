@@ -67,6 +67,7 @@ function drawTable(array , db) {
 			}
 		} 
 		// Pintamos los RTC
+		console.log("preDraw", array)
 		drawRTC(array, i, db);
 	}
 
@@ -148,7 +149,6 @@ function drawRTC(array, pos, db) {
 		array = orderBy(array, orderType, orderStyle);
 		arrayInTasksBackup = orderBy(arrayInTasksBackup, orderType, orderStyle);
 		if(arrayInTasksBackup.length > 0){
-
 			if(arrayInTasksBackup[pos].estadoFinal.toLowerCase().startsWith(arrayInTasksBackup[pos].estado.toLowerCase()) &&
 					array[pos].estadoActual.toLowerCase().startsWith(arrayInTasksBackup[pos].estado.toLowerCase())){
 
