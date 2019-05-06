@@ -1,5 +1,6 @@
 var estados;
 var equipo = [];
+var tipoTarea = []
 
 $(document).ready(function(){
 	estados = [];
@@ -40,6 +41,7 @@ function inputTasks() {
 	try {
 		if(inTasks.length > 0){
 			drawTable(inTasks, true);
+			fillTypefilter(inTasks);
 		}
 
 	} catch (e) {
@@ -125,12 +127,10 @@ function drawRTC(array, pos, db) {
 				}
 			} else {
 				try{
-					console.log("Funciona");
 					if (array[pos].estadoActual.toLowerCase().startsWith(estados[j])) {
 						estadoActual = j
 					}
 				}catch(e){
-					console.log("Catch");
 					if (array[pos].estado.toLowerCase().startsWith(estados[j])) {
 						estadoActual = j
 					}

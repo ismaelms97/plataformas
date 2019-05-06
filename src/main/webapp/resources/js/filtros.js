@@ -171,11 +171,12 @@ function onClickedFilter(){
 	if(filters.tipo.length >= 1 || filters.propiedad.length >= 1 || filters.urgente.length >= 1){
 		arrayTasksBackup = filter(tasks, filters);
 		arrayInTasksBackup = filter(inTasks, filters);
-
+		arr = filter(inTasks, filters)
 	}else{
 
 		arrayTasksBackup = tasks.slice(0);
 		arrayInTasksBackup = inTasks.slice(0);
+		arr = inTasks.slice(0);
 
 	}
 	
@@ -185,10 +186,21 @@ function onClickedFilter(){
 		chooseDaily();
 	}
 
+	// para cada elemento... 
+	var auxArr = arr.map( item => { 
+	  // lo guardas temporalmente
+	  var temporal = item.estado;
+	  // eliminas el valor que ya no quieres
+	  // delete item.nombre;
+	  // creas el valor nuevo.
+	  item.estadoActual = temporal;
+	  return item; 
+	});
+	
 	emptyTable();
 	drawTable(arrayInTasksBackup, true);
 	drawTable(arrayTasksBackup, false);
-	drawTable(arr, false);
+	drawTable(auxArr, false);
 }
 
 /**
@@ -256,4 +268,37 @@ function chooseDaily(){
 		}
 	});
 	arr = filter(arr,filters);
+}
+
+function fillTypefilter(array){
+	var taskType = document.querySelectorAll(".taskType:checked + label");
+	console.log(taskType);
+
+	array.forEach(function(task){
+
+		if(!tipoTarea.includes(task.tipo)){
+			tipoTarea.push(task.tipo);
+		}
+	});
+
+	var myNode = document.querySelectorAll("#collapseType  .card")[0];
+	while (myNode.firstChild) {
+		myNode.removeChild(myNode.firstChild);
+	}
+
+	tipoTarea.forEach(function(tipo){
+		console.log(tipo);
+		var i = tipo.toLowerCase();
+		var text = '<div class="custom-control custom-checkbox">';
+
+//		for (var k = 0; k < taskType.length; k++) {
+//		if(taskType)
+		text += '<input type="checkbox" id="'+i+'" value="'+i+'" class="custom-control-input filtros taskType">';
+//		}
+
+		text += '<label class="custom-control-label" for="'+i+'">'+toCamelCase(i)+'</label><br></div>';
+
+		document.querySelectorAll("#collapseType .card")[0].innerHTML += text;
+	})
+	filtering();
 }
