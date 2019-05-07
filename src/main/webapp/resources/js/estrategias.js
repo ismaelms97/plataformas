@@ -137,8 +137,24 @@ function saveData() {
 		});
 
 		var tasksToString = "";
+		
+		var listObjectToExport = [];
+		
 
 		strategy.tasks.forEach(task => {
+			
+		var ObjectToExport  = new Object();
+			ObjectToExport.RTC = task.id;
+			ObjectToExport.Tipo = task.tipo;
+			ObjectToExport.Estado = task.estadoActual;
+			ObjectToExport.EstadoFinal = task.estadoFinal;
+			ObjectToExport.Prioridad = task.prioridad;
+			ObjectToExport.Resumen = task.resumen;
+			ObjectToExport.Tamaño = task.tamano;
+			ObjectToExport.Complejidad = task.complejidad;
+			ObjectToExport.Propiedad = task.propiedad;
+			ObjectToExport.Peticionario = task.peticionario;
+			
 			tasksToString += "RTC:" + task.id + "--";
 			tasksToString += "Tipo:" + task.tipo + "--";
 			tasksToString += "Estado:" + task.estadoActual + "--";
@@ -151,21 +167,30 @@ function saveData() {
 			tasksToString += "peticionario:" + task.peticionario + "--";
 
 			if(task.relevante == "Sí"){
+				
+				ObjectToExport.Relevante = "Sí";
+				
 				tasksToString += "relevante:true--";
 			} else {
+				
+				ObjectToExport.Relevante = "No";
 				tasksToString += "relevante:false--";
 			}
 
 			if(task.urgente == "Sí"){
+				ObjectToExport.Urgente = "Sí";
 				tasksToString += "urgente:true--";
 			} else {
+				ObjectToExport.Urgente = "No";				
 				tasksToString += "urgente:false--";
 			}
-
+			ObjectToExport.Planificado = task.planificado;	
 			tasksToString += "planificado:" + task.planificado + "qwer" ;
+			listObjectToExport.push(ObjectToExport);
 		});
 
 		tasksToString = tasksToString.substring(0, tasksToString.length - 4);
+		
 		$.ajax({
 			type: "POST",
 			url: "/estrategia/saveEstrategia",
@@ -197,6 +222,18 @@ function saveData() {
 
 			}
 		});
+		
+		
+		//console.log(listObjectToExport);
+		
+		var xls = new XlsExport(listObjectToExport, sessionStorage.getItem('titulo'));
+		xls.exportToXLS(sessionStorage.getItem('titulo')+'.xls');
+	
+	
+		
+		
+		
+		
 	} else {
 		var date = new Date();
 		tasksToString = "";

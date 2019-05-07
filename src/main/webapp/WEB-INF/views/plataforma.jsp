@@ -85,7 +85,7 @@
 	</c:forEach>
 	
 	<div class="table-responsive table-bordered">
-		<table class="table">
+		<table class="table" id="tableId">
 			<thead>
 				<tr class="table-info">
 					<th scope="col">Pte Alta</th>
