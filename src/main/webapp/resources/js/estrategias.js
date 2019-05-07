@@ -191,37 +191,37 @@ function saveData() {
 
 		tasksToString = tasksToString.substring(0, tasksToString.length - 4);
 		
-		$.ajax({
-			type: "POST",
-			url: "/estrategia/saveEstrategia",
-			data: {
-				stratTasks: tasksToString
-			}, success: function (data) {
-
-				if(data == "true"){
-
-					location.href = "/estrategia/panelControl";
-					console.log("success");
-
-				}else{
-
-					$.notify({
-						title: '<strong>Error</strong>',
-						message: 'al guardar estrategia'
-					},{
-						type: 'danger',
-						newest_on_top: true,
-						placement: {
-							from: "top",
-							align: "center"
-						},
-						delay: 2000
-					});
-					$("div.button").removeClass("disabled");
-				}
-
-			}
-		});
+//		$.ajax({
+//			type: "POST",
+//			url: "/estrategia/saveEstrategia",
+//			data: {
+//				stratTasks: tasksToString
+//			}, success: function (data) {
+//
+//				if(data == "true"){
+//
+//					location.href = "/estrategia/panelControl";
+//					console.log("success");
+//
+//				}else{
+//
+//					$.notify({
+//						title: '<strong>Error</strong>',
+//						message: 'al guardar estrategia'
+//					},{
+//						type: 'danger',
+//						newest_on_top: true,
+//						placement: {
+//							from: "top",
+//							align: "center"
+//						},
+//						delay: 2000
+//					});
+//					$("div.button").removeClass("disabled");
+//				}
+//
+//			}
+//		});
 		
 		
 		//console.log(listObjectToExport);
