@@ -277,7 +277,7 @@ function fillTypefilter(array){
 		if(!tipoTarea.includes(task.tipo)){
 			tipoTarea.push(task.tipo);
 		}
-	});
+	});	
 
 	var myNode = document.querySelectorAll("#collapseType  .card")[0];
 	while (myNode.firstChild) {

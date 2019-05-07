@@ -8,6 +8,8 @@ $(document).ready(function(){
 	inputTasks();
 	showListDaily();
 	
+	console.log(inTasks);
+	
 	if(document.getElementsByClassName("mainTitle")[0]){
 		document.getElementsByClassName("mainTitle")[0].innerHTML = sessionStorage.getItem('titulo');
 
@@ -57,7 +59,7 @@ function drawTable(array , db) {
 //	Ordenamos el array por prioridad,
 	array = orderBy(array, orderType, orderStyle);
 	inTasks = orderBy(inTasks, orderType, orderStyle);
-	
+
 	// PIntamos la tabla
 	for (var i = 0; i < array.length; i++) {
 		var tr = document.createElement("tr");
@@ -74,19 +76,21 @@ function drawTable(array , db) {
 	}
 
 	if(db){
-		
+
 //		equipo = ownersDaily(inDailys);
 //		console.log("Equipo 1: ", equipo);
-		
+
 		// CLON ESTADO FINAL RECOGIDO DE BASE DE DATOS
 		var rect = document.getElementsByClassName("rect");
-		for (var i = 0; i < rect.length; i++) {
-			var el = rect[i];
-			var cln = $(el).clone();
-			cln.attr("class", "clone orange");
-			$(el).parent().siblings("."+array[i].estadoFinal.replace(/\s/g, "-").replace(/[\.]/g,  "_")).append(cln);
-			$(cln).css("display", "inline-block");
-		}
+		
+			for (var i = 0; i < rect.length; i++) {
+				var el = rect[i];
+				var cln = $(el).clone();
+				cln.attr("class", "clone orange");
+				$(el).parent().siblings("."+array[i].estadoFinal.replace(/\s/g, "-").replace(/[\.]/g,  "_")).append(cln);
+				$(cln).css("display", "inline-block");
+			}
+		
 	} else{
 		for (var i = 0; i < array.length; i++) {
 			if(array[i].modified){
@@ -94,15 +98,15 @@ function drawTable(array , db) {
 				var cln = $(el).clone();
 				cln.attr("class", "rect orange");
 				if($(el).parent().siblings("."+array[i].estadoFinal.replace(/\s/g, "-").replace(/[\.]/g,  "_")).length != 0){
-					
+
 					$(el).parent().siblings("."+array[i].estadoFinal.replace(/\s/g, "-").replace(/[\.]/g,  "_")).append(cln);
 					document.getElementsByClassName("clone")[i].setAttribute("style", 'display: inline-block')
-					
+
 				} else {
 
 					$(el).parent().append(cln);
 					document.getElementsByClassName("clone")[i].setAttribute("style", 'display: none')
-					
+
 				}
 
 				console.log(document.getElementsByClassName("rect")[i].parentElement.children)
@@ -170,16 +174,16 @@ function drawRTC(array, pos, db) {
 				// AZUL, resto
 				classes += ' blue';
 			}
-			console.log(array[pos].id + " " + array[pos].estadoActual + "  " + arrayInTasksBackup[pos].id + " " + arrayInTasksBackup[pos].estadoFinal + "  " + array[pos].estadoActual.toLowerCase().startsWith(inTasks[pos].estadoFinal.toLowerCase()))
+//			console.log(array[pos].id + " " + array[pos].estadoActual + "  " + arrayInTasksBackup[pos].id + " " + arrayInTasksBackup[pos].estadoFinal + "  " + array[pos].estadoActual.toLowerCase().startsWith(inTasks[pos].estadoFinal.toLowerCase()))
 		}
-		
+
 	} else {
-		 if(array[pos].estado.toLowerCase().startsWith(array[pos].estadoFinal.toLowerCase())){
+		if(array[pos].estado.toLowerCase().startsWith(array[pos].estadoFinal.toLowerCase())){
 
-				// GRIS/AZUL Inicio == Actual
-				classes += ' gradientGreyOrange';
+			// GRIS/AZUL Inicio == Actual
+			classes += ' gradientGreyOrange';
 
-		 }
+		}
 	}
 
 	if(estadoActual != -1){
@@ -196,7 +200,7 @@ function drawRTC(array, pos, db) {
 		cln.attr("class", "clone");
 		$(el).parent().append(cln);
 		$(cln).css("display", "none");
-		
+
 		dragDrop(array, true);
 	}else{
 		dragDrop(array, false);
