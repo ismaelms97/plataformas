@@ -171,7 +171,8 @@ function onClickedFilter(){
 	if(filters.tipo.length >= 1 || filters.propiedad.length >= 1 || filters.urgente.length >= 1){
 		arrayTasksBackup = filter(tasks, filters);
 		arrayInTasksBackup = filter(inTasks, filters);
-		arr = filter(inTasks, filters)
+		arr = filter(inTasks, filters);
+
 	}else{
 
 		arrayTasksBackup = tasks.slice(0);
@@ -183,23 +184,12 @@ function onClickedFilter(){
 	if(daily.trim() != ""){
 		chooseDaily();
 	}
-
-//	// para cada elemento... 
-//	var auxArr = arr.map( item => { 
-//	  // lo guardas temporalmente
-//	  var temporal = item.estado;
-//	  // eliminas el valor que ya no quieres
-//	  // delete item.nombre;
-//	  // creas el valor nuevo.
-//	  item.estadoActual = temporal;
-//	  return item; 
-//	});
 	
-	var auxArr = arr.slice();
+	aurArr = arr.slice();
 	emptyTable();
 	drawTable(arrayInTasksBackup, true);
 	drawTable(arrayTasksBackup, false);
-	drawTable(auxArr, false);
+	drawTable(aurArr, false);
 }
 
 /**
