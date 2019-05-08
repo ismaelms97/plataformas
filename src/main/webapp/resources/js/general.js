@@ -8,8 +8,6 @@ $(document).ready(function(){
 	inputTasks();
 	showListDaily();
 	
-	console.log(inTasks);
-	
 	if(document.getElementsByClassName("mainTitle")[0]){
 		document.getElementsByClassName("mainTitle")[0].innerHTML = sessionStorage.getItem('titulo');
 
