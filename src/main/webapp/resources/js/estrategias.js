@@ -402,7 +402,7 @@ function drawTeamUsers(array, bool){
 		var txt = '<div class="chip">'
 			+'<img src="https://addons.thunderbird.net/static//img/zamboni/anon_user.png" alt="Person" width="96" height="300"><span class="name">'
 			+ toCamelCase(array[i].nombre.toLowerCase()) +'</span> <br>Tareas: ' + getTasksByUser(array[i], tasks) + ' | K: '+ array[i].k.toFixed(2) +' </div>';
-		if(array.length >= 7 && i + 1 == Math.round((array.length / 2))){
+		if(array.length >= 10 && i + 1 == Math.round((array.length / 2))){
 			txt += "<br>";
 		}
 		k += array[i].k;

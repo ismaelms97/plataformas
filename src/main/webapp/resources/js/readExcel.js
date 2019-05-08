@@ -125,6 +125,7 @@ var process_wb = (function () {
 				$("div.button").removeClass("disabled");
 				var filtrado = tasks.filter(item => inTasks.find(item2 => item.id === item2.id).propiedad = item.propiedad);
 				
+				equipo = owners(tasks);
 			}else{
 				// Collect Users from propertyOf 
 				equipo = owners(tasks);

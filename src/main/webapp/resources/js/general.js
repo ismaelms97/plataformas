@@ -75,14 +75,17 @@ function drawTable(array , db) {
 
 	if(db){
 		console.log(inDailys);
-		console.log(inTasks);
-		equipo = owners(inTasks);
+		console.log(array)
 		
-		if(equipo.length > 1 && equipo[0].nombre != ""){
+		if(inDailys.length > 0){
+			equipo = owners(inTasks);
+			console.log(equipo)
+		}
+		
+		if(equipo.length > 1 && equipo[0].nombre != "" && tasks.length <= 0){
 			drawTeamUsers(equipo, false);
 		}
 		
-		console.log(equipo)
 
 		// CLON ESTADO FINAL RECOGIDO DE BASE DE DATOS
 		var rect = document.getElementsByClassName("rect");
