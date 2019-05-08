@@ -92,19 +92,17 @@ function dragDrop(arr, bool){
 							}
 						}else{
 							// SI estas arrastrando a los usuarios
-							if(event.target.children.length == 1){
 
 								var user = $(ui.draggable[0]).find(".name").text();
 								if(user.toLowerCase() == "sin propietario"){
 									user = "unassigned"
 								}
-								console.log(equipo);
-								tasks.find(tarea => parseInt(tarea.id) === parseInt(event.target.children[0].innerText.split("\n")[1].trim())).propiedad = user;
-								console.log(parseInt(event.target.children[0].innerText.split("\n")[1].trim()));
+								
+								tasks.find(tarea => parseInt(tarea.id) === parseInt(event.target.children[0].innerText.split(/[\s\n]+/)[1].trim())).propiedad = user;
 
 								$.notify({
 									title: '<strong>Cambio de Propietario</strong>',
-									message: ' en la tarea ' + event.target.children[0].innerText.split("\n")[1].trim() + '.'
+									message: ' en la tarea ' + event.target.children[0].innerText.split(/[\s\n]+/)[1].trim() + '.'
 								},{
 									type: 'success',
 									newest_on_top: true,
@@ -115,7 +113,6 @@ function dragDrop(arr, bool){
 									delay: 1000
 								});
 
-							}
 							drawTeamUsers(equipo);
 							document.getElementsByClassName("k")[0].innerHTML = "K: " + k.toFixed(2);
 						}
