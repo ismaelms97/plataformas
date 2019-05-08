@@ -92,12 +92,12 @@ function dragDrop(arr, bool){
 							}
 						}else{
 							// SI estas arrastrando a los usuarios
-
+							if(event.target.children.length >= 1){
 								var user = $(ui.draggable[0]).find(".name").text();
 								if(user.toLowerCase() == "sin propietario"){
 									user = "unassigned"
 								}
-								
+
 								tasks.find(tarea => parseInt(tarea.id) === parseInt(event.target.children[0].innerText.split(/[\s\n]+/)[1].trim())).propiedad = user;
 
 								$.notify({
@@ -112,9 +112,9 @@ function dragDrop(arr, bool){
 									},
 									delay: 1000
 								});
-
-							drawTeamUsers(equipo);
-							document.getElementsByClassName("k")[0].innerHTML = "K: " + k.toFixed(2);
+								drawTeamUsers(equipo);
+								document.getElementsByClassName("k")[0].innerHTML = "K: " + k.toFixed(2);
+							}
 						}
 					}
 				});
@@ -134,13 +134,13 @@ function saveData() {
 		});
 
 		var tasksToString = "";
-		
+
 		var listObjectToExport = [];
-		
+
 
 		strategy.tasks.forEach(task => {
-			
-		var ObjectToExport  = new Object();
+
+			var ObjectToExport  = new Object();
 			ObjectToExport.RTC = task.id;
 			ObjectToExport.Tipo = task.tipo;
 			ObjectToExport.Estado = task.estadoActual;
@@ -151,7 +151,7 @@ function saveData() {
 			ObjectToExport.Complejidad = task.complejidad;
 			ObjectToExport.Propiedad = task.propiedad;
 			ObjectToExport.Peticionario = task.peticionario;
-			
+
 			tasksToString += "RTC:" + task.id + "--";
 			tasksToString += "Tipo:" + task.tipo + "--";
 			tasksToString += "Estado:" + task.estadoActual + "--";
@@ -164,12 +164,12 @@ function saveData() {
 			tasksToString += "peticionario:" + task.peticionario + "--";
 
 			if(task.relevante == "Sí"){
-				
+
 				ObjectToExport.Relevante = "Sí";
-				
+
 				tasksToString += "relevante:true--";
 			} else {
-				
+
 				ObjectToExport.Relevante = "No";
 				tasksToString += "relevante:false--";
 			}
@@ -187,50 +187,50 @@ function saveData() {
 		});
 
 		tasksToString = tasksToString.substring(0, tasksToString.length - 4);
-		
+
 //		$.ajax({
-//			type: "POST",
-//			url: "/estrategia/saveEstrategia",
-//			data: {
-//				stratTasks: tasksToString
-//			}, success: function (data) {
-//
-//				if(data == "true"){
-//
-//					location.href = "/estrategia/panelControl";
-//					console.log("success");
-//
-//				}else{
-//
-//					$.notify({
-//						title: '<strong>Error</strong>',
-//						message: 'al guardar estrategia'
-//					},{
-//						type: 'danger',
-//						newest_on_top: true,
-//						placement: {
-//							from: "top",
-//							align: "center"
-//						},
-//						delay: 2000
-//					});
-//					$("div.button").removeClass("disabled");
-//				}
-//
-//			}
+//		type: "POST",
+//		url: "/estrategia/saveEstrategia",
+//		data: {
+//		stratTasks: tasksToString
+//		}, success: function (data) {
+
+//		if(data == "true"){
+
+//		location.href = "/estrategia/panelControl";
+//		console.log("success");
+
+//		}else{
+
+//		$.notify({
+//		title: '<strong>Error</strong>',
+//		message: 'al guardar estrategia'
+//		},{
+//		type: 'danger',
+//		newest_on_top: true,
+//		placement: {
+//		from: "top",
+//		align: "center"
+//		},
+//		delay: 2000
 //		});
-		
-		
+//		$("div.button").removeClass("disabled");
+//		}
+
+//		}
+//		});
+
+
 		//console.log(listObjectToExport);
-		
+
 		var xls = new XlsExport(listObjectToExport, sessionStorage.getItem('titulo'));
 		xls.exportToXLS(sessionStorage.getItem('titulo')+'.xls');
-	
-	
-		
-		
-		
-		
+
+
+
+
+
+
 	} else {
 		var date = new Date();
 		tasksToString = "";
@@ -425,6 +425,7 @@ function moveUsers(){
 		helper: function( event ) {
 			return $('<img src="https://addons.thunderbird.net/static//img/zamboni/anon_user.png" alt="Person" width="96" height="96" class="imgClone">');
 		},
+		containment: "body",
 	});
 }
 
