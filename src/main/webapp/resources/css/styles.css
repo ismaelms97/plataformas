@@ -474,12 +474,16 @@ form{
 	display: inline-block;
 	padding: 0 25px;
 	height: 70px;
+	width: 12vw;
 	font-size: 16px;
 	line-height: 33px;
 	border-radius: 25px;
 	background-color: #ced5da;
 	margin: 5px;
 	cursor: pointer;
+	white-space: nowrap; 
+  	overflow: hidden;
+  	text-overflow: ellipsis;
 }
 
 .chip img, .imgClone{
@@ -492,4 +496,5 @@ form{
 }
 .name{
 	font-weight: bolder;
+	
 }

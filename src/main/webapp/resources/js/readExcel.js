@@ -118,13 +118,14 @@ var process_wb = (function () {
 				}
 			}
 			document.getElementById("loadAnimation").style.display =  "none"; //Hide load animation
-			var includesAll = true;
+
 			if(inTasks.length >= 1){
 				
 				tasks = strategyFilter(tasks);
 				$("div.button").removeClass("disabled");
 				var filtrado = tasks.filter(item => inTasks.find(item2 => item.id === item2.id).propiedad = item.propiedad);
 				
+				equipo = owners(tasks);
 			}else{
 				// Collect Users from propertyOf 
 				equipo = owners(tasks);
@@ -134,7 +135,7 @@ var process_wb = (function () {
 
 			tasks = orderBy(tasks, orderType, orderStyle);
 			fillTypefilter(tasks);
-			drawTeamUsers(equipo);
+			drawTeamUsers(equipo, true);
 
 			drawTable(tasks, false);
 		} catch (e){

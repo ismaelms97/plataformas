@@ -95,7 +95,9 @@ function owners(array){
  * @returns
  */
 function ownersDaily(array){
-
+	
+	
+	
 }
 
 /**
@@ -173,7 +175,7 @@ function onClickedFilter(){
 		arr = filter(inTasks, filters);
 
 	}else{
-
+		
 		arrayTasksBackup = tasks.slice(0);
 		arrayInTasksBackup = inTasks.slice(0);
 	}
@@ -183,7 +185,7 @@ function onClickedFilter(){
 	if(daily.trim() != ""){
 		chooseDaily();
 	}
-	
+		
 	aurArr = arr.slice();
 	emptyTable();
 	drawTable(arrayInTasksBackup, true);
@@ -259,8 +261,6 @@ function chooseDaily(){
 }
 
 function fillTypefilter(array){
-	var taskType = document.querySelectorAll(".taskType:checked + label");
-
 	array.forEach(function(task){
 
 		if(!tipoTarea.includes(task.tipo)){

@@ -8,7 +8,7 @@ $(document).ready(function(){
 	inputTasks();
 	showListDaily();
 	
-	
+
 	if(document.getElementsByClassName("mainTitle")[0]){
 		document.getElementsByClassName("mainTitle")[0].innerHTML = sessionStorage.getItem('titulo');
 
@@ -75,8 +75,18 @@ function drawTable(array , db) {
 	}
 
 	if(db){
-
-//		equipo = ownersDaily(inDailys);
+		console.log(inDailys);
+		console.log(array)
+		
+		if(inDailys.length > 0){
+			equipo = owners(inTasks);
+			console.log(equipo)
+		}
+		
+		if(equipo.length > 1 && equipo[0].nombre != "" && tasks.length <= 0){
+			drawTeamUsers(equipo, false);
+		}
+		
 
 		// CLON ESTADO FINAL RECOGIDO DE BASE DE DATOS
 		var rect = document.getElementsByClassName("rect");
