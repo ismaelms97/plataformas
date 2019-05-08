@@ -74,8 +74,15 @@ function drawTable(array , db) {
 	}
 
 	if(db){
-
-//		equipo = ownersDaily(inDailys);
+		console.log(inDailys);
+		console.log(inTasks);
+		equipo = owners(inTasks);
+		
+		if(equipo.length > 1 && equipo[0].nombre != ""){
+			drawTeamUsers(equipo, false);
+		}
+		
+		console.log(equipo)
 
 		// CLON ESTADO FINAL RECOGIDO DE BASE DE DATOS
 		var rect = document.getElementsByClassName("rect");

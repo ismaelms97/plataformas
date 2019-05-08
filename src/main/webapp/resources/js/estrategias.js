@@ -44,7 +44,7 @@ function dragDrop(arr, bool){
 							}
 
 							habilitarBotonEnvio();
-							drawTeamUsers(equipo);
+							drawTeamUsers(equipo, true);
 							document.getElementsByClassName("k")[0].innerHTML = "K: " + k.toFixed(2);
 						},
 					});
@@ -112,7 +112,7 @@ function dragDrop(arr, bool){
 									},
 									delay: 1000
 								});
-								drawTeamUsers(equipo);
+								drawTeamUsers(equipo, true);
 								document.getElementsByClassName("k")[0].innerHTML = "K: " + k.toFixed(2);
 							}
 						}
@@ -189,50 +189,42 @@ function saveData() {
 		tasksToString = tasksToString.substring(0, tasksToString.length - 4);
 
 		$.ajax({
-		type: "POST",
-		url: "/estrategia/saveEstrategia",
-		data: {
-		stratTasks: tasksToString
-		}, success: function (data) {
+			type: "POST",
+			url: "/estrategia/saveEstrategia",
+			data: {
+				stratTasks: tasksToString
+			}, success: function (data) {
 
-		if(data == "true"){
+				if(data == "true"){
 
-		location.href = "/estrategia/panelControl";
-		console.log("success");
+					location.href = "/estrategia/panelControl";
+					console.log("success");
 
-		}else{
+				}else{
 
-		$.notify({
-		title: '<strong>Error</strong>',
-		message: 'al guardar estrategia'
-		},{
-		type: 'danger',
-		newest_on_top: true,
-		placement: {
-		from: "top",
-		align: "center"
-		},
-		delay: 2000
+					$.notify({
+						title: '<strong>Error</strong>',
+						message: 'al guardar estrategia'
+					},{
+						type: 'danger',
+						newest_on_top: true,
+						placement: {
+							from: "top",
+							align: "center"
+						},
+						delay: 2000
+					});
+					$("div.button").removeClass("disabled");
+				}
+
+			}
 		});
-		$("div.button").removeClass("disabled");
-		}
-
-		}
-		});
-
-
-		//console.log(listObjectToExport);
 
 		var xls = new XlsExport(listObjectToExport, sessionStorage.getItem('titulo'));
 		xls.exportToXLS(sessionStorage.getItem('titulo')+'.xls');
 
-
-
-
-
-
 	} else {
-		var date = new Date();
+
 		tasksToString = "";
 		tasks.forEach(task => {
 			tasksToString += "id:" + task.id + "--";
@@ -401,7 +393,7 @@ function exists(arr, val){
 	return false;
 }
 
-function drawTeamUsers(array){
+function drawTeamUsers(array, bool){
 	k = 0;
 	document.getElementsByClassName("teamUsers")[0].innerHTML = "";
 
@@ -416,17 +408,19 @@ function drawTeamUsers(array){
 		k += array[i].k;
 		document.getElementsByClassName("teamUsers")[0].innerHTML += txt;
 	}
-	moveUsers();
+	moveUsers(bool);
 }
 
-function moveUsers(){
-	$(".chip").draggable({
-		cursorAt: { top: 30, left: 0 },
-		helper: function( event ) {
-			return $('<img src="https://addons.thunderbird.net/static//img/zamboni/anon_user.png" alt="Person" width="96" height="96" class="imgClone">');
-		},
-		containment: "body",
-	});
+function moveUsers(bool){
+	if(bool){
+		$(".chip").draggable({
+			cursorAt: { top: 30, left: 0 },
+			helper: function( event ) {
+				return $('<img src="https://addons.thunderbird.net/static//img/zamboni/anon_user.png" alt="Person" width="96" height="96" class="imgClone">');
+			},
+			containment: "body",
+		});
+	}
 }
 
 function getTasksByUser(user, tareas){
