@@ -28,7 +28,8 @@ body{
 	z-index: 10;
 	cursor: pointer;
 	display: inline-block;
-	width: 150px;
+	width: 160px;
+	text-align:center;
 }
 
 .tamano {
@@ -49,7 +50,7 @@ body{
 .clone {
 	position: relative;
 	background-color: #dbdbdb;
-	width: 150px;
+	width: 160px;
 	padding: 20px 50px;
 	border: 2px solid darkgrey;
 	border-radius: 5%;
@@ -235,8 +236,7 @@ td .ui-selected {
 }
 .teamName{
 	font-family: Helvetica Neue,Arial,Helvetica,sans-serif;
-	font-size: 16px;
-	
+	font-size: 16px;s
 	font-weight: 700;
 }
 
@@ -252,6 +252,7 @@ td .ui-selected {
 
 .a{
 	margin-right: 2% !important;
+	margin-bottom: 2% !important;
 }
 
 .estartegiasCard{
