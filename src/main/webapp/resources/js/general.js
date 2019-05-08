@@ -7,8 +7,6 @@ $(document).ready(function(){
 	inputTasks();
 	showListDaily();
 	
-	console.log(inTasks);
-	
 	if(document.getElementsByClassName("mainTitle")[0]){
 		document.getElementsByClassName("mainTitle")[0].innerHTML = sessionStorage.getItem('titulo');
 
@@ -69,14 +67,22 @@ function drawTable(array , db) {
 			}
 		} 
 		// Pintamos los RTC
-		console.log("preDraw", array)
 		drawRTC(array, i, db);
 	}
 
 	if(db){
-
-//		equipo = ownersDaily(inDailys);
-//		console.log("Equipo 1: ", equipo);
+		console.log(inDailys);
+		console.log(array)
+		
+		if(inDailys.length > 0){
+			equipo = owners(inTasks);
+			console.log(equipo)
+		}
+		
+		if(equipo.length > 1 && equipo[0].nombre != "" && tasks.length <= 0){
+			drawTeamUsers(equipo, false);
+		}
+		
 
 		// CLON ESTADO FINAL RECOGIDO DE BASE DE DATOS
 		var rect = document.getElementsByClassName("rect");
@@ -107,7 +113,6 @@ function drawTable(array , db) {
 
 				}
 
-				console.log(document.getElementsByClassName("rect")[i].parentElement.children)
 				$(cln).css("display", "inline-block");
 				document.getElementsByClassName("rect")[i].parentElement.firstChild.remove();
 			}
@@ -173,7 +178,6 @@ function drawRTC(array, pos, db) {
 				// AZUL, resto
 				classes += ' blue';
 			}
-//			console.log(array[pos].id + " " + array[pos].estadoActual + "  " + arrayInTasksBackup[pos].id + " " + arrayInTasksBackup[pos].estadoFinal + "  " + array[pos].estadoActual.toLowerCase().startsWith(inTasks[pos].estadoFinal.toLowerCase()))
 		}
 
 	} else {
