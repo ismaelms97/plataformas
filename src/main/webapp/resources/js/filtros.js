@@ -143,7 +143,6 @@ function filtering(){
 			
 			if($(this).hasClass("orderAsc") || $(this).hasClass("orderDesc")){
 				orderStyle = this.value;
-				console.log(orderStyle);
 			}
 			
 		}else{
@@ -275,7 +274,6 @@ function fillTypefilter(array){
 	}
 
 	tipoTarea.forEach(function(tipo){
-		console.log(tipo);
 		var i = tipo.toLowerCase();
 		var text = '<div class="custom-control custom-checkbox">';
 
