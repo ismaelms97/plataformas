@@ -260,6 +260,10 @@ function chooseDaily(){
 	arr = filter(arr,filters);
 }
 
+/**
+ * Función que rellena el desplegable de los tipos con los que se recogen, tanto de base de datos como del propio excel
+ * 
+ */
 function fillTypefilter(array){
 	array.forEach(function(task){
 
@@ -277,10 +281,7 @@ function fillTypefilter(array){
 		var i = tipo.toLowerCase();
 		var text = '<div class="custom-control custom-checkbox">';
 
-//		for (var k = 0; k < taskType.length; k++) {
-//		if(taskType)
 		text += '<input type="checkbox" id="'+i+'" value="'+i+'" class="custom-control-input filtros taskType">';
-//		}
 
 		text += '<label class="custom-control-label" for="'+i+'">'+toCamelCase(i)+'</label><br></div>';
 
