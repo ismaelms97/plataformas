@@ -6,6 +6,13 @@ try{
 	arrayInTasksBackup = inTasks.slice(0);
 }catch(e){}
 
+/**
+ * Función Para habilitar el drag & Drop en toda la página
+ * 
+ * @param arr   Array en la quq modificaremos al mover
+ * @param bool  Viene de base de datos?
+ * 
+ */
 function dragDrop(arr, bool){
 
 	// Con este codigo conseguimos que se mueva cada tarea unicamente en su eje x, y
@@ -121,6 +128,10 @@ function dragDrop(arr, bool){
 	})
 }
 
+/**
+ * Función, guarda los datos en la base de datos, temporalmente también exporta la información a excel
+ * 
+ */
 function saveData() {
 	if(inTasks.length == 0){
 		strategy = new Object();
@@ -219,7 +230,7 @@ function saveData() {
 
 			}
 		});
-
+		
 		var xls = new XlsExport(listObjectToExport, sessionStorage.getItem('titulo'));
 		xls.exportToXLS(sessionStorage.getItem('titulo')+'.xls');
 
@@ -267,6 +278,10 @@ function saveData() {
 	}
 }
 
+/**
+ * Función. Como indica su nombre habilita el boton de envio, que esta vinculado con la anterior función
+ * 
+ */
 function habilitarBotonEnvio() {
 	var contador = 0;
 	for (var i = 0; i < tasks.length; i++) {
@@ -384,6 +399,13 @@ function orderBy(inArr, type = undefined, order = "asc") {
 	}
 }
 
+/**
+ * Función comprueba si un valor existe en una array
+ * 
+ * @param arr  Array en la que buscar
+ * @param val  Valor que buscamos
+ * 
+ */
 function exists(arr, val){
 	for(var x = 0; x < arr.length; x++){
 		if(arr[x].id == val.id){
@@ -393,6 +415,13 @@ function exists(arr, val){
 	return false;
 }
 
+/**
+ * Pinta por pantalla la lista con todos los usuarios
+ * 
+ * @param array  Array que pintaremos
+ * @param bool 	 Si viene de base de datos o no
+ * 
+ */
 function drawTeamUsers(array, bool){
 	k = 0;
 	document.getElementsByClassName("teamUsers")[0].innerHTML = "";
@@ -411,6 +440,12 @@ function drawTeamUsers(array, bool){
 	moveUsers(bool);
 }
 
+/**
+ * Función que habilita el movimiento de los usuarios
+ * 
+ * @param bool  Viene de base de datos?
+ * 
+ */
 function moveUsers(bool){
 	if(bool){
 		$(".chip").draggable({
@@ -423,6 +458,13 @@ function moveUsers(bool){
 	}
 }
 
+/**
+ * Función que devuelve el numero de tareas en las que trabaja un usuario
+ * 
+ * @param user		Usuario del cual quieres conocer las tareas
+ * @param tareas 	La array de tareas
+ * 
+ */
 function getTasksByUser(user, tareas){
 	var sum = 0;
 	var count = 0;
@@ -441,6 +483,15 @@ function getTasksByUser(user, tareas){
 	return count;
 }
 
+/**
+ * Función que calcula la k de cada tarea
+ * 
+ * @param comp 			 	Valor de complejidad
+ * @param tam 				Valor de tamaño
+ * @param estadoInicial  	Estado desde el que empieza la tarea
+ * @param estadoFinal 	 	Estado donde acaba la tarea
+ * 
+ */
 function calculateK(comp, tam, estadoInicial, estadoActual){ 
 
 	//	Listo para analizar; Cierre de requirimientos; En análisis; Aceptación usuario; En curso; Aceptación pruebas; Pendiente implantar; Implantado; Cerrado
@@ -464,6 +515,14 @@ function calculateK(comp, tam, estadoInicial, estadoActual){
 
 }
 
+/**
+ * Función útil, Convierte un objeto con una key en formato String separado por comas en un objeto con multiples keys pero con el mismo valor
+ * 
+ * @param obj  Objeto a pasar
+ * 
+ * expand({"Nombre, Name" : "Jose"}) = {"Nombre": "Jose", "Name": "Jose"}
+ * 
+ */
 function expand(obj) {
 	var keys = Object.keys(obj);
 	for (var i = 0; i < keys.length; ++i) {
@@ -476,6 +535,14 @@ function expand(obj) {
 	return obj;
 }
 
+/**
+ * Función, suma los valores de una array desde un punto X hasta un punto Y
+ * 
+ * @param array 	Array a sumar
+ * @param poInitial La posicion desde la que empezar
+ * @param posFinal 	La posicion en la que acaba
+ * 
+ */
 function sum(array, posInitial, posFinal){
 	var suma = 0;
 

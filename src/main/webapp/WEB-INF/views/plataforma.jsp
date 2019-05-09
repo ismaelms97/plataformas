@@ -31,6 +31,7 @@
 			<script>
 				var exists = false;
 				// Si da error en eclipse es por que jsp no detecta en su codigo que es un Script con codigo js
+				// Pero esto no afecta en nada al funcionamiento
 				inDailys.forEach(el => {
 					if(el.id == "${daily.id}"){
 						exists = true;

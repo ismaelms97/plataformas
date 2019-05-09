@@ -29,6 +29,10 @@ $(document).ready(function(){
 
 })
 
+/**
+ * Función que rellena una array con los estado disponibles en la tabla, esta array se utiliza para comprobaciones futuras
+ * 
+ */
 function rellenarEstados() {
 	if($("th").length >= 1){
 		for (var i = 0; i < $("th").length; i++) {
@@ -39,6 +43,10 @@ function rellenarEstados() {
 	}
 } 
 
+/**
+ * Función para pintar las tareas de base de datos en la tabla
+ * 
+ */
 function inputTasks() {
 	try {
 		if(inTasks.length > 0){
@@ -53,6 +61,10 @@ function inputTasks() {
 }
 /**
  * Función para pintar la tabla
+ * 
+ * @param array  array a pintar
+ * @param db  Viene de Base de datos?
+ * 
  */
 function drawTable(array , db) {
 //	Ordenamos el array por prioridad,
@@ -99,7 +111,8 @@ function drawTable(array , db) {
 				$(cln).css("display", "inline-block");
 			}
 		
-	} else{
+	} else {
+		
 		for (var i = 0; i < array.length; i++) {
 			if(array[i].modified){
 				var el = document.getElementsByClassName("rect")[i];
@@ -126,7 +139,13 @@ function drawTable(array , db) {
 
 /**
  * Función para pintar los RTC
+ * 
+ * @param array  Array en la que buscaremos las tareas
+ * @param pos	 La posición de la array que queremos pintar
+ * @param db	 Viene de base de datos?
+ * 
  */
+
 function drawRTC(array, pos, db) {
 	var estadoActual = -1;
 
@@ -221,6 +240,7 @@ function drawRTC(array, pos, db) {
 
 /**
  * Función que muestra la tooltip en html
+ * 
  */
 function tooltip(){
 	$( function() {
@@ -235,6 +255,13 @@ if(document.getElementById("save")){
 	});
 }
 
+/**
+ * Función que muestra los detalles de cada tarea
+ * 
+ * @param array : Array en la que buscar los datos
+ * @param i		: Posición de la tarea que queremos encontrar
+ * 
+ */
 function verDetallesRTC(array, i){
 	$("#detallesRTC").modal("show");
 	$('#detallesRTC').on('shown.bs.modal', function() {
@@ -248,6 +275,10 @@ function verDetallesRTC(array, i){
 	})
 }
 
+/**
+ * Función que vacia todo el elemento DOM que es la tabla 
+ * 
+ */
 function emptyTable(){
 	for (var j = $("TR").length -1; j > 0 ; j--) {
 		$("TR")[j].remove();
