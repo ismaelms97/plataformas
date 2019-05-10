@@ -419,14 +419,14 @@ function exists(arr, val){
  * Pinta por pantalla la lista con todos los usuarios
  * 
  * @param array  Array que pintaremos, array equipo
- * @param bool 	 Si viene de base de datos o no
+ * @param bool 	 Si viene de base de datos o no / Crear daily o ver daily
  * 
  */
 function drawTeamUsers(array, bool){
 	//k = 0;
 	var tArr = "";
 	console.log("BOOL", bool)
-	if(bool){
+	if(inDB){
 		tArr = "inTasks";
 	} else{
 		tArr = "tasks";

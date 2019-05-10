@@ -1,6 +1,7 @@
 var estados;
 var equipo = [];
 var tipoTarea = []
+var inDB = false;
 
 
 $(document).ready(function(){
@@ -87,6 +88,7 @@ function drawTable(array , db) {
 	}
 
 	if(db){
+		inDB = true;
 		console.log(inDailys);
 		console.log(array)
 		
