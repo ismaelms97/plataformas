@@ -206,11 +206,15 @@ function showListDaily(){
 	try{
 		if(inDailys.length >= 1){
 			$(".daily-body").show();
-			inDailys.forEach(function(d){
-
-				var daily = '<div class="custom-control custom-radio">'+
-				'<input type="radio" class="custom-control-input filtros daily" id="'+d.id+'" name="dailyRadio" value="'+d.fecha+'">'+
-				'<label class="custom-control-label" for="'+d.id+'">'+d.fecha+'</label></div>';
+			inDailys.forEach(function(d, i){
+				var daily = '<div class="custom-control custom-radio">';
+				if(i == 0){
+					daily += '<input type="radio" class="custom-control-input filtros daily" id="'+d.id+'" name="dailyRadio" value="'+d.fecha+'" checked>';
+				}else{
+					daily += '<input type="radio" class="custom-control-input filtros daily" id="'+d.id+'" name="dailyRadio" value="'+d.fecha+'">';
+				}
+				
+				daily += '<label class="custom-control-label" for="'+d.id+'">'+d.fecha+'</label></div>';
 
 
 				$("#collapseDaily").children(".card").append(daily);
@@ -230,7 +234,11 @@ function showListDaily(){
  */
 function chooseDaily(){
 	arr = orderBy(inTasks, orderType, orderStyle)
-	var dateSelected = daily;
+	var dateSelected = "";
+	
+	daily == "" ? dateSelected = inDailys[0].fecha : dateSelected = daily;
+	
+	console.log(dateSelected);
 	inDailys.forEach(function(daily){
 		if(daily.fecha == dateSelected){
 			arr.forEach(function(task){
