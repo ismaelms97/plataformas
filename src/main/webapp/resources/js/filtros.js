@@ -55,7 +55,7 @@ function owners(array){
 	var name = "";
 	
 	//Empty div before refill with new owners
-	$("#collapsePropertyOf").children(".card").text("");
+//	$("#collapsePropertyOf").children(".card").text("");
 	
 	array.forEach(function(task){
 		if(!backup.includes(task.propiedad)){
@@ -270,7 +270,7 @@ function chooseDaily(){
  */
 function fillTypefilter(array){
 	array.forEach(function(task){
-
+		console.log(task)
 		if(!tipoTarea.includes(task.tipo)){
 			tipoTarea.push(task.tipo);
 		}
