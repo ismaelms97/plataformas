@@ -1,6 +1,5 @@
 var estados;
 var equipo = [];
-var tipoTarea = []
 
 $(document).ready(function(){
 	estados = [];
@@ -8,11 +7,11 @@ $(document).ready(function(){
 	inputTasks();
 	showListDaily();
 	
+
 	if(document.getElementsByClassName("mainTitle")[0]){
 		document.getElementsByClassName("mainTitle")[0].innerHTML = sessionStorage.getItem('titulo');
 
 	}
-
 
 	if(document.getElementById("formContent")){
 
@@ -50,7 +49,6 @@ function inputTasks() {
 	try {
 		if(inTasks.length > 0){
 			drawTable(inTasks, true);
-			fillTypefilter(inTasks);
 		}
 
 	} catch (e) {
@@ -175,10 +173,12 @@ function drawRTC(array, pos, db) {
 				}
 			} else {
 				try{
+					console.log("Funciona");
 					if (array[pos].estadoActual.toLowerCase().startsWith(estados[j])) {
 						estadoActual = j
 					}
 				}catch(e){
+					console.log("Catch");
 					if (array[pos].estado.toLowerCase().startsWith(estados[j])) {
 						estadoActual = j
 					}

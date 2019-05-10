@@ -53,6 +53,10 @@ function owners(array){
 	var own = [];
 	var backup = [];
 	var name = "";
+	
+	//Empty div before refill with new owners
+	$("#collapsePropertyOf").children(".card").text("");
+	
 	array.forEach(function(task){
 		if(!backup.includes(task.propiedad)){
 			

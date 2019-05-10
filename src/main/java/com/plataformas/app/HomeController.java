@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.plataformas.Db2.StrategyService;
 import com.plataformas.Db2.UserService;
 import com.plataformas.model.User;
+import com.plataformas.recursos.SessionResources;
 
 
 @Controller
@@ -26,6 +27,8 @@ public class HomeController {
 	UserService userService;
 	@Autowired
 	StrategyService strategyService;
+	@Autowired
+	SessionResources sessionResources;
 
 
 	public static final String HOME = "home";
@@ -35,10 +38,17 @@ public class HomeController {
 
 
 	@GetMapping(value = "/")
-	public String home(Locale locale, Model model)  {
-		
-		model.addAttribute("user", new User());
-		return HOME;
+	public String home(Locale locale, Model model,HttpSession session)  {		
+
+		if (!sessionResources.checkUserSession(session)){
+
+			model.addAttribute("user", new User());
+			return HOME;
+
+		}else {		
+
+			return REDIRECT_MAIN_CONTROL;
+		}
 	}
 
 	@GetMapping(value = "/mainPanel")
