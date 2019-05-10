@@ -100,7 +100,7 @@ function drawTable(array , db) {
 		}
 		
 		for (var j = 0; j < array.length; j++) {
-			if(array[i].estadoActual && array[j].estadoActual.trim() != ""){
+			if(array[j].estadoActual && array[j].estadoActual.trim() != ""){
 				var complejidad =  array[j].complejidad != 0 ? array[j].complejidad-1 : array[j].complejidad;
 				
 				var tam = array[j].tamano;
