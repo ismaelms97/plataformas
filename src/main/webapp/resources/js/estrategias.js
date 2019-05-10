@@ -10,7 +10,7 @@ try{
  * Función Para habilitar el drag & Drop en toda la página
  * 
  * @param arr   Array en la quq modificaremos al mover
- * @param bool  Viene de base de datos?
+ * @param bool  Falso unicamente cuando vas a ver daily
  * 
  */
 function dragDrop(arr, bool){
@@ -419,13 +419,12 @@ function exists(arr, val){
  * Pinta por pantalla la lista con todos los usuarios
  * 
  * @param array  Array que pintaremos, array equipo
- * @param bool 	 Si viene de base de datos o no / Crear daily o ver daily
+ * @param bool 	 Falso unicamente cuando vas a ver daily
  * 
  */
 function drawTeamUsers(array, bool){
 	//k = 0;
 	var tArr = "";
-	console.log("BOOL", bool)
 	if(inDB){
 		tArr = "inTasks";
 	} else{
@@ -435,24 +434,26 @@ function drawTeamUsers(array, bool){
 
 	for (var i = 0; i < array.length; i++) {
 
+		array[i].tareas = getTasksByUser(array[i], eval(tArr));
 		
 		var txt = '<div class="chip">'
 			+'<img src="https://addons.thunderbird.net/static//img/zamboni/anon_user.png" alt="Person" width="96" height="300"><span class="name">'
-			+ toCamelCase(array[i].nombre.toLowerCase()) +'</span> <br>Tareas: ' + getTasksByUser(array[i], eval(tArr)) + ' | K: '+ array[i].k.toFixed(2) +' </div>';
+			+ toCamelCase(array[i].nombre.toLowerCase()) +'</span> <br>Tareas: ' + array[i].tareas + ' | K: '+ array[i].k.toFixed(2) +' </div>';
+		
 		if(array.length > 8 && i + 1 == 8){
 			txt += "<br>";
 		}
-		console.log("Ka", array[i].k.toFixed(2))
 		k += array[i].k;
 		document.getElementsByClassName("teamUsers")[0].innerHTML += txt;
 	}
+	detallesUsuarios(array);
 	moveUsers(bool);
 }
 
 /**
  * Función que habilita el movimiento de los usuarios
  * 
- * @param bool  Viene de base de datos?
+ * @param bool  Falso unicamente cuando vas a ver daily
  * 
  */
 function moveUsers(bool){
@@ -468,7 +469,32 @@ function moveUsers(bool){
 }
 
 /**
- * Función que devuelve el numero de tareas en las que trabaja un usuario
+ * Función para rellenar los detalles de los usuarios
+ * 
+ * @param array Array de Usuarios
+ * @returns
+ */
+function detallesUsuarios(array){
+	var d = document.getElementsByClassName('chip');
+	
+	for (var i = 0; i < d.length; i++) {
+		d[i].addEventListener("click", function(){
+			$("#detallesUsuarios").modal("show");
+			var usuario = array.find(user => user.nombre.toLowerCase() == this.children[1].innerHTML.toLowerCase());
+			console.log(usuario);
+			document.getElementById("detallesNombre").innerHTML = usuario.nombre;
+			document.getElementById("detallesTareas").innerHTML = usuario.tareas;
+			document.getElementById("detallesKTotalPorUsuario").innerHTML = usuario.k;
+			document.getElementById("detallesTareasActivo").innerHTML = usuario.tareasActivo.join(", ");
+			
+		});
+		
+	}
+}
+
+/**
+ * Función que devuelve el numero de tareas en las que trabaja un usuario, rellena la array de tareas en las que esta activo el usuario 
+ * y calcula la k total del usuario
  * 
  * @param user		Usuario del cual quieres conocer las tareas
  * @param tareas 	La array de tareas
@@ -477,8 +503,10 @@ function moveUsers(bool){
 function getTasksByUser(user, tareas){
 	var sum = 0;
 	var count = 0;
+	user.tareasActivo = [];
 	tareas.forEach(function(task){
 		if(task.propiedad.toLowerCase() == user.nombre.toLowerCase()){
+			user.tareasActivo.push(task.id);
 			count++;
 //			user.k += task.k;
 			sum += task.k;
@@ -510,13 +538,24 @@ function calculateK(comp, tam, estadoInicial, estadoActual){
 	//	"Pte Alta" = 0; "Pte. Cuantificar" = 0; "Listo para analizar" = 0; "Cierre requerimientos" = 0,4; "En análisis"= 0,6; "Aceptación usuario"= 0,72; "En curso" = 0,77; "Aceptación a las pruebas" = 0,97; "Pte. implantar" = 1; "Implantado" = 1; "Finalizada" = 1 : -1
 
 	//	O este: 
-	//	"Pte Alta" = 0; "Pte. Cuantificar" = 0; "Listo para analizar" = 0; "Cierre requerimientos" = 0,4; "En análisis"= 0,2; "Aceptación usuario"= 0,12; "En curso" = 0,05; "Aceptación a las pruebas" = 0.2; "Pte. implantar" = 0.03; "Implantado" = 1; "Finalizada" = 0 : -1
+	//	"Pte Alta" = 0;
+	//	"Pte. Cuantificar" = 0; 
+	//	"Listo para analizar" = 0;
+	//	"Cierre requerimientos" = 0,4; 
+	//	"En análisis"= 0,2; 
+	//	"Aceptación usuario"= 0,12;
+	//	"En curso" = 0,05; 
+	//	"Aceptación a las pruebas" = 0.2;
+	//	"Pte. implantar" = 0.03; 
+	//	"Implantado" = 0; 
+	//	"Finalizada" = 0 	
+	//	: -1
 
 	var pesoFase = [0,0,0, 0.4, 0.2, 0.12, 0.05, 0.2, 0.03, 0];
 	var tamano =  expand({"XXS, 50": 1, "XS, 100": 1.1, "S, 200":1.2, "M, 400": 1.3, "L, 800": 1.4, "XL, 1600": 1.5, "XXL, 3200": 1.6, "XXXL, 6400": 1.7});
 	var complejidad = [1, 5, 20, 50, 100];
 
-	if(parseInt(comp) <= 0 || parseInt(tam) <= 0){
+	if(parseInt(comp) < 0 || parseInt(tam) < 0){
 		return 0;
 	}
 

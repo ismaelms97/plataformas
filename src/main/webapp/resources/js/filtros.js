@@ -55,14 +55,14 @@ function owners(array){
 	var name = "";
 	
 	//Empty div before refill with new owners
-//	$("#collapsePropertyOf").children(".card").text("");
+	$("#collapsePropertyOf").children(".card").text("");
 	
 	array.forEach(function(task){
 		if(!backup.includes(task.propiedad)){
 			
 			if (task.propiedad.toLowerCase() != "unassigned"){
 				
-				own.push({nombre : task.propiedad, k: 0});
+				own.push({nombre : task.propiedad, k: 0, tareasActivo: []});
 				backup.push(task.propiedad);
 				
 				name = task.propiedad.toLowerCase();
@@ -85,23 +85,6 @@ function owners(array){
 	$("#collapsePropertyOf").children(".card").append(texto);
 
 	return own;
-}
-
-//function userNoExists(array, user){
-//array.forEach(function(us){
-//	if(us.nombre == user) return false;
-//})
-//return true;
-//}
-
-/**
- * Appends all the owners of the tasks to the filtering modal of a daily, when the users come from the database
- * @returns
- */
-function ownersDaily(array){
-	
-	
-	
 }
 
 /**

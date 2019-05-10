@@ -86,7 +86,9 @@ function drawTable(array , db) {
 		// Pintamos los RTC
 		drawRTC(array, i, db);
 	}
-
+	
+	
+	
 	if(db){
 		inDB = true;
 		console.log(inDailys);
@@ -97,22 +99,21 @@ function drawTable(array , db) {
 			console.log(equipo)
 		}
 		
-		for (var i = 0; i < array.length; i++) {
-			if(array[i].estadoActual && array[i].estadoActual.trim() != ""){
-				var complejidad =  array[i].complejidad != 0 ? array[i].complejidad-1 : array[i].complejidad;
+		for (var j = 0; j < array.length; j++) {
+			if(array[i].estadoActual && array[j].estadoActual.trim() != ""){
+				var complejidad =  array[j].complejidad != 0 ? array[j].complejidad-1 : array[j].complejidad;
 				
-				var tam = array[i].tamano;
+				var tam = array[j].tamano;
 				
-				var estadoInit = estados.indexOf(array[i].estado.toLowerCase());
+				var estadoInit = estados.indexOf(array[j].estado.toLowerCase());
 				
-				var estadoActual = estados.indexOf(array[i].estadoActual.toLowerCase());
+				var estadoActual = estados.indexOf(array[j].estadoActual.toLowerCase());
 				
-				array[i].k = calculateK(complejidad, tam, estadoInit, estadoActual);
-				console.log(array[i].k)
+				array[j].k = calculateK(complejidad, tam, estadoInit, estadoActual);
+				console.log(array[j].k)
 			}else{
-				array[i].k = 1;
+				array[j].k = 0;
 			}
-			
 		}
 		
 		if(equipo.length > 1 && equipo[0].nombre != "" && tasks.length <= 0){
