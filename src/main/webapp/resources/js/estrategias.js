@@ -418,7 +418,7 @@ function exists(arr, val){
 /**
  * Pinta por pantalla la lista con todos los usuarios
  * 
- * @param array  Array que pintaremos
+ * @param array  Array que pintaremos, array equipo
  * @param bool 	 Si viene de base de datos o no
  * 
  */

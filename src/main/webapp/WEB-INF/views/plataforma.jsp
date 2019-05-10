@@ -93,9 +93,9 @@
 					<th scope="col">Pte. Cuantificar</th>
 					<th scope="col">Listo Para Analizar</th>
 					<th scope="col">Cierre Requerimientos</th>
-					<th scope="col">En Análisis</th>
+					<th scope="col">En Análisis y Valoración</th>
 					<th scope="col">Aceptación Usuario</th>
-					<th scope="col">En Curso</th>
+					<th scope="col">En Curso (desarrollo)</th>
 					<th scope="col">Aceptación a las Pruebas</th>
 					<th scope="col">Pte. Implantar</th>
 					<th scope="col">Implantado</th>

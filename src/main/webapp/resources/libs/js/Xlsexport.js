@@ -21,6 +21,9 @@ class XlsExport {
     return this._data;
   }
 
+  /**
+   * 	Aquí exportamos lo que queramos siguiendo una template que utiliza tags html para crear el propio excel
+   */
   exportToXLS(fileName = 'export.xls') {
     if (typeof fileName !== 'string' || Object.prototype.toString.call(fileName) !== '[object String]') {
       throw new Error('Invalid input type: exportToCSV(String)');

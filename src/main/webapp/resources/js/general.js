@@ -94,6 +94,24 @@ function drawTable(array , db) {
 			console.log(equipo)
 		}
 		
+		for (var i = 0; i < array.length; i++) {
+			if(array[i].estadoActual && array[i].estadoActual.trim() != ""){
+				var complejidad =  array[i].complejidad != 0 ? array[i].complejidad-1 : array[i].complejidad;
+				
+				var tam = array[i].tamano;
+				
+				var estadoInit = estados.indexOf(array[i].estado.toLowerCase());
+				
+				var estadoActual = estados.indexOf(array[i].estadoActual.toLowerCase());
+				
+				array[i].k = calculateK(complejidad, tam, estadoInit, estadoActual);
+				console.log(array[i].k)
+			}else{
+				array[i].k = 0;
+			}
+			
+		}
+		
 		if(equipo.length > 1 && equipo[0].nombre != "" && tasks.length <= 0){
 			drawTeamUsers(equipo, false);
 		}
