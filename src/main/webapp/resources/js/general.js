@@ -1,5 +1,7 @@
 var estados;
 var equipo = [];
+var tipoTarea = []
+
 
 $(document).ready(function(){
 	estados = [];
@@ -49,6 +51,7 @@ function inputTasks() {
 	try {
 		if(inTasks.length > 0){
 			drawTable(inTasks, true);
+			fillTypefilter(inTasks);
 		}
 
 	} catch (e) {
@@ -105,7 +108,7 @@ function drawTable(array , db) {
 				array[i].k = calculateK(complejidad, tam, estadoInit, estadoActual);
 				console.log(array[i].k)
 			}else{
-				array[i].k = 0;
+				array[i].k = 1;
 			}
 			
 		}

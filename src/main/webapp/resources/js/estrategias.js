@@ -423,17 +423,26 @@ function exists(arr, val){
  * 
  */
 function drawTeamUsers(array, bool){
-	k = 0;
+	//k = 0;
+	var tArr = "";
+	console.log("BOOL", bool)
+	if(bool){
+		tArr = "inTasks";
+	} else{
+		tArr = "tasks";
+	}
 	document.getElementsByClassName("teamUsers")[0].innerHTML = "";
 
 	for (var i = 0; i < array.length; i++) {
 
+		
 		var txt = '<div class="chip">'
 			+'<img src="https://addons.thunderbird.net/static//img/zamboni/anon_user.png" alt="Person" width="96" height="300"><span class="name">'
-			+ toCamelCase(array[i].nombre.toLowerCase()) +'</span> <br>Tareas: ' + getTasksByUser(array[i], tasks) + ' | K: '+ array[i].k.toFixed(2) +' </div>';
+			+ toCamelCase(array[i].nombre.toLowerCase()) +'</span> <br>Tareas: ' + getTasksByUser(array[i], eval(tArr)) + ' | K: '+ array[i].k.toFixed(2) +' </div>';
 		if(array.length >= 10 && i + 1 == Math.round((array.length / 2))){
 			txt += "<br>";
 		}
+		console.log("Ka", array[i].k.toFixed(2))
 		k += array[i].k;
 		document.getElementsByClassName("teamUsers")[0].innerHTML += txt;
 	}
