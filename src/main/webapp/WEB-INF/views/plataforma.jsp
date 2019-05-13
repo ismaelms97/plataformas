@@ -126,10 +126,10 @@
 	<jsp:include page="footer.jsp"></jsp:include>
 	
 	<script type="text/javascript">
-		$(document).ready(function(){
-			// Activate the action to filter
+		/* $(document).ready(function(){
+			Activate the action to filter
 			filtering();
-		});
+		}); */
 	</script>
 	
 </body>

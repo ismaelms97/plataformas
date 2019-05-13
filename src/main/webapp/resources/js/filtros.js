@@ -66,9 +66,15 @@ function owners(array){
 				backup.push(task.propiedad);
 				
 				name = task.propiedad.toLowerCase();
-				var texto = '<div class="custom-control custom-checkbox">'+
-				'<input type="checkbox" id="'+ name +'" value="'+ name +'" class="custom-control-input filtros taskPropertyOf">'+
-				'<label class="custom-control-label" for="'+ name +'">'+ toCamelCase(name) +'</label><br> '+
+				var texto = '<div class="custom-control custom-checkbox">';
+				
+				if(filters.propiedad.includes(name)){
+					texto += '<input type="checkbox" id="'+ name +'" value="'+ name +'" class="custom-control-input filtros taskPropertyOf" checked>';
+				}else{
+					texto += '<input type="checkbox" id="'+ name +'" value="'+ name +'" class="custom-control-input filtros taskPropertyOf">';
+				}
+				
+				texto += '<label class="custom-control-label" for="'+ name +'">'+ toCamelCase(name) +'</label><br> '+
 				'</div>';
 				$("#collapsePropertyOf").children(".card").append(texto);
 
@@ -111,13 +117,13 @@ function filtering(){
 
 	$(".filtros").on("click", function(){
 		if((this).checked){
-			if($(this).hasClass("taskType")){
+			if($(this).hasClass("taskType") && !filters.tipo.includes(this.value)){
 				filters.tipo.push(this.value);
 
-			}else if($(this).hasClass("taskPropertyOf")) {
+			}else if($(this).hasClass("taskPropertyOf") && !filters.propiedad.includes(this.value)) {
 				filters.propiedad.push(this.value);
 
-			}else if($(this).hasClass("taskUrgent")){
+			}else if($(this).hasClass("taskUrgent") && !filters.urgente.includes(this.value)){
 				filters.urgente.length = 0;
 
 				if(this.value == ""){
