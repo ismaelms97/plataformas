@@ -126,10 +126,14 @@
 	<jsp:include page="footer.jsp"></jsp:include>
 	
 	<script type="text/javascript">
-		/* $(document).ready(function(){
-			Activate the action to filter
-			filtering();
-		}); */
+		$(document).ready(function(){
+
+			$(".card-header").on("click", function(){
+				
+				$(this).toggleClass("arrowDown");
+			})
+			
+		}); 
 	</script>
 	
 </body>

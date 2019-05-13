@@ -196,12 +196,8 @@ function modalFilter(){
 		document.getElementById("filter").removeEventListener('click', onClickedFilter);
 		document.getElementById("filter").addEventListener("click", onClickedFilter);
 
-		$(".card-header").on("click", function(){
-
-			$(this).toggleClass("arrowDown");
-		})
-
 	})
+	
 }
 
 /**
