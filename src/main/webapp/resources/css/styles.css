@@ -328,7 +328,7 @@ form{
 	background-color: #b5a9bc;
 }
 
-.actived:not(.ended) {
+.actived:not(.actived > .ended) {
   background-color: #65c26d !important;
 }
 

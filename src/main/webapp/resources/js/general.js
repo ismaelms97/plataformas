@@ -96,7 +96,8 @@ function drawTable(array , db) {
 		
 		if(inDailys.length > 0){
 			chooseDaily();
-			equipo = owners(inTasks);
+			equipo = owners(inTasks);	
+			filtering();
 			console.log(equipo)
 		}
 		
