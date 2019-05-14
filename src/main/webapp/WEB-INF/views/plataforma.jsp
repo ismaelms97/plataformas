@@ -26,8 +26,6 @@
 		var inTasks = [];
 	</script>
 	
-	
-	
 	<div class="teamUsers"></div>
 	<c:forEach items="${listaDaily}" var="daily" varStatus="item">
 			<script>
@@ -126,10 +124,14 @@
 	<jsp:include page="footer.jsp"></jsp:include>
 	
 	<script type="text/javascript">
-		/* $(document).ready(function(){
-			Activate the action to filter
-			filtering();
-		}); */
+		$(document).ready(function(){
+			
+			$(".card-header").on("click", function(){
+				
+				$(this).toggleClass("arrowDown");
+			})
+			
+		}); 
 	</script>
 	
 </body>
