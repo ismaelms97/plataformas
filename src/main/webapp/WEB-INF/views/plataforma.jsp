@@ -26,8 +26,6 @@
 		var inTasks = [];
 	</script>
 	
-	
-	
 	<div class="teamUsers"></div>
 	<c:forEach items="${listaDaily}" var="daily" varStatus="item">
 			<script>
