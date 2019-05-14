@@ -253,6 +253,7 @@ td .ui-selected {
 .a{
 	margin-right: 2% !important;
 	margin-bottom: 2% !important;
+	border-radius: 2%;
 }
 
 .estartegiasCard{
@@ -328,11 +329,11 @@ form{
 	background-color: #b5a9bc;
 }
 
-.actived:not(.actived > .ended) {
+.actived > .started {
   background-color: #65c26d !important;
 }
 
-.actived{
+.actived > .ended{
 	background-color: rgb(231, 132, 114) !important;
 } 
 
