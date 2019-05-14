@@ -117,31 +117,4 @@ public class DailyController {
 			return isSaved;
 		}
 	}
-
-	@PostMapping(value = "/date")
-	public @ResponseBody String getDatesOfDaily(String id ,Model model,HttpSession session) {	
-
-		synchronized (session) {
-
-			String date = "";
-
-			if (!sessionResources.checkUserSession(session)){
-
-				return REDIRECT_HOME;
-
-			}else {
-
-				try {
-
-					date = dailyService.findDateDaily(Integer.parseInt(id));
-
-				}catch (Exception e) {
-
-					System.err.println("Error al recoger fechas");
-				}
-			}
-
-			return date;
-		}
-	}
 }

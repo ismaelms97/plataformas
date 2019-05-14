@@ -46,40 +46,6 @@ public class DailyService {
 
 	}
 
-	public String findDateDaily(int idEstrategia){
-
-		String date = null;
-
-		try {
-
-			Connection con = dbResources.getConection();
-			con.setAutoCommit(false);
-			Statement  stmt = con.createStatement(); 
-			ResultSet rs = stmt.executeQuery("Select D.fecha FROM daily D where D.estrategia_id = "+idEstrategia+" AND"
-					+ " D.id = (Select MAX(D.id) from daily D where D.estrategia_id ="+idEstrategia+")");		
-
-			while (rs.next()) {
-
-				date = rs.getString("fecha");
-			}
-
-			return date;
-
-		} catch (SQLException e) {
-
-			System.err.println("SQL Exeption  findDateDaily:  code -> "+e.getErrorCode());
-			System.err.println("more inf : "+e.getMessage()+" reason  -> "+e.getCause());
-
-			return date;
-
-		}catch (Exception e) {
-
-			System.err.println("Error en findDateDaily ");
-			return date;
-		}
-
-	}
-
 	@Transactional
 	public void saveDaily(List<Daily> listDailty) throws  SQLException{
 
