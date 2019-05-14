@@ -260,14 +260,15 @@ td .ui-selected {
 	border-radius: 5%;
 	padding: 20px;
 	width: 187.52px;
-	height: 96px;
+	height: 110px;
 	max-width: 187.52px;
-	max-height: 96px;
+	max-height: 110px;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	text-decoration: none;
 	color: black;
+	line-height: 1.4em;
 }
 
 a:hover {
