@@ -125,7 +125,7 @@
 	
 	<script type="text/javascript">
 		$(document).ready(function(){
-
+			
 			$(".card-header").on("click", function(){
 				
 				$(this).toggleClass("arrowDown");

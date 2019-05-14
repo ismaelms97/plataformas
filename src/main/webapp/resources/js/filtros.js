@@ -209,18 +209,19 @@ function showListDaily(){
 		if(inDailys.length >= 1){
 			$(".daily-body").show();
 			inDailys.forEach(function(d, i){
-				var daily = '<div class="custom-control custom-radio">';
+				var dal = '<div class="custom-control custom-radio">';
 				if(i == 0){
-					daily += '<input type="radio" class="custom-control-input filtros daily" id="'+d.id+'" name="dailyRadio" value="'+d.fecha+'" checked>';
+					dal += '<input type="radio" class="custom-control-input filtros daily" id="'+d.id+'" name="dailyRadio" value="'+d.fecha+'" checked>';
 				}else{
-					daily += '<input type="radio" class="custom-control-input filtros daily" id="'+d.id+'" name="dailyRadio" value="'+d.fecha+'">';
+					dal += '<input type="radio" class="custom-control-input filtros daily" id="'+d.id+'" name="dailyRadio" value="'+d.fecha+'">';
 				}
 				
-				daily += '<label class="custom-control-label" for="'+d.id+'">'+d.fecha+'</label></div>';
+				dal += '<label class="custom-control-label" for="'+d.id+'">'+d.fecha+'</label></div>';
 
 
-				$("#collapseDaily").children(".card").append(daily);
+				$("#collapseDaily").children(".card").append(dal);
 			})
+			filtering();
 			chooseDaily();
 		}else{
 			$(".daily-body").hide();
