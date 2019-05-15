@@ -47,7 +47,7 @@
 				
 				$("#" + estrategia.equipo.replace(/\s/g, "-") + ">.strategyContainer").append(
 						'<a id="'+estrategia.id+'" class="a" data-index= "'+ ${item.index} +'">'+
-						'<div class="estartegiasCard">'+ nombre +'<br>Inicio: <b>'+estrategia.fechaInicio+'</b><br>Fin: <b>'+fecha+'</b></div>'+
+						'<div class="estartegiasCard">'+ nombre.big().bold() +'<br>Inicio: <b>'+estrategia.fechaInicio+'</b><br>Fin: <b>'+fecha+'</b></div>'+
 					'<div class="divOptions">'+
 						'<form action="/estrategia/findEstrategia" method="post">'+
 						'<input  type="hidden" name="id" value="'+estrategia.id+'">'+
