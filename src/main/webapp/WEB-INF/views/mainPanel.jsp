@@ -27,6 +27,7 @@
 			<script>
 				var estrategia = new Object();
 				estrategia.id = "${estrategia.id}";
+				estrategia.fechaInicio = "${estrategia.fechaInicio}"
 				estrategia.endDate = "${estrategia.fechaFin}";
 				estrategia.equipoId = "${estrategia.equipoId}";
 				estrategia.estado ="${estrategia.estado}";
@@ -35,10 +36,18 @@
 				estrategias.push(estrategia);
 				
 				var nombre = "${estrategia.nombre}";
+
+				var fecha = estrategia.fechaInicio.split("-");
+				fecha[1] = parseInt(fecha[1]) + 1;
+				estrategia.fechaInicio = fecha.reverse().join("/");
+				
+				fecha =  estrategia.endDate.split("-");
+				fecha[1] = parseInt(fecha[1]) + 1;
+				fecha = fecha.reverse().join("/");
 				
 				$("#" + estrategia.equipo.replace(/\s/g, "-") + ">.strategyContainer").append(
 						'<a id="'+estrategia.id+'" class="a" data-index= "'+ ${item.index} +'">'+
-						'<div class="estartegiasCard">'+ nombre +'</div>'+
+						'<div class="estartegiasCard">'+ nombre +'<br>Inicio: <b>'+estrategia.fechaInicio+'</b><br>Fin: <b>'+fecha+'</b></div>'+
 					'<div class="divOptions">'+
 						'<form action="/estrategia/findEstrategia" method="post">'+
 						'<input  type="hidden" name="id" value="'+estrategia.id+'">'+
@@ -112,7 +121,7 @@
 
 				$(".options").click(function(e){
 					if(!e.target.parentElement.parentElement.previousSibling.classList.contains("disabled")){ 
-						sessionStorage.setItem('titulo', e.target.parentElement.parentElement.previousSibling.innerHTML.trim());
+						sessionStorage.setItem('titulo', e.target.parentElement.parentElement.previousSibling.innerHTML.substring(0, e.target.parentElement.parentElement.previousSibling.innerHTML.indexOf("Inicio")).trim());
 						console.log(sessionStorage.getItem('titulo'));
 					}
 				});

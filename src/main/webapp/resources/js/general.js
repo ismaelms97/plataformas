@@ -79,7 +79,7 @@ function drawTable(array , db) {
 		for (var j = 0; j < 10; j++) {
 			if(document.getElementsByTagName("TR")[i+1].children.length != 10){
 				var td = document.createElement("td");
-				td.setAttribute("class", estados[j].replace(/\s/g, "-").replace(/[\.]/g,  "_"));
+				td.setAttribute("class", estados[j].replace(/\s/g, "-").replace(/[\.]/g,  "_").replace(/[(]/g, "0").replace(/[)]/g, "9"));
 				document.getElementsByTagName("TR")[i + 1].appendChild(td);
 			}
 		} 
@@ -130,7 +130,9 @@ function drawTable(array , db) {
 				var el = rect[i];
 				var cln = $(el).clone();
 				cln.attr("class", "clone orange");
-				$(el).parent().siblings("."+array[i].estadoFinal.replace(/\s/g, "-").replace(/[\.]/g,  "_")).append(cln);
+				console.log("EL", $(el).parent().siblings("."+array[i].estadoFinal.replace(/\s/g, "-").replace(/[\.]/g,  "_").replace(/[(]/g, "0").replace(/[)]/g, "9")))
+				console.log(array[i].estadoFinal.replace(/\s/g, "-").replace(/[\.]/g,  "_").replace(/[(]/g, "0").replace(/[)]/g, "9"));
+				$(el).parent().siblings("."+array[i].estadoFinal.replace(/\s/g, "-").replace(/[\.]/g,  "_").replace(/[(]/g, "0").replace(/[)]/g, "9")).append(cln);
 				$(cln).css("display", "inline-block");
 			}
 		
@@ -141,9 +143,9 @@ function drawTable(array , db) {
 				var el = document.getElementsByClassName("rect")[i];
 				var cln = $(el).clone();
 				cln.attr("class", "rect orange");
-				if($(el).parent().siblings("."+array[i].estadoFinal.replace(/\s/g, "-").replace(/[\.]/g,  "_")).length != 0){
-
-					$(el).parent().siblings("."+array[i].estadoFinal.replace(/\s/g, "-").replace(/[\.]/g,  "_")).append(cln);
+			
+				if($(el).parent().siblings("."+array[i].estadoFinal.replace(/\s/g, "-").replace(/[\.]/g,  "_").replace(/[(]/g, "0").replace(/[)]/g, "9")).length != 0){
+					$(el).parent().siblings("."+array[i].estadoFinal.replace(/\s/g, "-").replace(/[\.]/g,  "_").replace(/[(]/g, "0").replace(/[)]/g, "9")).append(cln);
 					document.getElementsByClassName("clone")[i].setAttribute("style", 'display: inline-block')
 
 				} else {

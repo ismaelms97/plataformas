@@ -35,16 +35,16 @@ function dragDrop(arr, bool){
 						stop: function (event, ui) {
 							document.getElementsByClassName("rect")[(this.getAttribute("data-rtc") - 1)].style.display = "";
 
-							if (this.parentElement.classList.contains(estados[this.getAttribute("data-posInitial")].replace(/\s/g, "-").replace(/[\.]/g, "_")) && arr[this.getAttribute("data-rtc") - 1].modified) {
+							if (this.parentElement.classList.contains(estados[this.getAttribute("data-posInitial")].replace(/\s/g, "-").replace(/[\.]/g, "_").replace(/[(]/g, "0").replace(/[)]/g, "9")) && arr[this.getAttribute("data-rtc") - 1].modified) {
 
 								arr[this.getAttribute("data-rtc") - 1].modified = false;
 								arr[this.getAttribute("data-rtc") - 1].k = 0;
 
 							} else {
 
-								if (estados.indexOf(this.parentElement.classList[0].replace(/-/g, " ").replace(/_/g, ".")) >= this.getAttribute("data-posInitial")) {
+								if (estados.indexOf(this.parentElement.classList[0].replace(/-/g, " ").replace(/_/g, ".").replace(/[0]/g, "(").replace(/[9]/g, ")")) >= this.getAttribute("data-posInitial")) {
 									arr[this.getAttribute("data-rtc") - 1].modified = true;
-									arr[this.getAttribute("data-rtc") - 1].estadoFinal = this.parentElement.classList[0].replace(/-/g, " ").replace(/_/g, ".");
+									arr[this.getAttribute("data-rtc") - 1].estadoFinal = this.parentElement.classList[0].replace(/-/g, " ").replace(/_/g, ".").replace(/[0]/g, "(").replace(/[9]/g, ")");
 									arr[this.getAttribute("data-rtc") - 1].k = calculateK(this.childNodes[2].innerHTML - 1, this.childNodes[0].innerHTML, this.getAttribute("data-posInitial"), estados.indexOf(arr[this.getAttribute("data-rtc") - 1].estadoFinal))
 									console.log(arr[this.getAttribute("data-rtc") - 1])
 								}
@@ -85,7 +85,7 @@ function dragDrop(arr, bool){
 							}
 
 							$(ui.draggable[0]).addClass("noLeft");
-							if (estados.indexOf(event.target.classList[0].replace(/-/g, " ").replace(/_/g, ".")) >= ui.draggable[0].getAttribute("data-posInitial")) {
+							if (estados.indexOf(event.target.classList[0].replace(/-/g, " ").replace(/_/g, ".").replace(/[0]/g, "(").replace(/[9]/g, ")")) >= ui.draggable[0].getAttribute("data-posInitial")) {
 
 								if (document.getElementsByClassName("clone")[(ui.draggable[0].getAttribute("data-rtc") - 1)].style.display == "none"
 									&& !(event.target.children.length >= 1)) {
