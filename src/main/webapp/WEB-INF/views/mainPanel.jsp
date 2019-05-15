@@ -42,7 +42,7 @@
 				estrategia.fechaInicio = fecha.reverse().join("/");
 				
 				fecha =  estrategia.endDate.split("-");
-				fecha[1] = parseInt(fecha[1]) + 1;
+				fecha[1] = parseInt(fecha[1]);
 				fecha = fecha.reverse().join("/");
 				
 				$("#" + estrategia.equipo.replace(/\s/g, "-") + ">.strategyContainer").append(
