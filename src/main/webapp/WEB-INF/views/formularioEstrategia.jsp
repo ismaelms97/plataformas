@@ -85,7 +85,13 @@ $(document).ready(function(){
 		$("#estrategiaFormInputDateInit").val(new Date().getFullYear() + "-" +  new Date().getMonth() + "-" + new Date().getDate());
 		$("#estrategiaFormInputEstado").val("En Curso");
 		$("#estrategiaFormInputEquipoId").val("1");
-		console.log($("#estrategiaFormSelectTeam"));
+		equipos.forEach(function(equipo,i){
+			if(equipo.rol.toLowerCase() != "admin"){
+				$($("#estrategiaFormSelectTeam").children()[i]).prop( "disabled", true ).addClass("disable");
+			}else{
+				$($("#estrategiaFormSelectTeam").children()[i]).prop( "disabled", false ).removeClass("disable");
+			}
+		})
 		
 	function isCorrect(){
 		 
