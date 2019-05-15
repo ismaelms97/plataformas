@@ -2,7 +2,7 @@ var estados;
 var equipo = [];
 var tipoTarea = []
 var inDB = false;
-
+var roles = [];
 
 $(document).ready(function(){
 	estados = [];
@@ -10,7 +10,6 @@ $(document).ready(function(){
 	inputTasks();
 	showListDaily();
 	
-
 	if(document.getElementsByClassName("mainTitle")[0]){
 		document.getElementsByClassName("mainTitle")[0].innerHTML = sessionStorage.getItem('titulo');
 

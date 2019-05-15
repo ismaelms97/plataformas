@@ -15,8 +15,7 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<form:form method="POST" action="/estrategia/pushEstrategia"
-					modelAttribute="estrategia">
+				<form:form method="POST" action="/estrategia/pushEstrategia" modelAttribute="estrategia">
 					<table>
 						<tr>
 							<td><form:label path="nombre" for="estrategiaFormInputName">Nombre</form:label></td>
@@ -86,6 +85,7 @@ $(document).ready(function(){
 		$("#estrategiaFormInputDateInit").val(new Date().getFullYear() + "-" +  new Date().getMonth() + "-" + new Date().getDate());
 		$("#estrategiaFormInputEstado").val("En Curso");
 		$("#estrategiaFormInputEquipoId").val("1");
+		console.log($("#estrategiaFormSelectTeam"));
 		
 	function isCorrect(){
 		 
