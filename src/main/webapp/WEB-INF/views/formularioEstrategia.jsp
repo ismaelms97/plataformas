@@ -92,6 +92,8 @@ $(document).ready(function(){
 				$($("#estrategiaFormSelectTeam").children()[i]).prop( "disabled", false ).removeClass("disable");
 			}
 		})
+		$($("#estrategiaFormSelectTeam").val($("#estrategiaFormSelectTeam > option:not(.disable)")[0].value));
+		console.log($("#estrategiaFormSelectTeam"));
 		
 	function isCorrect(){
 		 
