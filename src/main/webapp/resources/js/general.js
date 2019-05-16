@@ -9,7 +9,7 @@ $(document).ready(function(){
 	rellenarEstados();
 	inputTasks();
 	showListDaily();
-	
+
 	if(document.getElementsByClassName("mainTitle")[0]){
 		document.getElementsByClassName("mainTitle")[0].innerHTML = sessionStorage.getItem('titulo');
 
@@ -85,64 +85,64 @@ function drawTable(array , db) {
 		// Pintamos los RTC
 		drawRTC(array, i, db);
 	}
-	
-	
-	
+
+
+
 	if(db){
 		inDB = true;
 		console.log(inDailys);
 		console.log(array)
-		
+
 		if(inDailys.length > 0){
 			chooseDaily();
 			equipo = owners(inTasks);	
 			filtering();
 			console.log(equipo)
 		}
-		
+
 		for (var j = 0; j < array.length; j++) {
 			if(array[j].estadoActual && array[j].estadoActual.trim() != ""){
 				var complejidad =  array[j].complejidad != 0 ? array[j].complejidad-1 : array[j].complejidad;
-				
+
 				var tam = array[j].tamano;
-				
+
 				var estadoInit = estados.indexOf(array[j].estado.toLowerCase());
-				
+
 				var estadoActual = estados.indexOf(array[j].estadoActual.toLowerCase());
-				
+
 				array[j].k = calculateK(complejidad, tam, estadoInit, estadoActual);
 				console.log(array[j].k)
 			}else{
 				array[j].k = 0;
 			}
 		}
-		
+
 		if(equipo.length > 1 && equipo[0].nombre != "" && tasks.length <= 0){
 			drawTeamUsers(equipo, false);
 		}
-		
+
 
 		// CLON ESTADO FINAL RECOGIDO DE BASE DE DATOS
 		var rect = document.getElementsByClassName("rect");
-		
-			for (var i = 0; i < rect.length; i++) {
-				var el = rect[i];
-				var cln = $(el).clone();
-				cln.attr("class", "clone orange");
-				console.log("EL", $(el).parent().siblings("."+array[i].estadoFinal.replace(/\s/g, "-").replace(/[\.]/g,  "_").replace(/[(]/g, "0").replace(/[)]/g, "9")))
-				console.log(array[i].estadoFinal.replace(/\s/g, "-").replace(/[\.]/g,  "_").replace(/[(]/g, "0").replace(/[)]/g, "9"));
-				$(el).parent().siblings("."+array[i].estadoFinal.replace(/\s/g, "-").replace(/[\.]/g,  "_").replace(/[(]/g, "0").replace(/[)]/g, "9")).append(cln);
-				$(cln).css("display", "inline-block");
-			}
-		
+
+		for (var i = 0; i < rect.length; i++) {
+			var el = rect[i];
+			var cln = $(el).clone();
+			cln.attr("class", "clone orange");
+			console.log("EL", $(el).parent().siblings("."+array[i].estadoFinal.replace(/\s/g, "-").replace(/[\.]/g,  "_").replace(/[(]/g, "0").replace(/[)]/g, "9")))
+			console.log(array[i].estadoFinal.replace(/\s/g, "-").replace(/[\.]/g,  "_").replace(/[(]/g, "0").replace(/[)]/g, "9"));
+			$(el).parent().siblings("."+array[i].estadoFinal.replace(/\s/g, "-").replace(/[\.]/g,  "_").replace(/[(]/g, "0").replace(/[)]/g, "9")).append(cln);
+			$(cln).css("display", "inline-block");
+		}
+
 	} else {
-		
+
 		for (var i = 0; i < array.length; i++) {
 			if(array[i].modified){
 				var el = document.getElementsByClassName("rect")[i];
 				var cln = $(el).clone();
 				cln.attr("class", "rect orange");
-			
+
 				if($(el).parent().siblings("."+array[i].estadoFinal.replace(/\s/g, "-").replace(/[\.]/g,  "_").replace(/[(]/g, "0").replace(/[)]/g, "9")).length != 0){
 					$(el).parent().siblings("."+array[i].estadoFinal.replace(/\s/g, "-").replace(/[\.]/g,  "_").replace(/[(]/g, "0").replace(/[)]/g, "9")).append(cln);
 					document.getElementsByClassName("clone")[i].setAttribute("style", 'display: inline-block')
@@ -308,5 +308,46 @@ function verDetallesRTC(array, i){
 function emptyTable(){
 	for (var j = $("TR").length -1; j > 0 ; j--) {
 		$("TR")[j].remove();
+	}
+}
+
+
+function exportToXLS(){
+	if(inTasks.length == 0){
+		estrategia = new Object();
+		estrategia.tareas = [];
+
+		tasks.forEach(task => {
+			if (task.modified) {
+				estrategia.tareas.push(task);
+			}
+		});
+		
+		var listObjectToExport = [];
+		estrategia.tareas.forEach(task => {
+
+			var ObjectToExport  = new Object();
+			ObjectToExport.id = task.id;
+			ObjectToExport.Tipo = task.tipo;
+			ObjectToExport.PrioridadCBK = task.prioridad;
+			ObjectToExport.Resumen = task.resumen;
+			ObjectToExport.Peticionario = task.peticionario;
+			ObjectToExport.PropiedadDe = task.propiedad;
+			ObjectToExport.Estado = task.estadoActual;
+			ObjectToExport.EstadoFinal = task.estadoFinal;
+			ObjectToExport.Complejidad = task.complejidad;
+			ObjectToExport.Tamaño = task.tamano;
+
+			task.relevante == "Sí" ?  ObjectToExport.Relevante = "Sí" : ObjectToExport.Relevante = "No";
+			task.urgente == "Sí" ?  ObjectToExport.Urgente = "Sí" : ObjectToExport.Urgente = "No";
+
+			ObjectToExport.Planificado_Para = task.planificado;	
+
+			listObjectToExport.push(ObjectToExport);
+
+		})
+
+		var xls = new XlsExport(listObjectToExport, sessionStorage.getItem('titulo'));
+		xls.exportToXLS(sessionStorage.getItem('titulo')+'.xls');
 	}
 }

@@ -9,7 +9,7 @@ try{
 /**
  * Función Para habilitar el drag & Drop en toda la página
  * 
- * @param arr   Array en la quq modificaremos al mover
+ * @param arr   Array que modificaremos y usaremopara mover
  * @param bool  Falso unicamente cuando vas a ver daily
  * 
  */
@@ -146,22 +146,22 @@ function saveData() {
 
 		var tasksToString = "";
 
-		var listObjectToExport = [];
+//		var listObjectToExport = [];
 
 
 		strategy.tasks.forEach(task => {
 
-			var ObjectToExport  = new Object();
-			ObjectToExport.RTC = task.id;
-			ObjectToExport.Tipo = task.tipo;
-			ObjectToExport.Estado = task.estadoActual;
-			ObjectToExport.EstadoFinal = task.estadoFinal;
-			ObjectToExport.Prioridad = task.prioridad;
-			ObjectToExport.Resumen = task.resumen;
-			ObjectToExport.Tamaño = task.tamano;
-			ObjectToExport.Complejidad = task.complejidad;
-			ObjectToExport.Propiedad = task.propiedad;
-			ObjectToExport.Peticionario = task.peticionario;
+//			var ObjectToExport  = new Object();
+//			ObjectToExport.id = task.id;
+//			ObjectToExport.Tipo = task.tipo;
+//			ObjectToExport.PrioridadCBK = task.prioridad;
+//			ObjectToExport.Resumen = task.resumen;
+//			ObjectToExport.Peticionario = task.peticionario;
+//			ObjectToExport.PropiedadDe = task.propiedad;
+//			ObjectToExport.Estado = task.estadoActual;
+//			ObjectToExport.EstadoFinal = task.estadoFinal;
+//			ObjectToExport.Complejidad = task.complejidad;
+//			ObjectToExport.Tamaño = task.tamano;
 
 			tasksToString += "RTC:" + task.id + "--";
 			tasksToString += "Tipo:" + task.tipo + "--";
@@ -176,25 +176,25 @@ function saveData() {
 
 			if(task.relevante == "Sí"){
 
-				ObjectToExport.Relevante = "Sí";
+//				ObjectToExport.Relevante = "Sí";
 
 				tasksToString += "relevante:true--";
 			} else {
 
-				ObjectToExport.Relevante = "No";
+//				ObjectToExport.Relevante = "No";
 				tasksToString += "relevante:false--";
 			}
 
 			if(task.urgente == "Sí"){
-				ObjectToExport.Urgente = "Sí";
+//				ObjectToExport.Urgente = "Sí";
 				tasksToString += "urgente:true--";
 			} else {
-				ObjectToExport.Urgente = "No";				
+//				ObjectToExport.Urgente = "No";				
 				tasksToString += "urgente:false--";
 			}
-			ObjectToExport.Planificado = task.planificado;	
+//			ObjectToExport.Planificado_Para = task.planificado;	
 			tasksToString += "planificado:" + task.planificado + "qwer" ;
-			listObjectToExport.push(ObjectToExport);
+//			listObjectToExport.push(ObjectToExport);
 		});
 
 		tasksToString = tasksToString.substring(0, tasksToString.length - 4);
@@ -231,8 +231,9 @@ function saveData() {
 			}
 		});
 		
-		var xls = new XlsExport(listObjectToExport, sessionStorage.getItem('titulo'));
-		xls.exportToXLS(sessionStorage.getItem('titulo')+'.xls');
+		
+//		var xls = new XlsExport(listObjectToExport, sessionStorage.getItem('titulo'));
+//		xls.exportToXLS(sessionStorage.getItem('titulo')+'.xls');
 
 	} else {
 
@@ -279,7 +280,7 @@ function saveData() {
 }
 
 /**
- * Función. Como indica su nombre habilita el boton de envio, que esta vinculado con la anterior función
+ * Como indica su nombre habilita el boton de envio, está vinculado con la anterior función
  * 
  */
 function habilitarBotonEnvio() {
