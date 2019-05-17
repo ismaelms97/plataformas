@@ -344,9 +344,13 @@ function exportToXLS(){
 		ObjectToExport.Resumen = task.resumen;
 		ObjectToExport.Peticionario = task.peticionario;
 		ObjectToExport.Propiedad_De = task.propiedad;
-		ObjectToExport.Estado = task.estadoActual;
 		
-		if(task.estadoActual) ObjectToExport.Estado_Actual = task.estadoActual;
+		if(task.estadoActual) {
+			ObjectToExport.Estado = task.estado;
+			ObjectToExport.Estado_Actual = task.estadoActual;
+		}else{
+			ObjectToExport.Estado = task.estadoActual;
+		}
 		
 		ObjectToExport.Estado_Final = task.estadoFinal;
 		ObjectToExport.Complejidad = task.complejidad;

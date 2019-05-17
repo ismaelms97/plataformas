@@ -129,7 +129,7 @@
 
 				$(".options").click(function(e){
 					if(!e.target.parentElement.parentElement.previousSibling.classList.contains("disabled")){ 
-						sessionStorage.setItem('titulo', e.target.parentElement.parentElement.previousSibling.innerHTML.substring(0, e.target.parentElement.parentElement.previousSibling.innerHTML.indexOf("Inicio")).trim());
+						sessionStorage.setItem('titulo', e.target.parentElement.parentElement.previousSibling.innerHTML.substring(8, e.target.parentElement.parentElement.previousSibling.innerHTML.indexOf("</big>")).trim());
 						console.log(sessionStorage.getItem('titulo'));
 					}
 				});
