@@ -10,20 +10,28 @@
 <body>
 	<div class="parent cartas">
 
-		<c:forEach items="${equipos}" var="team">
+		<c:forEach items="${roles}" var="rol" varStatus="item">
+			<script>
+ 	  			roles.push("${rol}");
+ 	  	
+ 	  		</script>
+		</c:forEach>
+
+		<c:forEach items="${equipos}" var="team" varStatus="item">
 			<script>;
 			var eq = "${team}".split("=");
 			var equipo = new Object();
 			equipo.id = eq[0];
-			equipo.name= eq[1];
+			equipo.name = eq[1];
+			console.log("${item.index}")
+			equipo.rol = roles["${item.index}"];
 			$(".cartas ").append('<div id="'+ equipo.name.replace(/\s/g, "-") +'" class="strategyTeams"><span class="teamName">'+ equipo.name +'</span><div class="strategyContainer"></div></div><br>'); 
 			equipos.push(equipo);
 			</script>
-					
-			
+
+
 		</c:forEach>
-		<c:forEach items="${listaEstrategia}" var="estrategia"
-			varStatus="item">
+		<c:forEach items="${listaEstrategia}" var="estrategia" varStatus="item">
 			<script>
 				var estrategia = new Object();
 				estrategia.id = "${estrategia.id}";
@@ -42,12 +50,12 @@
 				estrategia.fechaInicio = fecha.reverse().join("/");
 				
 				fecha =  estrategia.endDate.split("-");
-				fecha[1] = parseInt(fecha[1]) + 1;
+				fecha[1] = parseInt(fecha[1]);
 				fecha = fecha.reverse().join("/");
 				
 				$("#" + estrategia.equipo.replace(/\s/g, "-") + ">.strategyContainer").append(
 						'<a id="'+estrategia.id+'" class="a" data-index= "'+ ${item.index} +'">'+
-						'<div class="estartegiasCard">'+ nombre +'<br>Inicio: <b>'+estrategia.fechaInicio+'</b><br>Fin: <b>'+fecha+'</b></div>'+
+						'<div class="estartegiasCard">'+ nombre.big().bold() +'<br>Inicio: <b>'+estrategia.fechaInicio+'</b><br>Fin: <b>'+fecha+'</b></div>'+
 					'<div class="divOptions">'+
 						'<form action="/estrategia/findEstrategia" method="post">'+
 						'<input  type="hidden" name="id" value="'+estrategia.id+'">'+
@@ -60,7 +68,7 @@
 					'</div></a>');
 			</script>
 		</c:forEach>
- 
+
 		<a data-toggle="modal" data-target="#estrategiaForm">
 			<div class="estartegiasCard">Nueva Estrategia</div>
 		</a>

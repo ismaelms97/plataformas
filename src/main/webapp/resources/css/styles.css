@@ -345,6 +345,11 @@ form{
    75%  {max-height: 30px;}
    100% {max-height: 40px; color:#eef2f0;}
 }
+.disable{
+	background-color:#d5dbd2;
+	opacity: 90% !important;
+	pointer-events:none !important;
+}
 
 /*########### MODAL ###########*/
 .detailsSubtitle{

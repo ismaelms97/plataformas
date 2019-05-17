@@ -15,8 +15,7 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<form:form method="POST" action="/estrategia/pushEstrategia"
-					modelAttribute="estrategia">
+				<form:form method="POST" action="/estrategia/pushEstrategia" modelAttribute="estrategia">
 					<table>
 						<tr>
 							<td><form:label path="nombre" for="estrategiaFormInputName">Nombre</form:label></td>
@@ -86,6 +85,14 @@ $(document).ready(function(){
 		$("#estrategiaFormInputDateInit").val(new Date().getFullYear() + "-" +  new Date().getMonth() + "-" + new Date().getDate());
 		$("#estrategiaFormInputEstado").val("En Curso");
 		$("#estrategiaFormInputEquipoId").val("1");
+		equipos.forEach(function(equipo,i){
+			if(equipo.rol.toLowerCase() != "admin"){
+				$($("#estrategiaFormSelectTeam").children()[i]).prop( "disabled", true ).addClass("disable");
+			}else{
+				$($("#estrategiaFormSelectTeam").children()[i]).prop( "disabled", false ).removeClass("disable");
+			}
+		})
+		$($("#estrategiaFormSelectTeam").val($("#estrategiaFormSelectTeam > option:not(.disable)")[0].value));
 		
 	function isCorrect(){
 		 

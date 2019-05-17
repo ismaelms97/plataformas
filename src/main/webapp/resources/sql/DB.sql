@@ -104,7 +104,7 @@ daily_id int  NOT NULL,
 tarea_id int  NOT NULL,
 estadoActual varchar(50) NOT NULL,
 subEstadoActual varchar (50) NOT NULL,
-propiedad   varchar(25) not null,
+propiedad   varchar(100) not null,
 primary Key (daily_id,tarea_id),
 CONSTRAINT tarea_id FOREIGN KEY (tarea_id) REFERENCES tarea (id) ON DELETE CASCADE,
 CONSTRAINT daily_id FOREIGN KEY (daily_id) REFERENCES daily (id) ON DELETE CASCADE
