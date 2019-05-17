@@ -328,7 +328,7 @@ function exportToXLS(){
 		
 	}else{
 
-		tasks.forEach(task => {
+		inTasks.forEach(task => {
 				estrategia.tareas.push(task);
 		});
 	}
@@ -343,12 +343,12 @@ function exportToXLS(){
 		ObjectToExport.PrioridadCBK = task.prioridad;
 		ObjectToExport.Resumen = task.resumen;
 		ObjectToExport.Peticionario = task.peticionario;
-		ObjectToExport.PropiedadDe = task.propiedad;
+		ObjectToExport.Propiedad_De = task.propiedad;
 		ObjectToExport.Estado = task.estadoActual;
 		
 		if(task.estadoActual) ObjectToExport.Estado_Actual = task.estadoActual;
 		
-		ObjectToExport.EstadoFinal = task.estadoFinal;
+		ObjectToExport.Estado_Final = task.estadoFinal;
 		ObjectToExport.Complejidad = task.complejidad;
 		ObjectToExport.Tamaño = task.tamano;
 
