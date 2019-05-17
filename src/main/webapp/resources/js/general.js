@@ -9,7 +9,9 @@ $(document).ready(function(){
 	rellenarEstados();
 	inputTasks();
 	showListDaily();
-
+	
+	 $('[data-toggle="tooltip"]').tooltip()
+	 
 	if(document.getElementsByClassName("mainTitle")[0]){
 		document.getElementsByClassName("mainTitle")[0].innerHTML = sessionStorage.getItem('titulo');
 

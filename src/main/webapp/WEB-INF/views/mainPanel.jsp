@@ -54,7 +54,7 @@
 				fecha = fecha.reverse().join("/");
 				
 				$("#" + estrategia.equipo.replace(/\s/g, "-") + ">.strategyContainer").append(
-						'<a id="'+estrategia.id+'" class="a" data-index= "'+ ${item.index} +'">'+
+						'<a id="'+estrategia.id+'" class="a" data-index= "'+ ${item.index} +'" '+/*'data-toggle="tooltip" data-placement="top"'+*/' title="'+ nombre +'">'+
 						'<div class="estartegiasCard">'+ nombre.big().bold() +'<br>Inicio: <b>'+estrategia.fechaInicio+'</b><br>Fin: <b>'+fecha+'</b></div>'+
 					'<div class="divOptions">'+
 						'<form action="/estrategia/findEstrategia" method="post">'+
