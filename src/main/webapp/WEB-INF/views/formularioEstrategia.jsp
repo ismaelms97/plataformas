@@ -93,7 +93,6 @@ $(document).ready(function(){
 			}
 		})
 		$($("#estrategiaFormSelectTeam").val($("#estrategiaFormSelectTeam > option:not(.disable)")[0].value));
-		console.log($("#estrategiaFormSelectTeam"));
 		
 	function isCorrect(){
 		 
