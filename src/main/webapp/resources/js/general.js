@@ -111,7 +111,7 @@ function drawTable(array , db) {
 				var estadoActual = estados.indexOf(array[j].estadoActual.toLowerCase());
 
 				array[j].k = calculateK(complejidad, tam, estadoInit, estadoActual);
-				console.log(array[j].k)
+				console.log("K", array[j].k)
 			}else{
 				array[j].k = 0;
 			}
@@ -129,8 +129,6 @@ function drawTable(array , db) {
 			var el = rect[i];
 			var cln = $(el).clone();
 			cln.attr("class", "clone orange");
-			console.log("EL", $(el).parent().siblings("."+array[i].estadoFinal.replace(/\s/g, "-").replace(/[\.]/g,  "_").replace(/[(]/g, "0").replace(/[)]/g, "9")))
-			console.log(array[i].estadoFinal.replace(/\s/g, "-").replace(/[\.]/g,  "_").replace(/[(]/g, "0").replace(/[)]/g, "9"));
 			$(el).parent().siblings("."+array[i].estadoFinal.replace(/\s/g, "-").replace(/[\.]/g,  "_").replace(/[(]/g, "0").replace(/[)]/g, "9")).append(cln);
 			$(cln).css("display", "inline-block");
 		}
@@ -311,43 +309,59 @@ function emptyTable(){
 	}
 }
 
-
+/**
+ * Exportamos a excel todo el objeto de tareas
+ * @returns
+ */
 function exportToXLS(){
+	estrategia = new Object();
+	estrategia.tareas = [];
+	
+	
 	if(inTasks.length == 0){
-		estrategia = new Object();
-		estrategia.tareas = [];
-
+		
 		tasks.forEach(task => {
 			if (task.modified) {
 				estrategia.tareas.push(task);
 			}
 		});
 		
-		var listObjectToExport = [];
-		estrategia.tareas.forEach(task => {
+	}else{
 
-			var ObjectToExport  = new Object();
-			ObjectToExport.id = task.id;
-			ObjectToExport.Tipo = task.tipo;
-			ObjectToExport.PrioridadCBK = task.prioridad;
-			ObjectToExport.Resumen = task.resumen;
-			ObjectToExport.Peticionario = task.peticionario;
-			ObjectToExport.PropiedadDe = task.propiedad;
-			ObjectToExport.Estado = task.estadoActual;
-			ObjectToExport.EstadoFinal = task.estadoFinal;
-			ObjectToExport.Complejidad = task.complejidad;
-			ObjectToExport.Tamaño = task.tamano;
-
-			task.relevante == "Sí" ?  ObjectToExport.Relevante = "Sí" : ObjectToExport.Relevante = "No";
-			task.urgente == "Sí" ?  ObjectToExport.Urgente = "Sí" : ObjectToExport.Urgente = "No";
-
-			ObjectToExport.Planificado_Para = task.planificado;	
-
-			listObjectToExport.push(ObjectToExport);
-
-		})
-
-		var xls = new XlsExport(listObjectToExport, sessionStorage.getItem('titulo'));
-		xls.exportToXLS(sessionStorage.getItem('titulo')+'.xls');
+		tasks.forEach(task => {
+				estrategia.tareas.push(task);
+		});
 	}
+	
+	var listObjectToExport = [];
+	
+	estrategia.tareas.forEach(task => {
+		
+		var ObjectToExport  = new Object();
+		ObjectToExport.id = task.id;
+		ObjectToExport.Tipo = task.tipo;
+		ObjectToExport.PrioridadCBK = task.prioridad;
+		ObjectToExport.Resumen = task.resumen;
+		ObjectToExport.Peticionario = task.peticionario;
+		ObjectToExport.PropiedadDe = task.propiedad;
+		ObjectToExport.Estado = task.estadoActual;
+		
+		if(task.estadoActual) ObjectToExport.Estado_Actual = task.estadoActual;
+		
+		ObjectToExport.EstadoFinal = task.estadoFinal;
+		ObjectToExport.Complejidad = task.complejidad;
+		ObjectToExport.Tamaño = task.tamano;
+
+		task.relevante == "Sí" ?  ObjectToExport.Relevante = "Sí" : ObjectToExport.Relevante = "No";
+		task.urgente == "Sí" ?  ObjectToExport.Urgente = "Sí" : ObjectToExport.Urgente = "No";
+
+		ObjectToExport.Planificado_Para = task.planificado;	
+
+		listObjectToExport.push(ObjectToExport);
+
+	})
+
+	var xls = new XlsExport(listObjectToExport, sessionStorage.getItem('titulo'));
+	xls.exportToXLS(sessionStorage.getItem('titulo')+'.xls');
+	
 }
