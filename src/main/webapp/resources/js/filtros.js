@@ -241,7 +241,6 @@ function chooseDaily(){
 	
 	daily == "" ? dateSelected = inDailys[0].fecha : dateSelected = daily;
 	
-	console.log(dateSelected);
 	inDailys.forEach(function(daily){
 		if(daily.fecha == dateSelected){
 			arr.forEach(function(task){
@@ -264,7 +263,6 @@ function chooseDaily(){
  */
 function fillTypefilter(array){
 	array.forEach(function(task){
-		console.log(task)
 		if(!tipoTarea.includes(task.tipo)){
 			tipoTarea.push(task.tipo);
 		}

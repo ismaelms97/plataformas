@@ -46,7 +46,6 @@ function dragDrop(arr, bool){
 									arr[this.getAttribute("data-rtc") - 1].modified = true;
 									arr[this.getAttribute("data-rtc") - 1].estadoFinal = this.parentElement.classList[0].replace(/-/g, " ").replace(/_/g, ".").replace(/[0]/g, "(").replace(/[9]/g, ")");
 									arr[this.getAttribute("data-rtc") - 1].k = calculateK(this.childNodes[2].innerHTML - 1, this.childNodes[0].innerHTML, this.getAttribute("data-posInitial"), estados.indexOf(arr[this.getAttribute("data-rtc") - 1].estadoFinal))
-									console.log(arr[this.getAttribute("data-rtc") - 1])
 								}
 							}
 
@@ -428,6 +427,7 @@ function drawTeamUsers(array, bool){
 	}
 	detallesUsuarios(array);
 	moveUsers(bool);
+	
 }
 
 /**
@@ -458,10 +458,11 @@ function detallesUsuarios(array){
 	var d = document.getElementsByClassName('chip');
 	
 	for (var i = 0; i < d.length; i++) {
+		d[i].children[0].ondragstart = function() { return false; };
+		
 		d[i].addEventListener("click", function(){
 			$("#detallesUsuarios").modal("show");
 			var usuario = array.find(user => user.nombre.toLowerCase() == this.children[1].innerHTML.toLowerCase());
-			console.log(usuario);
 			document.getElementById("detallesNombre").innerHTML = usuario.nombre;
 			document.getElementById("detallesTareas").innerHTML = usuario.tareas;
 			document.getElementById("detallesKTotalPorUsuario").innerHTML = usuario.k;
