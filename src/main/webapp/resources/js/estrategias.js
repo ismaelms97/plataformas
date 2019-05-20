@@ -417,7 +417,7 @@ function drawTeamUsers(array, bool){
 		
 		var txt = '<div class="chip">'
 			+'<img src="https://addons.thunderbird.net/static//img/zamboni/anon_user.png" alt="Person" width="96" height="300"><span class="name">'
-			+ toCamelCase(array[i].nombre.toLowerCase()) +'</span> <br>Tareas: ' + array[i].tareas + ' | K: '+ array[i].k.toFixed(2) +' </div>';
+			+ toPascalCase(array[i].nombre.toLowerCase()) +'</span> <br>Tareas: ' + array[i].tareas + ' | K: '+ array[i].k.toFixed(2) +' </div>';
 		
 		if(array.length > 8 && i + 1 == 8){
 			txt += "<br>";
