@@ -74,7 +74,7 @@ function owners(array){
 					texto += '<input type="checkbox" id="'+ name +'" value="'+ name +'" class="custom-control-input filtros taskPropertyOf">';
 				}
 				
-				texto += '<label class="custom-control-label" for="'+ name +'">'+ toCamelCase(name) +'</label><br> '+
+				texto += '<label class="custom-control-label" for="'+ name +'">'+ toPascalCase(name) +'</label><br> '+
 				'</div>';
 				$("#collapsePropertyOf").children(".card").append(texto);
 
@@ -86,7 +86,7 @@ function owners(array){
 	name = "Sin Propietario".toLowerCase();
 	var texto = '<div class="custom-control custom-checkbox">'+
 	'<input type="checkbox" id="'+ name +'" value="'+ name +'" class="custom-control-input filtros taskPropertyOf">'+
-	'<label class="custom-control-label" for="'+ name +'">'+ toCamelCase(name) +'</label><br> '+
+	'<label class="custom-control-label" for="'+ name +'">'+ toPascalCase(name) +'</label><br> '+
 	'</div>';
 	$("#collapsePropertyOf").children(".card").append(texto);
 
@@ -99,7 +99,7 @@ function owners(array){
  * @param str String to transform to Camel Case
  * @returns
  */
-function toCamelCase(str) {
+function toPascalCase(str) {
 
 	str = str.toLowerCase().split(' ');
 	for (var i = 0; i < str.length; i++) {
@@ -241,7 +241,6 @@ function chooseDaily(){
 	
 	daily == "" ? dateSelected = inDailys[0].fecha : dateSelected = daily;
 	
-	console.log(dateSelected);
 	inDailys.forEach(function(daily){
 		if(daily.fecha == dateSelected){
 			arr.forEach(function(task){
@@ -264,7 +263,6 @@ function chooseDaily(){
  */
 function fillTypefilter(array){
 	array.forEach(function(task){
-		console.log(task)
 		if(!tipoTarea.includes(task.tipo)){
 			tipoTarea.push(task.tipo);
 		}
@@ -281,7 +279,7 @@ function fillTypefilter(array){
 
 		text += '<input type="checkbox" id="'+i+'" value="'+i+'" class="custom-control-input filtros taskType">';
 
-		text += '<label class="custom-control-label" for="'+i+'">'+toCamelCase(i)+'</label><br></div>';
+		text += '<label class="custom-control-label" for="'+i+'">'+toPascalCase(i)+'</label><br></div>';
 
 		document.querySelectorAll("#collapseType .card")[0].innerHTML += text;
 	})

@@ -23,7 +23,6 @@
 			var equipo = new Object();
 			equipo.id = eq[0];
 			equipo.name = eq[1];
-			console.log("${item.index}")
 			equipo.rol = roles["${item.index}"];
 			$(".cartas ").append('<div id="'+ equipo.name.replace(/\s/g, "-") +'" class="strategyTeams"><span class="teamName">'+ equipo.name +'</span><div class="strategyContainer"></div></div><br>'); 
 			equipos.push(equipo);
@@ -31,7 +30,8 @@
 
 
 		</c:forEach>
-		<c:forEach items="${listaEstrategia}" var="estrategia" varStatus="item">
+		<c:forEach items="${listaEstrategia}" var="estrategia"
+			varStatus="item">
 			<script>
 				var estrategia = new Object();
 				estrategia.id = "${estrategia.id}";
@@ -54,7 +54,7 @@
 				fecha = fecha.reverse().join("/");
 				
 				$("#" + estrategia.equipo.replace(/\s/g, "-") + ">.strategyContainer").append(
-						'<a id="'+estrategia.id+'" class="a" data-index= "'+ ${item.index} +'">'+
+						'<a id="'+estrategia.id+'" class="a" data-index= "'+ ${item.index} +'" '+/*'data-toggle="tooltip" data-placement="top"'+*/' title="'+ nombre +'">'+
 						'<div class="estartegiasCard">'+ nombre.big().bold() +'<br>Inicio: <b>'+estrategia.fechaInicio+'</b><br>Fin: <b>'+fecha+'</b></div>'+
 					'<div class="divOptions">'+
 						'<form action="/estrategia/findEstrategia" method="post">'+
@@ -75,7 +75,7 @@
 	</div>
 	<script>
 		checkStatus();
-		 console.log("Equipos", equipos);
+		console.log("Equipos", equipos);
  		$(document).ready(function() {
  			$("a:not(.a)").on("click",function(){
  				$(".options").hide();
@@ -130,7 +130,6 @@
 				$(".options").click(function(e){
 					if(!e.target.parentElement.parentElement.previousSibling.classList.contains("disabled")){ 
 						sessionStorage.setItem('titulo', e.target.parentElement.parentElement.previousSibling.innerHTML.substring(8, e.target.parentElement.parentElement.previousSibling.innerHTML.indexOf("</big>")).trim());
-						console.log(sessionStorage.getItem('titulo'));
 					}
 				});
 				

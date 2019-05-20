@@ -9,7 +9,9 @@ $(document).ready(function(){
 	rellenarEstados();
 	inputTasks();
 	showListDaily();
-
+	
+	 $('[data-toggle="tooltip"]').tooltip()
+	 
 	if(document.getElementsByClassName("mainTitle")[0]){
 		document.getElementsByClassName("mainTitle")[0].innerHTML = sessionStorage.getItem('titulo');
 
@@ -90,14 +92,12 @@ function drawTable(array , db) {
 
 	if(db){
 		inDB = true;
-		console.log(inDailys);
-		console.log(array)
 
 		if(inDailys.length > 0){
 			chooseDaily();
 			equipo = owners(inTasks);	
 			filtering();
-			console.log(equipo)
+			console.log("Equipo", equipo)
 		}
 
 		for (var j = 0; j < array.length; j++) {
@@ -180,7 +180,7 @@ function drawRTC(array, pos, db) {
 				}
 			} else {
 				try{
-					console.log("Funciona");
+					console.log("Try");
 					if (array[pos].estadoActual.toLowerCase().startsWith(estados[j])) {
 						estadoActual = j
 					}

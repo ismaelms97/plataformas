@@ -99,7 +99,7 @@ $(document).ready(function(){
 		if(fechaCorrecta && nombreCorrecto){
 			  $("#crearEstrategia").prop( "disabled", false );
 			  $("#crearEstrategia").click(function(){
-				 sessionStorage.setItem('titulo', toCamelCase(document.getElementById("estrategiaFormInputName").value.trim()));
+				 sessionStorage.setItem('titulo', toPascalCase(document.getElementById("estrategiaFormInputName").value.trim()));
 			  })
 			
 		  }else{

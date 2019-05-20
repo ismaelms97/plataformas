@@ -46,7 +46,6 @@ function dragDrop(arr, bool){
 									arr[this.getAttribute("data-rtc") - 1].modified = true;
 									arr[this.getAttribute("data-rtc") - 1].estadoFinal = this.parentElement.classList[0].replace(/-/g, " ").replace(/_/g, ".").replace(/[0]/g, "(").replace(/[9]/g, ")");
 									arr[this.getAttribute("data-rtc") - 1].k = calculateK(this.childNodes[2].innerHTML - 1, this.childNodes[0].innerHTML, this.getAttribute("data-posInitial"), estados.indexOf(arr[this.getAttribute("data-rtc") - 1].estadoFinal))
-									console.log(arr[this.getAttribute("data-rtc") - 1])
 								}
 							}
 
@@ -146,22 +145,7 @@ function saveData() {
 
 		var tasksToString = "";
 
-//		var listObjectToExport = [];
-
-
 		strategy.tasks.forEach(task => {
-
-//			var ObjectToExport  = new Object();
-//			ObjectToExport.id = task.id;
-//			ObjectToExport.Tipo = task.tipo;
-//			ObjectToExport.PrioridadCBK = task.prioridad;
-//			ObjectToExport.Resumen = task.resumen;
-//			ObjectToExport.Peticionario = task.peticionario;
-//			ObjectToExport.PropiedadDe = task.propiedad;
-//			ObjectToExport.Estado = task.estadoActual;
-//			ObjectToExport.EstadoFinal = task.estadoFinal;
-//			ObjectToExport.Complejidad = task.complejidad;
-//			ObjectToExport.Tamaño = task.tamano;
 
 			tasksToString += "RTC:" + task.id + "--";
 			tasksToString += "Tipo:" + task.tipo + "--";
@@ -176,25 +160,22 @@ function saveData() {
 
 			if(task.relevante == "Sí"){
 
-//				ObjectToExport.Relevante = "Sí";
-
 				tasksToString += "relevante:true--";
 			} else {
 
-//				ObjectToExport.Relevante = "No";
 				tasksToString += "relevante:false--";
 			}
 
 			if(task.urgente == "Sí"){
-//				ObjectToExport.Urgente = "Sí";
+
 				tasksToString += "urgente:true--";
 			} else {
-//				ObjectToExport.Urgente = "No";				
+			
 				tasksToString += "urgente:false--";
 			}
-//			ObjectToExport.Planificado_Para = task.planificado;	
+
 			tasksToString += "planificado:" + task.planificado + "qwer" ;
-//			listObjectToExport.push(ObjectToExport);
+
 		});
 
 		tasksToString = tasksToString.substring(0, tasksToString.length - 4);
@@ -231,9 +212,6 @@ function saveData() {
 			}
 		});
 		
-		
-//		var xls = new XlsExport(listObjectToExport, sessionStorage.getItem('titulo'));
-//		xls.exportToXLS(sessionStorage.getItem('titulo')+'.xls');
 
 	} else {
 
@@ -439,7 +417,7 @@ function drawTeamUsers(array, bool){
 		
 		var txt = '<div class="chip">'
 			+'<img src="https://addons.thunderbird.net/static//img/zamboni/anon_user.png" alt="Person" width="96" height="300"><span class="name">'
-			+ toCamelCase(array[i].nombre.toLowerCase()) +'</span> <br>Tareas: ' + array[i].tareas + ' | K: '+ array[i].k.toFixed(2) +' </div>';
+			+ toPascalCase(array[i].nombre.toLowerCase()) +'</span> <br>Tareas: ' + array[i].tareas + ' | K: '+ array[i].k.toFixed(2) +' </div>';
 		
 		if(array.length > 8 && i + 1 == 8){
 			txt += "<br>";
@@ -449,6 +427,7 @@ function drawTeamUsers(array, bool){
 	}
 	detallesUsuarios(array);
 	moveUsers(bool);
+	
 }
 
 /**
@@ -479,10 +458,11 @@ function detallesUsuarios(array){
 	var d = document.getElementsByClassName('chip');
 	
 	for (var i = 0; i < d.length; i++) {
+		d[i].children[0].ondragstart = function() { return false; };
+		
 		d[i].addEventListener("click", function(){
 			$("#detallesUsuarios").modal("show");
 			var usuario = array.find(user => user.nombre.toLowerCase() == this.children[1].innerHTML.toLowerCase());
-			console.log(usuario);
 			document.getElementById("detallesNombre").innerHTML = usuario.nombre;
 			document.getElementById("detallesTareas").innerHTML = usuario.tareas;
 			document.getElementById("detallesKTotalPorUsuario").innerHTML = usuario.k;
