@@ -84,7 +84,6 @@ function drawTable(array , db) {
 				document.getElementsByTagName("TR")[i + 1].appendChild(td);
 			}
 		} 
-		
 		// Pintamos los RTC
 		drawRTC(array, i, db);
 	}
@@ -135,15 +134,13 @@ function drawTable(array , db) {
 		}
 
 	} else {
-		console.log(array)
+
 		for (var i = 0; i < array.length; i++) {
 			if(array[i].modified){
-				
 				var el = document.getElementsByClassName("rect")[i];
 				var cln = $(el).clone();
-				array[i].k = calculateK(complejidad, tam, estadoInit, estadoActual);
 				cln.attr("class", "rect orange");
-				
+
 				if($(el).parent().siblings("."+array[i].estadoFinal.replace(/\s/g, "-").replace(/[\.]/g,  "_").replace(/[(]/g, "0").replace(/[)]/g, "9")).length != 0){
 					$(el).parent().siblings("."+array[i].estadoFinal.replace(/\s/g, "-").replace(/[\.]/g,  "_").replace(/[(]/g, "0").replace(/[)]/g, "9")).append(cln);
 					document.getElementsByClassName("clone")[i].setAttribute("style", 'display: inline-block')
@@ -157,28 +154,6 @@ function drawTable(array , db) {
 
 				$(cln).css("display", "inline-block");
 				document.getElementsByClassName("rect")[i].parentElement.firstChild.remove();
-				
-			}else{
-				
-				if(array[i].estadoActual && array[i].estadoActual.trim() != ""){
-					var complejidad =  array[i].complejidad != 0 ? array[i].complejidad-1 : array[i].complejidad;
-
-					var tam = array[i].tamano;
-
-					var estadoInit = estados.indexOf(inTasks.find(tarea => tarea.id == array[i].id).estado.toLowerCase());
-
-					var estadoActual = estados.indexOf(array[i].estadoActual.toLowerCase());
-
-					array[i].k = calculateK(complejidad, tam, estadoInit, estadoActual);
-				
-				}else{
-					array[j].k = 0;
-				}
-										
-				if(equipo.length > 1 && equipo[0].nombre != "" && tasks.length <= 0){
-					drawTeamUsers(equipo, true);
-				}
-				
 			}
 		}
 	}
@@ -267,7 +242,7 @@ function drawRTC(array, pos, db) {
 
 
 	if(inTasks.length <= 0 && !db){
-				
+
 		var el = document.getElementsByClassName("rect")[pos];
 		var cln = $(el).clone();
 		cln.attr("class", "clone");
