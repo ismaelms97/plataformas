@@ -105,7 +105,10 @@ function dragDrop(arr, bool){
 								}
 
 								tasks.find(tarea => parseInt(tarea.id) === parseInt(event.target.children[0].innerText.split(/[\s\n]+/)[1].trim())).propiedad = user;
-
+								if(inTasks.length > 0){
+									inTasks.find(tarea => parseInt(tarea.id) === parseInt(event.target.children[0].innerText.split(/[\s\n]+/)[1].trim())).propiedad = user;	
+								}
+								
 								$.notify({
 									title: '<strong>Cambio de Propietario</strong>',
 									message: ' en la tarea ' + event.target.children[0].innerText.split(/[\s\n]+/)[1].trim() + '.'
@@ -118,6 +121,7 @@ function dragDrop(arr, bool){
 									},
 									delay: 1000
 								});
+								
 								drawTeamUsers(equipo, true);
 								document.getElementsByClassName("k")[0].innerHTML = "K: " + k.toFixed(2);
 							}
@@ -402,7 +406,7 @@ function exists(arr, val){
  * 
  */
 function drawTeamUsers(array, bool){
-	//k = 0;
+
 	var tArr = "";
 	if(inDB){
 		tArr = "inTasks";
@@ -478,18 +482,17 @@ function detallesUsuarios(array){
  * y calcula la k total del usuario
  * 
  * @param user		Usuario del cual quieres conocer las tareas
- * @param tareas 	La array de tareas
+ * @param arrayTareas 	La array de tareas
  * 
  */
-function getTasksByUser(user, tareas){
+function getTasksByUser(user, arrayTareas){
 	var sum = 0;
 	var count = 0;
 	user.tareasActivo = [];
-	tareas.forEach(function(task){
+	arrayTareas.forEach(function(task){
 		if(task.propiedad.toLowerCase() == user.nombre.toLowerCase()){
 			user.tareasActivo.push(task.id);
 			count++;
-//			user.k += task.k;
 			sum += task.k;
 		}
 		if(user.nombre.toLowerCase() == "sin propietario" && task.propiedad.toLowerCase()  == "unassigned"){

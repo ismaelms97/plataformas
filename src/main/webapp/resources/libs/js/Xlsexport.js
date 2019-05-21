@@ -79,7 +79,7 @@ class XlsExport {
     const colsHead = `<tr>${Object.keys(this._data[0]).map(key => `<td><strong>${key.replace('_', ' ')}</strong></td>`).join('')}</tr>`;
 
     const colsData = this._data.map(obj => [`<tr>
-                ${Object.keys(obj).map(col => `<td><center>${obj[col] ? obj[col] : ''}</center></td>`).join('')}
+                ${Object.keys(obj).map(col => `<td><center>${obj[col] ? toPascalCase(obj[col]) : ''}</center></td>`).join('')}
             </tr>`]) // 'null' values not showed
       .join('');
 

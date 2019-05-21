@@ -123,7 +123,7 @@ var process_wb = (function () {
 				
 				tasks = strategyFilter(tasks);
 				$("div.button").removeClass("disabled");
-				var filtrado = tasks.filter(item => inTasks.find(item2 => item.id === item2.id).propiedad = item.propiedad);
+				tasks.filter(item => inTasks.find(item2 => item.id === item2.id).propiedad = item.propiedad);
 				
 				equipo = owners(tasks);
 			}else{
