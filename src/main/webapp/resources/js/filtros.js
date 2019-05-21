@@ -21,7 +21,6 @@ $(document).ready(function(){
  */
 function filter(array, filtros){
 	
-
 	const filterKeys = Object.keys(filtros);
 	return array.filter(eachObj => {
 		return filterKeys.every(eachKey => {
