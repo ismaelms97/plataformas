@@ -134,27 +134,35 @@ function drawTable(array , db) {
 		}
 
 	} else {
-
+		console.log("Array", array);
 		for (var i = 0; i < array.length; i++) {
-			if(array[i].modified){
-				var el = document.getElementsByClassName("rect")[i];
-				var cln = $(el).clone();
-				cln.attr("class", "rect orange");
-
-				if($(el).parent().siblings("."+array[i].estadoFinal.replace(/\s/g, "-").replace(/[\.]/g,  "_").replace(/[(]/g, "0").replace(/[)]/g, "9")).length != 0){
-					$(el).parent().siblings("."+array[i].estadoFinal.replace(/\s/g, "-").replace(/[\.]/g,  "_").replace(/[(]/g, "0").replace(/[)]/g, "9")).append(cln);
-					document.getElementsByClassName("clone")[i].setAttribute("style", 'display: inline-block')
-
-				} else {
-
-					$(el).parent().append(cln);
-					document.getElementsByClassName("clone")[i].setAttribute("style", 'display: none')
-
-				}
-
-				$(cln).css("display", "inline-block");
-				document.getElementsByClassName("rect")[i].parentElement.firstChild.remove();
-			}
+			
+			array[i].k = calculateK(array[i].complejidad, array[i].tamano,
+					estados.indexOf(inTasks.find(tarea => parseInt(tarea.id) === parseInt(array[i].id)).estado.toLowerCase()),  
+					estados.indexOf(array[i].estadoActual.toLowerCase()));
+			inTasks.find(ta => parseInt(ta.id) === parseInt(array[i].id)).k = array[i].k;
+			console.log("Array[i].k", array[i].k);
+			drawTeamUsers(equipo, false)
+//			if(array[i].modified){
+//				console.log("HOLAAAAAA")
+//				var el = document.getElementsByClassName("rect")[i];
+//				var cln = $(el).clone();
+//				cln.attr("class", "rect orange");
+//
+//				if($(el).parent().siblings("."+array[i].estadoFinal.replace(/\s/g, "-").replace(/[\.]/g,  "_").replace(/[(]/g, "0").replace(/[)]/g, "9")).length != 0){
+//					$(el).parent().siblings("."+array[i].estadoFinal.replace(/\s/g, "-").replace(/[\.]/g,  "_").replace(/[(]/g, "0").replace(/[)]/g, "9")).append(cln);
+//					document.getElementsByClassName("clone")[i].setAttribute("style", 'display: inline-block')
+//
+//				} else {
+//
+//					$(el).parent().append(cln);
+//					document.getElementsByClassName("clone")[i].setAttribute("style", 'display: none')
+//
+//				}
+//
+//				$(cln).css("display", "inline-block");
+//				document.getElementsByClassName("rect")[i].parentElement.firstChild.remove();
+//			}
 		}
 	}
 }

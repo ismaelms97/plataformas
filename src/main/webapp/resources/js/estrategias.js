@@ -14,7 +14,7 @@ try{
  * 
  */
 function dragDrop(arr, bool){
-
+	
 	// Con este codigo conseguimos que se mueva cada tarea unicamente en su eje x, y
 	// a su vez que cuando los dejes en el sitio, cambien de color
 	$(function () {
@@ -51,7 +51,7 @@ function dragDrop(arr, bool){
 
 							habilitarBotonEnvio();
 							drawTeamUsers(equipo, true);
-							document.getElementsByClassName("k")[0].innerHTML = "K: " + k.toFixed(2);
+							
 						},
 					});
 		}
@@ -123,12 +123,13 @@ function dragDrop(arr, bool){
 								});
 								
 								drawTeamUsers(equipo, true);
-								document.getElementsByClassName("k")[0].innerHTML = "K: " + k.toFixed(2);
+//								document.getElementsByClassName("k")[0].innerHTML = "K: " + k.toFixed(2);
 							}
 						}
 					}
 				});
 	})
+	document.getElementsByClassName("k")[0].innerHTML = "K: " + k.toFixed(2);
 }
 
 /**
@@ -408,11 +409,16 @@ function exists(arr, val){
 function drawTeamUsers(array, bool){
 
 	var tArr = "";
-	if(inDB){
+	
+	if(inDB && tasks.length < inTasks.length){
+
 		tArr = "inTasks";
-	} else{
+	} else {
 		tArr = "tasks";
 	}
+	
+	console.log("tarr", tArr);
+	
 	document.getElementsByClassName("teamUsers")[0].innerHTML = "";
 
 	for (var i = 0; i < array.length; i++) {
@@ -539,7 +545,7 @@ function calculateK(comp, tam, estadoInicial, estadoActual){
 	var tamano =  expand({"XXS, 50": 1, "XS, 100": 1.1, "S, 200":1.2, "M, 400": 1.3, "L, 800": 1.4, "XL, 1600": 1.5, "XXL, 3200": 1.6, "XXXL, 6400": 1.7});
 	var complejidad = [1, 5, 20, 50, 100];
 
-	if(parseInt(comp) < 0 || parseInt(tam) <= 0){
+	if(parseInt(comp) < 0 || parseInt(tam) < 0){
 		return 0;
 	}
 
