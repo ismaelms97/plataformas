@@ -545,7 +545,7 @@ function calculateK(comp, tam, estadoInicial, estadoActual){
 	var tamano =  expand({"XXS, 50": 1, "XS, 100": 1.1, "S, 200":1.2, "M, 400": 1.3, "L, 800": 1.4, "XL, 1600": 1.5, "XXL, 3200": 1.6, "XXXL, 6400": 1.7});
 	var complejidad = [1, 5, 20, 50, 100];
 
-	if(parseInt(comp) < 0 || parseInt(tam) < 0){
+	if(parseInt(comp) < 0 || parseInt(tam) <= 0){
 		return 0;
 	}
 

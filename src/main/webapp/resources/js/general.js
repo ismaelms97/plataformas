@@ -135,14 +135,17 @@ function drawTable(array , db) {
 
 	} else {
 		console.log("Array", array);
+		if(inTasks.length > 0 && tasks.length > 0){
 		for (var i = 0; i < array.length; i++) {
 			
-			array[i].k = calculateK(array[i].complejidad, array[i].tamano,
-					estados.indexOf(inTasks.find(tarea => parseInt(tarea.id) === parseInt(array[i].id)).estado.toLowerCase()),  
-					estados.indexOf(array[i].estadoActual.toLowerCase()));
-			inTasks.find(ta => parseInt(ta.id) === parseInt(array[i].id)).k = array[i].k;
-			console.log("Array[i].k", array[i].k);
-			drawTeamUsers(equipo, false)
+				array[i].k = calculateK(array[i].complejidad, array[i].tamano,
+						estados.indexOf(inTasks.find(tarea => parseInt(tarea.id) === parseInt(array[i].id)).estado.toLowerCase()),  
+						estados.indexOf(array[i].estadoActual.toLowerCase()));
+				inTasks.find(ta => parseInt(ta.id) === parseInt(array[i].id)).k = array[i].k;
+				console.log("Array[i].k", array[i].k);
+				drawTeamUsers(equipo, true)
+				
+			}
 //			if(array[i].modified){
 //				console.log("HOLAAAAAA")
 //				var el = document.getElementsByClassName("rect")[i];
