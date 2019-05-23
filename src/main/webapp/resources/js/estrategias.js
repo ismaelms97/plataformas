@@ -48,7 +48,7 @@ function dragDrop(arr, bool){
 									arr[this.getAttribute("data-rtc") - 1].k = calculateK(this.childNodes[2].innerHTML - 1, this.childNodes[0].innerHTML, this.getAttribute("data-posInitial"), estados.indexOf(arr[this.getAttribute("data-rtc") - 1].estadoFinal))
 								}
 							}
-
+							
 							habilitarBotonEnvio();
 							drawTeamUsers(equipo, true);
 							
@@ -409,7 +409,7 @@ function exists(arr, val){
 function drawTeamUsers(array, bool){
 
 	var tArr = "";
-	
+	k = 0;
 	if(inDB && tasks.length < inTasks.length){
 
 		tArr = "inTasks";

@@ -83,7 +83,7 @@ function drawTable(array , db) {
 				td.setAttribute("class", estados[j].replace(/\s/g, "-").replace(/[\.]/g,  "_").replace(/[(]/g, "0").replace(/[)]/g, "9"));
 				document.getElementsByTagName("TR")[i + 1].appendChild(td);
 			}
-		} 
+		}
 		// Pintamos los RTC
 		drawRTC(array, i, db);
 	}
@@ -146,26 +146,6 @@ function drawTable(array , db) {
 				drawTeamUsers(equipo, true)
 				
 			}
-//			if(array[i].modified){
-//				console.log("HOLAAAAAA")
-//				var el = document.getElementsByClassName("rect")[i];
-//				var cln = $(el).clone();
-//				cln.attr("class", "rect orange");
-//
-//				if($(el).parent().siblings("."+array[i].estadoFinal.replace(/\s/g, "-").replace(/[\.]/g,  "_").replace(/[(]/g, "0").replace(/[)]/g, "9")).length != 0){
-//					$(el).parent().siblings("."+array[i].estadoFinal.replace(/\s/g, "-").replace(/[\.]/g,  "_").replace(/[(]/g, "0").replace(/[)]/g, "9")).append(cln);
-//					document.getElementsByClassName("clone")[i].setAttribute("style", 'display: inline-block')
-//
-//				} else {
-//
-//					$(el).parent().append(cln);
-//					document.getElementsByClassName("clone")[i].setAttribute("style", 'display: none')
-//
-//				}
-//
-//				$(cln).css("display", "inline-block");
-//				document.getElementsByClassName("rect")[i].parentElement.firstChild.remove();
-//			}
 		}
 	}
 }
