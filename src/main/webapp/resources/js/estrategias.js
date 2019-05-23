@@ -29,9 +29,6 @@ function dragDrop(arr, bool){
 						start: function (event, ui) {
 							$(".ui-draggable-dragging").removeClass("noLeft");
 						},
-						drag: function (event, ui) {
-
-						},
 						stop: function (event, ui) {
 							document.getElementsByClassName("rect")[(this.getAttribute("data-rtc") - 1)].style.display = "";
 
