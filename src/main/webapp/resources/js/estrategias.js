@@ -14,7 +14,7 @@ try{
  * 
  */
 function dragDrop(arr, bool){
-
+	
 	// Con este codigo conseguimos que se mueva cada tarea unicamente en su eje x, y
 	// a su vez que cuando los dejes en el sitio, cambien de color
 	$(function () {
@@ -28,9 +28,6 @@ function dragDrop(arr, bool){
 						helper: "clone",
 						start: function (event, ui) {
 							$(".ui-draggable-dragging").removeClass("noLeft");
-						},
-						drag: function (event, ui) {
-
 						},
 						stop: function (event, ui) {
 							document.getElementsByClassName("rect")[(this.getAttribute("data-rtc") - 1)].style.display = "";
@@ -48,10 +45,10 @@ function dragDrop(arr, bool){
 									arr[this.getAttribute("data-rtc") - 1].k = calculateK(this.childNodes[2].innerHTML - 1, this.childNodes[0].innerHTML, this.getAttribute("data-posInitial"), estados.indexOf(arr[this.getAttribute("data-rtc") - 1].estadoFinal))
 								}
 							}
-
+							
 							habilitarBotonEnvio();
 							drawTeamUsers(equipo, true);
-							document.getElementsByClassName("k")[0].innerHTML = "K: " + k.toFixed(2);
+							
 						},
 					});
 		}
@@ -123,12 +120,13 @@ function dragDrop(arr, bool){
 								});
 								
 								drawTeamUsers(equipo, true);
-								document.getElementsByClassName("k")[0].innerHTML = "K: " + k.toFixed(2);
+//								document.getElementsByClassName("k")[0].innerHTML = "K: " + k.toFixed(2);
 							}
 						}
 					}
 				});
 	})
+	document.getElementsByClassName("k")[0].innerHTML = "K: " + k.toFixed(2);
 }
 
 /**
@@ -408,11 +406,16 @@ function exists(arr, val){
 function drawTeamUsers(array, bool){
 
 	var tArr = "";
-	if(inDB){
+	k = 0;
+	if(inDB && tasks.length < inTasks.length){
+
 		tArr = "inTasks";
-	} else{
+	} else {
 		tArr = "tasks";
 	}
+	
+	console.log("tarr", tArr);
+	
 	document.getElementsByClassName("teamUsers")[0].innerHTML = "";
 
 	for (var i = 0; i < array.length; i++) {
