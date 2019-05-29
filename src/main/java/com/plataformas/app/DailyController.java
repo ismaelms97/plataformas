@@ -39,6 +39,7 @@ public class DailyController {
 	public static final String MAIN_PANEL = "mainPanel";
 	public static final String PLATAFORMA = "plataforma";
 	public static final String REDIRECT_PANEL_CONTROL = REDIRECT_HOME+"estrategia/panelControl";
+	public static final String ERROR = "error";
 
 
 	@PostMapping(value = "/findDailys")
@@ -59,7 +60,11 @@ public class DailyController {
 					List<Tarea> tareas = strategyService.findTasksByStrategy(id);
 					model.addAttribute("listaDaily", listaDaily);
 					model.addAttribute("listaTareas",tareas);
-
+					
+					if(tareas.size() <= 0) {
+						return ERROR;
+					}
+					
 				}catch (Exception e) {
 
 					System.err.println("Error en showDaily : no se ha encontrado daily con ese ID");

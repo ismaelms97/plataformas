@@ -59,7 +59,7 @@ public class StrategyService {
 		}catch (Exception e) {
 
 			System.err.println("Error en findEstrategiaById ");
-			return estrategiaList;
+			return (List<Estrategia>) e;
 		}
 
 	}
@@ -85,7 +85,7 @@ public class StrategyService {
 
 		}catch (Exception e) {
 
-			System.err.println("Error en findEstrategiaById ");
+			System.err.println("Error en findTareaByEstrategia ");
 			return tareaList;
 		}
 	}

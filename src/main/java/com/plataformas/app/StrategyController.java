@@ -40,6 +40,7 @@ public class StrategyController {
 	public static final String REDIRECT_PANEL_CONTROL = REDIRECT_HOME+"estrategia/panelControl";
 	public static final String MAIN_PANEL = "mainPanel";
 	public static final String PLATAFORMA = "plataforma";
+	public static final String ERROR = "error";
 
 
 	@GetMapping(value = "/panelControl")
@@ -65,6 +66,7 @@ public class StrategyController {
 						session.removeAttribute("newEstrategia");
 					}
 
+
 					model.addAttribute("equipos", equipos);	
 					model.addAttribute("greeting","Usuario: "+ actualUser.getUsername());	
 					model.addAttribute("roles", actualUser.getRole());
@@ -73,10 +75,14 @@ public class StrategyController {
 
 					return MAIN_PANEL;
 				}
-
+				
+			}catch(ClassCastException e) {
+				
+				return ERROR;
+				
 			}catch (Exception e) {
 
-				System.err.println("Panel  control Error with session or strategy");
+				System.err.println("Panel control Error with session or strategy");
 				return REDIRECT_HOME;
 			}
 		}
@@ -151,7 +157,7 @@ public class StrategyController {
 				List<Integer> ids = actualUser.getEquipoId();			
 				int index = ids.indexOf(estrategia.getEquipoId());				
 				String actualRol = actualUser.getRole().get(index);
-				
+
 				if(actualRol.equals("root")) {
 
 					return REDIRECT_PANEL_CONTROL;

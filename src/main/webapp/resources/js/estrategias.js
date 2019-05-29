@@ -414,8 +414,6 @@ function drawTeamUsers(array, bool){
 		tArr = "tasks";
 	}
 	
-	console.log("tarr", tArr);
-	
 	document.getElementsByClassName("teamUsers")[0].innerHTML = "";
 
 	for (var i = 0; i < array.length; i++) {
@@ -516,7 +514,7 @@ function getTasksByUser(user, arrayTareas){
  * @param estadoFinal 	 	Estado donde acaba la tarea
  * 
  */
-function calculateK(comp, tam, estadoInicial, estadoActual){ 
+function calculateK(comp, tam, estadoInicial, estadoActual){
 
 	//	Listo para analizar; Cierre de requirimientos; En análisis; Aceptación usuario; En curso; Aceptación pruebas; Pendiente implantar; Implantado; Cerrado
 	//	K = COMPLEJIDAD * TAMAÑO * suma(PESO_FASE_COMPLETADA)
