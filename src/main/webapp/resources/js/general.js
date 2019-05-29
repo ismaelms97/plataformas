@@ -73,7 +73,7 @@ function drawTable(array , db) {
 	array = orderBy(array, orderType, orderStyle);
 	inTasks = orderBy(inTasks, orderType, orderStyle);
 
-	// PIntamos la tabla
+	// Pintamos la tabla
 	for (var i = 0; i < array.length; i++) {
 		var tr = document.createElement("tr");
 		document.getElementsByTagName("TBODY")[0].appendChild(tr);
@@ -87,8 +87,6 @@ function drawTable(array , db) {
 		// Pintamos los RTC
 		drawRTC(array, i, db);
 	}
-
-
 
 	if(db){
 		inDB = true;
@@ -111,7 +109,6 @@ function drawTable(array , db) {
 				var estadoActual = estados.indexOf(array[j].estadoActual.toLowerCase());
 
 				array[j].k = calculateK(complejidad, tam, estadoInit, estadoActual);
-				console.log("K", array[j].k)
 			}else{
 				array[j].k = 0;
 			}
@@ -134,7 +131,6 @@ function drawTable(array , db) {
 		}
 
 	} else {
-		console.log("Array", array);
 		if(inTasks.length > 0 && tasks.length > 0){
 		for (var i = 0; i < array.length; i++) {
 			
@@ -142,7 +138,6 @@ function drawTable(array , db) {
 						estados.indexOf(inTasks.find(tarea => parseInt(tarea.id) === parseInt(array[i].id)).estado.toLowerCase()),  
 						estados.indexOf(array[i].estadoActual.toLowerCase()));
 				inTasks.find(ta => parseInt(ta.id) === parseInt(array[i].id)).k = array[i].k;
-				console.log("Array[i].k", array[i].k);
 				drawTeamUsers(equipo, true)
 				
 			}

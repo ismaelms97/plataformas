@@ -510,3 +510,18 @@ form{
 	font-weight: bolder;
 	
 }
+
+/*########### ERROR MESSAGE ##########*/
+.errorMessage {
+	text-align: center;
+	font-weight: 900;
+	font-family: 'Courier New', Courier, monospace;
+	font-size: 5vh;
+}
+
+.errorMessage:before {
+	font-family: "Font Awesome 5 Free";
+	font-size: 7vh;
+  	font-weight: 900;
+  	content: "\f233";
+}
